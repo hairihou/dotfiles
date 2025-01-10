@@ -1,0 +1,6 @@
+# local directory
+__local__
+
+# mise
+mise.local.toml
+mise.*.local.toml
