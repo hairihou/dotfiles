@@ -3,7 +3,7 @@ bun = "latest"
 deno = "latest"
 node = "lts"
 "npm:pnpm" = "10.0.0"
-python = "3.13"
+python = "3.13.1"
 
 [env]
 
