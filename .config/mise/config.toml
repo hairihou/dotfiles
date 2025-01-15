@@ -8,10 +8,10 @@ python = "3.13.1"
 [env]
 
 [tasks.zshrc]
-run = "rsync -au ~/dotfiles/.zshrc ~/ && [ -e ~/.hushlogin ] || touch ~/.hushlogin"
+run = "cp ~/dotfiles/.zshrc ~/.zshrc"
 
 [tasks."zshrc:dump"]
-run = "rsync -au ~/.zshrc ~/dotfiles/"
+run = "cp ~/.zshrc ~/dotfiles/.zshrc"
 
 [tasks.gitconfig]
 run = "rsync -au ~/dotfiles/.config/.gitconfig ~/"
