@@ -1,7 +1,6 @@
 tap "homebrew/bundle"
 brew "gettext"
 brew "gh"
-brew "git"
 brew "openssl@3"
 brew "mise"
 brew "peco"
