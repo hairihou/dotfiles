@@ -1,6 +1,5 @@
 tap "homebrew/bundle"
 brew "gh"
-brew "git"
 brew "mise"
 brew "peco"
 brew "pure"
