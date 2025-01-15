@@ -62,6 +62,7 @@
     "pylance",
     "rakus",
     "recents",
+    "rustup",
     "safelist",
     "swiftlint",
     "tailwindcss",
