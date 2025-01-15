@@ -66,9 +66,6 @@ export PATH="$ANDROID_SDK_ROOT/tools:$PATH"
 export JAVA_HOME="$HOME/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 export PATH="$JAVA_HOME/bin:$PATH"
 
-# npm
-export PATH="$HOME/.npm-global/bin:$PATH"
-
 # mise
 eval "$(mise activate zsh)"
 
