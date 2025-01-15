@@ -60,6 +60,7 @@
     "postcss",
     "pycache",
     "pylance",
+    "rakus",
     "recents",
     "safelist",
     "swiftlint",
