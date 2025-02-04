@@ -26,6 +26,7 @@
   "workbench.iconTheme": "catppuccin-mocha",
   "workbench.tree.indent": 24,
   "cSpell.userWords": [
+    "autodocs",
     "autohide",
     "autoprefixer",
     "axios",
