@@ -1,7 +1,6 @@
 tap "homebrew/bundle"
 brew "gh"
 brew "mise"
-brew "neovim"
 brew "peco"
 brew "pure"
 brew "swiftlint"
