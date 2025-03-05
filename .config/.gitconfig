@@ -1,5 +1,15 @@
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[fetch]
+	all = true
+	prune = true
+	pruneTags = true
 [init]
 	defaultBranch = main
+[tag]
+	sort = version:refname
 [user]
-	name = Yusuke Mizuno
 	email = 38448411+hairihou@users.noreply.github.com
+	name = Yusuke Mizuno
