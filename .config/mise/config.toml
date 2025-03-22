@@ -2,7 +2,7 @@
 bun = "1.2.1"
 deno = "2.1.7"
 node = "22.14.0"
-"npm:pnpm" = "10.6.2"
+"npm:pnpm" = "10.6.5"
 python = "3.13.1"
 
 [env]
