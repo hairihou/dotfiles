@@ -59,6 +59,7 @@
   },
   "todo-tree.regex.regex": "(\\*|//|#|<!--|;|/\\*|^|^[ \\t]*\\*)\\s*($TAGS)",
   "cSpell.userWords": [
+    "3rdparty",
     "appbar",
     "autodocs",
     "autohide",
@@ -115,6 +116,7 @@
     "rakuraku",
     "rakus",
     "recents",
+    "reka",
     "rgba",
     "rustup",
     "safelist",
@@ -139,7 +141,6 @@
     "ymizuno",
     "yonosuke",
     "yusuke",
-    "zenn",
-    "3rdparty"
+    "zenn"
   ]
 }

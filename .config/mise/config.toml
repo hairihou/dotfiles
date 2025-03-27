@@ -2,7 +2,7 @@
 bun = "1.2.1"
 deno = "2.1.7"
 node = "22.14.0"
-"npm:pnpm" = "10.6.5"
+"npm:pnpm" = "10.7.0"
 python = "3.13.1"
 
 [env]
@@ -36,6 +36,9 @@ run = "rsync -au ~/dotfiles/.vscode/settings.json ~/Library/Application\\ Suppor
 
 [tasks."code:settings_json:dump"]
 run = "rsync -au ~/Library/Application\\ Support/Code/User/settings.json ~/dotfiles/.vscode/"
+
+[tasks."code@insiders:settings_json"]
+run = "rsync -a ~/dotfiles/.vscode/settings.json ~/Library/Application\\ Support/Code\\ -\\ Insiders/User/"
 
 [tasks.all]
 depends = ["zshrc", "gitignore", "mise", "code:settings_json"]
