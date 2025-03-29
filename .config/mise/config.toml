@@ -40,6 +40,9 @@ run = "rsync -au ~/Library/Application\\ Support/Code/User/settings.json ~/dotfi
 [tasks."code@insiders:settings_json"]
 run = "rsync -a ~/dotfiles/.vscode/settings.json ~/Library/Application\\ Support/Code\\ -\\ Insiders/User/"
 
+[tasks."code@insiders:settings_json:dump"]
+run = "rsync -a ~/Library/Application\\ Support/Code\\ -\\ Insiders/User/settings.json ~/dotfiles/.vscode/"
+
 [tasks.all]
 depends = ["zshrc", "gitignore", "mise", "code:settings_json"]
 
