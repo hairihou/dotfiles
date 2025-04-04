@@ -70,6 +70,5 @@ export PATH="$JAVA_HOME/bin:$PATH"
 # mise
 eval "$(mise activate zsh)"
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+# Rancher Desktop
 export PATH="$HOME/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
