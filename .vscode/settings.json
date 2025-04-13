@@ -16,6 +16,8 @@
   "editor.tabSize": 2,
   "files.insertFinalNewline": true,
   "githubPullRequests.pullBranch": "never",
+  "php.suggest.basic": false,
+  "php.validate.enable": false,
   "terminal.integrated.fontFamily": "'MonaspiceAr Nerd Font', monospace",
   "terminal.integrated.fontSize": 14,
   "typescript.implementationsCodeLens.enabled": true,
@@ -94,12 +96,15 @@
     "kintai",
     "kyuyo",
     "lefthook",
+    "lhci",
+    "lighthouseci",
     "meiryo",
     "meisai",
     "mizuno",
     "monaspace",
     "monaspice",
     "mouvement",
+    "navi",
     "neos",
     "noopener",
     "noreferrer",
@@ -152,6 +157,20 @@
       "playwright": {
         "command": "pnpm",
         "args": ["dlx", "@playwright/mcp@latest", "--headless"]
+      },
+      "github": {
+        "command": "docker",
+        "args": [
+          "run",
+          "-i",
+          "--rm",
+          "-e",
+          "GITHUB_PERSONAL_ACCESS_TOKEN",
+          "ghcr.io/github/github-mcp-server"
+        ],
+        "env": {
+          "GITHUB_PERSONAL_ACCESS_TOKEN": "<github_token>"
+        }
       }
     }
   }
