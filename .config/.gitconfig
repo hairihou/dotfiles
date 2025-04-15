@@ -1,7 +1,7 @@
-[column]
-	ui = auto
 [branch]
 	sort = -committerdate
+[column]
+	ui = auto
 [fetch]
 	all = true
 	prune = true
