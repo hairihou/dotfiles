@@ -63,8 +63,7 @@ export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
 export PATH="$ANDROID_SDK_ROOT/tools:$PATH"
 
 # Java
-# export JAVA_HOME="$HOME/Applications/Android Studio.app/Contents/jbr/Contents/Home"
-export JAVA_HOME="/opt/homebrew/opt/openjdk"
+export JAVA_HOME="$HOME/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 export PATH="$JAVA_HOME/bin:$PATH"
 
 # mise
