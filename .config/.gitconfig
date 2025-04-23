@@ -2,6 +2,11 @@
 	sort = -committerdate
 [column]
 	ui = auto
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
 [init]
 	defaultBranch = main
 [tag]
