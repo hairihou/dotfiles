@@ -42,7 +42,7 @@
     "@todo"
   ],
   "todo-tree.general.tagGroups": {
-    "TODO": ["@todo", "TODO"]
+    "TODO": ["@todo", "ToDo", "TODO"]
   },
   "todo-tree.highlights.useColourScheme": true,
   "todo-tree.highlights.backgroundColourScheme": [
