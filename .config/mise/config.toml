@@ -1,11 +1,10 @@
 [tools]
-bun = "latest"
-deno = "latest"
-node = "lts"
-"npm:@anthropic-ai/claude-code" = "latest"
+bun = "1.2.1"
+deno = "2.1.7"
+node = "22.15.0"
 "npm:pnpm" = "10.10.0"
-python = "latest"
-uv = "latest"
+python = "3.13.3"
+uv = "0.6.16"
 
 [env]
 
