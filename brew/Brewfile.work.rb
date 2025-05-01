@@ -1,4 +1,3 @@
-tap "homebrew/bundle"
 brew "gettext"
 brew "gh"
 brew "mise"
