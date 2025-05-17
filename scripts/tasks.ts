@@ -44,6 +44,23 @@ const Tasks = {
     await Tasks['mise:dump']();
     await Tasks['code:settings_json:dump']();
   },
+  'brew:update': async (): Promise<void> => {
+    await $`brew update`;
+  },
+  'brew:upgrade': async (): Promise<void> => {
+    for (const option of ['formula', 'cask'] as const) {
+      const list = await $`brew list --${option}`.lines();
+      await $`brew upgrade --${option} ${list}`;
+    }
+  },
+  'brew:prune': async (): Promise<void> => {
+    await $`brew cleanup --prune=all --scrub`;
+  },
+  'brew:all': async (): Promise<void> => {
+    await Tasks['brew:update']();
+    await Tasks['brew:upgrade']();
+    await Tasks['brew:prune']();
+  },
 } as const;
 
 const TaskName = Deno.args[0];

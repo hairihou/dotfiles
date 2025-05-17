@@ -1,6 +1,7 @@
 {
   "nodeModulesDir": "auto",
   "fmt": {
+    "lineWidth": 120,
     "singleQuote": true
   },
   "tasks": {
