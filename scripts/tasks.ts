@@ -27,10 +27,10 @@ const Tasks = {
     await $`rsync -au ~/.config/mise/config.toml ~/dotfiles/.config/mise/`;
   },
   'code:settings_json': async (): Promise<void> => {
-    await $`rsync -au ~/dotfiles/.vscode.global/settings.json ~/Library/Application\\ Support/Code/User/`;
+    await $`rsync -au ~/dotfiles/.vscode/global/settings.json ~/Library/Application\\ Support/Code/User/`;
   },
   'code:settings_json:dump': async (): Promise<void> => {
-    await $`rsync -au ~/Library/Application\\ Support/Code/User/settings.json ~/dotfiles/.vscode.global/`;
+    await $`rsync -au ~/Library/Application\\ Support/Code/User/settings.json ~/dotfiles/.vscode/global/`;
   },
   all: async (): Promise<void> => {
     await Tasks.zshrc();
