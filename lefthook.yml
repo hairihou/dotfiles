@@ -6,5 +6,5 @@
 pre-commit:
   jobs:
     - run: deno fmt {staged_files}
-      glob: '*'
+      glob: '*.{ts,json,md,toml,yml}'
       stage_fixed: true
