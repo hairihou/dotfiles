@@ -15,6 +15,7 @@
   "editor.stickyScroll.enabled": false,
   "editor.tabSize": 2,
   "files.insertFinalNewline": true,
+  // "github.copilot.nextEditSuggestions.enabled": true,
   "githubPullRequests.pullBranch": "never",
   "php.suggest.basic": false,
   "php.validate.enable": false,
