@@ -26,23 +26,23 @@ const Tasks = {
   'mise:dump': async (): Promise<void> => {
     await $`rsync -au ~/.config/mise/config.toml ~/dotfiles/.config/mise/`;
   },
-  'code:settings_json': async (): Promise<void> => {
-    await $`rsync -au ~/dotfiles/.vscode/global/settings.json ~/Library/Application\\ Support/Code/User/`;
+  'code': async (): Promise<void> => {
+    await $`rsync -au ~/dotfiles/.vscode/global/ ~/Library/Application\\ Support/Code/User/`;
   },
-  'code:settings_json:dump': async (): Promise<void> => {
-    await $`rsync -au ~/Library/Application\\ Support/Code/User/settings.json ~/dotfiles/.vscode/global/`;
+  'code:dump': async (): Promise<void> => {
+    await $`rsync -au --include 'prompts/' --include 'prompts/***' --include 'settings.json' --exclude '*' ~/Library/Application\\ Support/Code/User/ ~/dotfiles/.vscode/global/`;
   },
   all: async (): Promise<void> => {
     await Tasks.zshrc();
     await Tasks.gitignore();
     await Tasks.mise();
-    await Tasks['code:settings_json']();
+    await Tasks['code']();
   },
   'all:dump': async (): Promise<void> => {
     await Tasks['zshrc:dump']();
     await Tasks['gitignore:dump']();
     await Tasks['mise:dump']();
-    await Tasks['code:settings_json:dump']();
+    await Tasks['code:dump']();
   },
   'brew:update': async (): Promise<void> => {
     await $`brew update`;
