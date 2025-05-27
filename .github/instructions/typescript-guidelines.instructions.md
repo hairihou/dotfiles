@@ -2,13 +2,11 @@
 applyTo: '**'
 ---
 
+# TypeScript Guidelines
+
 <!-- https://www.totaltypescript.com/cursor-rules-for-better-ai-development#the-rules -->
 
-# Project coding standards for Web Frontend With TypeScript
-
-## TypeScript Guidelines
-
-### Any inside generic functions
+## Any inside generic functions
 
 When building generic functions, you may need to use any inside the function body.
 
@@ -48,7 +46,7 @@ const youSayGoodbyeISayHello = <TInput extends 'hello' | 'goodbye'>(
 
 Outside of generic functions, use `any` extremely sparingly.
 
-### Default exports
+## Default exports
 
 Unless explicitly required by the framework, do not use default exports.
 
@@ -88,7 +86,7 @@ export default function MyPage() {
 }
 ```
 
-### Discriminated unions
+## Discriminated unions
 
 Proactively use discriminated unions to model data that can be in one of a few different shapes.
 
@@ -143,7 +141,7 @@ type FetchingState<TData> =
   | { status: 'error'; error: Error };
 ```
 
-### Enums
+## Enums
 
 Do not introduce new enums into the codebase. Retain existing enums.
 
@@ -188,7 +186,7 @@ enum Direction {
 Object.keys(Direction).length; // 8
 ```
 
-### Import types
+## Import types
 
 Use import type whenever you are importing a type.
 
@@ -215,7 +213,7 @@ import { type User } from './user';
 import './user';
 ```
 
-### Install libraries
+## Install libraries
 
 When installing libraries, do not rely on your own training data.
 
@@ -238,7 +236,7 @@ npm install --save-dev @typescript-eslint/eslint-plugin
 
 This will ensure you're always using the latest version.
 
-### Interface extends
+## Interface extends
 
 ALWAYS prefer interfaces when modelling inheritance.
 
@@ -274,7 +272,7 @@ interface C extends A, B {
 }
 ```
 
-### JSDoc comments
+## JSDoc comments
 
 Use JSDoc comments to annotate functions and types.
 
@@ -294,7 +292,7 @@ const subtract = (a: number, b: number) => a - b;
 const add = (a: number, b: number) => a + b;
 ```
 
-### Naming conventions
+## Naming conventions
 
 - Use kebab-case for file names (e.g., `my-component.ts`)
 - Use camelCase for variables and function names (e.g., `myVariable`, `myFunction()`)
@@ -306,7 +304,7 @@ const add = (a: number, b: number) => a + b;
 type RecordOfArrays<TItem> = Record<string, TItem[]>;
 ```
 
-### No unchecked indexed access
+## No unchecked indexed access
 
 If the user has this rule enabled in their `tsconfig.json`, indexing into objects and arrays will behave differently
 from how you expect.
@@ -329,7 +327,7 @@ const arr: string[] = [];
 const value = arr[0];
 ```
 
-### Optional properties
+## Optional properties
 
 Use optional properties extremely sparingly. Only use them when the property is truly optional, and consider whether
 bugs may be caused by a failure to pass the property.
@@ -359,7 +357,7 @@ const func = (options: AuthOptions) => {
 };
 ```
 
-### Readonly properties
+## Readonly properties
 
 Use `readonly` properties for object types by default. This will prevent accidental mutation at runtime.
 
@@ -391,7 +389,7 @@ const user: User = {
 user.id = '2'; // Error
 ```
 
-### Return types
+## Return types
 
 When declaring functions on the top-level of a module, declare their return types. This will help future AI assistants
 understand the function's purpose.
@@ -411,7 +409,7 @@ const MyComponent = () => {
 };
 ```
 
-### Throwing
+## Throwing
 
 Think carefully before implementing code that throws errors.
 
