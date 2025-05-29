@@ -1,5 +1,5 @@
 ---
-applyTo: '**'
+applyTo: '**/*.{ts,tsx,vue}'
 ---
 
 # TypeScript Guidelines
