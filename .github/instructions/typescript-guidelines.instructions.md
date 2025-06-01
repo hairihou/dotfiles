@@ -76,8 +76,7 @@ import myFunction from './myFunction';
 import { myFunction } from './myFunction';
 ```
 
-There are certain situations where a framework may require a default export. For instance, Next.js requires a default
-export for pages.
+There are certain situations where a framework may require a default export. For instance, Next.js requires a default export for pages.
 
 ```tsx
 // This is fine, if required by the framework
@@ -202,8 +201,7 @@ import { type User } from './user';
 import type { User } from './user';
 ```
 
-The reason for this is that in certain environments, the first version's import will not be erased. So you'll be left
-with:
+The reason for this is that in certain environments, the first version's import will not be erased. So you'll be left with:
 
 ```ts
 // Before transpilation
@@ -217,11 +215,9 @@ import './user';
 
 When installing libraries, do not rely on your own training data.
 
-Your training data has a cut-off date. You're probably not aware of all of the latest developments in the JavaScript and
-TypeScript world.
+Your training data has a cut-off date. You're probably not aware of all of the latest developments in the JavaScript and TypeScript world.
 
-This means that instead of picking a version manually (via updating the `package.json` file), you should use a script to
-install the latest version of a library.
+This means that instead of picking a version manually (via updating the `package.json` file), you should use a script to install the latest version of a library.
 
 ```bash
 # pnpm
@@ -296,8 +292,7 @@ const add = (a: number, b: number) => a + b;
 
 - Use kebab-case for file names (e.g., `my-component.ts`)
 - Use camelCase for variables, function names, and constants (e.g., `myVariable`, `myFunction()`, `maxCount`)
-- Use UpperCamelCase (PascalCase) for classes, types, interfaces, object literals and constants (e.g., `MyClass`,
-  `MyInterface`, `MyObjectLiteral`, `MaxCount`)
+- Use UpperCamelCase (PascalCase) for classes, types, interfaces, object literals and constants (e.g., `MyClass`, `MyInterface`, `MyObjectLiteral`, `MaxCount`)
 - Inside generic types, functions or classes, prefix type parameters with `T` (e.g., `TKey`, `TValue`)
 
 ```ts
@@ -306,8 +301,7 @@ type RecordOfArrays<TItem> = Record<string, TItem[]>;
 
 ## No unchecked indexed access
 
-If the user has this rule enabled in their `tsconfig.json`, indexing into objects and arrays will behave differently
-from how you expect.
+If the user has this rule enabled in their `tsconfig.json`, indexing into objects and arrays will behave differently from how you expect.
 
 ```ts
 const obj: Record<string, string> = {};
@@ -329,11 +323,9 @@ const value = arr[0];
 
 ## Optional properties
 
-Use optional properties extremely sparingly. Only use them when the property is truly optional, and consider whether
-bugs may be caused by a failure to pass the property.
+Use optional properties extremely sparingly. Only use them when the property is truly optional, and consider whether bugs may be caused by a failure to pass the property.
 
-In the example below we always want to pass user ID to `AuthOptions`. This is because if we forget to pass it somewhere
-in the code base, it will cause our function to be not authenticated.
+In the example below we always want to pass user ID to `AuthOptions`. This is because if we forget to pass it somewhere in the code base, it will cause our function to be not authenticated.
 
 ```ts
 // BAD
@@ -391,8 +383,7 @@ user.id = '2'; // Error
 
 ## Return types
 
-When declaring functions on the top-level of a module, declare their return types. This will help future AI assistants
-understand the function's purpose.
+When declaring functions on the top-level of a module, declare their return types. This will help future AI assistants understand the function's purpose.
 
 ```ts
 const myFunc = (): string => {
@@ -400,8 +391,7 @@ const myFunc = (): string => {
 };
 ```
 
-One exception to this is components which return JSX. No need to declare the return type of a component, as it is always
-JSX.
+One exception to this is components which return JSX. No need to declare the return type of a component, as it is always JSX.
 
 ```tsx
 const MyComponent = () => {
@@ -413,8 +403,7 @@ const MyComponent = () => {
 
 Think carefully before implementing code that throws errors.
 
-If a thrown error produces a desirable outcome in the system, go for it. For instance, throwing a custom error inside a
-backend framework's request handler.
+If a thrown error produces a desirable outcome in the system, go for it. For instance, throwing a custom error inside a backend framework's request handler.
 
 However, for code that you would need a manual try catch for, consider using a result type instead:
 
@@ -495,27 +484,27 @@ Use `forEach` sparingly and only when it's the most appropriate choice. In most 
 ```ts
 // BAD - use map instead
 const doubled: number[] = [];
-numbers.forEach(num => doubled.push(num * 2));
+numbers.forEach((num) => doubled.push(num * 2));
 
 // GOOD
-const doubled = numbers.map(num => num * 2);
+const doubled = numbers.map((num) => num * 2);
 ```
 
 ```ts
 // BAD - use filter instead
 const evens: number[] = [];
-numbers.forEach(num => {
+numbers.forEach((num) => {
   if (num % 2 === 0) evens.push(num);
 });
 
 // GOOD
-const evens = numbers.filter(num => num % 2 === 0);
+const evens = numbers.filter((num) => num % 2 === 0);
 ```
 
 ```ts
 // BAD - use reduce instead
 let sum = 0;
-numbers.forEach(num => sum += num);
+numbers.forEach((num) => sum += num);
 
 // GOOD
 const sum = numbers.reduce((acc, num) => acc + num, 0);
@@ -527,13 +516,13 @@ Use `forEach` only when you need side effects without creating a new array and n
 
 ```ts
 // GOOD - logging each item (side effect)
-users.forEach(user => {
+users.forEach((user) => {
   console.log(`Processing user: ${user.name}`);
   sendEmail(user.email);
 });
 
 // GOOD - updating external state (side effect)
-items.forEach(item => {
+items.forEach((item) => {
   cache.set(item.id, item);
   metrics.increment('items.processed');
 });
