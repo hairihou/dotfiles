@@ -3,40 +3,40 @@ import $ from 'jsr:@david/dax';
 
 const Tasks = {
   zshrc: async (): Promise<void> => {
-    await $`cp ~/dotfiles/.zshrc ~/.zshrc`;
+    await $`rsync -a ~/dotfiles/.zshrc ~/`;
   },
   'zshrc:dump': async (): Promise<void> => {
-    await $`cp ~/.zshrc ~/dotfiles/.zshrc`;
+    await $`rsync -a ~/.zshrc ~/dotfiles/`;
   },
   gitconfig: async (): Promise<void> => {
-    await $`rsync -au ~/dotfiles/.config/.gitconfig ~/`;
+    await $`rsync -a ~/dotfiles/.config/.gitconfig ~/`;
   },
   'gitconfig:dump': async (): Promise<void> => {
-    await $`rsync -au ~/.gitconfig ~/dotfiles/.config/`;
+    await $`rsync -a ~/.gitconfig ~/dotfiles/.config/`;
   },
   gitignore: async (): Promise<void> => {
-    await $`rsync -au ~/dotfiles/.config/git/ignore ~/.config/git/`;
+    await $`rsync -a ~/dotfiles/.config/git/ignore ~/.config/git/`;
   },
   'gitignore:dump': async (): Promise<void> => {
-    await $`rsync -au ~/.config/git/ignore ~/dotfiles/.config/git/`;
+    await $`rsync -a ~/.config/git/ignore ~/dotfiles/.config/git/`;
   },
   mise: async (): Promise<void> => {
-    await $`rsync -au ~/dotfiles/.config/mise/config.toml ~/.config/mise/`;
+    await $`rsync -a ~/dotfiles/.config/mise/config.toml ~/.config/mise/`;
   },
   'mise:dump': async (): Promise<void> => {
-    await $`rsync -au ~/.config/mise/config.toml ~/dotfiles/.config/mise/`;
+    await $`rsync -a ~/.config/mise/config.toml ~/dotfiles/.config/mise/`;
   },
   'code': async (): Promise<void> => {
-    await $`rsync -au ~/dotfiles/.vscode/global/settings.json ~/Library/Application\\ Support/Code/User/`;
+    await $`rsync -a ~/dotfiles/.vscode/global/settings.json ~/Library/Application\\ Support/Code/User/`;
   },
   'code:dump': async (): Promise<void> => {
-    await $`rsync -au ~/Library/Application\\ Support/Code/User/settings.json ~/dotfiles/.vscode/global/`;
+    await $`rsync -a ~/Library/Application\\ Support/Code/User/settings.json ~/dotfiles/.vscode/global/`;
   },
   'code:instructions': async (): Promise<void> => {
-    await $`rsync -au ~/dotfiles/.github/instructions/ ~/Library/Application\\ Support/Code/User/prompts/`;
+    await $`rsync -a ~/dotfiles/.github/instructions/ ~/Library/Application\\ Support/Code/User/prompts/`;
   },
   'code:instructions:dump': async (): Promise<void> => {
-    await $`rsync -au ~/Library/Application\\ Support/Code/User/prompts/ ~/dotfiles/.github/instructions/`;
+    await $`rsync -a ~/Library/Application\\ Support/Code/User/prompts/ ~/dotfiles/.github/instructions/`;
   },
   all: async (): Promise<void> => {
     await Tasks.zshrc();
