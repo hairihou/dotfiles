@@ -81,14 +81,13 @@ class SyncUtil {
     const expandedSource = this.expandPath(source);
     const expandedDestination = this.expandPath(destination);
 
-    // Check if source exists
     if (!(await this.exists(source))) {
       Logger.warn(`Skipping ${description}: source not found at ${source}`);
       return;
     }
 
     Logger.info(`${description}: ${source} → ${destination}`);
-    await $`rsync -av ${expandedSource} ${expandedDestination}`;
+    await $`rsync -av --force ${expandedSource} ${expandedDestination}`;
   }
 
   /**
@@ -139,7 +138,6 @@ class TaskRunner {
       throw new Error(`Task '${taskName}' not found`);
     }
 
-    // Execute dependencies
     if (task.dependencies?.length) {
       if (task.parallel) {
         await Promise.all(
@@ -152,7 +150,6 @@ class TaskRunner {
       }
     }
 
-    // Execute the task
     Logger.task(taskName);
     await task.action();
     this.executed.add(taskName);
@@ -184,10 +181,8 @@ class TaskRunner {
   }
 }
 
-// Initialize task runner
 const runner = new TaskRunner();
 
-// Configuration
 const Paths = {
   Dotfiles: '~/dotfiles',
   Home: '~',
@@ -195,7 +190,6 @@ const Paths = {
   Config: '~/.config',
 } as const;
 
-// Register dotfile sync tasks
 runner.register('zshrc', {
   description: 'Sync .zshrc from dotfiles to home',
   action: async () => {
@@ -303,14 +297,13 @@ runner.register('code:instructions:dump', {
   },
 });
 
-// Register composite tasks
 runner.register('all', {
   description: 'Sync all dotfiles to system',
   dependencies: ['zshrc', 'gitignore', 'mise', 'code', 'code:instructions'],
   parallel: true,
   action: async () => {
-    await Promise.resolve(); // Ensure it returns a Promise
     Logger.info('All dotfiles synced successfully');
+    await Promise.resolve();
   },
 });
 
@@ -319,12 +312,11 @@ runner.register('all:dump', {
   dependencies: ['zshrc:dump', 'gitignore:dump', 'mise:dump', 'code:dump', 'code:instructions:dump'],
   parallel: true,
   action: async () => {
-    await Promise.resolve(); // Ensure it returns a Promise
     Logger.info('All configs dumped successfully');
+    await Promise.resolve();
   },
 });
 
-// Register brew tasks
 runner.register('brew:update', {
   description: 'Update Homebrew',
   action: async () => {
@@ -371,13 +363,12 @@ runner.register('brew:all', {
   description: 'Update, upgrade, and clean Homebrew',
   dependencies: ['brew:update', 'brew:upgrade', 'brew:prune'],
   action: async () => {
-    await Promise.resolve(); // Ensure it returns a Promise
     Logger.info('Homebrew maintenance completed');
+    await Promise.resolve();
   },
 });
 
-// Main execution
-async function main(): Promise<void> {
+const main = async (): Promise<void> => {
   const taskName = Deno.args[0];
 
   if (!taskName || taskName === 'help' || taskName === '--help' || taskName === '-h') {
@@ -403,7 +394,7 @@ async function main(): Promise<void> {
     Logger.error(`Task '${taskName}' failed: ${result.error.message}`);
     Deno.exit(1);
   }
-}
+};
 
 if (import.meta.main) {
   await main();
