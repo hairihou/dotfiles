@@ -145,18 +145,18 @@ type FetchingState<TData> =
 
 Do not introduce new enums into the codebase. Retain existing enums.
 
-If you require enum-like behaviour, use an `as const` object:
+If you require enum-like behavior, use an `as const` object:
 
 ```ts
-const backendToFrontendEnum = {
+const BackendToFrontendEnum = {
   xs: 'EXTRA_SMALL',
   sm: 'SMALL',
   md: 'MEDIUM',
 } as const;
 
-type LowerCaseEnum = keyof typeof backendToFrontendEnum; // "xs" | "sm" | "md"
+type LowerCaseEnum = keyof typeof BackendToFrontendEnum; // "xs" | "sm" | "md"
 
-type UpperCaseEnum = (typeof backendToFrontendEnum)[LowerCaseEnum]; // "EXTRA_SMALL" | "SMALL" | "MEDIUM"
+type UpperCaseEnum = (typeof BackendToFrontendEnum)[LowerCaseEnum]; // "EXTRA_SMALL" | "SMALL" | "MEDIUM"
 ```
 
 Remember that numeric enums behave differently to string enums. Numeric enums produce a reverse mapping:
@@ -295,9 +295,9 @@ const add = (a: number, b: number) => a + b;
 ## Naming conventions
 
 - Use kebab-case for file names (e.g., `my-component.ts`)
-- Use camelCase for variables and function names (e.g., `myVariable`, `myFunction()`)
-- Use UpperCamelCase (PascalCase) for classes, types, and interfaces (e.g., `MyClass`, `MyInterface`)
-- Use ALL_CAPS for constants and enum values (e.g., `MAX_COUNT`, `Color.RED`)
+- Use camelCase for variables, function names, and constants (e.g., `myVariable`, `myFunction()`, `maxCount`)
+- Use UpperCamelCase (PascalCase) for classes, types, interfaces, object literals and constants (e.g., `MyClass`,
+  `MyInterface`, `MyObjectLiteral`, `MaxCount`)
 - Inside generic types, functions or classes, prefix type parameters with `T` (e.g., `TKey`, `TValue`)
 
 ```ts
