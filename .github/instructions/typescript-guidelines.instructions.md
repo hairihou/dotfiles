@@ -445,3 +445,98 @@ if (result.ok) {
   console.error(result.error);
 }
 ```
+
+## Arrow functions
+
+Prefer arrow functions over `function` declarations for function definitions.
+
+Arrow functions provide consistent lexical scoping and are more concise.
+
+```ts
+// BAD
+function calculateTotal(items: number[]): number {
+  return items.reduce((sum, item) => sum + item, 0);
+}
+```
+
+```ts
+// GOOD
+const calculateTotal = (items: number[]): number => {
+  return items.reduce((sum, item) => sum + item, 0);
+};
+```
+
+Exception: Use `function` declarations when you need hoisting behavior or when defining methods in classes.
+
+```ts
+// This is fine when hoisting is needed
+function initializeApp() {
+  setupDatabase();
+}
+
+function setupDatabase() {
+  // Implementation
+}
+
+// This is fine for class methods
+class Calculator {
+  calculate(value: number): number {
+    return value * 2;
+  }
+}
+```
+
+## forEach usage
+
+Use `forEach` sparingly and only when it's the most appropriate choice. In most cases, other array methods are more suitable.
+
+### When NOT to use forEach:
+
+```ts
+// BAD - use map instead
+const doubled: number[] = [];
+numbers.forEach(num => doubled.push(num * 2));
+
+// GOOD
+const doubled = numbers.map(num => num * 2);
+```
+
+```ts
+// BAD - use filter instead
+const evens: number[] = [];
+numbers.forEach(num => {
+  if (num % 2 === 0) evens.push(num);
+});
+
+// GOOD
+const evens = numbers.filter(num => num % 2 === 0);
+```
+
+```ts
+// BAD - use reduce instead
+let sum = 0;
+numbers.forEach(num => sum += num);
+
+// GOOD
+const sum = numbers.reduce((acc, num) => acc + num, 0);
+```
+
+### When to use forEach:
+
+Use `forEach` only when you need side effects without creating a new array and no other array method fits:
+
+```ts
+// GOOD - logging each item (side effect)
+users.forEach(user => {
+  console.log(`Processing user: ${user.name}`);
+  sendEmail(user.email);
+});
+
+// GOOD - updating external state (side effect)
+items.forEach(item => {
+  cache.set(item.id, item);
+  metrics.increment('items.processed');
+});
+```
+
+For most other use cases, prefer `map`, `filter`, `reduce`, `find`, `some`, `every`, or `for...of` loops.
