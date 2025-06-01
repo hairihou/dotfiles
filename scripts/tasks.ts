@@ -19,18 +19,6 @@ interface TaskDefinition {
 }
 
 /**
- * Unicode space constants for better visibility
- */
-const UnicodeSpaces = {
-  /** Regular space (U+0020) */
-  Space: '\u0020',
-  /** En space (U+2002) - half the width of an em */
-  EnSpace: '\u2002',
-  /** Figure space (U+2007) - same width as digits */
-  FigureSpace: '\u2007',
-} as const;
-
-/**
  * Logger utility for consistent output
  */
 class Logger {
@@ -39,25 +27,23 @@ class Logger {
   }
 
   static info(message: string): void {
-    console.log(`[${this.formatTime()}]${UnicodeSpaces.Space}ℹ️${UnicodeSpaces.EnSpace}${message}`);
+    console.log(`[${this.formatTime()}] ℹ️  ${message}`);
   }
 
   static success(message: string): void {
-    console.log(`[${this.formatTime()}]${UnicodeSpaces.Space}✅${UnicodeSpaces.Space}${message}`);
+    console.log(`[${this.formatTime()}] ✅ ${message}`);
   }
 
   static error(message: string): void {
-    console.error(`[${this.formatTime()}]${UnicodeSpaces.Space}❌${UnicodeSpaces.Space}${message}`);
+    console.error(`[${this.formatTime()}] ❌ ${message}`);
   }
 
   static warn(message: string): void {
-    console.warn(`[${this.formatTime()}]${UnicodeSpaces.Space}⚠️${UnicodeSpaces.EnSpace}${message}`);
+    console.warn(`[${this.formatTime()}] ⚠️  ${message}`);
   }
 
   static task(taskName: string): void {
-    console.log(
-      `[${this.formatTime()}]${UnicodeSpaces.Space}🚀${UnicodeSpaces.Space}Running${UnicodeSpaces.Space}task:${UnicodeSpaces.Space}${taskName}`,
-    );
+    console.log(`[${this.formatTime()}] 🚀 Running task: ${taskName}`);
   }
 }
 
@@ -97,15 +83,11 @@ class SyncUtil {
 
     // Check if source exists
     if (!(await this.exists(source))) {
-      Logger.warn(
-        `Skipping${UnicodeSpaces.Space}${description}:${UnicodeSpaces.Space}source${UnicodeSpaces.Space}not${UnicodeSpaces.Space}found${UnicodeSpaces.Space}at${UnicodeSpaces.Space}${source}`,
-      );
+      Logger.warn(`Skipping ${description}: source not found at ${source}`);
       return;
     }
 
-    Logger.info(
-      `${description}:${UnicodeSpaces.Space}${source}${UnicodeSpaces.Space}→${UnicodeSpaces.Space}${destination}`,
-    );
+    Logger.info(`${description}: ${source} → ${destination}`);
     await $`rsync -av ${expandedSource} ${expandedDestination}`;
   }
 
@@ -181,20 +163,14 @@ class TaskRunner {
    * List all available tasks
    */
   listTasks(): void {
-    console.log(`Available${UnicodeSpaces.Space}tasks:`);
+    console.log('Available tasks:');
     console.log();
 
     for (const [name, definition] of this.tasks) {
-      console.log(`${UnicodeSpaces.EnSpace}${UnicodeSpaces.EnSpace}${name}`);
-      console.log(
-        `${UnicodeSpaces.FigureSpace}${UnicodeSpaces.FigureSpace}${UnicodeSpaces.FigureSpace}${UnicodeSpaces.FigureSpace}${definition.description}`,
-      );
+      console.log(`  ${name}`);
+      console.log(`    ${definition.description}`);
       if (definition.dependencies?.length) {
-        console.log(
-          `${UnicodeSpaces.FigureSpace}${UnicodeSpaces.FigureSpace}${UnicodeSpaces.FigureSpace}${UnicodeSpaces.FigureSpace}Dependencies:${UnicodeSpaces.Space}${
-            definition.dependencies.join(`,${UnicodeSpaces.Space}`)
-          }`,
-        );
+        console.log(`    Dependencies: ${definition.dependencies.join(', ')}`);
       }
       console.log();
     }
@@ -405,9 +381,7 @@ async function main(): Promise<void> {
   const taskName = Deno.args[0];
 
   if (!taskName || taskName === 'help' || taskName === '--help' || taskName === '-h') {
-    console.log(
-      `Usage:${UnicodeSpaces.Space}deno${UnicodeSpaces.Space}run${UnicodeSpaces.Space}-A${UnicodeSpaces.Space}tasks.ts${UnicodeSpaces.Space}<task>`,
-    );
+    console.log('Usage: deno run -A tasks.ts <task>');
     console.log();
     runner.listTasks();
     Deno.exit(0);
@@ -415,20 +389,18 @@ async function main(): Promise<void> {
 
   const availableTasks = runner.getTaskNames();
   if (!availableTasks.includes(taskName)) {
-    Logger.error(`Task${UnicodeSpaces.Space}'${taskName}'${UnicodeSpaces.Space}not${UnicodeSpaces.Space}found`);
+    Logger.error(`Task '${taskName}' not found`);
     console.log();
-    console.log(`Available${UnicodeSpaces.Space}tasks:`);
+    console.log('Available tasks:');
     for (const name of availableTasks) {
-      console.log(`${UnicodeSpaces.EnSpace}${UnicodeSpaces.EnSpace}${name}`);
+      console.log(`  ${name}`);
     }
     Deno.exit(1);
   }
 
   const result = await runner.run(taskName);
   if (!result.ok) {
-    Logger.error(
-      `Task${UnicodeSpaces.Space}'${taskName}'${UnicodeSpaces.Space}failed:${UnicodeSpaces.Space}${result.error.message}`,
-    );
+    Logger.error(`Task '${taskName}' failed: ${result.error.message}`);
     Deno.exit(1);
   }
 }
