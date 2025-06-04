@@ -61,6 +61,9 @@
     "type": "text-and-comment"
   },
   "todo-tree.regex.regex": "(\\*|//|#|<!--|;|/\\*|^|^[ \\t]*\\*)\\s*($TAGS)",
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
   "mcp": {
     "servers": {
       "playwright": {
