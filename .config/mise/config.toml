@@ -7,3 +7,6 @@ python = "3.13.3"
 uv = "0.7.9"
 
 [env]
+
+[settings]
+idiomatic_version_file_enable_tools = ["python"]
