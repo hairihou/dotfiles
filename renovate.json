@@ -9,5 +9,11 @@
   "draftPR": true,
   "prConcurrentLimit": 3,
   "rangeStrategy": "bump",
-  "rebaseWhen": "conflicted"
+  "rebaseWhen": "conflicted",
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["patch"],
+      "enabled": false
+    }
+  ]
 }
