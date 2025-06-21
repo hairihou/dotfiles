@@ -17,6 +17,7 @@
   "files.insertFinalNewline": true,
   // "github.copilot.nextEditSuggestions.enabled": true,
   "githubPullRequests.pullBranch": "never",
+  "makefile.configureOnOpen": false,
   "php.suggest.basic": false,
   "php.validate.enable": false,
   "terminal.integrated.fontFamily": "'MonaspiceAr Nerd Font Mono', monospace",
