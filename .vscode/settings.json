@@ -20,6 +20,7 @@
   "makefile.configureOnOpen": false,
   "php.suggest.basic": false,
   "php.validate.enable": false,
+  "redhat.telemetry.enabled": false,
   "terminal.integrated.fontFamily": "'MonaspiceAr Nerd Font Mono', monospace",
   "terminal.integrated.fontSize": 14,
   "typescript.implementationsCodeLens.enabled": true,
