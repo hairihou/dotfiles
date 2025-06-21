@@ -1,105 +1,54 @@
-# Makefile for managing dotfiles and system configurations
-# Assumes execution on macOS with zsh. Individual scripts use zsh via shebang.
+DOTFILES_DIR := "${HOME}/dotfiles"
+VSCODE_USER_DIR := "${HOME}/Library/Application\ Support/Code/User"
 
-SCRIPTS_DIR := ./scripts
-
-# Colors for help message
-GREEN := $(shell tput setaf 2)
-RESET := $(shell tput sgr0)
-
-.PHONY: help \
-        sync-zshrc dump-zshrc \
-        sync-gitconfig dump-gitconfig \
+.PHONY: sync-zshrc dump-zshrc \
         sync-gitignore dump-gitignore \
         sync-mise dump-mise \
         sync-vscode-settings dump-vscode-settings \
         sync-vscode-instructions dump-vscode-instructions \
         sync-all dump-all \
-        brew-all \
+				sync-gitconfig dump-gitconfig \
         user-defaults
 
-help:
-	@echo "Usage: make [target]"
-	@echo ""
-	@echo "Targets:"
-	@echo "  ${GREEN}help${RESET}                       Show this help message"
-	@echo ""
-	@echo "  --- Sync Dotfiles (Dotfiles -> System) ---"
-	@echo "  ${GREEN}sync-zshrc${RESET}               Sync .zshrc"
-	@echo "  ${GREEN}sync-gitconfig${RESET}           Sync gitconfig"
-	@echo "  ${GREEN}sync-gitignore${RESET}           Sync git ignore"
-	@echo "  ${GREEN}sync-mise${RESET}                Sync mise config"
-	@echo "  ${GREEN}sync-vscode-settings${RESET}     Sync VS Code settings"
-	@echo "  ${GREEN}sync-vscode-instructions${RESET} Sync VS Code prompt instructions"
-	@echo "  ${GREEN}sync-all${RESET}                 Sync all above dotfiles"
-	@echo ""
-	@echo "  --- Dump Configs (System -> Dotfiles) ---"
-	@echo "  ${GREEN}dump-zshrc${RESET}               Dump .zshrc"
-	@echo "  ${GREEN}dump-gitconfig${RESET}           Dump gitconfig"
-	@echo "  ${GREEN}dump-gitignore${RESET}           Dump git ignore"
-	@echo "  ${GREEN}dump-mise${RESET}                Dump mise config"
-	@echo "  ${GREEN}dump-vscode-settings${RESET}     Dump VS Code settings"
-	@echo "  ${GREEN}dump-vscode-instructions${RESET} Dump VS Code prompt instructions"
-	@echo "  ${GREEN}dump-all${RESET}                 Dump all above configs"
-	@echo ""
-	@echo "  --- Homebrew ---"
-	@echo "  ${GREEN}brew-all${RESET}                 Update, upgrade, and clean Homebrew"
-	@echo ""
-	@echo "  --- macOS ---"
-	@echo "  ${GREEN}user-defaults${RESET}            Configure macOS Dock settings"
-
-
-# Default target
-default: help
-
-# Sync Dotfiles
 sync-zshrc:
-	@zsh ${SCRIPTS_DIR}/sync_zshrc.sh
-
-sync-gitconfig:
-	@zsh ${SCRIPTS_DIR}/sync_gitconfig.sh
+	@rsync -av --force "${DOTFILES_DIR}/.zshrc" "${HOME}/"
 
 sync-gitignore:
-	@zsh ${SCRIPTS_DIR}/sync_gitignore.sh
+	@rsync -av --force "${DOTFILES_DIR}/.config/git/ignore" "${HOME}/.config/git/"
 
 sync-mise:
-	@zsh ${SCRIPTS_DIR}/sync_mise.sh
+	@rsync -av --force "${DOTFILES_DIR}/.config/mise/" "${HOME}/.config/mise/"
 
 sync-vscode-settings:
-	@zsh ${SCRIPTS_DIR}/sync_vscode_settings.sh
+	@rsync -av --force "${DOTFILES_DIR}/.vscode/global/settings.json" "${VSCODE_USER_DIR}/"
 
 sync-vscode-instructions:
-	@zsh ${SCRIPTS_DIR}/sync_vscode_instructions.sh
+	@rsync -av --force "${DOTFILES_DIR}/.github/instructions/" "${VSCODE_USER_DIR}/prompts/"
 
-sync-all: sync-zshrc sync-gitconfig sync-gitignore sync-mise sync-vscode-settings sync-vscode-instructions
-	@echo "All dotfiles synced successfully"
+sync-all: sync-zshrc sync-gitignore sync-mise sync-vscode-settings sync-vscode-instructions
 
-# Dump Configs
 dump-zshrc:
-	@zsh ${SCRIPTS_DIR}/dump_zshrc.sh
-
-dump-gitconfig:
-	@zsh ${SCRIPTS_DIR}/dump_gitconfig.sh
+	@rsync -av --force "${HOME}/.zshrc" "${DOTFILES_DIR}/"
 
 dump-gitignore:
-	@zsh ${SCRIPTS_DIR}/dump_gitignore.sh
+	@rsync -av --force "${HOME}/.config/git/ignore" "${DOTFILES_DIR}/.config/git/"
 
 dump-mise:
-	@zsh ${SCRIPTS_DIR}/dump_mise.sh
+	@rsync -av --force "${HOME}/.config/mise/" "${DOTFILES_DIR}/.config/mise/"
 
 dump-vscode-settings:
-	@zsh ${SCRIPTS_DIR}/dump_vscode_settings.sh
+	@rsync -av --force "${VSCODE_USER_DIR}/settings.json" "${HOME}/dotfiles/.vscode/global/"
 
 dump-vscode-instructions:
-	@zsh ${SCRIPTS_DIR}/dump_vscode_instructions.sh
+	@rsync -av --force "${VSCODE_USER_DIR}/prompts/" "${DOTFILES_DIR}/.github/instructions/"
 
-dump-all: dump-zshrc dump-gitconfig dump-gitignore dump-mise dump-vscode-settings dump-vscode-instructions
-	@echo "All configs dumped successfully"
+dump-all: dump-zshrc dump-gitignore dump-mise dump-vscode-settings dump-vscode-instructions
 
-# Homebrew
-brew-all:
-	@zsh ${SCRIPTS_DIR}/brew_all.sh
+sync-gitconfig:
+	@rsync -av --force "${DOTFILES_DIR}/.config/.gitconfig" "${HOME}/"
 
-# macOS
+dump-gitconfig:
+	@rsync -av --force "${HOME}/.gitconfig" "${DOTFILES_DIR}/.config/"
+
 user-defaults:
-	@zsh ${SCRIPTS_DIR}/user_defaults.sh
+	@zsh "${DOTFILES_DIR}/scripts/user-defaults.sh"
