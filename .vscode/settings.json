@@ -33,6 +33,7 @@
   },
   "workbench.iconTheme": "catppuccin-mocha",
   "workbench.tree.indent": 24,
+  "yaml.maxItemsComputed": 1000,
   "todo-tree.filtering.excludeGlobs": ["**/node_modules", "**/dist"],
   "todo-tree.general.tags": [
     "BUG",
