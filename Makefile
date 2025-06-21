@@ -54,62 +54,52 @@ default: help
 
 # Sync Dotfiles
 sync-zshrc:
-	@${SHELL} ${SCRIPTS_DIR}/sync_zshrc.sh
+	@zsh ${SCRIPTS_DIR}/sync_zshrc.sh
 
 sync-gitconfig:
-	@${SHELL} ${SCRIPTS_DIR}/sync_gitconfig.sh
+	@zsh ${SCRIPTS_DIR}/sync_gitconfig.sh
 
 sync-gitignore:
-	@${SHELL} ${SCRIPTS_DIR}/sync_gitignore.sh
+	@zsh ${SCRIPTS_DIR}/sync_gitignore.sh
 
 sync-mise:
-	@${SHELL} ${SCRIPTS_DIR}/sync_mise.sh
+	@zsh ${SCRIPTS_DIR}/sync_mise.sh
 
 sync-vscode-settings:
-	@${SHELL} ${SCRIPTS_DIR}/sync_vscode_settings.sh
+	@zsh ${SCRIPTS_DIR}/sync_vscode_settings.sh
 
 sync-vscode-instructions:
-	@${SHELL} ${SCRIPTS_DIR}/sync_vscode_instructions.sh
+	@zsh ${SCRIPTS_DIR}/sync_vscode_instructions.sh
 
-sync-all: sync-zshrc sync-gitignore sync-mise sync-vscode-settings sync-vscode-instructions
+sync-all: sync-zshrc sync-gitconfig sync-gitignore sync-mise sync-vscode-settings sync-vscode-instructions
 	@echo "All dotfiles synced successfully"
 
 # Dump Configs
 dump-zshrc:
-	@${SHELL} ${SCRIPTS_DIR}/dump_zshrc.sh
+	@zsh ${SCRIPTS_DIR}/dump_zshrc.sh
 
 dump-gitconfig:
-	@${SHELL} ${SCRIPTS_DIR}/dump_gitconfig.sh
+	@zsh ${SCRIPTS_DIR}/dump_gitconfig.sh
 
 dump-gitignore:
-	@${SHELL} ${SCRIPTS_DIR}/dump_gitignore.sh
+	@zsh ${SCRIPTS_DIR}/dump_gitignore.sh
 
 dump-mise:
-	@${SHELL} ${SCRIPTS_DIR}/dump_mise.sh
+	@zsh ${SCRIPTS_DIR}/dump_mise.sh
 
 dump-vscode-settings:
-	@${SHELL} ${SCRIPTS_DIR}/dump_vscode_settings.sh
+	@zsh ${SCRIPTS_DIR}/dump_vscode_settings.sh
 
 dump-vscode-instructions:
-	@${SHELL} ${SCRIPTS_DIR}/dump_vscode_instructions.sh
+	@zsh ${SCRIPTS_DIR}/dump_vscode_instructions.sh
 
-dump-all: dump-zshrc dump-gitignore dump-mise dump-vscode-settings dump-vscode-instructions
+dump-all: dump-zshrc dump-gitconfig dump-gitignore dump-mise dump-vscode-settings dump-vscode-instructions
 	@echo "All configs dumped successfully"
 
 # Homebrew
-.PHONY: _brew-update _brew-upgrade _brew-prune
-_brew-update:
-	@${SHELL} ${SCRIPTS_DIR}/brew_update.sh
-
-_brew-upgrade: _brew-update
-	@${SHELL} ${SCRIPTS_DIR}/brew_upgrade.sh
-
-_brew-prune:
-	@${SHELL} ${SCRIPTS_DIR}/brew_prune.sh
-
-brew-all: _brew-update _brew-upgrade _brew-prune
-	@echo "Homebrew maintenance completed"
+brew-all:
+	@zsh ${SCRIPTS_DIR}/brew_all.sh
 
 # macOS
 user-defaults:
-	@${SHELL} ${SCRIPTS_DIR}/user_defaults.sh
+	@zsh ${SCRIPTS_DIR}/user_defaults.sh

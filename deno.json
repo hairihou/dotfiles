@@ -6,7 +6,7 @@
     "singleQuote": true
   },
   "tasks": {
-    "dev": "deno run --watch main.ts",
+    // "dev": "deno run --watch main.ts", // main.ts is not part of this refactoring
     // "hook": "lefthook install", // Removed: lefthook is no longer used
     // "user-defaults": "deno run --allow-all ./src/user-defaults.ts", // Moved to Makefile
     // "tasks": "deno run --allow-all ./src/tasks.ts" // Moved to Makefile
