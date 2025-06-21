@@ -7,9 +7,9 @@
   },
   "tasks": {
     "dev": "deno run --watch main.ts",
-    "hook": "lefthook install",
-    "user-defaults": "deno run --allow-all ./src/user-defaults.ts",
-    "tasks": "deno run --allow-all ./src/tasks.ts"
+    // "hook": "lefthook install", // Removed: lefthook is no longer used
+    // "user-defaults": "deno run --allow-all ./src/user-defaults.ts", // Moved to Makefile
+    // "tasks": "deno run --allow-all ./src/tasks.ts" // Moved to Makefile
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@1",
