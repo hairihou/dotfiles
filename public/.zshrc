@@ -2,11 +2,14 @@ export EDITOR='vim'
 export LANG='en_US.UTF-8'
 
 HISTFILE="$HOME/.zsh_history"
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=50000
+SAVEHIST=50000
 
+setopt hist_expire_dups_first
 setopt hist_ignore_all_dups
+setopt hist_ignore_space
 setopt hist_reduce_blanks
+setopt inc_append_history
 setopt share_history
 setopt IGNOREEOF
 autoload -Uz compinit
@@ -26,35 +29,20 @@ peco-select-history() {
 zle -N peco-select-history
 bindkey "^r" peco-select-history
 
-peco-get-destination-from-cdr() {
-  cdr -l | \
-  sed -e "s/^[[:digit:]]*[[:blank:]]*//" | \
-  peco --query "$LBUFFER"
-}
-
-peco-cdr() {
-  local destination="$(peco-get-destination-from-cdr)"
-  if [ -n "$destination" ]; then
-    BUFFER="cd $destination"
-    zle accept-line
-  else
-    zle reset-prompt
-  fi
-}
-zle -N peco-cdr
-bindkey "^u" peco-cdr
-
-# resize
 resize() {
   local scale=${1:-1}
-  if (( $(echo "$scale < 1" | bc -l) )); then
+  if ! [[ "$scale" =~ ^[0-9]*\.?[0-9]+$ ]]; then
+    echo "Error: Scale must be a number" >&2
+    return 1
+  fi
+  if (( $(awk "BEGIN {print ($scale < 1)}") )); then
     scale=1
-  elif (( $(echo "$scale > 3" | bc -l) )); then
+  elif (( $(awk "BEGIN {print ($scale > 3)}") )); then
     scale=3
   fi
   local rows=$((24 * scale))
   local cols=$((80 * scale))
-  echo -e "\e[8;${rows};${cols}t"
+  printf '\e[8;%d;%dt' "$rows" "$cols"
 }
 
 # Android
