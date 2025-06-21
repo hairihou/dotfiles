@@ -7,6 +7,7 @@ VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
         sync-vscode-settings dump-vscode-settings \
         sync-vscode-instructions dump-vscode-instructions \
         sync-all dump-all \
+				brew-all \
         sync-gitconfig dump-gitconfig \
         user-defaults
 
@@ -43,6 +44,12 @@ dump-vscode-instructions:
 	@rsync -av "${VSCODE_USER_DIR}/prompts/" "$(DOTFILES_DIR)/.github/instructions/"
 
 dump-all: dump-zshrc dump-gitignore dump-mise dump-vscode-settings dump-vscode-instructions
+
+brew-all:
+	@brew update
+	@brew upgrade --formula $(brew ls --formula)
+	@brew upgrade --cask $(brew ls --cask)
+	@brew cleanup --prune=all --scrub
 
 sync-gitconfig:
 	@rsync -av "$(DOTFILES_DIR)/public/.gitconfig" "$(HOME)/"
