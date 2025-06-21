@@ -7,7 +7,7 @@ VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
         sync-vscode-settings dump-vscode-settings \
         sync-vscode-instructions dump-vscode-instructions \
         sync-all dump-all \
-				sync-gitconfig dump-gitconfig \
+        sync-gitconfig dump-gitconfig \
         user-defaults
 
 sync-zshrc:
