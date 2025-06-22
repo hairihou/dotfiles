@@ -15,7 +15,7 @@
   "editor.stickyScroll.enabled": false,
   "editor.tabSize": 2,
   "files.insertFinalNewline": true,
-  // "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.nextEditSuggestions.enabled": false,
   "githubPullRequests.pullBranch": "never",
   "makefile.configureOnOpen": false,
   "php.suggest.basic": false,
@@ -34,6 +34,21 @@
   "workbench.iconTheme": "catppuccin-mocha",
   "workbench.tree.indent": 24,
   "yaml.maxItemsComputed": 1000,
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
+  "mcp": {
+    "servers": {
+      "github": {
+        "type": "http",
+        "url": "https://api.githubcopilot.com/mcp/"
+      },
+      "playwright": {
+        "command": "pnpm",
+        "args": ["dlx", "@playwright/mcp@latest", "--headless"]
+      }
+    }
+  },
   "todo-tree.filtering.excludeGlobs": ["**/node_modules", "**/dist"],
   "todo-tree.general.tags": [
     "BUG",
@@ -64,121 +79,20 @@
     "type": "text-and-comment"
   },
   "todo-tree.regex.regex": "(\\*|//|#|<!--|;|/\\*|^|^[ \\t]*\\*)\\s*($TAGS)",
-  "[php]": {
-    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
-  },
-  "mcp": {
-    "servers": {
-      "github": {
-        "type": "http",
-        "url": "https://api.githubcopilot.com/mcp/"
-      },
-      "playwright": {
-        "command": "pnpm",
-        "args": ["dlx", "@playwright/mcp@latest", "--headless"]
-      }
-    }
-  },
   "cSpell.userWords": [
     "3rdparty",
-    "akafuku",
-    "appbar",
-    "autodocs",
-    "autohide",
-    "autoprefixer",
-    "axios",
-    "baleine",
-    "bierner",
-    "cadran",
-    "catppuccin",
-    "colada",
-    "committerdate",
-    "csrftoken",
-    "denoland",
     "devcontainers",
-    "dotfiles",
-    "dragover",
-    "dropzone",
-    "ehozon",
-    "esbenp",
-    "extrathick",
-    "goreleaser",
-    "grayscale",
-    "gtag",
-    "hairihou",
-    "hanbai",
-    "hiragino",
-    "hushlogin",
-    "iconify",
-    "intlify",
-    "kaku",
-    "killall",
-    "kinnosuke",
-    "kintai",
-    "kyuyo",
-    "lefthook",
-    "lhci",
-    "lighthouseci",
-    "meiryo",
-    "meisai",
-    "mizuno",
     "modelcontextprotocol",
-    "monaspace",
-    "monaspice",
-    "mouvement",
-    "navi",
-    "neos",
     "noopener",
     "noreferrer",
-    "noto",
-    "nuxt",
     "openapi",
-    "openapitools",
-    "orbstack",
-    "peco",
-    "persistedstate",
-    "picklist",
-    "pinia",
-    "postcss",
-    "pycache",
-    "pylance",
-    "rakuraku",
-    "rakus",
-    "recents",
-    "redocly",
-    "reka",
-    "reviewstats",
     "rgba",
     "rolldown",
-    "rustup",
-    "safelist",
-    "safelisting",
-    "seikyu",
-    "seisan",
-    "ssooff",
-    "subphase",
-    "swiftlint",
     "tailwindcss",
     "tanstack",
-    "tilesize",
-    "tsbuildinfo",
-    "tsdown",
     "tseslint",
-    "tsgo",
-    "typespec",
     "unplugin",
-    "vali",
     "valibot",
-    "venv",
-    "vite",
-    "vitejs",
-    "vitest",
-    "vuetify",
-    "wagashi",
-    "xlink",
-    "ymizuno",
-    "yonosuke",
-    "yusuke",
-    "zenn"
+    "vite"
   ]
 }
