@@ -47,9 +47,10 @@ dump-all: dump-zshrc dump-gitignore dump-mise dump-vscode-settings dump-vscode-i
 
 brew-all:
 	@brew update
-	@brew upgrade --formula $(brew ls --formula)
-	@brew upgrade --cask $(brew ls --cask)
+	@brew upgrade --formula $$(brew ls --formula)
+	@brew upgrade --cask $$(brew ls --cask)
 	@brew cleanup --prune=all --scrub
+	@brew autoremove
 
 sync-gitconfig:
 	@rsync -av "$(DOTFILES_DIR)/public/.gitconfig" "$(HOME)/"
