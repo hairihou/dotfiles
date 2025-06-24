@@ -1,4 +1,3 @@
-DOTFILES_DIR := $(HOME)/dotfiles
 VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
 
 .PHONY: sync-zshrc dump-zshrc \
@@ -12,36 +11,36 @@ VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
         user-defaults
 
 sync-zshrc:
-	@rsync -av "$(DOTFILES_DIR)/public/.zshrc" "$(HOME)/"
+	@rsync -av ./public/.zshrc "$(HOME)/"
 
 sync-gitignore:
-	@rsync -av "$(DOTFILES_DIR)/.config/git/ignore" "$(HOME)/.config/git/"
+	@rsync -av ./.config/git/ignore "$(HOME)/.config/git/"
 
 sync-mise:
-	@rsync -av "$(DOTFILES_DIR)/.config/mise/" "$(HOME)/.config/mise/"
+	@rsync -av ./.config/mise/ "$(HOME)/.config/mise/"
 
 sync-vscode-settings:
-	@rsync -av "$(DOTFILES_DIR)/.vscode/settings.json" "${VSCODE_USER_DIR}/"
+	@rsync -av ./.vscode/settings.json "${VSCODE_USER_DIR}/"
 
 sync-vscode-instructions:
-	@rsync -av "$(DOTFILES_DIR)/.github/instructions/" "${VSCODE_USER_DIR}/prompts/"
+	@rsync -av ./.github/instructions/ "${VSCODE_USER_DIR}/prompts/"
 
 sync-all: sync-zshrc sync-gitignore sync-mise sync-vscode-settings sync-vscode-instructions
 
 dump-zshrc:
-	@rsync -av "$(HOME)/.zshrc" "$(DOTFILES_DIR)/public/"
+	@rsync -av "$(HOME)/.zshrc" ./public/
 
 dump-gitignore:
-	@rsync -av "$(HOME)/.config/git/ignore" "$(DOTFILES_DIR)/.config/git/"
+	@rsync -av "$(HOME)/.config/git/ignore" ./.config/git/
 
 dump-mise:
-	@rsync -av "$(HOME)/.config/mise/" "$(DOTFILES_DIR)/.config/mise/"
+	@rsync -av "$(HOME)/.config/mise/" ./.config/mise/
 
 dump-vscode-settings:
-	@rsync -av "${VSCODE_USER_DIR}/settings.json" "$(HOME)/dotfiles/.vscode/"
+	@rsync -av "${VSCODE_USER_DIR}/settings.json" ./.vscode/
 
 dump-vscode-instructions:
-	@rsync -av "${VSCODE_USER_DIR}/prompts/" "$(DOTFILES_DIR)/.github/instructions/"
+	@rsync -av "${VSCODE_USER_DIR}/prompts/" ./.github/instructions/
 
 dump-all: dump-zshrc dump-gitignore dump-mise dump-vscode-settings dump-vscode-instructions
 
@@ -53,10 +52,10 @@ brew-all:
 	@brew autoremove
 
 sync-gitconfig:
-	@rsync -av "$(DOTFILES_DIR)/public/.gitconfig" "$(HOME)/"
+	@rsync -av ./public/.gitconfig "$(HOME)/"
 
 dump-gitconfig:
-	@rsync -av "$(HOME)/.gitconfig" "$(DOTFILES_DIR)/public/"
+	@rsync -av "$(HOME)/.gitconfig" ./public/
 
 user-defaults:
-	@zsh "$(DOTFILES_DIR)/scripts/user-defaults.sh"
+	@zsh ./scripts/user-defaults.sh
