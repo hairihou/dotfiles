@@ -1,7 +1,7 @@
 [tools]
 deno = "2.3.6"
 node = "22.17.0"
-"npm:@anthropic-ai/claude-code" = "1.0.22"
+"npm:@anthropic-ai/claude-code" = "1.0.34"
 "npm:pnpm" = "10.12.3"
 python = "3.13.5"
 uv = "0.7.13"
