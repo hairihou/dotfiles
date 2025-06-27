@@ -1,17 +1,18 @@
 VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
 
-.PHONY: sync-zshrc dump-zshrc \
+.PHONY: sync-gemini dump-gemini \
         sync-gitignore dump-gitignore \
         sync-mise dump-mise \
-        sync-vscode-settings dump-vscode-settings \
         sync-vscode-instructions dump-vscode-instructions \
+        sync-vscode-settings dump-vscode-settings \
+        sync-zshrc dump-zshrc \
         sync-all dump-all \
-				brew-all \
+        brew-all \
         sync-gitconfig dump-gitconfig \
         user-defaults
 
-sync-zshrc:
-	@rsync -av ./public/.zshrc "$(HOME)/"
+sync-gemini:
+	@rsync -av ./.gemini/GEMINI.md ./.gemini/settings.json "$(HOME)/.gemini/"
 
 sync-gitignore:
 	@rsync -av ./.config/git/ignore "$(HOME)/.config/git/"
@@ -19,16 +20,19 @@ sync-gitignore:
 sync-mise:
 	@rsync -av ./.config/mise/ "$(HOME)/.config/mise/"
 
-sync-vscode-settings:
-	@rsync -av ./.vscode/settings.json "${VSCODE_USER_DIR}/"
-
 sync-vscode-instructions:
 	@rsync -av ./.github/instructions/ "${VSCODE_USER_DIR}/prompts/"
 
-sync-all: sync-zshrc sync-gitignore sync-mise sync-vscode-settings sync-vscode-instructions
+sync-vscode-settings:
+	@rsync -av ./.vscode/settings.json "${VSCODE_USER_DIR}/"
 
-dump-zshrc:
-	@rsync -av "$(HOME)/.zshrc" ./public/
+sync-zshrc:
+	@rsync -av ./public/.zshrc "$(HOME)/"
+
+sync-all: sync-gitignore sync-mise sync-vscode-instructions sync-vscode-settings sync-zshrc
+
+dump-gemini:
+	@rsync -av "$(HOME)/.gemini/GEMINI.md" "$(HOME)/.gemini/settings.json" ./.gemini/
 
 dump-gitignore:
 	@rsync -av "$(HOME)/.config/git/ignore" ./.config/git/
@@ -36,13 +40,16 @@ dump-gitignore:
 dump-mise:
 	@rsync -av "$(HOME)/.config/mise/" ./.config/mise/
 
-dump-vscode-settings:
-	@rsync -av "${VSCODE_USER_DIR}/settings.json" ./.vscode/
-
 dump-vscode-instructions:
 	@rsync -av "${VSCODE_USER_DIR}/prompts/" ./.github/instructions/
 
-dump-all: dump-zshrc dump-gitignore dump-mise dump-vscode-settings dump-vscode-instructions
+dump-vscode-settings:
+	@rsync -av "${VSCODE_USER_DIR}/settings.json" ./.vscode/
+
+dump-zshrc:
+	@rsync -av "$(HOME)/.zshrc" ./public/
+
+dump-all: dump-gitignore dump-mise dump-vscode-instructions dump-vscode-settings dump-zshrc
 
 brew-all:
 	@brew update
