@@ -12,42 +12,42 @@ VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
         user-defaults
 
 sync-gemini:
-	@rsync -av ./.gemini/GEMINI.md ./.gemini/settings.json "$(HOME)/.gemini/"
+	@rsync -av --checksum ./.gemini/GEMINI.md ./.gemini/settings.json "$(HOME)/.gemini/"
 
 sync-gitignore:
-	@rsync -av ./.config/git/ignore "$(HOME)/.config/git/"
+	@rsync -av --checksum ./.config/git/ignore "$(HOME)/.config/git/"
 
 sync-mise:
-	@rsync -av ./.config/mise/ "$(HOME)/.config/mise/"
+	@rsync -av --checksum ./.config/mise/ "$(HOME)/.config/mise/"
 
 sync-vscode-instructions:
-	@rsync -av ./.github/instructions/ "${VSCODE_USER_DIR}/prompts/"
+	@rsync -av --checksum ./.github/instructions/ "${VSCODE_USER_DIR}/prompts/"
 
 sync-vscode-settings:
-	@rsync -av ./.vscode/settings.json "${VSCODE_USER_DIR}/"
+	@rsync -av --checksum ./.vscode/settings.json "${VSCODE_USER_DIR}/"
 
 sync-zshrc:
-	@rsync -av ./public/.zshrc "$(HOME)/"
+	@rsync -av --checksum ./public/.zshrc "$(HOME)/"
 
 sync-all: sync-gitignore sync-mise sync-vscode-instructions sync-vscode-settings sync-zshrc
 
 dump-gemini:
-	@rsync -av "$(HOME)/.gemini/GEMINI.md" "$(HOME)/.gemini/settings.json" ./.gemini/
+	@rsync -av --checksum "$(HOME)/.gemini/GEMINI.md" "$(HOME)/.gemini/settings.json" ./.gemini/
 
 dump-gitignore:
-	@rsync -av "$(HOME)/.config/git/ignore" ./.config/git/
+	@rsync -av --checksum "$(HOME)/.config/git/ignore" ./.config/git/
 
 dump-mise:
-	@rsync -av "$(HOME)/.config/mise/" ./.config/mise/
+	@rsync -av --checksum "$(HOME)/.config/mise/" ./.config/mise/
 
 dump-vscode-instructions:
-	@rsync -av "${VSCODE_USER_DIR}/prompts/" ./.github/instructions/
+	@rsync -av --checksum "${VSCODE_USER_DIR}/prompts/" ./.github/instructions/
 
 dump-vscode-settings:
-	@rsync -av "${VSCODE_USER_DIR}/settings.json" ./.vscode/
+	@rsync -av --checksum "${VSCODE_USER_DIR}/settings.json" ./.vscode/
 
 dump-zshrc:
-	@rsync -av "$(HOME)/.zshrc" ./public/
+	@rsync -av --checksum "$(HOME)/.zshrc" ./public/
 
 dump-all: dump-gitignore dump-mise dump-vscode-instructions dump-vscode-settings dump-zshrc
 
@@ -59,10 +59,10 @@ brew-all:
 	@brew autoremove
 
 sync-gitconfig:
-	@rsync -av ./public/.gitconfig "$(HOME)/"
+	@rsync -av --checksum ./public/.gitconfig "$(HOME)/"
 
 dump-gitconfig:
-	@rsync -av "$(HOME)/.gitconfig" ./public/
+	@rsync -av --checksum "$(HOME)/.gitconfig" ./public/
 
 user-defaults:
 	@zsh ./scripts/user-defaults.sh
