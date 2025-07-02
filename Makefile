@@ -7,7 +7,7 @@ VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
         sync-vscode-settings dump-vscode-settings \
         sync-zshrc dump-zshrc \
         sync-all dump-all \
-        brew-all \
+        brew-all brew-stable \
         sync-gitconfig dump-gitconfig \
         user-defaults
 
@@ -52,6 +52,13 @@ dump-zshrc:
 dump-all: dump-gemini dump-gitignore dump-mise dump-vscode-instructions dump-vscode-settings dump-zshrc
 
 brew-all:
+	@brew update
+	@brew upgrade --formula $$(brew ls --formula)
+	@brew upgrade --cask $$(brew ls --cask | grep -vE '@(canary|nightly)')
+	@brew cleanup --prune=all --scrub
+	@brew autoremove
+
+brew-stable:
 	@brew update
 	@brew upgrade --formula $$(brew ls --formula)
 	@brew upgrade --cask $$(brew ls --cask)
