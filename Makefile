@@ -29,7 +29,7 @@ sync-vscode-settings:
 sync-zshrc:
 	@rsync -av --checksum ./public/.zshrc "$(HOME)/"
 
-sync-all: sync-gitignore sync-mise sync-vscode-instructions sync-vscode-settings sync-zshrc
+sync-all: sync-gemini sync-gitignore sync-mise sync-vscode-instructions sync-vscode-settings sync-zshrc
 
 dump-gemini:
 	@rsync -av --checksum "$(HOME)/.gemini/GEMINI.md" "$(HOME)/.gemini/settings.json" ./.gemini/
@@ -49,7 +49,7 @@ dump-vscode-settings:
 dump-zshrc:
 	@rsync -av --checksum "$(HOME)/.zshrc" ./public/
 
-dump-all: dump-gitignore dump-mise dump-vscode-instructions dump-vscode-settings dump-zshrc
+dump-all: dump-gemini dump-gitignore dump-mise dump-vscode-instructions dump-vscode-settings dump-zshrc
 
 brew-all:
 	@brew update
