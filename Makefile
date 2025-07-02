@@ -54,14 +54,14 @@ dump-all: dump-gemini dump-gitignore dump-mise dump-vscode-instructions dump-vsc
 brew-all:
 	@brew update
 	@brew upgrade --formula $$(brew ls --formula)
-	@brew upgrade --cask $$(brew ls --cask | grep -vE '@(canary|nightly)')
+	@brew upgrade --cask $$(brew ls --cask)
 	@brew cleanup --prune=all --scrub
 	@brew autoremove
 
 brew-stable:
 	@brew update
 	@brew upgrade --formula $$(brew ls --formula)
-	@brew upgrade --cask $$(brew ls --cask)
+	@brew upgrade --cask $$(brew ls --cask | grep -vE '@(canary|nightly)')
 	@brew cleanup --prune=all --scrub
 	@brew autoremove
 
