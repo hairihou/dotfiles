@@ -61,7 +61,7 @@ brew-all:
 brew-stable:
 	@brew update
 	@brew upgrade --formula $$(brew ls --formula)
-	@brew upgrade --cask $$(brew ls --cask | grep -vE '@(canary|nightly)')
+	@brew upgrade --cask $$(brew ls --cask | grep -v '@')
 	@brew cleanup --prune=all --scrub
 	@brew autoremove
 
