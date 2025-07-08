@@ -6,8 +6,6 @@
     ":disableDependencyDashboard",
     "group:allNonMajor"
   ],
-  "draftPR": true,
   "prConcurrentLimit": 8,
-  "rangeStrategy": "bump",
-  "rebaseWhen": "conflicted"
+  "rangeStrategy": "bump"
 }
