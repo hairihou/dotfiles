@@ -6,6 +6,5 @@
     ":disableDependencyDashboard",
     "group:allNonMajor"
   ],
-  "prConcurrentLimit": 8,
-  "rangeStrategy": "bump"
+  "prConcurrentLimit": 4
 }
