@@ -38,9 +38,9 @@ resize() {
     echo "Error: Scale must be a number" >&2
     return 1
   fi
-  if (( $(awk "BEGIN {print ($scale < 1)}") )); then
+  if (($(awk "BEGIN {print ($scale < 1)}"))); then
     scale=1
-  elif (( $(awk "BEGIN {print ($scale > 3)}") )); then
+  elif (($(awk "BEGIN {print ($scale > 3)}"))); then
     scale=3
   fi
   local rows=$((24 * scale))
