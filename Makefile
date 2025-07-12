@@ -4,6 +4,7 @@ VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
         sync-gitignore dump-gitignore \
         sync-mise dump-mise \
         sync-vscode-instructions dump-vscode-instructions \
+        sync-vscode-mcp dump-vscode-mcp \
         sync-vscode-settings dump-vscode-settings \
         sync-zshrc dump-zshrc \
         sync-all dump-all \
@@ -22,6 +23,9 @@ sync-mise:
 
 sync-vscode-instructions:
 	@rsync -av --checksum ./.github/instructions/ "${VSCODE_USER_DIR}/prompts/"
+
+sync-vscode-mcp:
+	@rsync -av --checksum ./.vscode/mcp.json "${VSCODE_USER_DIR}/"
 
 sync-vscode-settings:
 	@rsync -av --checksum ./.vscode/settings.json "${VSCODE_USER_DIR}/"
@@ -42,6 +46,9 @@ dump-mise:
 
 dump-vscode-instructions:
 	@rsync -av --checksum "${VSCODE_USER_DIR}/prompts/" ./.github/instructions/
+
+dump-vscode-mcp:
+	@rsync -av --checksum "${VSCODE_USER_DIR}/mcp.json" ./.vscode/
 
 dump-vscode-settings:
 	@rsync -av --checksum "${VSCODE_USER_DIR}/settings.json" ./.vscode/
