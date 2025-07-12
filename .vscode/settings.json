@@ -27,6 +27,7 @@
   "php.suggest.basic": false,
   "php.validate.enable": false,
   "redhat.telemetry.enabled": false,
+  "shellformat.effectLanguages": ["shellscript", "dockerfile", "dotenv"],
   "terminal.integrated.fontFamily": "'MonaspiceAr Nerd Font Mono', monospace",
   "terminal.integrated.fontSize": 14,
   "typescript.implementationsCodeLens.enabled": true,
@@ -43,17 +44,8 @@
   "[php]": {
     "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
   },
-  "mcp": {
-    "servers": {
-      "github": {
-        "type": "http",
-        "url": "https://api.githubcopilot.com/mcp/"
-      },
-      "playwright": {
-        "command": "pnpm",
-        "args": ["dlx", "@playwright/mcp@latest", "--headless"]
-      }
-    }
+  "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "todo-tree.filtering.excludeGlobs": ["**/node_modules", "**/dist"],
   "todo-tree.general.tags": [
