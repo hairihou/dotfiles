@@ -10,7 +10,7 @@ VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
         sync-all dump-all \
         brew-all brew-stable \
         sync-gitconfig dump-gitconfig \
-        user-defaults
+        macos-settings
 
 sync-gemini:
 	@rsync -av --checksum ./.gemini/GEMINI.md ./.gemini/settings.json "$(HOME)/.gemini/"
@@ -78,5 +78,5 @@ sync-gitconfig:
 dump-gitconfig:
 	@rsync -av --checksum "$(HOME)/.gitconfig" ./public/
 
-user-defaults:
-	@zsh ./scripts/user-defaults.sh
+macos-settings:
+	@zsh ./scripts/macos-settings.sh
