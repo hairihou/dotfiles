@@ -15,6 +15,7 @@
   "editor.stickyScroll.enabled": false,
   "editor.tabSize": 2,
   "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
@@ -41,6 +42,9 @@
   "workbench.iconTheme": "catppuccin-mocha",
   "workbench.tree.indent": 24,
   "yaml.maxItemsComputed": 1000,
+  "[makefile]": {
+    "editor.defaultFormatter": "EditorConfig.EditorConfig"
+  },
   "[php]": {
     "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
   },
