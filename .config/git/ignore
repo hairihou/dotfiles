@@ -1,8 +1,6 @@
-# local directory
+# local
 **/__local__
 
-# mise
-**/mise.*local.toml
-
-# @anthropic-ai/claude-code
+# cli
 **/.claude/settings.local.json
+**/mise.*local.toml
