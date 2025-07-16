@@ -1,16 +1,16 @@
 VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
 
 .PHONY: sync-gemini dump-gemini \
-        sync-gitignore dump-gitignore \
-        sync-mise dump-mise \
-        sync-vscode-instructions dump-vscode-instructions \
-        sync-vscode-mcp dump-vscode-mcp \
-        sync-vscode-settings dump-vscode-settings \
-        sync-zshrc dump-zshrc \
-        sync-all dump-all \
-        brew-all brew-stable \
-        sync-gitconfig dump-gitconfig \
-        macos-settings
+	sync-gitignore dump-gitignore \
+	sync-mise dump-mise \
+	sync-vscode-instructions dump-vscode-instructions \
+	sync-vscode-mcp dump-vscode-mcp \
+	sync-vscode-settings dump-vscode-settings \
+	sync-zshrc dump-zshrc \
+	sync-all dump-all \
+	brew-all brew-stable \
+	sync-gitconfig dump-gitconfig \
+	macos-settings
 
 sync-gemini:
 	@rsync -av --checksum ./.gemini/GEMINI.md ./.gemini/settings.json "$(HOME)/.gemini/"
