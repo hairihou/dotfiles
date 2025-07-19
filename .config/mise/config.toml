@@ -1,7 +1,7 @@
 [tools]
 deno = "2.4.2"
 node = "22.17.1"
-"npm:@anthropic-ai/claude-code" = "1.0.55"
+"npm:@anthropic-ai/claude-code" = "1.0.56"
 "npm:@google/gemini-cli" = "0.1.12"
 "npm:pnpm" = "10.13.1"
 python = "3.13.5"
