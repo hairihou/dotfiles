@@ -1,12 +1,42 @@
 {
   "servers": {
+    "deepwiki": {
+      "type": "http",
+      "url": "https://mcp.deepwiki.com/sse",
+      "gallery": true
+    },
+    "figma": {
+      "type": "http",
+      "url": "http://127.0.0.1:3845/sse",
+      "gallery": true
+    },
     "github": {
       "type": "http",
       "url": "https://api.githubcopilot.com/mcp/"
     },
+    "imagesorcery": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["imagesorcery-mcp==latest"],
+      "gallery": true
+    },
+    "markitdown": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["markitdown-mcp"],
+      "gallery": true
+    },
     "playwright": {
       "command": "pnpm",
-      "args": ["dlx", "@playwright/mcp@latest", "--headless"]
+      "args": ["dlx", "@playwright/mcp@latest", "--headless"],
+      "type": "stdio"
+    },
+    "terraform": {
+      "type": "stdio",
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "hashicorp/terraform-mcp-server:latest"],
+      "gallery": true
     }
-  }
+  },
+  "inputs": []
 }
