@@ -25,5 +25,8 @@ dist-ssr
 *.sln
 *.sw?
 
-# homebrew
+# Homebrew
 Brewfile.lock.json
+
+# Licensed files
+.github/instructions/tailwind.instructions.md
