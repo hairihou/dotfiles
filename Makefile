@@ -1,7 +1,6 @@
 VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
 
-.PHONY: sync-gemini dump-gemini \
-	sync-gitignore dump-gitignore \
+.PHONY: sync-gitignore dump-gitignore \
 	sync-mise dump-mise \
 	sync-vscode-instructions dump-vscode-instructions \
 	sync-vscode-mcp dump-vscode-mcp \
@@ -11,9 +10,6 @@ VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
 	brew-all brew-stable \
 	sync-gitconfig dump-gitconfig \
 	macos-settings
-
-sync-gemini:
-	@rsync -av --checksum ./.gemini/GEMINI.md ./.gemini/settings.json "$(HOME)/.gemini/"
 
 sync-gitignore:
 	@rsync -av --checksum ./.config/git/ignore "$(HOME)/.config/git/"
@@ -33,10 +29,7 @@ sync-vscode-settings:
 sync-zshrc:
 	@rsync -av --checksum ./public/.zshrc "$(HOME)/"
 
-sync-all: sync-gemini sync-gitignore sync-mise sync-vscode-instructions sync-vscode-mcp sync-vscode-settings sync-zshrc
-
-dump-gemini:
-	@rsync -av --checksum "$(HOME)/.gemini/GEMINI.md" "$(HOME)/.gemini/settings.json" ./.gemini/
+sync-all: sync-gitignore sync-mise sync-vscode-instructions sync-vscode-mcp sync-vscode-settings sync-zshrc
 
 dump-gitignore:
 	@rsync -av --checksum "$(HOME)/.config/git/ignore" ./.config/git/
@@ -56,7 +49,7 @@ dump-vscode-settings:
 dump-zshrc:
 	@rsync -av --checksum "$(HOME)/.zshrc" ./public/
 
-dump-all: dump-gemini dump-gitignore dump-mise dump-vscode-instructions dump-vscode-mcp dump-vscode-settings dump-zshrc
+dump-all: dump-gitignore dump-mise dump-vscode-instructions dump-vscode-mcp dump-vscode-settings dump-zshrc
 
 brew-all:
 	@brew update
