@@ -2,13 +2,11 @@
   "servers": {
     "deepwiki": {
       "type": "http",
-      "url": "https://mcp.deepwiki.com/sse",
-      "gallery": true
+      "url": "https://mcp.deepwiki.com/sse"
     },
     "figma": {
       "type": "http",
-      "url": "http://127.0.0.1:3845/sse",
-      "gallery": true
+      "url": "http://127.0.0.1:3845/sse"
     },
     "github": {
       "type": "http",
@@ -17,14 +15,12 @@
     "imagesorcery": {
       "type": "stdio",
       "command": "uvx",
-      "args": ["imagesorcery-mcp==latest"],
-      "gallery": true
+      "args": ["imagesorcery-mcp==latest"]
     },
     "markitdown": {
       "type": "stdio",
       "command": "uvx",
-      "args": ["markitdown-mcp"],
-      "gallery": true
+      "args": ["markitdown-mcp"]
     },
     "playwright": {
       "command": "pnpm",
@@ -34,8 +30,7 @@
     "terraform": {
       "type": "stdio",
       "command": "docker",
-      "args": ["run", "-i", "--rm", "hashicorp/terraform-mcp-server:latest"],
-      "gallery": true
+      "args": ["run", "-i", "--rm", "hashicorp/terraform-mcp-server:latest"]
     }
   },
   "inputs": []
