@@ -31,11 +31,7 @@
   },
   "github.copilot.nextEditSuggestions.enabled": false,
   "githubPullRequests.pullBranch": "never",
-  "makefile.configureOnOpen": false,
-  "php.suggest.basic": false,
-  "php.validate.enable": false,
   "redhat.telemetry.enabled": false,
-  "shellformat.effectLanguages": ["shellscript"],
   "tailwindCSS.experimental.classRegex": [["[\"']([^\"']*)[\"']"]],
   "terminal.integrated.fontSize": 14,
   "typescript.implementationsCodeLens.enabled": true,
@@ -49,15 +45,25 @@
   "workbench.iconTheme": "catppuccin-mocha",
   "workbench.tree.indent": 24,
   "yaml.maxItemsComputed": 1000,
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
   "[makefile]": {
     "editor.defaultFormatter": "EditorConfig.EditorConfig"
   },
+  "makefile.configureOnOpen": false,
   "[php]": {
     "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
+  "php.suggest.basic": false,
+  "php.validate.enable": false,
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
   },
   "[shellscript]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
+  "shellformat.effectLanguages": ["shellscript"],
   "todo-tree.filtering.excludeGlobs": ["**/node_modules", "**/dist"],
   "todo-tree.general.tags": [
     "BUG",
