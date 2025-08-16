@@ -1,15 +1,21 @@
 VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
 
-.PHONY: sync-gitignore dump-gitignore \
+.PHONY:
+	sync-claude dump-claude \
+	sync-gitignore dump-gitignore \
 	sync-mise dump-mise \
 	sync-vscode-instructions dump-vscode-instructions \
 	sync-vscode-mcp dump-vscode-mcp \
 	sync-vscode-settings dump-vscode-settings \
+	sync-vscode dump-vscode \
 	sync-zshrc dump-zshrc \
 	sync-all dump-all \
 	brew-all brew-stable \
 	sync-gitconfig dump-gitconfig \
 	macos-settings
+
+sync-claude:
+	@rsync -av --checksum ./.claude/commands/ "${HOME}/.claude/commands/"
 
 sync-gitignore:
 	@rsync -av --checksum ./.config/git/ignore "$(HOME)/.config/git/"
@@ -26,10 +32,15 @@ sync-vscode-mcp:
 sync-vscode-settings:
 	@rsync -av --checksum ./.vscode/settings.json "${VSCODE_USER_DIR}/"
 
+sync-vscode: sync-vscode-instructions sync-vscode-mcp sync-vscode-settings
+
 sync-zshrc:
 	@rsync -av --checksum ./public/.zshrc "$(HOME)/"
 
-sync-all: sync-gitignore sync-mise sync-vscode-instructions sync-vscode-mcp sync-vscode-settings sync-zshrc
+sync-all: sync-claude sync-gitignore sync-mise sync-vscode sync-zshrc
+
+dump-claude:
+	@rsync -av --checksum "${HOME}/.claude/commands/" ./.claude/commands/
 
 dump-gitignore:
 	@rsync -av --checksum "$(HOME)/.config/git/ignore" ./.config/git/
@@ -46,10 +57,12 @@ dump-vscode-mcp:
 dump-vscode-settings:
 	@rsync -av --checksum "${VSCODE_USER_DIR}/settings.json" ./.vscode/
 
+dump-vscode: dump-vscode-instructions dump-vscode-mcp dump-vscode-settings
+
 dump-zshrc:
 	@rsync -av --checksum "$(HOME)/.zshrc" ./public/
 
-dump-all: dump-gitignore dump-mise dump-vscode-instructions dump-vscode-mcp dump-vscode-settings dump-zshrc
+dump-all: dump-claude dump-gitignore dump-mise dump-vscode dump-zshrc
 
 brew-all:
 	@brew update
