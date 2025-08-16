@@ -3,10 +3,13 @@ deno = "2.4.4"
 node = "22.18.0"
 "npm:@anthropic-ai/claude-code" = "1.0.83"
 "npm:pnpm" = "10.14.0"
-python = "3.13.7"
+python = "3.13.6"
 uv = "0.8.11"
 
 [env]
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]
+
+[settings.python]
+compile = false
