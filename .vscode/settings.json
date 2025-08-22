@@ -1,7 +1,7 @@
 {
   "chat.agent.enabled": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit",
+    "source.fixAll": "explicit",
     "source.organizeImports": "explicit"
   },
   "editor.cursorBlinking": "phase",
@@ -31,6 +31,10 @@
   },
   "github.copilot.nextEditSuggestions.enabled": false,
   "githubPullRequests.pullBranch": "never",
+  "notebook.codeActionsOnSave": {
+    "notebook.source.fixAll": "explicit"
+  },
+  "notebook.formatOnSave.enabled": true,
   "redhat.telemetry.enabled": false,
   "tailwindCSS.experimental.classRegex": [["[\"']([^\"']*)[\"']"]],
   "terminal.integrated.fontSize": 14,
@@ -57,9 +61,6 @@
   },
   "php.suggest.basic": false,
   "php.validate.enable": false,
-  "[rust]": {
-    "editor.defaultFormatter": "rust-lang.rust-analyzer"
-  },
   "[shellscript]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
