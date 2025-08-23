@@ -3,7 +3,7 @@
 ## Quick Install
 
 ```zsh
-curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh
+curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh | sh
 ```
 
 ## Install Packages from Brewfile
