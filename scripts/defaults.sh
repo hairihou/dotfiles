@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-echo "--- Configuring macOS settings ---"
+echo "--- Configuring defaults ---"
 
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock magnification -bool false
