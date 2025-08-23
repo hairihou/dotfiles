@@ -1,10 +1,14 @@
 # dotfiles
 
+## Quick Install
+
+```zsh
+curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh
+```
+
 ## Install Packages from Brewfile
 
 ```zsh
-brew bundle --file=./public/Brewfile
-# work
 brew bundle --file=./public/Brewfile.work.rb
 ```
 
