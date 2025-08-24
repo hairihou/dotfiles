@@ -14,9 +14,6 @@ dist-ssr
 
 # Editor directories and files
 .vscode/*
-!.vscode/extensions.json
-!.vscode/mcp.json
-!.vscode/settings.json
 .idea
 .DS_Store
 *.suo
@@ -29,4 +26,4 @@ dist-ssr
 Brewfile.lock.json
 
 # Licensed files
-.github/instructions/tailwind.instructions.md
+tailwind.instructions.md

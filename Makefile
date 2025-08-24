@@ -8,63 +8,56 @@ VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
 	sync-vscode-mcp dump-vscode-mcp \
 	sync-vscode-settings dump-vscode-settings \
 	sync-vscode dump-vscode \
-	sync-zshrc dump-zshrc \
 	sync-all dump-all \
 	brew-all brew-stable \
 	sync-gitconfig dump-gitconfig \
 	defaults
 
 sync-claude:
-	@rsync -av --checksum ./.claude/commands/ "${HOME}/.claude/commands/"
-	@rsync -av --checksum ./.claude/settings.json "${HOME}/.claude/"
+	@rsync -av --checksum ./src/.claude/commands/ "${HOME}/.claude/commands/"
+	@rsync -av --checksum ./src/.claude/settings.json "${HOME}/.claude/"
 
 sync-gitignore:
-	@rsync -av --checksum ./.config/git/ignore "$(HOME)/.config/git/"
+	@rsync -av --checksum ./src/.config/git/ignore "$(HOME)/.config/git/"
 
 sync-mise:
-	@rsync -av --checksum ./.config/mise/ "$(HOME)/.config/mise/"
+	@rsync -av --checksum ./src/.config/mise/ "$(HOME)/.config/mise/"
 
 sync-vscode-instructions:
-	@rsync -av --checksum ./.github/instructions/ "${VSCODE_USER_DIR}/prompts/"
+	@rsync -av --checksum ./src/.github/instructions/ "${VSCODE_USER_DIR}/prompts/"
 
 sync-vscode-mcp:
-	@rsync -av --checksum ./.vscode/mcp.json "${VSCODE_USER_DIR}/"
+	@rsync -av --checksum ./src/.vscode/mcp.json "${VSCODE_USER_DIR}/"
 
 sync-vscode-settings:
-	@rsync -av --checksum ./.vscode/settings.json "${VSCODE_USER_DIR}/"
+	@rsync -av --checksum ./src/.vscode/settings.json "${VSCODE_USER_DIR}/"
 
 sync-vscode: sync-vscode-instructions sync-vscode-mcp sync-vscode-settings
 
-sync-zshrc:
-	@rsync -av --checksum ./public/.zshrc "$(HOME)/"
-
-sync-all: sync-claude sync-gitignore sync-mise sync-vscode sync-zshrc
+sync-all: sync-claude sync-gitignore sync-mise sync-vscode
 
 dump-claude:
-	@rsync -av --checksum "${HOME}/.claude/commands/" ./.claude/commands/
-	@rsync -av --checksum "${HOME}/.claude/settings.json" ./.claude/
+	@rsync -av --checksum "${HOME}/.claude/commands/" ./src/.claude/commands/
+	@rsync -av --checksum "${HOME}/.claude/settings.json" ./src/.claude/
 
 dump-gitignore:
-	@rsync -av --checksum "$(HOME)/.config/git/ignore" ./.config/git/
+	@rsync -av --checksum "$(HOME)/.config/git/ignore" ./src/.config/git/
 
 dump-mise:
-	@rsync -av --checksum "$(HOME)/.config/mise/" ./.config/mise/
+	@rsync -av --checksum "$(HOME)/.config/mise/" ./src/.config/mise/
 
 dump-vscode-instructions:
-	@rsync -av --checksum "${VSCODE_USER_DIR}/prompts/" ./.github/instructions/
+	@rsync -av --checksum "${VSCODE_USER_DIR}/prompts/" ./src/.github/instructions/
 
 dump-vscode-mcp:
-	@rsync -av --checksum "${VSCODE_USER_DIR}/mcp.json" ./.vscode/
+	@rsync -av --checksum "${VSCODE_USER_DIR}/mcp.json" ./src/.vscode/
 
 dump-vscode-settings:
-	@rsync -av --checksum "${VSCODE_USER_DIR}/settings.json" ./.vscode/
+	@rsync -av --checksum "${VSCODE_USER_DIR}/settings.json" ./src/.vscode/
 
 dump-vscode: dump-vscode-instructions dump-vscode-mcp dump-vscode-settings
 
-dump-zshrc:
-	@rsync -av --checksum "$(HOME)/.zshrc" ./public/
-
-dump-all: dump-claude dump-gitignore dump-mise dump-vscode dump-zshrc
+dump-all: dump-claude dump-gitignore dump-mise dump-vscode
 
 brew-all:
 	@brew update
@@ -81,10 +74,10 @@ brew-stable:
 	@brew autoremove
 
 sync-gitconfig:
-	@rsync -av --checksum ./public/.gitconfig "$(HOME)/"
+	@rsync -av --checksum ./src/.gitconfig "$(HOME)/"
 
 dump-gitconfig:
-	@rsync -av --checksum "$(HOME)/.gitconfig" ./public/
+	@rsync -av --checksum "$(HOME)/.gitconfig" ./src/
 
 defaults:
 	@sh ./scripts/defaults.sh

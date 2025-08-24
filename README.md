@@ -9,7 +9,7 @@ curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh |
 ## Install Packages from Brewfile
 
 ```zsh
-brew bundle --file=./public/Brewfile.work.rb
+brew bundle --file=./src/Brewfile.work.rb
 ```
 
 ## Sync All Settings and Configurations
