@@ -15,7 +15,7 @@ else
 fi
 
 if [ "$(uname)" == 'Darwin' ]; then
-  ln -si "$dest/src/.zshrc" "$HOME/.zshrc" || echo "Symlink creation skipped"
+  ln -si "$dest/src/.zshrc" "$HOME/.zshrc" || echo "Symlink creation skipped."
 else
   echo "($(uname -a)) is not supported."
   exit 1
