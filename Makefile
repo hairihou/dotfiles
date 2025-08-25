@@ -10,8 +10,7 @@ VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
 	sync-vscode dump-vscode \
 	sync-all dump-all \
 	brew-all brew-stable \
-	sync-gitconfig dump-gitconfig \
-	defaults
+	sync-gitconfig dump-gitconfig
 
 sync-claude:
 	@rsync -av --checksum ./src/.claude/commands/ "${HOME}/.claude/commands/"
@@ -78,6 +77,3 @@ sync-gitconfig:
 
 dump-gitconfig:
 	@rsync -av --checksum "$(HOME)/.gitconfig" ./src/
-
-defaults:
-	@sh ./scripts/defaults.sh
