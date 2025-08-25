@@ -14,6 +14,7 @@ VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
 
 sync-claude:
 	@rsync -av --checksum ./src/.claude/commands/ "${HOME}/.claude/commands/"
+	@rsync -av --checksum ./src/.claude/CLAUDE.md "${HOME}/.claude/"
 	@rsync -av --checksum ./src/.claude/settings.json "${HOME}/.claude/"
 
 sync-gitignore:
@@ -37,6 +38,7 @@ sync-all: sync-claude sync-gitignore sync-mise sync-vscode
 
 dump-claude:
 	@rsync -av --checksum "${HOME}/.claude/commands/" ./src/.claude/commands/
+	@rsync -av --checksum "${HOME}/.claude/CLAUDE.md" ./src/.claude/
 	@rsync -av --checksum "${HOME}/.claude/settings.json" ./src/.claude/
 
 dump-gitignore:
