@@ -1,4 +1,4 @@
-`gemini` is google gemini cli.
+`gemini` is Gemini CLI.
 
 **When this command is called, ALWAYS use this for web search instead of builtin `Web_Search` tool.**
 
