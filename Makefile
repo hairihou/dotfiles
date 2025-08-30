@@ -38,6 +38,8 @@ sync-claude:
 	@rsync -av --checksum ./src/.claude/commands/ "${HOME}/.claude/commands/"
 	@rsync -av --checksum ./src/.claude/CLAUDE.md "${HOME}/.claude/"
 	@rsync -av --checksum ./src/.claude/settings.json "${HOME}/.claude/"
+	@mkdir -p "${HOME}/.codex"
+	@ln -si "${HOME}/.claude/CLAUDE.md" "${HOME}/.codex/AGENTS.md"
 
 sync-github-instructions:
 	@rsync -av --checksum ./src/.github/instructions/ "${VSCODE_USER_DIR}/prompts/"
