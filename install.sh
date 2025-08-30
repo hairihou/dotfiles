@@ -2,16 +2,16 @@
 set -euo pipefail
 
 create_symlink() {
-    local src="$1"
-    local target="$2"
-    local dir="$(dirname "$target")"
-    if [ -L "$target" ] && [ "$(readlink "$target")" = "$src" ]; then
-        return 0
-    fi
-    if [ "$dir" != "$HOME" ] && [ ! -d "$dir" ]; then
-        mkdir -p "$dir"
-    fi
-    ln -si "$src" "$target" < /dev/tty || :
+  local src="$1"
+  local target="$2"
+  local dir="$(dirname "$target")"
+  if [ -L "$target" ] && [ "$(readlink "$target")" = "$src" ]; then
+    return 0
+  fi
+  if [ "$dir" != "$HOME" ] && [ ! -d "$dir" ]; then
+    mkdir -p "$dir"
+  fi
+  ln -si "$src" "$target" < /dev/tty || :
 }
 
 readonly dest="$HOME/dotfiles"
