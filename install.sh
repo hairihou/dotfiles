@@ -6,7 +6,6 @@ create_symlink() {
     local target="$2"
     local dir="$(dirname "$target")"
     if [ -L "$target" ] && [ "$(readlink "$target")" = "$src" ]; then
-        echo "Symlink already exists: $target -> $src"
         return 0
     fi
     if [ "$dir" != "$HOME" ] && [ ! -d "$dir" ]; then
