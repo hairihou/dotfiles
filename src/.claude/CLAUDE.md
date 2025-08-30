@@ -1,4 +1,4 @@
-# Claude AI Settings
+# Agent Settings
 
 ## Language Requirements
 
