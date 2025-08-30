@@ -8,7 +8,7 @@ create_symlink() {
     if [ "$dir" != "$HOME" ] && [ ! -d "$dir" ]; then
         mkdir -p "$dir"
     fi
-    ln -si "$src" "$target" < /dev/tty || echo "skipped"
+    ln -si "$src" "$target" < /dev/tty || :
 }
 
 readonly dest="$HOME/dotfiles"
@@ -17,6 +17,11 @@ readonly repo='https://github.com/hairihou/dotfiles.git'
 if [ ! -e "$dest/.git" ]; then
   git clone "$repo" "$dest"
 else
+  if [ "$(git -C "$dest" config --get remote.origin.url)" != "$repo" ]; then
+    echo "Error: Remote origin URL does not match expected URL"
+    exit 1
+  fi
+
   echo "Updating existing repository..."
   git -C "$dest" fetch --prune
   git -C "$dest" switch main
