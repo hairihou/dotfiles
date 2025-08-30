@@ -2,8 +2,8 @@ VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
 
 .PHONY:
 	brew-all brew-stable \
-	dump-all dump-claude dump-github-instructions dump-mise \
-	sync-all sync-claude sync-github-instructions sync-mise
+	dump-claude dump-github-instructions\
+	sync-claude sync-github-instructions
 
 brew-all:
 	@brew update
@@ -19,8 +19,6 @@ brew-stable:
 	@brew cleanup --prune=all --scrub
 	@brew autoremove
 
-dump-all: dump-claude dump-github-instructions dump-mise
-
 dump-claude:
 	@rsync -av --checksum "${HOME}/.claude/commands/" ./src/.claude/commands/
 	@rsync -av --checksum "${HOME}/.claude/CLAUDE.md" ./src/.claude/
@@ -28,11 +26,6 @@ dump-claude:
 
 dump-github-instructions:
 	@rsync -av --checksum "${VSCODE_USER_DIR}/prompts/" ./src/.github/instructions/
-
-dump-mise:
-	@rsync -av --checksum "$(HOME)/.config/mise/" ./src/.config/mise/
-
-sync-all: sync-claude sync-github-instructions sync-mise
 
 sync-claude:
 	@rsync -av --checksum ./src/.claude/commands/ "${HOME}/.claude/commands/"
@@ -44,6 +37,3 @@ sync-claude:
 
 sync-github-instructions:
 	@rsync -av --checksum ./src/.github/instructions/ "${VSCODE_USER_DIR}/prompts/"
-
-sync-mise:
-	@rsync -av --checksum ./src/.config/mise/ "$(HOME)/.config/mise/"

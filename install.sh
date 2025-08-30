@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+readonly dest="$HOME/dotfiles"
+readonly repo='https://github.com/hairihou/dotfiles.git'
+
 create_symlink() {
   local src="$1"
   local target="$2"
@@ -14,8 +17,9 @@ create_symlink() {
   ln -si "$src" "$target" < /dev/tty || :
 }
 
-readonly dest="$HOME/dotfiles"
-readonly repo='https://github.com/hairihou/dotfiles.git'
+is_owner() {
+  [ "$(whoami)" == 'hairihou' ]
+}
 
 if [ ! -e "$dest/.git" ]; then
   git clone "$repo" "$dest"
@@ -32,16 +36,15 @@ else
 fi
 
 echo "Creating symlinks..."
-if [ "$(whoami)" == 'hairihou' ]; then
-  create_symlink "$dest/src/.config/brew/bundle.rb" "$HOME/.Brewfile"
-  create_symlink "$dest/src/.gitconfig" "$HOME/.gitconfig"
-else
-  create_symlink "$dest/src/.config/brew/bundle.work.rb" "$HOME/.Brewfile"
-fi
 create_symlink "$dest/src/.config/git/ignore" "$HOME/.config/git/ignore"
+create_symlink "$dest/src/.config/mise/config.toml" "$HOME/.config/mise/config.toml"
 create_symlink "$dest/src/.zshrc" "$HOME/.zshrc"
+if is_owner; then
+  create_symlink "$dest/src/.gitconfig" "$HOME/.gitconfig"
+fi
 
 if [ "$(uname)" == 'Darwin' ]; then
+  create_symlink "$dest/src/.config/brew/$(is_owner && echo "bundle.rb" || echo "bundle.work.rb")" "$HOME/.Brewfile"
   vscode="$HOME/Library/Application Support/Code/User"
   if [ -d "$vscode" ]; then
     create_symlink "$dest/src/.vscode/settings.json" "$vscode/settings.json"
