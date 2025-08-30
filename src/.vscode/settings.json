@@ -61,10 +61,6 @@
   },
   "php.suggest.basic": false,
   "php.validate.enable": false,
-  "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
-  },
-  "shellformat.effectLanguages": ["shellscript"],
   "todo-tree.filtering.excludeGlobs": ["**/node_modules", "**/dist"],
   "todo-tree.general.tags": [
     "BUG",
@@ -111,5 +107,6 @@
     "unplugin",
     "valibot",
     "vite"
-  ]
+  ],
+  "diffEditor.ignoreTrimWhitespace": false
 }
