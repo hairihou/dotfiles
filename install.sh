@@ -37,6 +37,5 @@ if [ "$(uname)" == 'Darwin' ]; then
     create_symlink "$dest/src/.vscode/mcp.json" "$vscode/mcp.json"
   fi
 else
-  echo "($(uname -a)) is not supported."
-  exit 1
+  echo "($(uname -a)) is not supported"
 fi
