@@ -33,7 +33,10 @@ fi
 
 echo "Creating symlinks..."
 if [ "$(whoami)" == 'hairihou' ]; then
+  create_symlink "$dest/src/.config/brew/bundle.rb" "$HOME/.Brewfile"
   create_symlink "$dest/src/.gitconfig" "$HOME/.gitconfig"
+else
+  create_symlink "$dest/src/.config/brew/bundle.work.rb" "$HOME/.Brewfile"
 fi
 create_symlink "$dest/src/.config/git/ignore" "$HOME/.config/git/ignore"
 create_symlink "$dest/src/.zshrc" "$HOME/.zshrc"
