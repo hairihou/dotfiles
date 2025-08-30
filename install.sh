@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+create_symlink() {
+    local src="$1"
+    local target="$2"
+    local dir="$(dirname "$target")"
+    if [ "$dir" != "$HOME" ] && [ ! -d "$dir" ]; then
+        mkdir -p "$dir"
+    fi
+    ln -si "$src" "$target" || echo "Symlink creation skipped."
+}
+
 readonly dest="$HOME/dotfiles"
 readonly repo='https://github.com/hairihou/dotfiles.git'
 
@@ -8,14 +18,24 @@ if [ ! -e "$dest/.git" ]; then
   git clone "$repo" "$dest"
 else
   echo "Updating existing repository..."
-  cd "$dest"
-  git fetch --prune
-  git switch main
-  git pull origin main
+  git -C "$dest" fetch --prune
+  git -C "$dest" switch main
+  git -C "$dest" pull origin main
 fi
 
+echo "Creating symlinks..."
+if [ "$(whoami)" == 'hairihou' ]; then
+  create_symlink "$dest/src/.gitconfig" "$HOME/.gitconfig"
+fi
+create_symlink "$dest/src/.config/git/ignore" "$HOME/.config/git/ignore"
+create_symlink "$dest/src/.zshrc" "$HOME/.zshrc"
+
 if [ "$(uname)" == 'Darwin' ]; then
-  ln -si "$dest/src/.zshrc" "$HOME/.zshrc" || echo "Symlink creation skipped."
+  vscode="$HOME/Library/Application Support/Code/User"
+  if [ -d "$vscode" ]; then
+    create_symlink "$dest/src/.vscode/settings.json" "$vscode/settings.json"
+    create_symlink "$dest/src/.vscode/mcp.json" "$vscode/mcp.json"
+  fi
 else
   echo "($(uname -a)) is not supported."
   exit 1

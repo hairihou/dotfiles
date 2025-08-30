@@ -6,6 +6,10 @@
 curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh | sh
 ```
 
+## Appendix
+
+Config files follow the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/latest/).
+
 <!--
 ``````````````````````````````````````````````````
 ``````````````````````````````````````````````````
