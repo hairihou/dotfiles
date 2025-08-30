@@ -8,7 +8,7 @@ create_symlink() {
     if [ "$dir" != "$HOME" ] && [ ! -d "$dir" ]; then
         mkdir -p "$dir"
     fi
-    ln -si "$src" "$target" || echo "Symlink creation skipped."
+    ln -si "$src" "$target" < /dev/tty || echo "skipped"
 }
 
 readonly dest="$HOME/dotfiles"
