@@ -1,54 +1,56 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly dest="$HOME/dotfiles"
-readonly repo='https://github.com/hairihou/dotfiles.git'
+readonly dst="$HOME/dotfiles"
+readonly src='https://github.com/hairihou/dotfiles.git'
 
 create_symlink() {
-  local src="$1"
-  local target="$2"
-  local dir="$(dirname "$target")"
-  if [ -L "$target" ] && [ "$(readlink "$target")" = "$src" ]; then
+  local from="$1"
+  local to="$2"
+  local parent="$(dirname "$to")"
+  if [ -L "$to" ] && [ "$(readlink "$to")" = "$from" ]; then
     return 0
   fi
-  if [ "$dir" != "$HOME" ] && [ ! -d "$dir" ]; then
-    mkdir -p "$dir"
+  if [ "$parent" != "$HOME" ] && [ ! -d "$parent" ]; then
+    mkdir -p "$parent"
   fi
-  ln -si "$src" "$target" < /dev/tty || :
+  ln -si "$from" "$to" < /dev/tty || :
 }
 
 is_owner() {
   [ "$(whoami)" == 'hairihou' ]
 }
 
-if [ ! -e "$dest/.git" ]; then
-  git clone "$repo" "$dest"
+if [ ! -e "$dst/.git" ]; then
+  git clone "$src" "$dst"
+elif [ "$(git -C "$dst" config --get remote.origin.url)" != "$src" ]; then
+  echo "Error: Remote origin URL does not match expected URL"
+  exit 1
 else
-  if [ "$(git -C "$dest" config --get remote.origin.url)" != "$repo" ]; then
-    echo "Error: Remote origin URL does not match expected URL"
-    exit 1
-  fi
-
   echo "Updating existing repository..."
-  git -C "$dest" fetch --prune
-  git -C "$dest" switch main
-  git -C "$dest" pull origin main
+  git -C "$dst" fetch --prune
+  git -C "$dst" switch main
+  git -C "$dst" pull origin main
 fi
 
 echo "Creating symlinks..."
-create_symlink "$dest/src/.config/git/ignore" "$HOME/.config/git/ignore"
-create_symlink "$dest/src/.config/mise/config.toml" "$HOME/.config/mise/config.toml"
-create_symlink "$dest/src/.zshrc" "$HOME/.zshrc"
+create_symlink "$dst/src/.config/git/ignore" "$HOME/.config/git/ignore"
+create_symlink "$dst/src/.config/mise/config.toml" "$HOME/.config/mise/config.toml"
+create_symlink "$dst/src/.zshrc" "$HOME/.zshrc"
 if is_owner; then
-  create_symlink "$dest/src/.gitconfig" "$HOME/.gitconfig"
+  create_symlink "$dst/src/.gitconfig" "$HOME/.gitconfig"
 fi
 
 if [ "$(uname)" == 'Darwin' ]; then
-  create_symlink "$dest/src/.config/brew/$(is_owner && echo "bundle.rb" || echo "bundle.work.rb")" "$HOME/.Brewfile"
+  if is_owner; then
+    create_symlink "$dst/src/.config/brew/bundle.rb" "$HOME/.Brewfile"
+  else
+    create_symlink "$dst/src/.config/brew/bundle.work.rb" "$HOME/.Brewfile"
+  fi
   vscode="$HOME/Library/Application Support/Code/User"
   if [ -d "$vscode" ]; then
-    create_symlink "$dest/src/.vscode/settings.json" "$vscode/settings.json"
-    create_symlink "$dest/src/.vscode/mcp.json" "$vscode/mcp.json"
+    create_symlink "$dst/src/.vscode/settings.json" "$vscode/settings.json"
+    create_symlink "$dst/src/.vscode/mcp.json" "$vscode/mcp.json"
   fi
 else
   echo "($(uname -a)) is not supported"
