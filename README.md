@@ -11,7 +11,7 @@ curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh |
 - `/bin` - Scripts are available globally after setup:
   - `brewup [-s]` - Homebrew batch update utility
   - `cdefaults` - macOS system defaults configuration
-  - `gclean` - Git repository cleanup (removes empty dirs)
+  - `dprune` - Removes empty dirs
   - `tresize [scale]` - Terminal window resizer
 - `/src` - Source files for various configurations
 
