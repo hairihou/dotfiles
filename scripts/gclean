@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+is_ignored() {
+  git check-ignore -q "$1" 2>/dev/null
+}
+
+remove_empty_dirs() {
+  local removed=0
+  while IFS= read -r -d '' dir; do
+    [ "$dir" = './.git' ] || [[ "$dir" == ./.git/* ]] && continue
+    is_ignored "$dir" && continue
+    if [ -d "$dir" ] && [ -z "$(ls -A "$dir" 2>/dev/null)" ]; then
+      echo "Removing: $dir"
+      rmdir "$dir" 2>/dev/null && ((removed++)) || :
+    fi
+  done < <(find . -type d -depth ! -path './.git*' -print0 2>/dev/null)
+  echo "$removed"
+}
+
+if ! git rev-parse --git-dir >/dev/null 2>&1; then
+  echo "Error: Not in a git repository" >&2
+  exit 1
+fi
+
+total_removed=0
+while :; do
+  removed=$(remove_empty_dirs)
+  [ "$removed" -eq 0 ] && break
+  ((total_removed += removed))
+done
+
+if [ $total_removed -eq 0 ]; then
+  echo "No empty directories found"
+else
+  echo "Removed $total_removed empty director$([ $total_removed -eq 1 ] && echo 'y' || echo 'ies')"
+fi
