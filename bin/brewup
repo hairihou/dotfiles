@@ -3,17 +3,17 @@ set -euo pipefail
 
 stable_only=false
 for arg in "$@"; do
-  [[ "$arg" == "-s" || "$arg" == "--stable-only" ]] && stable_only=true
+  [[ "$arg" == '-s' || "$arg" == '--stable-only' ]] && stable_only=true
 done
 
 brew update
 brew upgrade --formula
 
 casks=$(brew list --cask)
-if $stable_only && [[ -n "$casks" ]]; then
-  casks=$(echo "$casks" | grep -Ev '@[0-9]+(\.[0-9]+)*' || echo "")
+if "$stable_only" && [[ -n "$casks" ]]; then
+  casks=$(echo "$casks" | grep -Ev '@[0-9]+(\.[0-9]+)*' || echo '')
 fi
-[[ -n "$casks" ]] && brew upgrade --greedy --cask $casks
+[[ -n "$casks" ]] && brew upgrade --greedy --cask "$casks"
 
 brew cleanup --prune=all --scrub
 brew autoremove
