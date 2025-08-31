@@ -1,23 +1,6 @@
 VSCODE_USER_DIR := $(HOME)/Library/Application Support/Code/User
 
-.PHONY:
-	brew-all brew-stable \
-	dump-claude dump-github-instructions\
-	sync-claude sync-github-instructions
-
-brew-all:
-	@brew update
-	@brew upgrade --formula $$(brew ls --formula)
-	@brew upgrade --cask $$(brew ls --cask)
-	@brew cleanup --prune=all --scrub
-	@brew autoremove
-
-brew-stable:
-	@brew update
-	@brew upgrade --formula $$(brew ls --formula)
-	@brew upgrade --cask $$(brew ls --cask | grep -v '@')
-	@brew cleanup --prune=all --scrub
-	@brew autoremove
+.PHONY: dump-claude dump-github-instructions sync-claude sync-github-instructions
 
 dump-claude:
 	@rsync -av --checksum "${HOME}/.claude/commands/" ./src/.claude/commands/
