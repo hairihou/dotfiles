@@ -3,15 +3,13 @@ set -euo pipefail
 
 count=0
 while IFS= read -r dir; do
-  [[ "$dir" == ./.git* ]] && continue
+  git check-ignore "$dir" &>/dev/null && continue
+  rmdir "$dir" 2>/dev/null || continue
+  echo "Removed: $dir"
+  ((count++))
+done < <(find . -type d -empty -not -path '*/.git/*' -not -name '.git' 2>/dev/null | sort -r)
 
-  if rmdir "$dir" 2>/dev/null; then
-    echo "Removed: $dir"
-    ((count++))
-  fi
-done < <(find . -type d -empty 2>/dev/null | sort -r)
-
-if ((count == 0)); then
+if [[ $count -eq 0 ]]; then
   echo "No empty directories found"
 else
   echo "Removed $count empty director$([[ $count -eq 1 ]] && echo 'y' || echo 'ies')"
