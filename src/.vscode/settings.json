@@ -25,8 +25,8 @@
   "files.trimTrailingWhitespace": true,
   "github.copilot.enable": {
     "*": true,
-    "plaintext": false,
     "markdown": true,
+    "plaintext": false,
     "scminput": false
   },
   "github.copilot.nextEditSuggestions.enabled": false,
@@ -52,10 +52,6 @@
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
   },
-  "[makefile]": {
-    "editor.defaultFormatter": "EditorConfig.EditorConfig"
-  },
-  "makefile.configureOnOpen": false,
   "[php]": {
     "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
   },
@@ -107,6 +103,5 @@
     "unplugin",
     "valibot",
     "vite"
-  ],
-  "diffEditor.ignoreTrimWhitespace": false
+  ]
 }
