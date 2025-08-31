@@ -6,7 +6,7 @@ export JAVA_HOME="$HOME/Applications/Android Studio.app/Contents/jbr/Contents/Ho
 export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
 export PATH="$ANDROID_SDK_ROOT/tools:$PATH"
 export PATH="$JAVA_HOME/bin:$PATH"
-export PATH="$HOME/dotfiles/scripts:$PATH"
+export PATH="$HOME/dotfiles/bin:$PATH"
 
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=50000
