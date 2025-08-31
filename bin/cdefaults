@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+if [[ "$(uname)" != 'Darwin' ]]; then
+  echo 'Warning: This script is intended for macOS only.' >&2
+  exit 0
+fi
+
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock magnification -bool false
 defaults write com.apple.dock orientation -string 'left'
