@@ -9,7 +9,7 @@ done
 brew update
 brew upgrade --formula
 
-casks=$(brew list --cask)
+casks="$(brew list --cask)"
 if "$stable_only" && [[ -n "$casks" ]]; then
   casks=$(echo "$casks" | grep -Ev '@[0-9]+(\.[0-9]+)*' || echo '')
 fi
