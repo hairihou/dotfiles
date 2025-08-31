@@ -8,7 +8,11 @@ curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh |
 
 ## Overview
 
-## Scripts
+### Config files
+
+Config files follow the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/latest/).
+
+### Scripts
 
 Scripts are available after syncing zshrc configuration.
 
@@ -18,10 +22,6 @@ Scripts are available after syncing zshrc configuration.
 | `cdefaults` | macOS system defaults configuration         | `cdefaults`       |
 | `gclean`    | Git repository cleanup (removes empty dirs) | `gclean`          |
 | `tresize`   | Terminal window resizer                     | `tresize [scale]` |
-
-## Appendix
-
-Config files follow the [XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/latest/).
 
 <!--
 ``````````````````````````````````````````````````
