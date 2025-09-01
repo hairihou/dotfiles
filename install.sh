@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+as_owner=false
+for arg in "$@"; do
+  if [[ "$arg" == '--as-owner' ]]; then
+    as_owner=true
+    break
+  fi
+done
+
 readonly dst="$HOME/dotfiles"
 readonly src='https://github.com/hairihou/dotfiles.git'
 
@@ -18,6 +26,9 @@ create_symlink() {
 }
 
 is_owner() {
+  if "$as_owner"; then
+    return 0
+  fi
   [[ "$(whoami)" == 'hairihou' ]]
 }
 
