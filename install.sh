@@ -26,7 +26,7 @@ create_symlink() {
 }
 
 is_owner() {
-  if "$as_owner"; then
+  if [[ "$as_owner" == true ]]; then
     return 0
   fi
   [[ "$(whoami)" == 'hairihou' ]]
