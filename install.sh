@@ -3,7 +3,7 @@ set -euo pipefail
 
 as_owner=false
 for arg in "$@"; do
-  if [[ "$arg" == '--as-owner' ]]; then
+  if [[ $arg == '--as-owner' ]]; then
     as_owner=true
     break
   fi
@@ -26,10 +26,10 @@ create_symlink() {
 }
 
 is_owner() {
-  if [[ "$as_owner" == true ]]; then
+  if [[ $as_owner == true ]]; then
     return 0
   fi
-  [[ "$(whoami)" == 'hairihou' ]]
+  [[ $(whoami) == 'hairihou' ]]
 }
 
 if [[ ! -e "$dst/.git" ]]; then
@@ -54,7 +54,7 @@ if is_owner; then
   create_symlink "$dst/src/.gitconfig" "$HOME/.gitconfig"
 fi
 
-if [[ "$(uname)" == 'Darwin' ]]; then
+if [[ $(uname) == 'Darwin' ]]; then
   if is_owner; then
     create_symlink "$dst/src/.config/brew/bundle.rb" "$HOME/.Brewfile"
   else
