@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ "$(uname)" != 'Darwin' ]]; then
+if [[ $(uname) != 'Darwin' ]]; then
   echo 'Warning: This script is intended for macOS only' >&2
   exit 0
 fi
