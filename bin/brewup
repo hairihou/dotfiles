@@ -3,7 +3,7 @@ set -euo pipefail
 
 stable_only=false
 for arg in "$@"; do
-  [[ "$arg" == '-s' || "$arg" == '--stable-only' ]] && stable_only=true
+  [[ $arg == '-s' || $arg == '--stable-only' ]] && stable_only=true
 done
 
 brew update
