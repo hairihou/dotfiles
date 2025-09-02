@@ -3,7 +3,7 @@ set -euo pipefail
 
 size=${1:-s}
 
-case "$size" in
+case $size in
   s|small)
     height=24
     width=80
