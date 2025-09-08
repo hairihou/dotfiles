@@ -11,6 +11,5 @@
       "matchPackageNames": ["python"],
       "minimumReleaseAge": "14 days"
     }
-  ],
-  "prConcurrentLimit": 8
+  ]
 }
