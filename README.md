@@ -2,7 +2,7 @@
 
 ## Install
 
-```zsh
+```sh
 curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh | sh
 ```
 
