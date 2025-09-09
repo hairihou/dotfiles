@@ -235,6 +235,130 @@ enum Direction {
 Object.keys(Direction).length; // 8
 ```
 
+## Equality operators
+
+ALWAYS use strict equality (`===`) and strict inequality (`!==`) operators.
+
+The loose equality operators (`==` and `!=`) perform type coercion, which can lead to unexpected and confusing behavior.
+
+```ts
+// BAD - uses loose equality with type coercion
+if (value == 0) {
+  // This matches 0, "0", false, "", null, undefined
+}
+if (response.status == 200) {
+  // This would match "200" as well
+}
+if (items.length != 0) {
+  // Unexpected behavior with type coercion
+}
+
+// GOOD - uses strict equality
+if (value === 0) {
+  // Only matches exactly 0
+}
+if (response.status === 200) {
+  // Only matches the number 200
+}
+if (items.length !== 0) {
+  // Clear and predictable behavior
+}
+```
+
+### Common type coercion pitfalls to avoid:
+
+```ts
+// These all evaluate to true with loose equality:
+0 == false; // true
+"" == false; // true
+null == undefined; // true
+"0" == 0; // true
+[] == false; // true
+"  " == 0; // true
+
+// With strict equality, these are all false:
+0 === false; // false
+"" === false; // false
+null === undefined; // false
+"0" === 0; // false
+[] === false; // false
+"  " === 0; // false
+```
+
+### When you need to check for null/undefined:
+
+```ts
+// BAD - loose equality
+if (value == null) {
+  // Matches both null and undefined
+}
+
+// GOOD - explicit checks
+if (value === null || value === undefined) {
+  // Clear intention
+}
+
+// ALSO GOOD - using nullish check
+if (value == null) {
+  // Only acceptable use of == is for null/undefined check
+  // But explicit is better
+}
+```
+
+The only exception is when specifically checking for null/undefined together, but even then, explicit checks are preferred for clarity.
+
+### Avoid implicit boolean casting:
+
+Avoid using `!` operator or implicit boolean casting, as they can lead to unexpected behavior with different types.
+
+```ts
+// BAD - implicit boolean casting
+if (!value) {
+  // Matches "", 0, false, null, undefined, NaN
+}
+if (!!value) {
+  // Double negation for boolean conversion
+}
+if (items.length) {
+  // Implicit truthy check
+}
+
+// GOOD - explicit checks
+if (value === "") {
+  // Only matches empty string
+}
+if (value === null || value === undefined) {
+  // Explicit null/undefined check
+}
+if (items.length > 0) {
+  // Explicit length check
+}
+if (value === false) {
+  // Explicit boolean check
+}
+```
+
+### Common boolean casting pitfalls:
+
+```ts
+// These all evaluate to false with ! operator:
+!0; // true (number)
+!""; // true (empty string)
+!false; // true (boolean)
+!null; // true
+!undefined; // true
+!NaN; // true
+![]; // false (empty array is truthy!)
+!{}; // false (empty object is truthy!)
+
+// Be explicit about what you're checking:
+const isEmpty = (str: string): boolean => str === "";
+const isZero = (num: number): boolean => num === 0;
+const isNull = (value: unknown): value is null => value === null;
+const isUndefined = (value: unknown): value is undefined => value === undefined;
+const hasItems = (arr: unknown[]): boolean => arr.length > 0;
+```
+
 ## Import types
 
 Use import type whenever you are importing a type.
