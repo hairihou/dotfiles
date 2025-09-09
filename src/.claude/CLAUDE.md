@@ -22,3 +22,9 @@ English is permitted only for:
 - Do not write comments for operations that are self-evident from the code.
 - Avoid unnecessary blank lines that don't improve readability.
 - Focus comments on explaining complex logic, business rules, or non-obvious behavior.
+
+## TypeScript Implementation Guidelines
+
+**When writing TypeScript code, follow the implementation guidelines specified in:**
+
+- @~/dotfiles/src/.github/instructions/typescript-guidelines.instructions.md
