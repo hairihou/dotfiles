@@ -4,12 +4,5 @@
     "config:recommended",
     "github>hairihou/renovate-config",
     "group:allNonMajor"
-  ],
-  "packageRules": [
-    {
-      "matchManagers": ["mise"],
-      "matchPackageNames": ["python"],
-      "minimumReleaseAge": "14 days"
-    }
   ]
 }
