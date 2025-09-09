@@ -1,5 +1,5 @@
 ---
-applyTo: '**/*.{ts,tsx,vue}'
+applyTo: "**/*.{ts,tsx,vue}"
 ---
 
 # TypeScript Guidelines
@@ -15,13 +15,13 @@ This is because TypeScript often cannot match your runtime logic to the logic do
 One example:
 
 ```ts
-const youSayGoodbyeISayHello = <TInput extends 'hello' | 'goodbye'>(
-  input: TInput,
-): TInput extends 'hello' ? 'goodbye' : 'hello' => {
-  if (input === 'goodbye') {
-    return 'hello'; // Error!
+const youSayGoodbyeISayHello = <TInput extends "hello" | "goodbye">(
+  input: TInput
+): TInput extends "hello" ? "goodbye" : "hello" => {
+  if (input === "goodbye") {
+    return "hello"; // Error!
   } else {
-    return 'goodbye'; // Error!
+    return "goodbye"; // Error!
   }
 };
 ```
@@ -33,18 +33,68 @@ There is no way to make this work concisely in TypeScript.
 So using `any` is the most concise solution:
 
 ```ts
-const youSayGoodbyeISayHello = <TInput extends 'hello' | 'goodbye'>(
-  input: TInput,
-): TInput extends 'hello' ? 'goodbye' : 'hello' => {
-  if (input === 'goodbye') {
-    return 'hello' as any;
+const youSayGoodbyeISayHello = <TInput extends "hello" | "goodbye">(
+  input: TInput
+): TInput extends "hello" ? "goodbye" : "hello" => {
+  if (input === "goodbye") {
+    return "hello" as any;
   } else {
-    return 'goodbye' as any;
+    return "goodbye" as any;
   }
 };
 ```
 
 Outside of generic functions, use `any` extremely sparingly.
+
+## Block statements
+
+Always use block statements (curly braces) for control flow statements, even for single-line statements.
+
+This improves readability, prevents errors when adding additional statements, and maintains consistency.
+
+```ts
+// BAD
+if (condition) return;
+if (user.isActive) processUser(user);
+for (const item of items) console.log(item);
+
+// GOOD
+if (condition) {
+  return;
+}
+
+if (user.isActive) {
+  processUser(user);
+}
+
+for (const item of items) {
+  console.log(item);
+}
+```
+
+This rule applies to all control flow statements:
+
+```ts
+// BAD
+if (error) throw error;
+while (running) update();
+try { risky(); } catch (e) handle(e);
+
+// GOOD
+if (error) {
+  throw error;
+}
+
+while (running) {
+  update();
+}
+
+try {
+  risky();
+} catch (e) {
+  handle(e);
+}
+```
 
 ## Default exports
 
@@ -68,12 +118,12 @@ Default exports create confusion from the importing file.
 
 ```ts
 // BAD
-import myFunction from './myFunction';
+import myFunction from "./myFunction";
 ```
 
 ```ts
 // GOOD
-import { myFunction } from './myFunction';
+import { myFunction } from "./myFunction";
 ```
 
 There are certain situations where a framework may require a default export. For instance, Next.js requires a default export for pages.
@@ -93,12 +143,12 @@ For example, when sending events between environments:
 
 ```ts
 type UserCreatedEvent = {
-  type: 'user.created';
+  type: "user.created";
   data: { id: string; email: string };
 };
 
 type UserDeletedEvent = {
-  type: 'user.deleted';
+  type: "user.deleted";
   data: { id: string };
 };
 
@@ -110,10 +160,10 @@ Use switch statements to handle the results of discriminated unions:
 ```ts
 const handleEvent = (event: Event) => {
   switch (event.type) {
-    case 'user.created':
+    case "user.created":
       console.log(event.data.email);
       break;
-    case 'user.deleted':
+    case "user.deleted":
       console.log(event.data.id);
       break;
   }
@@ -127,17 +177,17 @@ For example, when describing a fetching state:
 ```ts
 // BAD - allows impossible states
 type FetchingState<TData> = {
-  status: 'idle' | 'loading' | 'success' | 'error';
+  status: "idle" | "loading" | "success" | "error";
   data?: TData;
   error?: Error;
 };
 
 // GOOD - prevents impossible states
 type FetchingState<TData> =
-  | { status: 'idle' }
-  | { status: 'loading' }
-  | { status: 'success'; data: TData }
-  | { status: 'error'; error: Error };
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: TData }
+  | { status: "error"; error: Error };
 ```
 
 ## Enums
@@ -148,9 +198,9 @@ If you require enum-like behavior, use an `as const` object:
 
 ```ts
 const BackendToFrontendEnum = {
-  xs: 'EXTRA_SMALL',
-  sm: 'SMALL',
-  md: 'MEDIUM',
+  xs: "EXTRA_SMALL",
+  sm: "SMALL",
+  md: "MEDIUM",
 } as const;
 
 type LowerCaseEnum = keyof typeof BackendToFrontendEnum; // "xs" | "sm" | "md"
@@ -193,22 +243,22 @@ Prefer top-level `import type` over inline `import { type ... }`.
 
 ```ts
 // BAD
-import { type User } from './user';
+import { type User } from "./user";
 ```
 
 ```ts
 // GOOD
-import type { User } from './user';
+import type { User } from "./user";
 ```
 
 The reason for this is that in certain environments, the first version's import will not be erased. So you'll be left with:
 
 ```ts
 // Before transpilation
-import { type User } from './user';
+import { type User } from "./user";
 
 // After transpilation
-import './user';
+import "./user";
 ```
 
 ## Install libraries
@@ -362,10 +412,10 @@ type User = {
 };
 
 const user: User = {
-  id: '1',
+  id: "1",
 };
 
-user.id = '2';
+user.id = "2";
 ```
 
 ```ts
@@ -375,10 +425,10 @@ type User = {
 };
 
 const user: User = {
-  id: '1',
+  id: "1",
 };
 
-user.id = '2'; // Error
+user.id = "2"; // Error
 ```
 
 ## Return types
@@ -387,7 +437,7 @@ When declaring functions on the top-level of a module, declare their return type
 
 ```ts
 const myFunc = (): string => {
-  return 'hello';
+  return "hello";
 };
 ```
 
@@ -408,7 +458,9 @@ If a thrown error produces a desirable outcome in the system, go for it. For ins
 However, for code that you would need a manual try catch for, consider using a result type instead:
 
 ```ts
-type Result<T, E extends Error> = { ok: true; value: T } | { ok: false; error: E };
+type Result<T, E extends Error> =
+  | { ok: true; value: T }
+  | { ok: false; error: E };
 ```
 
 For example, when parsing JSON:
@@ -504,7 +556,7 @@ const evens = numbers.filter((num) => num % 2 === 0);
 ```ts
 // BAD - use reduce instead
 let sum = 0;
-numbers.forEach((num) => sum += num);
+numbers.forEach((num) => (sum += num));
 
 // GOOD
 const sum = numbers.reduce((acc, num) => acc + num, 0);
@@ -524,7 +576,7 @@ users.forEach((user) => {
 // GOOD - updating external state (side effect)
 items.forEach((item) => {
   cache.set(item.id, item);
-  metrics.increment('items.processed');
+  metrics.increment("items.processed");
 });
 ```
 
