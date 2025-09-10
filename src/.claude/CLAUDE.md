@@ -25,5 +25,5 @@ English is permitted only for:
 
 ## Additional Implementation Guidelines
 
-@~/dotfiles/src/.github/instructions/tailwind.instructions.md
-@~/dotfiles/src/.github/instructions/typescript-guidelines.instructions.md
+- @~/dotfiles/src/.github/instructions/tailwind.instructions.md
+- @~/dotfiles/src/.github/instructions/typescript-guidelines.instructions.md
