@@ -57,15 +57,6 @@ if is_owner; then
 fi
 
 if [[ $(uname) == 'Darwin' ]]; then
-  if ! xcode-select -p &> /dev/null; then
-    echo 'Xcode Command Line Tools are not installed.'
-    read -p 'Install them now? (y/N) ' -n 1 -r REPLY < /dev/tty
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-      xcode-select --install
-    fi
-  fi
-
   if is_owner; then
     create_symlink "$dst/src/.config/brew/bundle.rb" "$HOME/.Brewfile"
   else
