@@ -76,7 +76,7 @@ if [[ $(uname) == 'Darwin' ]]; then
     create_symlink "$dst/src/.vscode/settings.json" "$vscode/settings.json"
     create_symlink "$dst/src/.vscode/mcp.json" "$vscode/mcp.json"
   fi
-  if [[ $initial_install == true ]]; then
+  if $initial_install; then
     echo 'Configuring macOS...'
     read -p 'Run cdefaults to set up macOS? (y/N) ' -n 1 -r REPLY < /dev/tty
     echo
