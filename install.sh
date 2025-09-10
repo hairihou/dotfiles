@@ -2,6 +2,7 @@
 set -euo pipefail
 
 as_owner=false
+initial_install=false
 for arg in "$@"; do
   if [[ $arg == '--as-owner' ]]; then
     as_owner=true
@@ -33,6 +34,7 @@ is_owner() {
 }
 
 if [[ ! -e "$dst/.git" ]]; then
+  initial_install=true
   git clone "$src" "$dst"
 elif [[ "$(git -C "$dst" config --get remote.origin.url)" != "$src" ]]; then
   echo 'Error: Remote origin URL does not match expected URL'
@@ -64,6 +66,14 @@ if [[ $(uname) == 'Darwin' ]]; then
   if [[ -d "$vscode" ]]; then
     create_symlink "$dst/src/.vscode/settings.json" "$vscode/settings.json"
     create_symlink "$dst/src/.vscode/mcp.json" "$vscode/mcp.json"
+  fi
+  if $initial_install; then
+    echo 'Configuring macOS...'
+    read -p 'Run cdefaults to set up macOS? (y/N) ' -n 1 -r REPLY < /dev/tty
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+      "$dst/bin/cdefaults"
+    fi
   fi
 else
   echo "($(uname -a)) is not supported"
