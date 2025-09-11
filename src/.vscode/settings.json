@@ -1,5 +1,4 @@
 {
-  "chat.agent.enabled": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit"
@@ -8,7 +7,7 @@
   "editor.cursorSmoothCaretAnimation": "explicit",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.fontFamily": "'MonaspiceAr Nerd Font Mono', monospace",
-  "editor.fontSize": 13,
+  "editor.fontSize": 12,
   "editor.formatOnSave": true,
   "editor.quickSuggestions": {
     "strings": "on"
@@ -25,11 +24,9 @@
   "files.trimTrailingWhitespace": true,
   "github.copilot.enable": {
     "*": true,
-    "markdown": true,
     "plaintext": false,
     "scminput": false
   },
-  "github.copilot.nextEditSuggestions.enabled": false,
   "githubPullRequests.pullBranch": "never",
   "notebook.codeActionsOnSave": {
     "notebook.source.fixAll": "explicit"
@@ -37,7 +34,7 @@
   "notebook.formatOnSave.enabled": true,
   "redhat.telemetry.enabled": false,
   "tailwindCSS.experimental.classRegex": [["[\"']([^\"']*)[\"']"]],
-  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.fontSize": 12,
   "typescript.implementationsCodeLens.enabled": true,
   "typescript.referencesCodeLens.enabled": true,
   "window.commandCenter": false,
