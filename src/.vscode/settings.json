@@ -24,6 +24,7 @@
   "files.trimTrailingWhitespace": true,
   "github.copilot.enable": {
     "*": true,
+    "markdown": true,
     "plaintext": false,
     "scminput": false
   },
@@ -35,6 +36,7 @@
   "redhat.telemetry.enabled": false,
   "tailwindCSS.experimental.classRegex": [["[\"']([^\"']*)[\"']"]],
   "terminal.integrated.fontSize": 12,
+  "terminal.integrated.stickyScroll.enabled": false,
   "typescript.implementationsCodeLens.enabled": true,
   "typescript.referencesCodeLens.enabled": true,
   "window.commandCenter": false,
@@ -54,7 +56,7 @@
   },
   "php.suggest.basic": false,
   "php.validate.enable": false,
-  "todo-tree.filtering.excludeGlobs": ["**/node_modules", "**/dist"],
+  "todo-tree.filtering.excludeGlobs": ["node_modules", "dist"],
   "todo-tree.general.tags": [
     "BUG",
     "HACK",
