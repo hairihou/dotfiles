@@ -56,9 +56,9 @@ fi
 
 if [[ $(uname) == 'Darwin' ]]; then
   if is_owner; then
-    create_symlink "$dst/src/.config/brew/bundle.rb" "$HOME/.Brewfile"
+    create_symlink "$dst/src/.config/brew/.Brewfile" "$HOME/.Brewfile"
   else
-    create_symlink "$dst/src/.config/brew/bundle.work.rb" "$HOME/.Brewfile"
+    create_symlink "$dst/src/.config/brew/.Brewfile.work.rb" "$HOME/.Brewfile"
   fi
   vscode="$HOME/Library/Application Support/Code/User"
   if [[ -d "$vscode" ]]; then
