@@ -41,12 +41,11 @@
   "typescript.referencesCodeLens.enabled": true,
   "window.commandCenter": false,
   "window.title": "\u0020",
-  "workbench.colorTheme": "Catppuccin Mocha",
+  "workbench.colorTheme": "Tailwind CSS Dark",
   "workbench.editorAssociations": {
     "*.svg": "default"
   },
-  "workbench.iconTheme": "catppuccin-mocha",
-  "workbench.tree.indent": 24,
+  "workbench.tree.indent": 16,
   "yaml.maxItemsComputed": 1000,
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
