@@ -2,12 +2,16 @@
 set -euo pipefail
 
 as_owner=false
-for arg in "$@"; do
-  if [[ $arg == '--as-owner' ]]; then
-    as_owner=true
-    break
-  fi
-done
+if [[ $(whoami) == 'hairihou' ]]; then
+  as_owner=true
+else
+  for arg in "$@"; do
+    if [[ $arg == '--as-owner' ]]; then
+      as_owner=true
+      break
+    fi
+  done
+fi
 
 readonly dst="$HOME/dotfiles"
 readonly src='https://github.com/hairihou/dotfiles.git'
@@ -25,12 +29,6 @@ create_symlink() {
   ln -si "$from" "$to" < /dev/tty || :
 }
 
-is_owner() {
-  if [[ $as_owner == true ]]; then
-    return 0
-  fi
-  [[ $(whoami) == 'hairihou' ]]
-}
 
 if [[ ! -e "$dst/.git" ]]; then
   git clone "$src" "$dst"
@@ -50,12 +48,12 @@ create_symlink "$dst/src/.claude/CLAUDE.md" "$HOME/.codex/AGENTS.md"
 create_symlink "$dst/src/.config/git/ignore" "$HOME/.config/git/ignore"
 create_symlink "$dst/src/.config/mise/config.toml" "$HOME/.config/mise/config.toml"
 create_symlink "$dst/src/.zshrc" "$HOME/.zshrc"
-if is_owner; then
+if [[ $as_owner == true ]]; then
   create_symlink "$dst/src/.gitconfig" "$HOME/.gitconfig"
 fi
 
 if [[ $(uname) == 'Darwin' ]]; then
-  if is_owner; then
+  if [[ $as_owner == true ]]; then
     create_symlink "$dst/src/.config/brew/.Brewfile" "$HOME/.Brewfile"
   else
     create_symlink "$dst/src/.config/brew/.Brewfile.work" "$HOME/.Brewfile"
