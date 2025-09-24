@@ -15,7 +15,7 @@ create_symlink() {
   if [[ "$parent" != "$HOME" && ! -d "$parent" ]]; then
     mkdir -p "$parent"
   fi
-  ln -si "$from" "$to" < /dev/tty || :
+  ln -sfi "$from" "$to" < /dev/tty || :
 }
 
 if [[ ! -e "$dst/.git" ]]; then
