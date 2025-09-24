@@ -44,7 +44,7 @@ if [[ $(uname) == 'Darwin' ]]; then
   if [[ "$as_owner" == 'true' ]]; then
     create_symlink "$dst/src/.config/brew/.Brewfile.owner" "$HOME/.Brewfile"
   else
-    create_symlink "$dst/src/.config/brew/.Brewfile.guest" "$HOME/.Brewfile"
+    create_symlink "$dst/src/.config/brew/.Brewfile" "$HOME/.Brewfile"
   fi
   vscode="$HOME/Library/Application Support/Code/User"
   if [[ -d "$vscode" ]]; then
