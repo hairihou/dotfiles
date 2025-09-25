@@ -2,6 +2,7 @@
 deno = "2.5.1"
 node = "22.19.0"
 "npm:@anthropic-ai/claude-code" = "1.0.120"
+"npm:@github/copilot" = "0.0.327"
 "npm:@google/gemini-cli" = "0.5.5"
 "npm:@openai/codex" = "0.39.0"
 "npm:ccusage" = "17.0.2"
