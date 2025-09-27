@@ -1,14 +1,14 @@
 [tools]
 deno = "2.5.1"
 node = "22.19.0"
-"npm:@anthropic-ai/claude-code" = "1.0.120"
+"npm:@anthropic-ai/claude-code" = "1.0.123"
 "npm:@github/copilot" = "0.0.327"
 "npm:@google/gemini-cli" = "0.5.5"
-"npm:@openai/codex" = "0.39.0"
+"npm:@openai/codex" = "0.40.0"
 "npm:ccusage" = "17.0.2"
 "npm:pnpm" = "10.17.1"
 python = "3.13.7"
-uv = "0.8.20"
+uv = "0.8.22"
 
 [env]
 
