@@ -57,12 +57,10 @@ create_symlink "$dst/src/.claude/settings.json" "$HOME/.claude/settings.json"
 create_symlink "$dst/src/.config/git/ignore" "$HOME/.config/git/ignore"
 create_symlink "$dst/src/.config/mise/config.toml" "$HOME/.config/mise/config.toml"
 create_symlink "$dst/src/.zshrc" "$HOME/.zshrc"
-if [[ "$as_owner" == 'true' ]]; then
-  create_symlink "$dst/src/.gitconfig" "$HOME/.gitconfig"
-fi
 
 if [[ $(uname) == 'Darwin' ]]; then
   if [[ "$as_owner" == 'true' ]]; then
+    create_symlink "$dst/src/.gitconfig" "$HOME/.gitconfig"
     create_symlink "$dst/src/.config/brew/.Brewfile.owner" "$HOME/.Brewfile"
   else
     create_symlink "$dst/src/.config/brew/.Brewfile" "$HOME/.Brewfile"
