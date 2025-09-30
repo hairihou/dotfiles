@@ -17,23 +17,7 @@ create_symlink() {
   if [[ "$parent" != "$HOME" && ! -d "$parent" ]]; then
     mkdir -p "$parent"
   fi
-
-  if [[ -d "$to" && ! -L "$to" ]]; then
-    local backup_path="${to}.backup"
-    rm -rf "$backup_path"
-    mv "$to" "$backup_path"
-  elif [[ -e "$to" ]]; then
-    echo -n "Overwrite $to? (y/N): "
-    read -r response < /dev/tty
-    if [[ "$response" =~ ^[Yy]$ ]]; then
-      rm "$to"
-    else
-      echo "Skipped $to"
-      return 0
-    fi
-  fi
-
-  ln -s "$from" "$to"
+  ln -sfi "$from" "$to" < /dev/tty || :
 }
 
 if [[ ! -e "$dst/.git" ]]; then
@@ -49,7 +33,6 @@ else
 fi
 
 echo 'Creating symlinks...'
-create_symlink "$dst/src/.claude/commands" "$HOME/.claude/commands"
 create_symlink "$dst/src/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 create_symlink "$dst/src/.claude/CLAUDE.md" "$HOME/.codex/AGENTS.md"
 create_symlink "$dst/src/.config/git/ignore" "$HOME/.config/git/ignore"
