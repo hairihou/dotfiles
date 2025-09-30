@@ -6,17 +6,19 @@ description: Conduct a KPT retrospective and append results to CLAUDE.md upon ap
 # disable-model-invocation: true
 ---
 
-# Goal
+# KPT Retrospective
+
+## Goal
 
 Conduct a Keep-Problem-Try retrospective on the current session and update the repository's CLAUDE.md with actionable insights.
 
-# Keep-Problem-Try Framework
+## Keep-Problem-Try Framework
 
 - **Keep**: What worked well and should be continued
 - **Problem**: What did not work well or caused issues
 - **Try**: How to improve AI agentic work quality in future iterations
 
-# Steps
+## Steps
 
 1. **Keep Analysis**: Review the session to identify what worked well:
 
@@ -82,7 +84,7 @@ Conduct a Keep-Problem-Try retrospective on the current session and update the r
 
 7. **Review and Finalize**: Ensure updates maintain consistency, clarity, and readability
 
-# Important Notes
+## Important Notes
 
 - Focus on systemic, codebase-wide insights rather than specific implementations
 - Problems should capture root causes, not only symptoms
