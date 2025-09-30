@@ -17,7 +17,23 @@ create_symlink() {
   if [[ "$parent" != "$HOME" && ! -d "$parent" ]]; then
     mkdir -p "$parent"
   fi
-  ln -sfi "$from" "$to" < /dev/tty || :
+
+  if [[ -d "$from" ]]; then
+    if [[ -e "$to" || -L "$to" ]]; then
+      echo -n "ln: replace '$to'? "
+      read -r response < /dev/tty
+      if [[ "$response" =~ ^[Yy]([Ee][Ss])?$ ]]; then
+        rm -rf "$to"
+      else
+        return 0
+      fi
+    fi
+    ln -s "$from" "$to" < /dev/tty || :
+  elif [[ -f "$from" ]]; then
+    ln -sfi "$from" "$to" < /dev/tty || :
+  else
+    return 0
+  fi
 }
 
 if [[ ! -e "$dst/.git" ]]; then
@@ -33,8 +49,11 @@ else
 fi
 
 echo 'Creating symlinks...'
+create_symlink "$dst/src/.claude/commands" "$HOME/.claude/commands"
+create_symlink "$dst/src/.claude/commands" "$HOME/.codex/prompts"
 create_symlink "$dst/src/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 create_symlink "$dst/src/.claude/CLAUDE.md" "$HOME/.codex/AGENTS.md"
+create_symlink "$dst/src/.claude/settings.json" "$HOME/.claude/settings.json"
 create_symlink "$dst/src/.config/git/ignore" "$HOME/.config/git/ignore"
 create_symlink "$dst/src/.config/mise/config.toml" "$HOME/.config/mise/config.toml"
 create_symlink "$dst/src/.zshrc" "$HOME/.zshrc"
@@ -50,6 +69,7 @@ if [[ $(uname) == 'Darwin' ]]; then
   fi
   vscode="$HOME/Library/Application Support/Code/User"
   if [[ -d "$vscode" ]]; then
+    create_symlink "$dst/src/.github/instructions" "$vscode/prompts"
     create_symlink "$dst/src/.vscode/settings.json" "$vscode/settings.json"
     create_symlink "$dst/src/.vscode/mcp.json" "$vscode/mcp.json"
   fi
