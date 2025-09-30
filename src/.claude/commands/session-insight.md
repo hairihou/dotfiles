@@ -6,21 +6,25 @@ description: Extract key project insights and update CLAUDE.md with actionable i
 # disable-model-invocation: true
 ---
 
+# Session Insight
+
 Extract project-specific insights from the session to update CLAUDE.md with _ULTRATHINK_.
 
-**3-Axis Analysis**
+## 3-Axis Analysis
 
 - **Goal Achievement**: Objective completion effectiveness
 - **Efficiency**: Process and resource optimization
 - **User Satisfaction**: Emotional experience and frustration analysis
 
-**Output Requirements**
+## Output Requirements
+
 **ALWAYS** use user language for output.
 
-**Analysis Ratings**
+## Analysis Ratings
+
 Rating guide: ★☆☆☆☆ Failed/Very poor | ★★☆☆☆ Poor | ★★★☆☆ Adequate | ★★★★☆ Good | ★★★★★ Excellent
 
-**Steps**
+## Steps
 
 0.  **Preparation**: Review session context and notes
 
@@ -145,7 +149,7 @@ Rating guide: ★☆☆☆☆ Failed/Very poor | ★★☆☆☆ Poor | ★★�
 
 10. **Finalize**: Ensure consistency
 
-**Guidelines**
+## Guidelines
 
 - Project-specific insights only
 - Root causes, not symptoms
