@@ -14,7 +14,7 @@ This is because TypeScript often cannot match your runtime logic to the logic do
 
 One example:
 
-```ts
+```typescript
 const youSayGoodbyeISayHello = <TInput extends "hello" | "goodbye">(
   input: TInput
 ): TInput extends "hello" ? "goodbye" : "hello" => {
@@ -32,7 +32,7 @@ There is no way to make this work concisely in TypeScript.
 
 So using `any` is the most concise solution:
 
-```ts
+```typescript
 const youSayGoodbyeISayHello = <TInput extends "hello" | "goodbye">(
   input: TInput
 ): TInput extends "hello" ? "goodbye" : "hello" => {
@@ -52,7 +52,7 @@ Always use block statements (curly braces) for control flow statements, even for
 
 This improves readability, prevents errors when adding additional statements, and maintains consistency.
 
-```ts
+```typescript
 // BAD
 if (condition) return;
 if (user.isActive) processUser(user);
@@ -74,7 +74,7 @@ for (const item of items) {
 
 This rule applies to all control flow statements:
 
-```ts
+```typescript
 // BAD
 if (error) throw error;
 while (running) update();
@@ -100,14 +100,14 @@ try {
 
 Unless explicitly required by the framework, do not use default exports.
 
-```ts
+```typescript
 // BAD
 export default function myFunction() {
   return <div>Hello</div>;
 }
 ```
 
-```ts
+```typescript
 // GOOD
 export function myFunction() {
   return <div>Hello</div>;
@@ -116,12 +116,12 @@ export function myFunction() {
 
 Default exports create confusion from the importing file.
 
-```ts
+```typescript
 // BAD
 import myFunction from "./myFunction";
 ```
 
-```ts
+```typescript
 // GOOD
 import { myFunction } from "./myFunction";
 ```
@@ -141,7 +141,7 @@ Proactively use discriminated unions to model data that can be in one of a few d
 
 For example, when sending events between environments:
 
-```ts
+```typescript
 type UserCreatedEvent = {
   type: "user.created";
   data: { id: string; email: string };
@@ -157,7 +157,7 @@ type Event = UserCreatedEvent | UserDeletedEvent;
 
 Use switch statements to handle the results of discriminated unions:
 
-```ts
+```typescript
 const handleEvent = (event: Event) => {
   switch (event.type) {
     case "user.created":
@@ -174,7 +174,7 @@ Use discriminated unions to prevent the 'bag of optionals' problem.
 
 For example, when describing a fetching state:
 
-```ts
+```typescript
 // BAD - allows impossible states
 type FetchingState<TData> = {
   status: "idle" | "loading" | "success" | "error";
@@ -196,7 +196,7 @@ Do not introduce new enums into the codebase. Retain existing enums.
 
 If you require enum-like behavior, use an `as const` object:
 
-```ts
+```typescript
 const BackendToFrontendEnum = {
   xs: "EXTRA_SMALL",
   sm: "SMALL",
@@ -210,7 +210,7 @@ type UpperCaseEnum = (typeof BackendToFrontendEnum)[LowerCaseEnum]; // "EXTRA_SM
 
 Remember that numeric enums behave differently to string enums. Numeric enums produce a reverse mapping:
 
-```ts
+```typescript
 enum Direction {
   Up,
   Down,
@@ -224,7 +224,7 @@ const directionName = Direction[0]; // "Up"
 
 This means that the enum `Direction` above will have eight keys instead of four.
 
-```ts
+```typescript
 enum Direction {
   Up,
   Down,
@@ -241,7 +241,7 @@ ALWAYS use strict equality (`===`) and strict inequality (`!==`) operators.
 
 The loose equality operators (`==` and `!=`) perform type coercion, which can lead to unexpected and confusing behavior.
 
-```ts
+```typescript
 // BAD - uses loose equality with type coercion
 if (value == 0) {
   // This matches 0, "0", false, "", null, undefined
@@ -267,7 +267,7 @@ if (items.length !== 0) {
 
 ### Common type coercion pitfalls to avoid:
 
-```ts
+```typescript
 // These all evaluate to true with loose equality:
 0 == false; // true
 "" == false; // true
@@ -287,7 +287,7 @@ null === undefined; // false
 
 ### When you need to check for null/undefined:
 
-```ts
+```typescript
 // BAD - loose equality
 if (value == null) {
   // Matches both null and undefined
@@ -311,7 +311,7 @@ The only exception is when specifically checking for null/undefined together, bu
 
 Avoid using `!` operator or implicit boolean casting, as they can lead to unexpected behavior with different types.
 
-```ts
+```typescript
 // BAD - implicit boolean casting
 if (!value) {
   // Matches "", 0, false, null, undefined, NaN
@@ -340,7 +340,7 @@ if (value === false) {
 
 ### Common boolean casting pitfalls:
 
-```ts
+```typescript
 // These all evaluate to false with ! operator:
 !0; // true (number)
 !""; // true (empty string)
@@ -365,19 +365,19 @@ Use import type whenever you are importing a type.
 
 Prefer top-level `import type` over inline `import { type ... }`.
 
-```ts
+```typescript
 // BAD
 import { type User } from "./user";
 ```
 
-```ts
+```typescript
 // GOOD
 import type { User } from "./user";
 ```
 
 The reason for this is that in certain environments, the first version's import will not be erased. So you'll be left with:
 
-```ts
+```typescript
 // Before transpilation
 import { type User } from "./user";
 
@@ -393,7 +393,7 @@ Your training data has a cut-off date. You're probably not aware of all of the l
 
 This means that instead of picking a version manually (via updating the `package.json` file), you should use a script to install the latest version of a library.
 
-```bash
+```sh
 # pnpm
 pnpm add -D @typescript-eslint/eslint-plugin
 
@@ -412,7 +412,7 @@ ALWAYS prefer interfaces when modelling inheritance.
 
 The `&` operator has terrible performance in TypeScript. Only use it where `interface extends` is not possible.
 
-```ts
+```typescript
 // BAD
 
 type A = {
@@ -426,7 +426,7 @@ type B = {
 type C = A & B;
 ```
 
-```ts
+```typescript
 // GOOD
 
 interface A {
@@ -450,7 +450,7 @@ Be concise in JSDoc comments, and only provide JSDoc comments if the function's 
 
 Use the JSDoc inline `@link` tag to link to other functions and types within the same file.
 
-```ts
+```typescript
 /**
  * Subtracts two numbers
  */
@@ -469,7 +469,7 @@ const add = (a: number, b: number) => a + b;
 - Use UpperCamelCase (PascalCase) for classes, types, interfaces, object literals and constants (e.g., `MyClass`, `MyInterface`, `MyObjectLiteral`, `MaxCount`)
 - Inside generic types, functions or classes, prefix type parameters with `T` (e.g., `TKey`, `TValue`)
 
-```ts
+```typescript
 type RecordOfArrays<TItem> = Record<string, TItem[]>;
 ```
 
@@ -477,7 +477,7 @@ type RecordOfArrays<TItem> = Record<string, TItem[]>;
 
 If the user has this rule enabled in their `tsconfig.json`, indexing into objects and arrays will behave differently from how you expect.
 
-```ts
+```typescript
 const obj: Record<string, string> = {};
 
 // With noUncheckedIndexedAccess, value will
@@ -486,7 +486,7 @@ const obj: Record<string, string> = {};
 const value = obj.key;
 ```
 
-```ts
+```typescript
 const arr: string[] = [];
 
 // With noUncheckedIndexedAccess, value will
@@ -501,7 +501,7 @@ Use optional properties extremely sparingly. Only use them when the property is 
 
 In the example below we always want to pass user ID to `AuthOptions`. This is because if we forget to pass it somewhere in the code base, it will cause our function to be not authenticated.
 
-```ts
+```typescript
 // BAD
 type AuthOptions = {
   userId?: string;
@@ -512,7 +512,7 @@ const func = (options: AuthOptions) => {
 };
 ```
 
-```ts
+```typescript
 // GOOD
 type AuthOptions = {
   userId: string | undefined;
@@ -529,7 +529,7 @@ Use `readonly` properties for object types by default. This will prevent acciden
 
 Omit `readonly` only when the property is genuinely mutable.
 
-```ts
+```typescript
 // BAD
 type User = {
   id: string;
@@ -542,7 +542,7 @@ const user: User = {
 user.id = "2";
 ```
 
-```ts
+```typescript
 // GOOD
 type User = {
   readonly id: string;
@@ -559,7 +559,7 @@ user.id = "2"; // Error
 
 When declaring functions on the top-level of a module, declare their return types. This will help future AI assistants understand the function's purpose.
 
-```ts
+```typescript
 const myFunc = (): string => {
   return "hello";
 };
@@ -581,7 +581,7 @@ If a thrown error produces a desirable outcome in the system, go for it. For ins
 
 However, for code that you would need a manual try catch for, consider using a result type instead:
 
-```ts
+```typescript
 type Result<T, E extends Error> =
   | { ok: true; value: T }
   | { ok: false; error: E };
@@ -589,7 +589,7 @@ type Result<T, E extends Error> =
 
 For example, when parsing JSON:
 
-```ts
+```typescript
 const parseJson = (input: string): Result<unknown, Error> => {
   try {
     return { ok: true, value: JSON.parse(input) };
@@ -601,7 +601,7 @@ const parseJson = (input: string): Result<unknown, Error> => {
 
 This way you can handle the error in the caller:
 
-```ts
+```typescript
 const result = parseJson('{"name": "John"}');
 
 if (result.ok) {
@@ -617,14 +617,14 @@ Prefer arrow functions over `function` declarations for function definitions.
 
 Arrow functions provide consistent lexical scoping and are more concise.
 
-```ts
+```typescript
 // BAD
 function calculateTotal(items: number[]): number {
   return items.reduce((sum, item) => sum + item, 0);
 }
 ```
 
-```ts
+```typescript
 // GOOD
 const calculateTotal = (items: number[]): number => {
   return items.reduce((sum, item) => sum + item, 0);
@@ -633,7 +633,7 @@ const calculateTotal = (items: number[]): number => {
 
 Exception: Use `function` declarations when you need hoisting behavior or when defining methods in classes.
 
-```ts
+```typescript
 // This is fine when hoisting is needed
 function initializeApp() {
   setupDatabase();
@@ -657,7 +657,7 @@ Use `forEach` sparingly and only when it's the most appropriate choice. In most 
 
 ### When NOT to use forEach:
 
-```ts
+```typescript
 // BAD - use map instead
 const doubled: number[] = [];
 numbers.forEach((num) => doubled.push(num * 2));
@@ -666,7 +666,7 @@ numbers.forEach((num) => doubled.push(num * 2));
 const doubled = numbers.map((num) => num * 2);
 ```
 
-```ts
+```typescript
 // BAD - use filter instead
 const evens: number[] = [];
 numbers.forEach((num) => {
@@ -677,7 +677,7 @@ numbers.forEach((num) => {
 const evens = numbers.filter((num) => num % 2 === 0);
 ```
 
-```ts
+```typescript
 // BAD - use reduce instead
 let sum = 0;
 numbers.forEach((num) => (sum += num));
@@ -690,7 +690,7 @@ const sum = numbers.reduce((acc, num) => acc + num, 0);
 
 Use `forEach` only when you need side effects without creating a new array and no other array method fits:
 
-```ts
+```typescript
 // GOOD - logging each item (side effect)
 users.forEach((user) => {
   console.log(`Processing user: ${user.name}`);
