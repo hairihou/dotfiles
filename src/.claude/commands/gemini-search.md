@@ -1,5 +1,9 @@
 ---
+# allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*)
+# argument-hint: [message]
 description: Use Gemini CLI for web search
+# model: claude-3-5-haiku-20241022
+# disable-model-invocation: true
 ---
 
 `gemini` is Gemini CLI.
