@@ -1,3 +1,7 @@
+---
+description: Use Gemini CLI for web search
+---
+
 `gemini` is Gemini CLI.
 
 **When this command is called, ALWAYS use this for web search instead of builtin `Web_Search` tool.**
@@ -8,6 +12,6 @@ Run web search via Task Tool with `gemini --prompt "WebSearch: <query>"`.
 
 Run:
 
-```bash
+```sh
 gemini --prompt "WebSearch: <query>"
 ```
