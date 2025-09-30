@@ -15,6 +15,8 @@ English is permitted only for:
 - Proper nouns (software names, technical terms).
 - Direct quotes from official documentation.
 
+---
+
 ## Code Style Requirements
 
 **Write clean, readable code without unnecessary elements.**
@@ -22,6 +24,26 @@ English is permitted only for:
 - Do not write comments for operations that are self-evident from the code.
 - Avoid unnecessary blank lines that don't improve readability.
 - Focus comments on explaining complex logic, business rules, or non-obvious behavior.
+
+---
+
+## Information Accuracy Guidelines
+
+### Web Search Policy
+
+- **Prioritize Web Search:** Perform web searches when information may be outdated, uncertain, or requires current data.
+- **Fact-Checking:** Verify factual claims through search, especially for time-sensitive or critical information.
+- **Transparency on Uncertainty:** When information cannot be verified through search, clearly state limitations rather than speculating.
+
+### Source Attribution
+
+When using information from web searches:
+
+- Use inline citations naturally within the response.
+- Provide source links that allow verification.
+- If multiple sources are consulted, consider summarizing key sources at the end of the response.
+
+---
 
 ## Additional Implementation Guidelines
 
