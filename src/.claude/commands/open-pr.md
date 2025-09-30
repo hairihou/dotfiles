@@ -52,12 +52,21 @@ Based on the context above, follow these steps:
    ```
 
 5. **Create pull request**:
+
    - Generate PR title and description based on the changes
    - **NOTE**: Do NOT include Claude Code co-author credits or AI tool references in PR titles or descriptions
+   - Open as **draft** by default to minimize accidental merges. Include a clear checklist in the body.
    - Example:
-   ```sh
-   gh pr create --title "<suggested-pr-title>" --body "<generated-description>" --assignee @me
-   ```
+
+     ```sh
+     gh pr create --title "<suggested-pr-title>" --body "<generated-description>" --assignee @me --draft
+     ```
+
+   - If the PR already exists, run:
+
+     ```sh
+     gh pr view --web
+     ```
 
 ## Conventional Commits Reference
 
