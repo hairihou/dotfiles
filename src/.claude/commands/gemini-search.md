@@ -1,5 +1,5 @@
 ---
-# allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*)
+allowed-tools: Bash(gemini:*)
 # argument-hint: [message]
 description: Use Gemini CLI for web search
 # model: claude-3-5-haiku-20241022
