@@ -12,6 +12,7 @@
 [tag]
 	sort = version:refname
 [status]
+	branch = true
 	short = true
 [user]
 	email = 38448411+hairihou@users.noreply.github.com
