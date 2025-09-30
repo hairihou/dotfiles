@@ -71,7 +71,6 @@ if [[ $(uname) == 'Darwin' ]]; then
   if [[ -d "$vscode" ]]; then
     create_symlink "$dst/src/.github/instructions" "$vscode/prompts"
     create_symlink "$dst/src/.vscode/settings.json" "$vscode/settings.json"
-    create_symlink "$dst/src/.vscode/mcp.json" "$vscode/mcp.json"
   fi
 else
   echo "($(uname -a)) is not supported"
