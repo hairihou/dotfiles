@@ -6,7 +6,7 @@ description: Extract key project insights and update CLAUDE.md with actionable i
 # disable-model-invocation: true
 ---
 
-# Session Insight
+# Session Insights
 
 Extract project-specific insights from the session to update CLAUDE.md with _ULTRATHINK_.
 
