@@ -1,5 +1,5 @@
 ---
-# allowed-tools: Bash(git add:_), Bash(git status:_), Bash(git commit:\*)
+# allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git commit:*)
 # argument-hint: [message]
 description: Extract key project insights and update CLAUDE.md with actionable improvements
 # model: claude-3-5-haiku-20241022
