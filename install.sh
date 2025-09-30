@@ -9,13 +9,31 @@ create_symlink() {
   local from="$1"
   local to="$2"
   local parent="$(dirname "$to")"
+
   if [[ -L "$to" && "$(readlink "$to")" = "$from" ]]; then
     return 0
   fi
+
   if [[ "$parent" != "$HOME" && ! -d "$parent" ]]; then
     mkdir -p "$parent"
   fi
-  ln -sfi "$from" "$to" < /dev/tty || :
+
+  if [[ -d "$to" && ! -L "$to" ]]; then
+    local backup_path="${to}.backup"
+    rm -rf "$backup_path"
+    mv "$to" "$backup_path"
+  elif [[ -e "$to" ]]; then
+    echo -n "Overwrite $to? (y/N): "
+    read -r response < /dev/tty
+    if [[ "$response" =~ ^[Yy]$ ]]; then
+      rm "$to"
+    else
+      echo "Skipped $to"
+      return 0
+    fi
+  fi
+
+  ln -s "$from" "$to"
 }
 
 if [[ ! -e "$dst/.git" ]]; then
