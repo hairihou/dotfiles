@@ -6,6 +6,8 @@ description: Create a branch and GitHub pull request from current changes (draft
 # disable-model-invocation: true
 ---
 
+# Open Pull Request
+
 ## Context
 
 - Git status: !`git status -b --porcelain`
