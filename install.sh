@@ -21,7 +21,7 @@ create_symlink() {
   if [[ -d "$from" ]]; then
     if [[ -e "$to" || -L "$to" ]]; then
       echo -n "ln: replace '$to'? "
-      read -r response
+      read -r response < /dev/tty
       if [[ "$response" =~ ^[Yy]([Ee][Ss])?$ ]]; then
         rm -rf "$to"
       else
