@@ -49,6 +49,7 @@ else
 fi
 
 echo 'Creating symlinks...'
+create_symlink "$dst/src/.claude/commands" "$HOME/.claude/commands"
 create_symlink "$dst/src/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 create_symlink "$dst/src/.claude/CLAUDE.md" "$HOME/.codex/AGENTS.md"
 create_symlink "$dst/src/.config/git/ignore" "$HOME/.config/git/ignore"
