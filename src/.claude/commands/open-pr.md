@@ -17,6 +17,7 @@ description: Create a branch and GitHub pull request from current changes (draft
 Based on the context above, follow these steps:
 
 1. **Safety check**:
+
    - If currently on `main` branch with uncommitted changes, create a new branch first
    - Suggest a descriptive branch name based on the changes shown in the diff (e.g., `feature/add-user-auth`, `fix/handle-null-errors`, `docs/update-readme`)
 
@@ -27,6 +28,7 @@ Based on the context above, follow these steps:
    ```
 
 3. **Stage and commit changes**:
+
    - **IMPORTANT**: Check for repository-specific commit message rules first (look for CONTRIBUTING.md, .gitmessage, or project documentation)
    - If no specific rules exist, follow Conventional Commits format
    - Analyze the diff to suggest an appropriate commit message
