@@ -10,15 +10,14 @@ create_symlink() {
   local to="$2"
   local parent="$(dirname "$to")"
 
-  if [[ -L "$to" && "$(readlink "$to")" = "$from" ]]; then
-    return 0
-  fi
-
   if [[ "$parent" != "$HOME" && ! -d "$parent" ]]; then
     mkdir -p "$parent"
   fi
 
   if [[ -d "$from" ]]; then
+    if [[ -L "$to" && "$(readlink "$to")" = "$from" ]]; then
+      return 0
+    fi
     if [[ -e "$to" || -L "$to" ]]; then
       echo -n "ln: replace '$to'? "
       read -r response < /dev/tty
