@@ -19,9 +19,18 @@ create_symlink() {
   fi
 
   if [[ -d "$from" ]]; then
-    ln -sni "$from" "$to" < /dev/tty
+    if [[ -e "$to" || -L "$to" ]]; then
+      echo -n "ln: replace '$to'? "
+      read -r response < /dev/tty
+      if [[ "$response" =~ ^[Yy]([Ee][Ss])?$ ]]; then
+        rm -rf "$to"
+      else
+        return 0
+      fi
+    fi
+    ln -s "$from" "$to" < /dev/tty || :
   elif [[ -f "$from" ]]; then
-    ln -sfi "$from" "$to" < /dev/tty
+    ln -sfi "$from" "$to" < /dev/tty || :
   else
     return 0
   fi
