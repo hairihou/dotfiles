@@ -28,7 +28,6 @@
   "files.trimTrailingWhitespace": true,
   "github.copilot.enable": {
     "*": true,
-    "markdown": true,
     "plaintext": false,
     "scminput": false
   },
@@ -37,7 +36,6 @@
     "notebook.source.fixAll": "explicit"
   },
   "notebook.formatOnSave.enabled": true,
-  "redhat.telemetry.enabled": false,
   "tailwindCSS.experimental.classRegex": [["[\"']([^\"']*)[\"']"]],
   "terminal.integrated.fontSize": 12,
   "terminal.integrated.stickyScroll.enabled": false,
