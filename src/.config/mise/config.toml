@@ -1,11 +1,11 @@
 [tools]
-deno = "2.5.2"
+deno = "2.5.3"
 node = "22.20.0"
 "npm:@anthropic-ai/claude-code" = "2.0.5"
 "npm:@github/copilot" = "0.0.333"
 "npm:@google/gemini-cli" = "0.7.0"
 "npm:@google/jules" = "0.1.30"
-"npm:@openai/codex" = "0.42.0"
+"npm:@openai/codex" = "0.44.0"
 "npm:ccusage" = "17.1.1"
 "npm:pnpm" = "10.18.0"
 python = "3.13.7"
