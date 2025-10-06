@@ -1,4 +1,11 @@
 {
+  "cSpell.customDictionaries": {
+    "knownWords": {
+      "name": "knownWords",
+      "path": "~/dotfiles/dist/known-words.txt",
+      "scope": "user"
+    }
+  },
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
@@ -47,6 +54,7 @@
   "workbench.editorAssociations": {
     "*.svg": "default"
   },
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.tree.indent": 16,
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
@@ -85,22 +93,5 @@
     "fontStyle": "italic",
     "type": "text-and-comment"
   },
-  "todo-tree.regex.regex": "(\\*|//|#|<!--|;|/\\*|^|^[ \\t]*\\*)\\s*($TAGS)",
-  "cSpell.userWords": [
-    "3rdparty",
-    "devcontainers",
-    "hairihou",
-    "modelcontextprotocol",
-    "noopener",
-    "noreferrer",
-    "openapi",
-    "rgba",
-    "rolldown",
-    "tailwindcss",
-    "tanstack",
-    "tseslint",
-    "unplugin",
-    "valibot",
-    "vite"
-  ]
+  "todo-tree.regex.regex": "(\\*|//|#|<!--|;|/\\*|^|^[ \\t]*\\*)\\s*($TAGS)"
 }
