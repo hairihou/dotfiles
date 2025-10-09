@@ -1,6 +1,6 @@
 ---
 allowed-tools: Bash(git:*), Bash(gh:*)
-# argument-hint: [message]
+argument-hint: [base-branch]
 description: Create a branch and GitHub pull request from current changes (draft by default)
 # model: claude-3-5-haiku-20241022
 # disable-model-invocation: true
@@ -53,13 +53,15 @@ Based on the context above, follow these steps:
 
 5. **Create pull request**:
 
+   - **Base branch**: If `$ARGUMENTS` is provided, use it as the base branch. Otherwise, determine the appropriate base branch (repository default or current branch's upstream)
    - Generate PR title and description based on the changes
-   - **NOTE**: Do NOT include Claude Code co-author credits or AI tool references in PR titles or descriptions
-   - Open as **draft** by default to minimize accidental merges. Include a clear checklist in the body.
+   - **NOTE**: Do NOT include Claude Code co-author credits or AI tool references
+   - Open as **draft** by default with `--assignee @me`
+   - **IMPORTANT**: Always specify the base branch using `--base` option
    - Example:
 
      ```sh
-     gh pr create --title "<suggested-pr-title>" --body "<generated-description>" --assignee @me --draft
+     gh pr create --title "<title>" --body "<description>" --base <base-branch> --assignee @me --draft
      ```
 
    - If the PR already exists, run:
