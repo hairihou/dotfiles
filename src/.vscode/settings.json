@@ -59,6 +59,9 @@
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
   },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  },
   "[php]": {
     "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
   },
