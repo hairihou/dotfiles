@@ -14,7 +14,7 @@
   "editor.cursorBlinking": "phase",
   "editor.cursorSmoothCaretAnimation": "explicit",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.fontFamily": "'MonaspiceAr Nerd Font Mono', monospace",
+  "editor.fontFamily": "'Monaspace Argon Regular', monospace",
   "editor.fontSize": 12,
   "editor.formatOnSave": true,
   "editor.quickSuggestions": {
@@ -44,6 +44,7 @@
   },
   "notebook.formatOnSave.enabled": true,
   "tailwindCSS.experimental.classRegex": [["[\"']([^\"']*)[\"']"]],
+  "terminal.integrated.fontFamily": "'Monaspace Argon Regular', monospace",
   "terminal.integrated.fontSize": 12,
   "terminal.integrated.stickyScroll.enabled": false,
   "typescript.implementationsCodeLens.enabled": true,
