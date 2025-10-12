@@ -2,7 +2,7 @@ export EDITOR='vim'
 export LANG='en_US.UTF-8'
 
 export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
-export JAVA_HOME="$HOME/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
 export PATH="$ANDROID_SDK_ROOT/tools:$PATH"
 export PATH="$JAVA_HOME/bin:$PATH"
