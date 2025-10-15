@@ -27,6 +27,15 @@ English is permitted only for:
 
 ---
 
+## Citation and Source Attribution Rules
+
+When formulating an answer using information obtained from a web search, **both** of the following two citation formats must be used to attribute the source:
+
+- **In-Text Citation:** Immediately after the quoted or referenced information, place a link to the source in the format: `[*](URL)`.
+- **End-of-Response Reference List:** At the end of the response, create a heading titled "References" (or "Source List") and list **all** consulted sources in the following bulleted format: `[Article Title](URL)`. Sequential numbering of the list items is **not** required.
+
+---
+
 ## Additional Implementation Guidelines
 
 - @~/dotfiles/src/.github/instructions/tailwind.instructions.md
