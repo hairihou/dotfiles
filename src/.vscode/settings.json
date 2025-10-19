@@ -2,7 +2,7 @@
   "cSpell.customDictionaries": {
     "knownWords": {
       "name": "knownWords",
-      "path": "~/dotfiles/dist/known-words.txt",
+      "path": "~/dotfiles/dist/.tmp/known-words.txt",
       "scope": "user"
     }
   },
