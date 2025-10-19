@@ -1,4 +1,5 @@
 brew "mise"
+brew "peco"
 brew "pure"
 brew "vim"
 cask "android-studio"
