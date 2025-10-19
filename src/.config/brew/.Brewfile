@@ -1,7 +1,5 @@
 brew "mise"
-brew "peco"
 brew "pure"
-brew "tmux"
 brew "vim"
 cask "android-studio"
 cask "figma"
