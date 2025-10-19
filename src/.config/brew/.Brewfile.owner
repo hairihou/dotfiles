@@ -1,6 +1,5 @@
 brew "mise"
 brew "pure"
-brew "swiftlint"
 brew "vim"
 cask "android-studio"
 cask "font-udev-gothic-nf"
