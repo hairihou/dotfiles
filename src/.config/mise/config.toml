@@ -12,6 +12,7 @@ peco = "0.5.11"
 pipx = "1.8.0"
 "pipx:git+https://github.com/github/spec-kit.git" = "v0.0.69"
 python = "3.14.0"
+swiftlint = "0.62.1"
 tmux = "3.5a"
 uv = "0.9.3"
 
