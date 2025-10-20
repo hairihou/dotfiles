@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-stable_only=false
+include_beta=false
 for arg in "$@"; do
-  [[ $arg == '-s' || $arg == '--stable-only' ]] && stable_only=true
+  [[ $arg == '-b' || $arg == '--include-beta' ]] && include_beta=true
 done
 
 brew update
 brew upgrade --formula
 
 casks="$(brew list --cask)"
-if "$stable_only" && [[ -n "$casks" ]]; then
-  casks=$(echo "$casks" | grep -Ev '@[0-9]+(\.[0-9]+)*' || echo '')
+if ! "$include_beta" && [[ -n "$casks" ]]; then
+  casks=$(echo "$casks" | grep -v '@' || echo '')
 fi
 [[ -n "$casks" ]] && echo "$casks" | xargs brew upgrade --greedy --cask
 
