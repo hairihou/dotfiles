@@ -1,3 +1,4 @@
+brew "gh"
 brew "mise"
 brew "peco"
 brew "pure"
