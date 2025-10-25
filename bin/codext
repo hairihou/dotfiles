@@ -4,27 +4,14 @@ set -euo pipefail
 readonly extensions_file="$HOME/dotfiles/src/.vscode/extensions.txt"
 
 dump_extensions() {
-  echo 'Dumping installed extensions...'
-
   code --list-extensions | sort > "$extensions_file"
-
-  local count
-  count=$(wc -l < "$extensions_file")
+  local count=$(wc -l < "$extensions_file")
   echo "Dumped $count extensions to $extensions_file"
 }
 
 prune_extensions() {
-  if [[ ! -f "$extensions_file" ]]; then
-    echo "Error: $extensions_file not found"
-    exit 1
-  fi
-
-  echo 'Checking for extensions not in file...'
-
   local installed_extensions=$(code --list-extensions 2>/dev/null || echo "")
-
   local expected_extensions=$(grep -v '^#' "$extensions_file" | grep -v '^$' || echo "")
-
   local to_remove=()
 
   while IFS= read -r installed_ext; do
@@ -42,8 +29,6 @@ prune_extensions() {
   for ext in "${to_remove[@]}"; do
     echo "  - $ext"
   done
-  echo ''
-
   echo -n 'Remove these extensions? (y/n): '
   read -r response < /dev/tty
 
@@ -64,14 +49,6 @@ prune_extensions() {
 }
 
 install_extensions() {
-  if [[ ! -f "$extensions_file" ]]; then
-    echo "Error: $extensions_file not found"
-    echo 'Run with --dump to create it'
-    exit 1
-  fi
-
-  echo "Installing extensions from $extensions_file..."
-
   local installed_extensions
   installed_extensions=$(code --list-extensions 2>/dev/null || echo "")
 
@@ -105,7 +82,6 @@ install_extensions() {
     fi
   done < "$extensions_file"
 
-  echo ''
   echo "Installed: $installed, Skipped: $skipped"
 }
 
@@ -119,15 +95,21 @@ main() {
     --dump)
       dump_extensions
       ;;
-    --prune)
-      prune_extensions
-      ;;
-    '')
-      install_extensions
+    --prune | '')
+      if [[ ! -f "$extensions_file" ]]; then
+        echo "Error: $extensions_file not found"
+        [[ "${1:-}" == '--prune' ]] || echo 'Run with --dump to create it'
+        exit 1
+      fi
+
+      if [[ "${1:-}" == '--prune' ]]; then
+        prune_extensions
+      else
+        install_extensions
+      fi
       ;;
     *)
       echo "Error: Unknown option: $1"
-      echo ''
       exit 1
       ;;
   esac
