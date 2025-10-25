@@ -11,6 +11,7 @@ curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh |
 - `/bin` - Scripts are available globally after setup:
   - `brewup [-b --include-beta]` - Homebrew batch update utility
   - `cdefaults` - macOS system defaults configuration
+  - `codext [--dump | prune]` - Visual Studio Code extension manager
   - `dprune` - Removes repository empty dirs
   - `tresize [s|m|l|xl]` - Terminal window resizer
 - `/src` - Source files for various configurations
