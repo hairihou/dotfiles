@@ -13,8 +13,6 @@ node = "22.21.0"
 pipx = "1.8.0"
 "pipx:git+https://github.com/github/spec-kit.git" = "v0.0.79"
 python = "3.14.0"
-swiftlint = "0.62.1"
-tmux = "3.5a"
 uv = "0.9.5"
 
 [env]
