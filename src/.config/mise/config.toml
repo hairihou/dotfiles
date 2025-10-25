@@ -1,6 +1,5 @@
 [tools]
 deno = "2.5.4"
-gh = "2.82.0"
 node = "22.21.0"
 "npm:@angular/cli" = "20.3.7"
 "npm:@anthropic-ai/claude-code" = "2.0.26"
