@@ -21,13 +21,17 @@ prune_extensions() {
 
   echo 'Checking for extensions not in file...'
 
+  local installed_extensions=$(code --list-extensions 2>/dev/null || echo "")
+
+  local expected_extensions=$(grep -v '^#' "$extensions_file" | grep -v '^$' || echo "")
+
   local to_remove=()
 
   while IFS= read -r installed_ext; do
-    if ! grep -v '^#' "$extensions_file" | grep -v '^$' | grep -q "^${installed_ext}$"; then
+    if ! echo "$expected_extensions" | grep -q "^${installed_ext}$" 2>/dev/null; then
       to_remove+=("$installed_ext")
     fi
-  done < <(code --list-extensions)
+  done <<< "$installed_extensions"
 
   if [[ ${#to_remove[@]} -eq 0 ]]; then
     echo 'No extensions to remove'
@@ -68,6 +72,9 @@ install_extensions() {
 
   echo "Installing extensions from $extensions_file..."
 
+  local installed_extensions
+  installed_extensions=$(code --list-extensions 2>/dev/null || echo "")
+
   local total=0
   local installed=0
   local skipped=0
@@ -85,7 +92,7 @@ install_extensions() {
     current=$((current + 1))
     echo "[$current/$total] $extension"
 
-    if code --list-extensions | grep -q "^$extension$"; then
+    if echo "$installed_extensions" | grep -q "^$extension$" 2>/dev/null; then
       echo 'Already installed'
       skipped=$((skipped + 1))
     else
