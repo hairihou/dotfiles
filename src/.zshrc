@@ -8,8 +8,6 @@ export PATH="$ANDROID_SDK_ROOT/tools:$PATH"
 export PATH="$JAVA_HOME/bin:$PATH"
 export PATH="$HOME/dotfiles/bin:$PATH"
 
-alias tmux='zellij'
-
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=50000
 SAVEHIST=50000
