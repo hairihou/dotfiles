@@ -73,7 +73,7 @@ install_extensions() {
       echo 'Already installed'
       skipped=$((skipped + 1))
     else
-      if code --install-extension "$extension" --force > /dev/null 2>&1; then
+      if code --install-extension "$extension" > /dev/null 2>&1; then
         echo 'Installed'
         installed=$((installed + 1))
       else
