@@ -1,8 +1,8 @@
 [tools]
-deno = "2.5.5"
+deno = "2.5.6"
 node = "24.11.0"
-"npm:@angular/cli" = "20.3.7"
-"npm:@anthropic-ai/claude-code" = "2.0.28"
+"npm:@angular/cli" = "20.3.8"
+"npm:@anthropic-ai/claude-code" = "2.0.29"
 "npm:@devcontainers/cli" = "0.80.1"
 "npm:@google/gemini-cli" = "0.11.0"
 "npm:@hono/cli" = "0.1.0"
@@ -14,7 +14,7 @@ pipx = "1.8.0"
 "pipx:git+https://github.com/github/spec-kit.git" = "v0.0.79"
 python = "3.14.0"
 swiftlint = "0.62.2"
-uv = "0.9.5"
+uv = "0.9.6"
 
 [env]
 
