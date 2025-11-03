@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly brewfile="$HOME/.Brewfile"
+
+install_packages() {
+  if [[ ! -f "$brewfile" ]]; then
+    echo "Error: $brewfile not found"
+    exit 1
+  fi
+
+  echo "Installing packages from Brewfile..."
+  brew bundle --global --no-vscode
+  echo "Installation complete"
+}
+
+dump_packages() {
+  echo "Dumping installed packages to Brewfile..."
+  brew bundle dump --global --no-vscode --force
+  local formulae_count=$(grep -c "^brew " "$brewfile" 2>/dev/null || echo 0)
+  local cask_count=$(grep -c "^cask " "$brewfile" 2>/dev/null || echo 0)
+  local total=$((formulae_count + cask_count))
+  echo "Dumped $total packages to $brewfile"
+}
+
+prune_packages() {
+  if [[ ! -f "$brewfile" ]]; then
+    echo "Error: $brewfile not found"
+    exit 1
+  fi
+
+  local to_remove=$(brew bundle cleanup --global --no-vscode 2>&1 | grep "^Would uninstall" | sed 's/^Would uninstall //' || echo "")
+
+  if [[ -z "$to_remove" ]]; then
+    echo 'No packages to remove'
+    return 0
+  fi
+
+  echo "The following packages are not in $brewfile:"
+  echo "$to_remove" | sed 's/^/  - /'
+  echo -n 'Remove these packages? (y/n): '
+  read -r response < /dev/tty
+
+  if [[ ! "$response" =~ ^[Yy]([Ee][Ss])?$ ]]; then
+    echo 'Cancelled'
+    return 0
+  fi
+
+  echo "Removing packages..."
+  brew bundle cleanup --force --global --no-vscode
+  echo "Cleanup complete"
+}
+
+main() {
+  if ! command -v brew > /dev/null 2>&1; then
+    echo "Error: 'brew' command not found"
+    exit 1
+  fi
+
+  case "${1:-}" in
+    --dump)
+      dump_packages
+      ;;
+    --prune)
+      prune_packages
+      ;;
+    '')
+      install_packages
+      ;;
+    *)
+      echo "Error: Unknown option: $1"
+      exit 1
+      ;;
+  esac
+}
+
+main "$@"

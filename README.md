@@ -15,6 +15,7 @@ curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh |
 
 Available globally after setup:
 
+- `brewsync [--dump | --prune]` - Homebrew package synchronizer
 - `brewup [-b --include-beta]` - Homebrew batch update utility
 - `cdefaults` - macOS system defaults configuration
 - `codext [--dump | --prune]` - VS Code extension manager
@@ -39,26 +40,3 @@ Symlinked to home directory:
 | `src/.github/instructions`         | `~/Library/Application Support/Code/User/prompts`       |
 | `src/.vscode/settings.json`        | `~/Library/Application Support/Code/User/settings.json` |
 | `src/.zshrc`                       | `~/.zshrc`                                              |
-
-## Customization
-
-### Managing Homebrew Packages
-
-Brewfile is located at `~/dotfiles/src/.config/brew/.Brewfile` and symlinked to `~/.Brewfile`.
-
-```sh
-# Install packages from Brewfile
-brew bundle --global --no-vscode
-
-# Add currently installed packages to Brewfile
-brew bundle dump --global --no-vscode
-
-# List packages not in Brewfile
-brew bundle cleanup --global --no-vscode
-
-# Remove packages not in Brewfile
-brew bundle cleanup --force --global --no-vscode
-```
-
-<!-- https://user-images.githubusercontent.com/38448411/120893176-d64b3800-c64c-11eb-827e-2d0f96f3088b.jpeg -->
-<!-- T8pcHI1j -->
