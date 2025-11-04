@@ -16,7 +16,7 @@ curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh |
 Available globally after setup:
 
 - `brewsync [--dump | --prune]` - Homebrew package synchronizer
-- `brewup [-b --include-beta]` - Homebrew batch update utility
+- `brewup [--all]` - Homebrew batch update utility
 - `cdefaults` - macOS system defaults configuration
 - `codext [--dump | --prune]` - VS Code extension manager
 - `dprune` - Remove empty directories from repository
