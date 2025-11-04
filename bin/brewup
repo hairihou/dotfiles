@@ -1,18 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-include_beta=false
-for arg in "$@"; do
-  [[ $arg == '-b' || $arg == '--include-beta' ]] && include_beta=true
-done
-
 brew update
 brew upgrade --formula
 
 casks="$(brew list --cask)"
-if ! "$include_beta" && [[ -n "$casks" ]]; then
-  casks=$(echo "$casks" | grep -v '@' || echo '')
-fi
+[[ "$*" != *--all* && -n "$casks" ]] && casks=$(echo "$casks" | grep -v '@' || echo '')
 [[ -n "$casks" ]] && echo "$casks" | xargs brew upgrade --greedy --cask
 
 brew cleanup --prune=all --scrub
