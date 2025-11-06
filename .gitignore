@@ -24,4 +24,5 @@ dist-ssr
 *.sw?
 
 # Licensed files
-tailwind.instructions.md
+src/.codex
+src/.github/instructions/tailwind.instructions.md
