@@ -17,6 +17,7 @@
   "editor.fontFamily": "'UDEV Gothic 35NFLG', monospace",
   "editor.fontSize": 12,
   "editor.formatOnSave": true,
+  "editor.minimap.enabled": false,
   "editor.quickSuggestions": {
     "strings": "on"
   },
