@@ -1,9 +1,9 @@
 # dotfiles
 
-## Setup
-
 > [!IMPORTANT]
 > This dotfiles repository is designed for macOS only.
+
+## Setup
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh | sh
