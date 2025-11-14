@@ -1,18 +1,18 @@
 [tools]
 deno = "2.5.6"
 node = "24.11.1"
-"npm:@angular/cli" = "20.3.9"
-"npm:@google/gemini-cli" = "0.13.0"
+"npm:@angular/cli" = "20.3.10"
+"npm:@google/gemini-cli" = "0.14.0"
 "npm:@hono/cli" = "0.1.0"
 "npm:@ionic/cli" = "7.2.1"
 "npm:@openai/codex" = "0.57.0"
 "npm:ccusage" = "17.1.4"
-"npm:pnpm" = "10.21.0"
+"npm:pnpm" = "10.22.0"
 pipx = "1.8.0"
 "pipx:git+https://github.com/github/spec-kit.git" = "v0.0.79"
 python = "3.14.0"
 swiftlint = "0.62.2"
-uv = "0.9.8"
+uv = "0.9.9"
 
 [env]
 
