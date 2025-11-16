@@ -29,7 +29,5 @@ streetsidesoftware.code-spell-checker
 tailwindlabs.tailwindcss-vscode-theme
 tamasfe.even-better-toml
 usernamehw.errorlens
-visualstudioexptteam.intellicode-api-usage-examples
-visualstudioexptteam.vscodeintellicode
 vue.volar
 yoavbls.pretty-ts-errors
