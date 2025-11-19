@@ -1,7 +1,7 @@
 [tools]
 deno = "2.5.6"
 node = "24.11.1"
-"npm:@angular/cli" = "20.3.10"
+"npm:@angular/cli" = "21.0.0"
 "npm:@google/gemini-cli" = "0.15.3"
 "npm:@hono/cli" = "0.1.0"
 "npm:@ionic/cli" = "7.2.1"
