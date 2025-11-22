@@ -2,7 +2,7 @@
 deno = "2.5.6"
 node = "24.11.1"
 "npm:@angular/cli" = "21.0.0"
-"npm:@google/gemini-cli" = "0.17.0"
+"npm:@google/gemini-cli" = "0.17.1"
 "npm:@hono/cli" = "0.1.0"
 "npm:@ionic/cli" = "7.2.1"
 "npm:@openai/codex" = "0.63.0"
