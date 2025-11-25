@@ -12,7 +12,7 @@ pipx = "1.8.0"
 "pipx:git+https://github.com/github/spec-kit.git" = "v0.0.85"
 python = "3.14.0"
 swiftlint = "0.62.2"
-uv = "0.9.11"
+uv = "0.9.12"
 
 [env]
 
