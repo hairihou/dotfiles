@@ -25,7 +25,7 @@
   "editor.renderLineHighlightOnlyWhenFocus": true,
   "editor.stickyScroll.enabled": false,
   "editor.tabSize": 2,
-  "extensions.autoUpdate": false,
+  // "extensions.autoUpdate": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
     "*.css": "tailwindcss",
