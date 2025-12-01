@@ -29,6 +29,7 @@ Symlinked to home directory:
 | Source                             | Target                                                  |
 | ---------------------------------- | ------------------------------------------------------- |
 | `src/.claude/commands`             | `~/.claude/commands`<br>`~/.codex/prompts`              |
+| `src/.claude/skills`               | `~/.codex/skills`                                       |
 | `src/.claude/CLAUDE.md`            | `~/.claude/CLAUDE.md`<br>`~/.codex/AGENTS.md`           |
 | `src/.claude/settings.json`        | `~/.claude/settings.json`                               |
 | `src/.config/brew/.Brewfile`       | `~/.Brewfile`                                           |
