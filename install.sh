@@ -49,6 +49,7 @@ else
 fi
 
 echo 'Creating symlinks...'
+create_symlink "$dst/src/.claude/agents" "$HOME/.claude/agents"
 create_symlink "$dst/src/.claude/commands" "$HOME/.claude/commands"
 create_symlink "$dst/src/.claude/commands" "$HOME/.codex/prompts"
 create_symlink "$dst/src/.claude/skills" "$HOME/.claude/skills"
