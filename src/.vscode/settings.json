@@ -1,4 +1,6 @@
 {
+  "claudeCode.preferredLocation": "panel",
+  "claudeCode.useTerminal": true,
   "cSpell.customDictionaries": {
     "knownWords": {
       "name": "knownWords",
