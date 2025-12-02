@@ -26,16 +26,17 @@ Available globally after setup:
 
 Symlinked to home directory:
 
-| Source                             | Target                                                         |
-| ---------------------------------- | -------------------------------------------------------------- |
-| `src/.claude/**/*`                 | `~/.claude/**/*`<br>`~/.codex/prompts`<br>`~/.codex/AGENTS.md` |
-| `src/.claude/settings.json`        | `~/.claude/settings.json`                                      |
-| `src/.config/brew/.Brewfile`       | `~/.Brewfile`                                                  |
-| `src/.config/brew/.Brewfile.owner` | `~/.Brewfile` (owner only)                                     |
-| `src/.config/git/ignore`           | `~/.config/git/ignore`                                         |
-| `src/.config/mise/config.toml`     | `~/.config/mise/config.toml`                                   |
-| `src/.config/zellij/config.kdl`    | `~/.config/zellij/config.kdl`                                  |
-| `src/.gitconfig`                   | `~/.gitconfig` (owner only)                                    |
-| `src/.github/instructions`         | `~/Library/Application Support/Code/User/prompts`              |
-| `src/.vscode/settings.json`        | `~/Library/Application Support/Code/User/settings.json`        |
-| `src/.zshrc`                       | `~/.zshrc`                                                     |
+| Source                             | Target                                                  |
+| ---------------------------------- | ------------------------------------------------------- |
+| `src/.claude/**/*`                 | `~/.claude/**/*`                                        |
+| `src/.claude/commands`             | `~/.codex/prompts`                                      |
+| `src/.claude/CLAUDE.md`            | `~/.codex/AGENTS.md`                                    |
+| `src/.config/brew/.Brewfile`       | `~/.Brewfile`                                           |
+| `src/.config/brew/.Brewfile.owner` | `~/.Brewfile` (owner only)                              |
+| `src/.config/git/ignore`           | `~/.config/git/ignore`                                  |
+| `src/.config/mise/config.toml`     | `~/.config/mise/config.toml`                            |
+| `src/.config/zellij/config.kdl`    | `~/.config/zellij/config.kdl`                           |
+| `src/.gitconfig`                   | `~/.gitconfig` (owner only)                             |
+| `src/.github/instructions`         | `~/Library/Application Support/Code/User/prompts`       |
+| `src/.vscode/settings.json`        | `~/Library/Application Support/Code/User/settings.json` |
+| `src/.zshrc`                       | `~/.zshrc`                                              |
