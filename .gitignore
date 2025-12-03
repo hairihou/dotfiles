@@ -23,5 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-# Licensed files
-tailwind.instructions.md
+# WIP
+src/.codex/config.toml
+src/.github/instructions/tailwind.instructions.md
