@@ -7,6 +7,12 @@ description: Write code review comments using Conventional Comments format. (htt
 
 Write code review comments in a structured format that makes intent clear and enables machine parsing.
 
+## Rules
+
+- Do NOT use praise, nitpick, or quibble labels. Focus only on actionable feedback.
+- Every comment must be actionable or informative.
+- Be concise. Omit unnecessary discussion.
+
 ## Format
 
 ```
@@ -18,40 +24,28 @@ Write code review comments in a structured format that makes intent clear and en
 - **label**: Required. Indicates the type of comment.
 - **decorations**: Optional. Comma-separated context in parentheses.
 - **subject**: Required. The main message.
-- **discussion**: Optional. Reasoning, background, or suggested changes.
+- **discussion**: Optional. Reasoning or suggested changes.
 
 ## Labels
 
-| Label        | Description                                               |
-| ------------ | --------------------------------------------------------- |
-| `praise`     | Highlights something positive. Encourages good practices. |
-| `nitpick`    | Trivial, preference-based. Addressing is optional.        |
-| `suggestion` | Proposes an improvement with an explicit change.          |
-| `issue`      | Identifies a problem that needs to be addressed.          |
-| `todo`       | Small, necessary change. Less severe than an issue.       |
-| `question`   | Seeks clarification or investigation.                     |
-| `thought`    | An idea that occurred during review. May not need action. |
-| `chore`      | Simple task that must be done before acceptance.          |
-| `note`       | Information for the reader. Does not require action.      |
-| `typo`       | Points out a typographical error.                         |
-| `polish`     | Suggests refinement to improve code quality.              |
-| `quibble`    | Similar to nitpick. A minor concern.                      |
+| Label        | Description                                          |
+| ------------ | ---------------------------------------------------- |
+| `issue`      | Identifies a problem that needs to be addressed.     |
+| `suggestion` | Proposes an improvement with an explicit change.     |
+| `todo`       | Small, necessary change. Less severe than an issue.  |
+| `question`   | Seeks clarification or investigation.                |
+| `note`       | Information for the reader. Does not require action. |
+| `typo`       | Points out a typographical error.                    |
 
 ## Decorations
 
-| Decoration       | Description                                      |
-| ---------------- | ------------------------------------------------ |
-| `(non-blocking)` | Does not block approval. Addressing is optional. |
-| `(blocking)`     | Must be addressed before approval.               |
-| `(if-minor)`     | Only address if the change is minor.             |
-| `(security)`     | Related to security concerns.                    |
-| `(performance)`  | Related to performance concerns.                 |
+| Decoration      | Description                        |
+| --------------- | ---------------------------------- |
+| `(blocking)`    | Must be addressed before approval. |
+| `(security)`    | Related to security concerns.      |
+| `(performance)` | Related to performance concerns.   |
 
 ## Examples
-
-```
-praise: Clean separation of concerns here. The logic is easy to follow.
-```
 
 ```
 suggestion: Consider using optional chaining here.
@@ -63,10 +57,6 @@ suggestion: Consider using optional chaining here.
 issue: This function silently swallows exceptions.
 
 Either log the error or propagate it to the caller.
-```
-
-```
-nitpick (non-blocking): `data` is a bit vague. Consider renaming to `userList`.
 ```
 
 ```
