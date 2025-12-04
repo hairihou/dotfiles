@@ -7,26 +7,27 @@ description: Write code review comments using Conventional Comments format. (htt
 
 Write code review comments in a structured format that makes intent clear and enables machine parsing.
 
-## Rules
+## Instructions
 
 - Do NOT use praise, nitpick, or quibble labels. Focus only on actionable feedback.
 - Every comment must be actionable or informative.
 - Be concise. Omit unnecessary discussion.
 
-## Format
+### Format
 
 ```
-<label> [decorations]: <subject>
+<label>[!] [decorations]: <subject>
 
 [discussion]
 ```
 
 - **label**: Required. Indicates the type of comment.
+- **`!` suffix**: Optional. Indicates blocking—must be addressed before approval.
 - **decorations**: Optional. Comma-separated context in parentheses.
 - **subject**: Required. The main message.
 - **discussion**: Optional. Reasoning or suggested changes.
 
-## Labels
+### Labels
 
 | Label        | Description                                          |
 | ------------ | ---------------------------------------------------- |
@@ -37,13 +38,12 @@ Write code review comments in a structured format that makes intent clear and en
 | `note`       | Information for the reader. Does not require action. |
 | `typo`       | Points out a typographical error.                    |
 
-## Decorations
+### Decorations
 
-| Decoration      | Description                        |
-| --------------- | ---------------------------------- |
-| `(blocking)`    | Must be addressed before approval. |
-| `(security)`    | Related to security concerns.      |
-| `(performance)` | Related to performance concerns.   |
+| Decoration      | Description                      |
+| --------------- | -------------------------------- |
+| `(security)`    | Related to security concerns.    |
+| `(performance)` | Related to performance concerns. |
 
 ## Examples
 
@@ -54,19 +54,19 @@ suggestion: Consider using optional chaining here.
 ```
 
 ```
-issue: This function silently swallows exceptions.
+issue!: This function silently swallows exceptions.
 
 Either log the error or propagate it to the caller.
 ```
 
 ```
-suggestion (security): User input should not be directly embedded in SQL.
+suggestion! (security): User input should not be directly embedded in SQL.
 
 Use prepared statements to prevent SQL injection.
 ```
 
 ```
-todo (blocking): Missing test coverage.
+todo!: Missing test coverage.
 
 Add tests for edge cases (empty array, null values).
 ```
