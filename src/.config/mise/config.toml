@@ -10,10 +10,10 @@ node = "24.11.1"
 "npm:ccusage" = "17.1.6"
 "npm:pnpm" = "10.24.0"
 pipx = "1.8.0"
-"pipx:git+https://github.com/github/spec-kit.git" = "v0.0.89"
+"pipx:git+https://github.com/github/spec-kit.git" = "v0.0.90"
 python = "3.14.1"
 swiftlint = "0.62.2"
-uv = "0.9.14"
+uv = "0.9.15"
 
 [env]
 
