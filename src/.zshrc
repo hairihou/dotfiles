@@ -34,13 +34,23 @@ promptinit
 prompt pure
 
 # peco
-peco-select-history() {
+peco-history() {
   BUFFER=$(\history -n -r 1 | peco --query "$LBUFFER")
   CURSOR=$#BUFFER
   zle clear-screen
 }
-zle -N peco-select-history
-bindkey "^r" peco-select-history
+zle -N peco-history
+bindkey '^r' peco-history
+
+peco-ghq() {
+  local repo=$(ghq list --full-path | peco)
+  if [[ -n "$repo" ]]; then
+    cd "$repo"
+  fi
+  zle reset-prompt
+}
+zle -N peco-ghq
+bindkey '^g' peco-ghq
 
 # mise
 eval "$(mise activate zsh)"
