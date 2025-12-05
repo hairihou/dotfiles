@@ -7,6 +7,8 @@
 	colorMoved = plain
 	mnemonicPrefix = true
 	renames = true
+[ghq]
+	root = ~/dev
 [init]
 	defaultBranch = main
 [tag]
