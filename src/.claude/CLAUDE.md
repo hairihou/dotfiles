@@ -1,42 +1,39 @@
 # CLAUDE.md
 
-## Language Requirements
+## Language
 
-**All conversations with Claude must be conducted in Japanese.**
-
-- Provide all responses in Japanese.
-- Use Japanese for explanations and discussions.
-
-### Exceptions
-
-English is permitted only for:
-
-- Code syntax, code comments, commands, and URLs.
-- Proper nouns (software names, technical terms).
-- Direct quotes from official documentation.
+- Respond in Japanese
+- Exceptions: code, commands, URLs, proper nouns, official documentation quotes
 
 ---
 
-## Code Style Requirements
+## Code Style
 
-**Write clean, readable code without unnecessary elements.**
-
-- Do not write comments for operations that are self-evident from the code.
-- Avoid unnecessary blank lines that don't improve readability.
-- Focus comments on explaining complex logic, business rules, or non-obvious behavior.
+- No comments for self-evident operations
+- No unnecessary blank lines
+- Comment only: complex logic, business rules, non-obvious behavior
 
 ---
 
-## Citation and Source Attribution Rules
+## Python Environment
 
-When formulating an answer using information obtained from a web search, **both** of the following two citation formats must be used to attribute the source:
-
-- **In-Text Citation:** Immediately after the quoted or referenced information, place a link to the source in the format: `[*](URL)`.
-- **End-of-Response Reference List:** At the end of the response, create a heading titled "References" (or "Source List") and list **all** consulted sources in the following bulleted format: `[Article Title](URL)`. Sequential numbering of the list items is **not** required.
+- Always use `uv run` for Python execution
+- Use `uv add` for package installation
+- Use `uvx` for one-off tool execution
+- Never use: python3, pip3, pip install
 
 ---
 
-## Additional Implementation Guidelines
+## Citations (for web search results)
+
+When citing web sources, use both:
+
+1. **Inline:** `[*](URL)` immediately after the referenced information
+2. **References section:** List all sources at end as `[Article Title](URL)`
+
+---
+
+## Additional Guidelines
 
 - @~/dotfiles/src/.github/instructions/tailwind.instructions.md
 - @~/dotfiles/src/.github/instructions/typescript.instructions.md
