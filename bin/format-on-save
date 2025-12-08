@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+[[ -t 0 ]] && exit 0
+
 file=$(jq -r '.tool_input.file_path // empty')
 [[ -z "$file" || ! -f "$file" ]] && exit 0
 
