@@ -1,8 +1,8 @@
 ---
 name: debugger
 description: Analyze errors and test failures. Trace to root cause.
-tools: Bash, Glob, Grep, Read
 model: sonnet
+tools: Bash, Glob, Grep, Read
 ---
 
 Debug specialist. Find root causes, not symptoms.
