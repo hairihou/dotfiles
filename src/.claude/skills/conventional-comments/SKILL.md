@@ -1,33 +1,29 @@
 ---
 name: conventional-comments
-description: Write code review comments using Conventional Comments format. (https://conventionalcomments.org) Use when reviewing code, providing feedback on pull requests, suggesting improvements, or analyzing code changes. Produces structured, actionable comments with clear intent and machine-parsable labels.
+description: Write structured code review comments using Conventional Comments format.
 ---
 
 # Conventional Comments
 
-Write code review comments in a structured format that makes intent clear and enables machine parsing.
+Write code review comments in Conventional Comments format (<https://conventionalcomments.org>).
 
-## Instructions
-
-- Do NOT use praise, nitpick, or quibble labels. Focus only on actionable feedback.
-- Every comment must be actionable or informative.
-- Be concise. Omit unnecessary discussion.
-
-### Format
+## Format
 
 ```
-<label>[!] [decorations]: <subject>
+<label>[!] [(decorations)]: <subject>
 
 [discussion]
 ```
 
-- **label**: Required. Indicates the type of comment.
-- **`!` suffix**: Optional. Indicates blocking—must be addressed before approval.
-- **decorations**: Optional. Comma-separated context in parentheses.
-- **subject**: Required. The main message.
-- **discussion**: Optional. Reasoning or suggested changes.
+| Part           | Required | Description                                       |
+| -------------- | -------- | ------------------------------------------------- |
+| `label`        | Yes      | Comment type (see Labels below)                   |
+| `!`            | No       | Blocking indicator—must resolve before approval   |
+| `(decoration)` | No       | Comma-separated context tags (e.g., `(security)`) |
+| `subject`      | Yes      | Main message (1 line)                             |
+| `discussion`   | No       | Additional reasoning or suggested fix (1-3 lines) |
 
-### Labels
+## Labels
 
 | Label        | Description                                          |
 | ------------ | ---------------------------------------------------- |
@@ -38,14 +34,20 @@ Write code review comments in a structured format that makes intent clear and en
 | `note`       | Information for the reader. Does not require action. |
 | `typo`       | Points out a typographical error.                    |
 
-### Decorations
+**Do NOT use**: `praise`, `nitpick`, `quibble` — focus on actionable feedback only.
 
-| Decoration      | Description                      |
-| --------------- | -------------------------------- |
-| `(security)`    | Related to security concerns.    |
-| `(performance)` | Related to performance concerns. |
+## Decorations
+
+| Decoration      | Use when                                     |
+| --------------- | -------------------------------------------- |
+| `(security)`    | Comment relates to security vulnerabilities. |
+| `(performance)` | Comment relates to performance impact.       |
+| `(a11y)`        | Comment relates to accessibility.            |
+| `(ux)`          | Comment relates to user experience.          |
 
 ## Examples
+
+### Basic suggestion
 
 ```
 suggestion: Consider using optional chaining here.
@@ -53,11 +55,15 @@ suggestion: Consider using optional chaining here.
 `user && user.profile && user.profile.name` can be simplified to `user?.profile?.name`.
 ```
 
+### Blocking issue
+
 ```
 issue!: This function silently swallows exceptions.
 
 Either log the error or propagate it to the caller.
 ```
+
+### With security decoration
 
 ```
 suggestion! (security): User input should not be directly embedded in SQL.
@@ -65,8 +71,30 @@ suggestion! (security): User input should not be directly embedded in SQL.
 Use prepared statements to prevent SQL injection.
 ```
 
-```
-todo!: Missing test coverage.
+### With performance decoration
 
-Add tests for edge cases (empty array, null values).
+```
+issue (performance): This query runs inside a loop causing N+1 problem.
+
+Batch the IDs and fetch all records in a single query.
+```
+
+### Simple todo
+
+```
+todo: Add null check before accessing `user.email`.
+```
+
+### Question
+
+```
+question: Is this timeout value intentional?
+
+300ms seems short for API calls that may span regions.
+```
+
+### Note (informational)
+
+```
+note: This pattern is also used in `auth-service.ts:45`.
 ```
