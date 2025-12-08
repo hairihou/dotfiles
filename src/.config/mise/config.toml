@@ -1,6 +1,7 @@
 [tools]
 deno = "2.5.6"
 ghq = "1.8.0"
+go = "1.25.5"
 node = "24.11.1"
 "npm:@angular/cli" = "21.0.2"
 "npm:@dotenvx/dotenvx" = "1.51.1"
