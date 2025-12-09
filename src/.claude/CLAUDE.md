@@ -35,5 +35,6 @@ When citing web sources, use both:
 
 ## Additional Guidelines
 
+- @~/dotfiles/src/.github/instructions/component-structure.instructions.md
 - @~/dotfiles/src/.github/instructions/tailwind.instructions.md
 - @~/dotfiles/src/.github/instructions/typescript.instructions.md
