@@ -36,3 +36,4 @@ const handleSubmit = () => { ... }
 
 - 1 blank line between feature blocks
 - No blank lines within same feature block
+- No comments to label feature blocks (spacing alone indicates grouping)
