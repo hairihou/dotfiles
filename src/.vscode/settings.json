@@ -1,4 +1,7 @@
 {
+  "accessibility.signals.terminalBell": {
+    "sound": "on"
+  },
   "claudeCode.preferredLocation": "panel",
   "claudeCode.useTerminal": true,
   "cSpell.customDictionaries": {
