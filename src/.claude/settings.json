@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay ~/dotfiles/src/assets/my-turn.mp3"
+            "command": "tuinotify"
           }
         ]
       }
