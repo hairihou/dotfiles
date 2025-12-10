@@ -2,8 +2,6 @@
 allowed-tools: Bash(git:*), Bash(gh:*)
 argument-hint: [base-branch]
 description: Create a branch and GitHub pull request from current changes (draft by default)
-# model: claude-3-5-haiku-20241022
-# disable-model-invocation: true
 ---
 
 # Open Pull Request
