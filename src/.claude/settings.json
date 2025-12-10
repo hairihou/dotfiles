@@ -10,6 +10,17 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay ~/dotfiles/sounds/my-turn.mp3"
+          }
+        ]
+      }
     ]
   }
 }
