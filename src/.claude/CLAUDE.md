@@ -30,11 +30,3 @@ When citing web sources, use both:
 
 1. **Inline:** `[*](URL)` immediately after the referenced information
 2. **References section:** List all sources at end as `[Article Title](URL)`
-
----
-
-## Additional Guidelines
-
-- @~/dotfiles/src/.github/instructions/component-structure.instructions.md
-- @~/dotfiles/src/.github/instructions/tailwind.instructions.md
-- @~/dotfiles/src/.github/instructions/typescript.instructions.md

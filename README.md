@@ -38,6 +38,5 @@ Symlinked to home directory:
 | `src/.config/mise/config.toml`     | `~/.config/mise/config.toml`                            |
 | `src/.config/zellij/config.kdl`    | `~/.config/zellij/config.kdl`                           |
 | `src/.gitconfig`                   | `~/.gitconfig` (owner only)                             |
-| `src/.github/instructions`         | `~/Library/Application Support/Code/User/prompts`       |
 | `src/.vscode/settings.json`        | `~/Library/Application Support/Code/User/settings.json` |
 | `src/.zshrc`                       | `~/.zshrc`                                              |

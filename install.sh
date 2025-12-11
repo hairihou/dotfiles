@@ -52,6 +52,7 @@ echo 'Creating symlinks...'
 create_symlink "$dst/src/.claude/agents" "$HOME/.claude/agents"
 create_symlink "$dst/src/.claude/commands" "$HOME/.claude/commands"
 create_symlink "$dst/src/.claude/commands" "$HOME/.codex/prompts"
+create_symlink "$dst/src/.claude/rules" "$HOME/.claude/rules"
 create_symlink "$dst/src/.claude/skills" "$HOME/.claude/skills"
 create_symlink "$dst/src/.claude/skills" "$HOME/.codex/skills"
 create_symlink "$dst/src/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
@@ -71,7 +72,6 @@ if [[ $(uname) == 'Darwin' ]]; then
   fi
   vscode="$HOME/Library/Application Support/Code/User"
   if [[ -d "$vscode" ]]; then
-    create_symlink "$dst/src/.github/instructions" "$vscode/prompts"
     create_symlink "$dst/src/.vscode/settings.json" "$vscode/settings.json"
   fi
 else
