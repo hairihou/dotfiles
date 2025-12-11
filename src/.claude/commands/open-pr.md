@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(git:*), Bash(gh:*)
+allowed-tools: Bash(gh:*), Bash(git:*)
 argument-hint: [base-branch]
 description: Create a branch and GitHub pull request from current changes (draft by default)
 ---
