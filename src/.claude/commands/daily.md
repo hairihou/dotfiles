@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(ls:*), Bash(mkdir:*), Bash(touch:*)
+allowed-tools: Bash(ls:*), Bash(mkdir:*), Bash(touch:*), Read(~/Documents/Obsidian Vault/Daily/**)
 description: Append session work summary to Obsidian daily note
 ---
 
