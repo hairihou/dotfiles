@@ -31,19 +31,28 @@ Note: No h1 header needed - Obsidian shows filename as title.
 ## Session Entry Format (appended to Memo section)
 
 ```markdown
-### Session: HH:MM - repository-name
+### repository-name
+
+#### HH:MM
 
 - [What was done 1]
 - [What was done 2]
-- [Technical issue solved (if any)]
 
 > 💭
 ```
 
-- **HH:MM**: Session start time (from first message in conversation or first commit time)
 - **repository-name**: From current working directory (basename of git root or cwd)
+- **HH:MM**: Session start time - MUST verify with `date "+%H:%M"` command
 
 Keep it factual and concise. User adds their own thoughts and feelings directly in Memo section.
+
+### Same Repository Rule
+
+If a session entry for the **same repository** already exists in the Memo section:
+
+- Do NOT create a new `### repository-name` heading
+- Add a new `#### HH:MM` subheading under the existing repository heading
+- Keep entries chronologically ordered within the repository
 
 ## Steps
 
