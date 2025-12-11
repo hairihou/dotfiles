@@ -1,18 +1,18 @@
 ---
-allowed-tools: Bash(ls:*), Bash(mkdir:*), Bash(touch:*), Read(~/Documents/Obsidian Vault/Daily/**)
-description: Append session work summary to Obsidian daily note
+allowed-tools: Bash(ls:*), Bash(mkdir:*), Bash(touch:*), Read(~/Documents/Obsidian Vault/Diary/**)
+description: Append session work summary to Obsidian diary
 ---
 
-# Daily
+# Diary
 
-Append today's session summary to Obsidian daily note in `~/Documents/Obsidian Vault/Daily/YYYYMMDD.md`.
+Append today's session summary to Obsidian diary in `~/Documents/Obsidian Vault/Diary/YYYYMMDD.md`.
 
 ## Purpose
 
-Support "Diary-Driven Work" (日記駆動仕事術) by extracting session work into daily notes.
+Support "Diary-Driven Work" (日記駆動仕事術) by extracting session work into diary entries.
 The user writes their own diary - this command assists by organizing session activities.
 
-## Daily Note Template (for new files)
+## Diary Template (for new files)
 
 ```markdown
 ## Tasks
@@ -70,7 +70,7 @@ If a session entry for the **same repository** already exists in the Memo sectio
 
 3. **Check File**: Determine target file path:
 
-   - Path: `~/Documents/Obsidian Vault/Daily/YYYYMMDD.md`
+   - Path: `~/Documents/Obsidian Vault/Diary/YYYYMMDD.md`
    - If new: create with full template (Tasks/Meeting/Memo sections)
    - If exists: append to Memo section
 
