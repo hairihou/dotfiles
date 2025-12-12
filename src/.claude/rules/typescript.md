@@ -1,5 +1,5 @@
 ---
-paths: **/*.{ts,tsx,vue}
+paths: "**/*.{ts,tsx,vue}"
 ---
 
 # TypeScript Rules
