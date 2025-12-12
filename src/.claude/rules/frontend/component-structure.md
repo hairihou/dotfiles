@@ -1,5 +1,5 @@
 ---
-paths: **/*.component.ts, **/*.tsx, **/*.vue
+paths: "**/*.{component.ts,tsx,vue}"
 ---
 
 # Component Structure
