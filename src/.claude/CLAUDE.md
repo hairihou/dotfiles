@@ -1,17 +1,17 @@
 # CLAUDE.md
 
-## Language
-
-- Respond in Japanese
-- Exceptions: code, commands, URLs, proper nouns, official documentation quotes
-
----
-
 ## Code Style
 
 - No comments for self-evident operations
 - No unnecessary blank lines
 - Comment only: complex logic, business rules, non-obvious behavior
+
+---
+
+## Language
+
+- Respond in Japanese
+- Exceptions: code, commands, URLs, proper nouns, official documentation quotes
 
 ---
 
@@ -24,9 +24,6 @@
 
 ---
 
-## Citations (for web search results)
+## Skills
 
-When citing web sources, use both:
-
-1. **Inline:** `[*](URL)` immediately after the referenced information
-2. **References section:** List all sources at end as `[Article Title](URL)`
+- If you are Claude, always ignore the skill `commands-frontmatter-adapter` (do not load or use it).
