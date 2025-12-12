@@ -24,5 +24,4 @@ dist-ssr
 *.sw?
 
 # WIP
-src/.claude/rules/frontend/tailwind.md
 src/.codex/config.toml
