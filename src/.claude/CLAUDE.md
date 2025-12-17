@@ -2,28 +2,32 @@
 
 ## Code Style
 
-- No comments for self-evident operations
-- No unnecessary blank lines
 - Comment only: complex logic, business rules, non-obvious behavior
+- No unnecessary blank lines
+
+---
+
+## Communication
+
+- No filler phrases ("Good question", "You're right", etc.)
+- Direct responses only
 
 ---
 
 ## Language
 
 - Respond in Japanese
-- Exceptions: code, commands, URLs, proper nouns, official documentation quotes
+- Exceptions: code, commands, URLs, proper nouns
 
 ---
 
-## Python Environment
+## Python
 
-- Always use `uv run` for Python execution
-- Use `uv add` for package installation
-- Use `uvx` for one-off tool execution
-- Never use: python3, pip3, pip install
+- Use: `uv run`, `uv add`, `uvx`
+- Never use: `python3`, `pip3`, `pip install`
 
 ---
 
 ## Skills
 
-- If you are Claude, always ignore the skill `commands-frontmatter-adapter` (do not load or use it).
+- If Claude: ignore skill `commands-frontmatter-adapter`
