@@ -13,6 +13,8 @@ Support "Diary-Driven Work" (日記駆動仕事術) by organizing session activi
 
 ## Entry Format
 
+### New Repository
+
 ```markdown
 ### repository-name
 
@@ -23,31 +25,35 @@ Support "Diary-Driven Work" (日記駆動仕事術) by organizing session activi
 > 💭
 ```
 
+### Adding to Existing Repository
+
+```markdown
+### repository-name
+
+#### HH:MM (existing)
+
+- [Previous work]
+
+> 💭
+
+#### HH:MM (new)
+
+- [What was done]
+
+> 💭
+```
+
 - **repository-name**: basename of git root or cwd
 - **HH:MM**: Current time via `date "+%H:%M"`
-- **💭**: Placeholder for user's own reflections
+- **💭**: Each time entry gets its own reflection placeholder
 
 ## Steps
 
-1. **Analyze Session**: Review conversation and `git log` to extract completed tasks, challenges, and modified files
-
-2. **Get Metadata**:
-
-   - Time: `date "+%H:%M"`
-   - Date: `date "+%Y%m%d"` (for filename)
-   - Repo: Run `git rev-parse --show-toplevel` first, then run `basename <result>` separately (use `pwd` if not a git repo). Do NOT use subshell expansion like `$(...)` - run each command independently.
-
-3. **Check Target File**: `~/Documents/Obsidian Vault/Diary/<date>.md`
-
-   - If new: create with template below
-   - If exists: read and append to Memo section
-
-4. **Append Entry**: Add under `## Memo` section
-
-   - Same repo exists → add new `#### HH:MM` under existing `### repo` heading
-   - New repo → add new `### repo` heading
-
-5. **Confirm**: Show appended content and file path
+1. **Analyze**: Review conversation and `git log` for completed tasks
+2. **Get Metadata**: `date "+%H:%M"`, `date "+%Y%m%d"`, `git rev-parse --show-toplevel` then `basename`
+3. **Read/Create**: `~/Documents/Obsidian Vault/Diary/<date>.md`
+4. **Append**: Follow Entry Format above
+5. **Confirm**: Show appended content
 
 ## New File Template
 
@@ -65,6 +71,5 @@ Support "Diary-Driven Work" (日記駆動仕事術) by organizing session activi
 
 ## Guidelines
 
-- Factual, concise, action-oriented (past tense)
-- Never overwrite - always append
-- No emotions or opinions - user adds their own
+- Factual, concise, past tense
+- Append only - never overwrite
