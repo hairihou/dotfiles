@@ -59,6 +59,7 @@ install_extensions() {
 
   local total=0
   local installed=0
+  local failed=0
   local skipped=0
 
   while IFS= read -r extension; do
@@ -86,11 +87,12 @@ install_extensions() {
         installed=$((installed + 1))
       else
         echo 'Failed'
+        failed=$((failed + 1))
       fi
     fi
   done < "$extensions_file"
 
-  echo "Installed: $installed, Skipped: $skipped"
+  echo "Installed: $installed, Failed: $failed, Skipped: $skipped"
 }
 
 main() {
