@@ -1,18 +1,55 @@
 ---
-allowed-tools: Bash(basename:*), Bash(git rev-parse:*), Bash(ls:*), Bash(mkdir:*), Bash(touch:*), Read(~/Documents/Obsidian Vault/Diary/**), Update(~/Documents/Obsidian Vault/Diary/**), Write(~/Documents/Obsidian Vault/Diary/**)
+allowed-tools: Bash(basename:*), Bash(date:*), Bash(git log:*), Bash(git rev-parse --show-toplevel:*), Bash(pwd:*), Edit("~/Documents/Obsidian Vault/Diary/**"), Read("~/Documents/Obsidian Vault/Diary/**"), Write("~/Documents/Obsidian Vault/Diary/**")
 description: Append session work summary to Obsidian diary
 ---
 
 # Diary
 
-Append today's session summary to Obsidian diary in `~/Documents/Obsidian Vault/Diary/YYYYMMDD.md`.
+Append session summary to Obsidian diary at `~/Documents/Obsidian Vault/Diary/YYYYMMDD.md`.
 
 ## Purpose
 
-Support "Diary-Driven Work" (日記駆動仕事術) by extracting session work into diary entries.
-The user writes their own diary - this command assists by organizing session activities.
+Support "Diary-Driven Work" (日記駆動仕事術) by organizing session activities into factual entries.
 
-## Diary Template (for new files)
+## Entry Format
+
+```markdown
+### repository-name
+
+#### HH:MM
+
+- [What was done]
+
+> 💭
+```
+
+- **repository-name**: basename of git root or cwd
+- **HH:MM**: Current time via `date "+%H:%M"`
+- **💭**: Placeholder for user's own reflections
+
+## Steps
+
+1. **Analyze Session**: Review conversation and `git log` to extract completed tasks, challenges, and modified files
+
+2. **Get Metadata**:
+
+   - Time: `date "+%H:%M"`
+   - Date: `date "+%Y%m%d"` (for filename)
+   - Repo: Run `git rev-parse --show-toplevel` first, then run `basename <result>` separately (use `pwd` if not a git repo). Do NOT use subshell expansion like `$(...)` - run each command independently.
+
+3. **Check Target File**: `~/Documents/Obsidian Vault/Diary/<date>.md`
+
+   - If new: create with template below
+   - If exists: read and append to Memo section
+
+4. **Append Entry**: Add under `## Memo` section
+
+   - Same repo exists → add new `#### HH:MM` under existing `### repo` heading
+   - New repo → add new `### repo` heading
+
+5. **Confirm**: Show appended content and file path
+
+## New File Template
 
 ```markdown
 ## Tasks
@@ -26,63 +63,8 @@ The user writes their own diary - this command assists by organizing session act
 ## Memo
 ```
 
-Note: No h1 header needed - Obsidian shows filename as title.
-
-## Session Entry Format (appended to Memo section)
-
-```markdown
-### repository-name
-
-#### HH:MM
-
-- [What was done 1]
-- [What was done 2]
-
-> 💭
-```
-
-- **repository-name**: From current working directory (basename of git root or cwd)
-- **HH:MM**: Session start time - MUST verify with `date "+%H:%M"` command
-
-Keep it factual and concise. User adds their own thoughts and feelings directly in Memo section.
-
-### Same Repository Rule
-
-If a session entry for the **same repository** already exists in the Memo section:
-
-- Do NOT create a new `### repository-name` heading
-- Add a new `#### HH:MM` subheading under the existing repository heading
-- Keep entries chronologically ordered within the repository
-
-## Steps
-
-1. **Analyze Session**: Review conversation to extract:
-
-   - Completed tasks and their outcomes
-   - Technical challenges and solutions
-   - Files created or modified
-
-2. **Prepare Content**: Format as factual bullet points:
-
-   - Action-oriented, past tense ("Implemented X", "Fixed Y")
-   - Include file paths for significant changes
-   - Note unresolved issues or next steps if any
-
-3. **Check File**: Determine target file path:
-
-   - Path: `~/Documents/Obsidian Vault/Diary/YYYYMMDD.md`
-   - If new: create with full template (Tasks/Meeting/Memo sections)
-   - If exists: append to Memo section
-
-4. **Append Content**: Add session entry to Memo section:
-
-   - Find `## Memo` section
-   - Append session entry at the end of Memo section
-
-5. **Confirm**: Show what was appended and file location
-
 ## Guidelines
 
-- Keep entries factual and concise - user adds their own reflections
-- Never overwrite existing content - always append
-- Do not include emotions or opinions - that's the user's job
+- Factual, concise, action-oriented (past tense)
+- Never overwrite - always append
+- No emotions or opinions - user adds their own
