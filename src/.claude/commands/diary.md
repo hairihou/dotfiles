@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(ls:*), Bash(mkdir:*), Bash(touch:*), Read(~/Documents/Obsidian Vault/Diary/**), Update(~/Documents/Obsidian Vault/Diary/**)
+allowed-tools: Bash(git rev-parse:*), Bash(ls:*), Bash(mkdir:*), Bash(touch:*), Read(~/Documents/Obsidian Vault/Diary/**), Update(~/Documents/Obsidian Vault/Diary/**), Write(~/Documents/Obsidian Vault/Diary/**)
 description: Append session work summary to Obsidian diary
 ---
 
