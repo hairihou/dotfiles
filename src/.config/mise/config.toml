@@ -1,21 +1,21 @@
 [tools]
-deno = "2.6.0"
+deno = "2.6.1"
 ghq = "1.8.0"
 go = "1.25.5"
 node = "24.12.0"
 "npm:@angular/cli" = "21.0.3"
-"npm:@dotenvx/dotenvx" = "1.51.1"
-"npm:@google/gemini-cli" = "0.20.0"
-"npm:@hono/cli" = "0.1.3"
+"npm:@dotenvx/dotenvx" = "1.51.2"
+"npm:@google/gemini-cli" = "0.20.2"
+"npm:@hono/cli" = "0.1.4"
 "npm:@ionic/cli" = "7.2.1"
-"npm:@openai/codex" = "0.71.0"
+"npm:@openai/codex" = "0.72.0"
 "npm:ccusage" = "17.2.0"
 "npm:pnpm" = "10.25.0"
 pipx = "1.8.0"
 "pipx:git+https://github.com/github/spec-kit.git" = "v0.0.90"
 python = "3.14.2"
 swiftlint = "0.62.2"
-uv = "0.9.17"
+uv = "0.9.18"
 
 [env]
 
