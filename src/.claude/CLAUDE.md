@@ -9,8 +9,9 @@
 
 ## Communication
 
-- No filler phrases ("Good question", "You're right", etc.)
 - Direct responses only
+- No filler phrases ("Good question", "You're right", etc.)
+- Polite/formal tone
 
 ---
 
