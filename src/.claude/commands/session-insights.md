@@ -1,154 +1,162 @@
 ---
-description: Extract key project insights and update CLAUDE.md with actionable improvements
+allowed-tools: Bash(gh issue create:*), Edit, Glob, Grep, Read, TodoWrite
+description: Session retrospective (Kolb's Learning Cycle + KPT). Updates memory file and creates GitHub Issues.
 ---
 
 # Session Insights
 
-Extract project-specific insights from the session to update CLAUDE.md with _ULTRATHINK_.
-
-## 3-Axis Analysis
-
-- **Goal Achievement**: Objective completion effectiveness
-- **Efficiency**: Process and resource optimization
-- **User Satisfaction**: Emotional experience and frustration analysis
-
-## Output Requirements
-
-**ALWAYS** use user language for output.
-
-## Analysis Ratings
-
-Rating guide: ★☆☆☆☆ Failed/Very poor | ★★☆☆☆ Poor | ★★★☆☆ Adequate | ★★★★☆ Good | ★★★★★ Excellent
-
-## Steps
-
-0.  **Preparation**: Review session context and notes
-
-    - Understand project goals and user expectations
-    - Identify key events and actions taken during the session
-
-    **Output Template:**
-
-    ```
-    Starting session analysis...
-    ```
-
-1.  **Analysis: Goal Achievement**: Evaluate objective completion
-
-    - Task completion status and quality
-    - Project outcomes delivered
-    - Goals missed and blockers
-
-    **Output Template:**
-
-    ```
-    ## Goal Achievement: ★★★☆☆ (3/5)
-
-    - [Reason 1]
-    - [Reason 2]
-    - [Reason 3]
-    ```
-
-2.  **Analysis: Efficiency**: Assess process optimization
-
-    - Effective vs ineffective approaches
-    - Resource waste patterns
-    - Future optimization opportunities
-
-    **Output Template:**
-
-    ```
-    ## Efficiency: ★★★☆☆ (3/5)
-
-    - [Reason 1]
-    - [Reason 2]
-    - [Reason 3]
-    ```
-
-3.  **Analysis: User Satisfaction**: Analyze emotional experience
-
-    - AI actions triggering negative reactions
-    - Frustration patterns and root causes
-    - Expectation violations and communication issues
-
-    **Output Template:**
-
-    ```
-    ## User Satisfaction: ★★★☆☆ (3/5)
-
-    - [Reason 1]
-    - [Reason 2]
-    - [Reason 3]
-    ```
-
-4.  **Thinking: Synthesize Insights**: Two improvement types:
-
-    **Codebase**: Lint/test/refactor changes enhancing AI coding
-    **LLM Context**: CLAUDE.md updates improving AI understanding
-
-5.  **Report: Present Insights for LLM Context Improvements**: Display only the most critical improvements for user approval:
-
-    **Output Template:**
-
-    ```
-    ## LLM Context Improvements
-
-    - ADD: [New context to add]: [How it improves AI understanding]
-    - DELETE: [Context to remove]: [Why it causes problems]
-    - MODIFY: [Context to modify]: [Current issue] → [Improved version]
-
-    Do you approve these LLM context improvements for CLAUDE.md updates?
-    ```
-
-    Principles: Extracted insights only, project-relevant, actionable, organized by type
-
-6.  **Action: Review CLAUDE.md**: Check structure and style
-7.  **Action: Apply LLM Improvements**: Update CLAUDE.md with approved insights
-8.  **Report: Present Codebase Improvements**:
-
-    ```
-    ## Codebase Improvements Suggestions
-
-    - [Specific codebase change]: [How it enhances AI coding quality]
-    - Example: Add ESLint rules for consistent imports - Reduces AI confusion about module resolution
-
-    Would you like me to create GitHub issues for these codebase improvements?
-    ```
-
-9.  **Action: Create Issues (If Approved)**: Make GitHub issues with detailed descriptions:
-
-    ```
-    Title: [Improvement Type]: [Brief description]
-    Example: "Code Quality: Add ESLint rules for consistent imports"
-
-    Body:
-    ## Context
-
-    Identified during AI coding session retrospective
-
-    ## Problem
-
-    [Root cause that led to AI coding issues]
-
-    ## Proposed Solution
-
-    [Specific change and implementation approach]
-
-    ## Expected Benefit
-
-    [How this enhances future AI coding quality]
-
-    ## Priority
-
-    [Low/Medium/High based on impact]
-    ```
-
-10. **Finalize**: Ensure consistency
+Extract actionable insights from the session and apply improvements.
 
 ## Guidelines
 
-- Project-specific insights only
-- Root causes, not symptoms
-- Concrete improvements, not vague aspirations
-- Prevent frustration patterns
-- Verify CLAUDE.md consistency
+- Use user's session language for all output
+- Focus on systemic insights, not one-off fixes
+- Extract root causes, not symptoms
+- Formulate actionable principles, not vague aspirations
+
+---
+
+## Step 1: Detect Memory File
+
+Search for memory file in repository root and `.claude/` or `.codex/` directories:
+
+- If you are Codex CLI → prefer `AGENTS.md`, fallback to `CLAUDE.md`
+- Otherwise → prefer `CLAUDE.md`, fallback to `AGENTS.md`
+- If neither exists → ask user: "No memory file found. Create CLAUDE.md or AGENTS.md?"
+
+Report detected file before proceeding:
+
+```
+Memory file: [path/to/file]
+```
+
+---
+
+## Step 2: Fact Collection & Analysis
+
+Execute together and present in a single message.
+
+### Fact Collection
+
+List observable facts. NO analysis at this stage.
+
+### Analysis & Abstraction
+
+**For Keep**: Identify success factors
+**For Problem**: Apply "Why?" repeatedly until reaching root cause (typically 2-5 times)
+
+**Abstraction Gate** - Transform each insight:
+
+1. Remove concrete details (function names, file paths, URLs)
+2. Add "Apply when" conditions
+3. Formulate as reusable principle
+
+```
+❌ Check email validation before calling UserService.createUser()
+✅ Validate user inputs at system boundaries before processing
+```
+
+**Output format:**
+
+```
+## Fact Collection & Analysis
+
+### Keep
+- [Fact]: [Outcome]
+  - Success factor: [Why it worked]
+  - Principle: [Abstracted insight]
+  - Apply when: [Condition/trigger]
+
+### Problem
+- [Fact]: [Outcome]
+  - Root cause: [Why] → [Why] → ... → [Root cause]
+  - Principle: [Abstracted insight]
+  - Apply when: [Condition/trigger]
+
+Proceed to improvement proposals? (yes/no)
+```
+
+**If Keep is empty**: Omit Keep section, note "No notable successes identified."
+**If Problem is empty**: Omit Problem section, note "No notable problems identified."
+**If both empty**: Output "No significant insights from this session." and end command.
+
+If user says "no" → end command.
+
+---
+
+## Step 3: Improvement Proposals
+
+### 3.1 Memory File Updates
+
+Read current memory file, check for conflicts, then present proposals.
+
+**If no proposals**: Output "No memory file updates needed." and skip to 3.2.
+
+**If proposals exist**:
+
+```
+### Memory File Updates
+
+**1. [ADD/MODIFY/DELETE]: [Section]**
+- Reason: [Why]
+- Content:
+  [Exact markdown]
+
+**2. ...**
+
+Approve? ("1,2" / "all" / "none")
+```
+
+- If "none" → skip to 3.2
+- If approved → apply changes, report result, then proceed to 3.2
+
+### 3.2 Codebase Improvements
+
+**If no proposals**: Output "No codebase improvements identified." and end command.
+
+**If proposals exist**:
+
+```
+### Codebase Improvements
+
+**1. [Type]: [Description]**
+- Problem: [Issue]
+- Solution: [Change]
+
+**2. ...**
+
+Create GitHub Issues? ("1,2" / "all" / "none")
+```
+
+Type examples: Bug fix, Refactor, Test, Performance, Documentation
+
+- If "none" → end command
+- If approved → create issues, report URLs, then end command
+
+**GitHub Issue format:**
+
+```
+gh issue create --title "[Type]: [Description]" --body "$(cat <<'EOF'
+## Context
+Identified during session retrospective.
+
+## Problem
+[Root cause]
+
+## Proposed Solution
+[Implementation approach]
+
+## Expected Benefit
+[How this improves future work]
+EOF
+)"
+```
+
+If `gh` command fails, report error and suggest manual creation.
+
+---
+
+## Error Handling
+
+- Memory file read/write failure → report error, ask user how to proceed
+- GitHub Issue creation failure → report error, output issue content for manual creation
