@@ -2,9 +2,9 @@
 paths: "**/*.{component.ts,css,html,tsx,vue}"
 ---
 
-# Tailwind CSS v4 Rules
+# Critical (Must Know)
 
-## Critical: Removed Utilities
+## Removed Utilities
 
 Never use these — they don't exist in v4:
 
@@ -17,7 +17,7 @@ Never use these — they don't exist in v4:
 | `flex-grow-*`       | `grow-*`          |
 | `overflow-ellipsis` | `text-ellipsis`   |
 
-## Critical: Renamed Utilities
+## Renamed Utilities
 
 Always use the v4 name:
 
@@ -35,68 +35,14 @@ Always use the v4 name:
 | `outline-none`   | `outline-hidden` |
 | `ring`           | `ring-3`         |
 
-## Spacing
+---
 
-Use `gap-*` in flex/grid, never `space-x-*` or `space-y-*`:
+# Tailwind CSS v4 Rules
 
-```html
-<!-- ❌ BAD -->
-<div class="flex space-x-4">
-  <!-- ✅ GOOD -->
-  <div class="flex gap-4"></div>
-</div>
-```
+## Avoid
 
-Other spacing rules:
-
-- Use `min-h-dvh` not `min-h-screen` (mobile Safari bug)
-- Use `size-*` for equal width/height
-
-## Typography
-
-Always use line-height modifiers, never separate `leading-*`:
-
-```html
-<!-- ❌ BAD -->
-<p class="text-base leading-7">
-  <!-- ✅ GOOD -->
-</p>
-
-<p class="text-base/7"></p>
-```
-
-## Responsive
-
-Only add breakpoint variants when values change:
-
-```html
-<!-- ❌ BAD - redundant -->
-<div class="px-4 md:px-4 lg:px-8">
-  <!-- ✅ GOOD -->
-  <div class="px-4 lg:px-8"></div>
-</div>
-```
-
-## Dark Mode
-
-Light mode first, then `dark:` variants:
-
-```html
-<div class="bg-white dark:bg-black"></div>
-```
-
-## Gradients (v4)
-
-```html
-<!-- Linear -->
-<div class="bg-linear-to-r from-blue-500 to-purple-500">
-  <!-- Radial -->
-  <div class="bg-radial from-white to-black">
-    <!-- Conic -->
-    <div class="bg-conic from-red-500 via-yellow-500 to-red-500"></div>
-  </div>
-</div>
-```
+- `@apply` — use CSS variables or components
+- Arbitrary values — prefer design scale (`ml-4` not `ml-[16px]`)
 
 ## CSS Variables
 
@@ -119,7 +65,64 @@ Extend theme:
 }
 ```
 
-## Avoid
+## Dark Mode
 
-- `@apply` — use CSS variables or components
-- Arbitrary values — prefer design scale (`ml-4` not `ml-[16px]`)
+Light mode first, then `dark:` variants:
+
+```html
+<div class="bg-white dark:bg-black"></div>
+```
+
+## Gradients
+
+```html
+<!-- Linear -->
+<div class="bg-linear-to-r from-blue-500 to-purple-500"></div>
+
+<!-- Radial -->
+<div class="bg-radial from-white to-black"></div>
+
+<!-- Conic -->
+<div class="bg-conic from-red-500 via-yellow-500 to-red-500"></div>
+```
+
+## Responsive
+
+Only add breakpoint variants when values change:
+
+```html
+<!-- ❌ BAD - redundant -->
+<div class="px-4 md:px-4 lg:px-8"></div>
+
+<!-- ✅ GOOD -->
+<div class="px-4 lg:px-8"></div>
+```
+
+## Spacing
+
+Use `gap-*` in flex/grid, never `space-x-*` or `space-y-*`:
+
+```html
+<!-- ❌ BAD -->
+<div class="flex space-x-4"></div>
+
+<!-- ✅ GOOD -->
+<div class="flex gap-4"></div>
+```
+
+Other spacing rules:
+
+- Use `min-h-dvh` not `min-h-screen` (mobile Safari bug)
+- Use `size-*` for equal width/height
+
+## Typography
+
+Always use line-height modifiers, never separate `leading-*`:
+
+```html
+<!-- ❌ BAD -->
+<p class="text-base leading-7"></p>
+
+<!-- ✅ GOOD -->
+<p class="text-base/7"></p>
+```
