@@ -1,3 +1,9 @@
+# /// script
+# requires-python = ">=3.9"
+# dependencies = [
+#   "pyyaml",
+# ]
+# ///
 """Extract Claude Code command frontmatter + body for Codex CLI prompts."""
 
 from __future__ import annotations
