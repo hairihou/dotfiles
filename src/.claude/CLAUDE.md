@@ -4,6 +4,7 @@
 
 - Comment only: complex logic, business rules, non-obvious behavior
 - No unnecessary blank lines
+- Rule/doc file sections: alphabetical order
 
 ---
 
