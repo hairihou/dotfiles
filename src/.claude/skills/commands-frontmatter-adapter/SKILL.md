@@ -9,8 +9,8 @@ Extract frontmatter and body from Claude-style command files so Codex CLI can co
 
 ## Usage
 
-- By command name (from the scripts directory): `uv run ./adapter.py --command diary --pretty`
-- By explicit file (from anywhere): `uv run /abs/path/to/adapter.py --file /abs/path/to/src/.claude/commands/diary.md`
+- By command name (from the scripts directory): `./adapter.py --command diary --pretty`
+- By explicit file (from anywhere): `/abs/path/to/adapter.py --file /abs/path/to/src/.claude/commands/diary.md`
 
 Note: The script resolves `src/.claude/commands` relative to the skill location, so symlinked global installs work without depending on the current working directory. Use `--file` if your commands live elsewhere.
 
