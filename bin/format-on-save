@@ -14,6 +14,7 @@ root=$PWD
 command -v goimports &>/dev/null && goimports -w "$file" 2>/dev/null || { command -v gofmt &>/dev/null && gofmt -w "$file" 2>/dev/null; } || true
 
 while [[ "$PWD" != "/" && ! -f "package.json" ]]; do cd ..; done
-run=$([[ -f 'pnpm-lock.yaml' ]] && echo 'pnpm' || echo 'npx')
+run='npx'
+[[ -f 'pnpm-lock.yaml' ]] && run='pnpm' || true
 [[ -f 'node_modules/.bin/biome' ]] && $run biome check --files-ignore-unknown=true --write "$file" 2>/dev/null || true
 [[ -f 'node_modules/.bin/prettier' ]] && $run prettier --ignore-unknown --write "$file" 2>/dev/null || true
