@@ -19,6 +19,47 @@ const doubled = numbers.map((n) => n * 2);
 
 Use `forEach` only for side effects (logging, API calls).
 
+## Array Types
+
+Use `T[]` for simple types, `Array<T>` for complex types:
+
+```typescript
+// ✅ GOOD - simple types
+const names: string[] = [];
+const users: User[] = [];
+
+// ✅ GOOD - complex types (unions, generics)
+const items: Array<string | number> = [];
+const maps: Array<Map<string, User>> = [];
+
+// ✅ GOOD - readonly
+const ids: readonly string[] = [];
+const configs: ReadonlyArray<Config> = [];
+```
+
+## Constructor Functions (Prohibited)
+
+NEVER use `Boolean`, `String`, `Number` as conversion functions:
+
+```typescript
+// ❌ PROHIBITED
+items.filter(Boolean);
+const str = String(value);
+const num = Number(input);
+const bool = Boolean(value);
+
+// ✅ REQUIRED
+items.filter((item) => item !== undefined && item !== null);
+const str = `${value}`;
+const num = parseFloat(input); // or parseInt(input, 10) for integers
+const bool = value !== undefined && value !== null;
+```
+
+Note: `Number()` and `parseInt()`/`parseFloat()` behave differently:
+
+- `Number("3.14")` → `3.14`, `parseInt("3.14", 10)` → `3`
+- `Number("10px")` → `NaN`, `parseInt("10px", 10)` → `10`
+
 ## Control Flow
 
 Always use block statements:
@@ -81,6 +122,18 @@ if (!isDisabled) {
 }
 ```
 
+Exception: `!!value` is allowed for multiple falsy values:
+
+```typescript
+// ✅ OK - checking string | null | undefined for empty
+const hasValue = !!value; // instead of: value !== '' && value !== null && value !== undefined
+
+// ❌ BAD - single nullish check should be explicit (value: T | undefined)
+const exists = !!value;
+// ✅ GOOD
+const existsGood = value !== undefined;
+```
+
 ## Exports
 
 Avoid default exports unless framework requires:
@@ -126,26 +179,22 @@ const toggle = <T extends "on" | "off">(
 };
 ```
 
-## Imports
+## Nullish Coalescing
 
-Use top-level `import type`:
+Use `??` for nullish values, `||` only when falsy fallback is intended:
 
 ```typescript
-// ❌ BAD
-import { type User } from "./user";
+// ❌ BAD - || treats 0, '', false as falsy
+const countBad = input || 10; // 0 becomes 10
+const nameBad = input || "default"; // '' becomes 'default'
 
-// ✅ GOOD
-import type { User } from "./user";
+// ✅ GOOD - ?? only handles null/undefined
+const count = input ?? 10;
+const name = input ?? "default";
+
+// ✅ OK - || when falsy fallback is intentional
+const displayName = userName || "Anonymous"; // empty string should fallback
 ```
-
-Note: With `verbatimModuleSyntax: true`, inline `import { type X }` may be preferred. Follow project's tsconfig.
-
-## Naming
-
-- Files: `kebab-case.ts`
-- Variables/functions: `camelCase`
-- Types/interfaces/classes: `PascalCase`
-- Type parameters: `TPrefix` (e.g., `TKey`, `TValue`)
 
 ## Optional Properties
 
@@ -172,6 +221,22 @@ interface User {
 }
 ```
 
+## Result Type (Recommended)
+
+Consider Result type for recoverable errors:
+
+```typescript
+type Result<T, E> = { ok: true; value: T } | { ok: false; error: E };
+
+const parseJson = (input: string): Result<unknown, Error> => {
+  try {
+    return { ok: true, value: JSON.parse(input) };
+  } catch (e) {
+    return { ok: false, error: e as Error };
+  }
+};
+```
+
 ## Type Definitions
 
 Use `interface` for object types, `type` for others:
@@ -179,15 +244,15 @@ Use `interface` for object types, `type` for others:
 ```typescript
 // interface - object types (extendable, better error messages)
 interface User {
-  id: string;
-  name: string;
+  readonly id: string;
+  readonly name: string;
 }
 
 // type - unions, tuples, primitives, mapped types
 type Status = "active" | "inactive";
 type Pair = [string, number];
 type ID = string;
-type Readonly<T> = { readonly [K in keyof T]: T[K] };
+type Nullable<T> = T | null;
 ```
 
 Prefer `interface extends` over `&` intersections:
@@ -218,22 +283,26 @@ type State =
   | { status: "error"; error: Error };
 ```
 
----
+## Unknown Type
 
-# Guidelines (Recommended)
-
-## Error Handling
-
-Consider Result type for recoverable errors:
+Use `unknown` instead of `any` for type-safe handling:
 
 ```typescript
-type Result<T, E> = { ok: true; value: T } | { ok: false; error: E };
+// ❌ BAD - any disables type checking
+const parseBad = (json: string): any => JSON.parse(json);
+const dataBad = parseBad("{}");
+dataBad.foo.bar; // no error, runtime crash
 
-const parseJson = (input: string): Result<unknown, Error> => {
-  try {
-    return { ok: true, value: JSON.parse(input) };
-  } catch (e) {
-    return { ok: false, error: e as Error };
-  }
-};
+// ✅ GOOD - unknown requires type narrowing
+const parse = (json: string): unknown => JSON.parse(json);
+const data = parse("{}");
+if (typeof data === "object" && data !== null && "foo" in data) {
+  // safely access data.foo
+}
 ```
+
+`any` is acceptable only in:
+
+- Generic function bodies (see Generic Functions section)
+- Type assertions for legacy code migration
+- Third-party library type workarounds (with TODO comment)
