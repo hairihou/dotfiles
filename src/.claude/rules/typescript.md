@@ -259,10 +259,12 @@ Prefer `interface extends` over `&` intersections:
 
 ```typescript
 // ❌ BAD - poor performance
-type C = A & B;
+type AdminUser = User & { readonly permissions: string[] };
 
 // ✅ GOOD
-interface C extends A, B {}
+interface AdminUser extends User {
+  readonly permissions: string[];
+}
 ```
 
 Use discriminated unions for variant data:
