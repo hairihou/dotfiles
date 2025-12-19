@@ -23,13 +23,6 @@
 
 ---
 
-## Python
-
-- Use: `uv run`, `uv add`, `uvx`
-- Never use: `python3`, `pip3`, `pip install`
-
----
-
 ## Skills
 
 - If Claude: ignore skill `commands-frontmatter-adapter`
