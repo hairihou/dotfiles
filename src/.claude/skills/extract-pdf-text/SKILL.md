@@ -5,15 +5,11 @@ description: Extract text content from PDF files using pdfplumber
 
 # Extract PDF text
 
-Use pdfplumber for text extraction:
+## Usage
 
-```python
-import pdfplumber
-
-with pdfplumber.open("<path-to-pdf>") as pdf:
-    text = pdf.pages[0].extract_text()
-
-    all_text = "\n".join(
-        page.extract_text() or "" for page in pdf.pages
-    )
+```sh
+./scripts/extract.py <path-to-pdf>
+./scripts/extract.py <path-to-pdf> --page 0  # specific page (0-indexed)
 ```
+
+Dependencies are resolved automatically via PEP 723 inline metadata.
