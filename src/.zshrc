@@ -32,7 +32,7 @@ promptinit
 prompt pure
 
 # fzf
-export FZF_DEFAULT_OPTS='--reverse'
+export FZF_DEFAULT_OPTS='--color=hl:blue,hl+:cyan,pointer:cyan,marker:cyan --reverse'
 
 fzf-history() {
   local selected=$(history -n -r 1 | fzf --query "$LBUFFER")
