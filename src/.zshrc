@@ -35,7 +35,7 @@ prompt pure
 export FZF_DEFAULT_OPTS='--color=hl:blue,hl+:cyan,pointer:cyan,marker:cyan --reverse'
 
 fzf-history() {
-  local selected=$(history -n -r 1 | fzf --query "$LBUFFER")
+  local selected=$(history -n 1 | fzf --query "$LBUFFER" --tac)
   if [[ -n "$selected" ]]; then
     BUFFER="$selected"
     CURSOR=$#BUFFER
