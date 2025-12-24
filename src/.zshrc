@@ -1,10 +1,10 @@
+typeset -U PATH
 export EDITOR='vim'
 export LANG='en_US.UTF-8'
 
 export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
 export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
-export PATH="$ANDROID_SDK_ROOT/tools:$PATH"
 export PATH="$JAVA_HOME/bin:$PATH"
 export PATH="$HOME/dotfiles/bin:$PATH"
 
@@ -14,9 +14,7 @@ SAVEHIST=50000
 
 setopt EXTENDED_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_NO_FUNCTIONS
 setopt HIST_REDUCE_BLANKS
@@ -33,24 +31,29 @@ autoload -U promptinit
 promptinit
 prompt pure
 
-# peco
-peco-history() {
-  BUFFER=$(\history -n -r 1 | peco --query "$LBUFFER")
-  CURSOR=$#BUFFER
+# fzf
+export FZF_DEFAULT_OPTS='--reverse'
+
+fzf-history() {
+  local selected=$(history -n -r 1 | fzf --query "$LBUFFER")
+  if [[ -n "$selected" ]]; then
+    BUFFER="$selected"
+    CURSOR=$#BUFFER
+  fi
   zle clear-screen
 }
-zle -N peco-history
-bindkey '^r' peco-history
+zle -N fzf-history
+bindkey '^r' fzf-history
 
-peco-ghq() {
-  local repo=$(ghq list --full-path | peco)
+fzf-ghq() {
+  local repo=$(ghq list --full-path | fzf)
   if [[ -n "$repo" ]]; then
     cd "$repo"
   fi
   zle reset-prompt
 }
-zle -N peco-ghq
-bindkey '^g' peco-ghq
+zle -N fzf-ghq
+bindkey '^g' fzf-ghq
 
 # mise
 eval "$(mise activate zsh)"
