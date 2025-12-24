@@ -20,7 +20,7 @@ setopt HIST_NO_FUNCTIONS
 setopt HIST_REDUCE_BLANKS
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_VERIFY
-setopt SHARE_HISTORY
+setopt INC_APPEND_HISTORY
 setopt IGNOREEOF
 
 autoload -Uz compinit
