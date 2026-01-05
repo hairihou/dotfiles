@@ -40,6 +40,7 @@
     "plaintext": false,
     "scminput": false
   },
+  "github.copilot.nextEditSuggestions.enabled": false,
   "githubPullRequests.pullBranch": "never",
   "notebook.codeActionsOnSave": {
     "notebook.source.fixAll": "explicit"
