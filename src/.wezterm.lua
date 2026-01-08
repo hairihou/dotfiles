@@ -1,4 +1,7 @@
 local wezterm = require 'wezterm'
+
+local act = wezterm.action
+
 local config = wezterm.config_builder()
 
 config.colors = {
@@ -34,10 +37,17 @@ config.cursor_blink_rate = 500
 config.default_cursor_style = 'BlinkingBar'
 config.font = wezterm.font 'UDEV Gothic 35NFLG'
 config.font_size = 12
+config.hide_tab_bar_if_only_one_tab = true
 config.initial_cols = 120
 config.initial_rows = 48
+config.keys = {
+  {
+    key = 'Enter',
+    mods = 'SHIFT',
+    action = act.SendString "\\\n",
+  },
+}
 config.macos_window_background_blur = 20
-config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.use_ime = true
 config.window_background_opacity = 0.96
