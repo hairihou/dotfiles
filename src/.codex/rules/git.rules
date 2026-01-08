@@ -18,7 +18,6 @@ prefix_rule(
 prefix_rule(
     pattern = ["git", "push", ["--force", "-f"]],
     decision = "forbidden",
-    justification = "Use --force-with-lease instead",
     match = [
         "git push --force origin main",
         "git push -f origin main",
