@@ -46,6 +46,7 @@
     "notebook.source.fixAll": "explicit"
   },
   "notebook.formatOnSave.enabled": true,
+  "python.languageServer": "None",
   "tailwindCSS.experimental.classRegex": [["[\"']([^\"']*)[\"']"]],
   "terminal.integrated.fontFamily": "'UDEV Gothic 35NFLG', monospace",
   "terminal.integrated.fontSize": 12,
