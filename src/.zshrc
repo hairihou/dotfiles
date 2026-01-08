@@ -57,8 +57,5 @@ bindkey '^g' fzf-ghq
 # mise
 eval "$(mise activate zsh)"
 
-# zellij
-eval "$(zellij setup --generate-auto-start zsh)"
-
 # Rancher Desktop
 export PATH="$HOME/.rd/bin:$PATH"
