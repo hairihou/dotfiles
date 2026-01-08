@@ -32,6 +32,7 @@ Symlinked to home directory:
 | `src/.claude/commands`             | `~/.codex/prompts`                                      |
 | `src/.claude/skills`               | `~/.codex/skills`                                       |
 | `src/.claude/CLAUDE.md`            | `~/.codex/AGENTS.md`                                    |
+| `src/.codex/rules/git.rules`       | `~/.codex/rules/git.rules`                              |
 | `src/.config/brew/.Brewfile`       | `~/.Brewfile`                                           |
 | `src/.config/brew/.Brewfile.owner` | `~/.Brewfile` (owner only)                              |
 | `src/.config/git/ignore`           | `~/.config/git/ignore`                                  |
