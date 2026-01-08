@@ -23,5 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
+src/.claude/skills/.system
 # WIP
 src/.codex/config.toml
