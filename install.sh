@@ -61,6 +61,7 @@ create_symlink "$dst/src/.claude/settings.json" "$HOME/.claude/settings.json"
 create_symlink "$dst/src/.config/git/ignore" "$HOME/.config/git/ignore"
 create_symlink "$dst/src/.config/mise/config.toml" "$HOME/.config/mise/config.toml"
 create_symlink "$dst/src/.config/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
+create_symlink "$dst/src/.wezterm.lua" "$HOME/.wezterm.lua"
 create_symlink "$dst/src/.zshrc" "$HOME/.zshrc"
 
 if [[ $(uname) == 'Darwin' ]]; then
