@@ -27,8 +27,7 @@ autoload -Uz compinit
 compinit
 
 # pure
-autoload -U promptinit
-promptinit
+autoload -U promptinit; promptinit
 prompt pure
 
 # fzf
