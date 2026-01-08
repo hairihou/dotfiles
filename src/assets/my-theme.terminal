@@ -273,13 +273,21 @@
 	cqIWGFhOU09iamVjdAgRGiQpMjdJTFFTV11kand+qKqssbzFzdAAAAAAAAABAQAAAAAA
 	AAAZAAAAAAAAAAAAAAAAAAAA2Q==
 	</data>
+	<key>ShowActiveProcessArgumentsInTabTitle</key>
+	<false/>
 	<key>ShowActiveProcessArgumentsInTitle</key>
+	<false/>
+	<key>ShowActiveProcessInTabTitle</key>
 	<false/>
 	<key>ShowActiveProcessInTitle</key>
 	<false/>
 	<key>ShowDimensionsInTitle</key>
 	<false/>
+	<key>ShowRepresentedURLInTabTitle</key>
+	<false/>
 	<key>ShowRepresentedURLInTitle</key>
+	<false/>
+	<key>ShowRepresentedURLPathInTabTitle</key>
 	<false/>
 	<key>ShowRepresentedURLPathInTitle</key>
 	<false/>
@@ -298,6 +306,45 @@
 	<integer>120</integer>
 	<key>name</key>
 	<string>my-theme</string>
+	<key>noWarnProcesses</key>
+	<array>
+		<dict>
+			<key>ProcessName</key>
+			<string>screen</string>
+		</dict>
+		<dict>
+			<key>ProcessName</key>
+			<string>less</string>
+		</dict>
+		<dict>
+			<key>ProcessName</key>
+			<string>more</string>
+		</dict>
+		<dict>
+			<key>ProcessName</key>
+			<string>view</string>
+		</dict>
+		<dict>
+			<key>ProcessName</key>
+			<string>mandoc</string>
+		</dict>
+		<dict>
+			<key>ProcessName</key>
+			<string>tail</string>
+		</dict>
+		<dict>
+			<key>ProcessName</key>
+			<string>log</string>
+		</dict>
+		<dict>
+			<key>ProcessName</key>
+			<string>top</string>
+		</dict>
+		<dict>
+			<key>ProcessName</key>
+			<string>htop</string>
+		</dict>
+	</array>
 	<key>rowCount</key>
 	<integer>36</integer>
 	<key>type</key>
