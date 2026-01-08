@@ -26,6 +26,7 @@ natqe.reload
 naumovs.color-highlight
 rangav.vscode-thunder-client
 streetsidesoftware.code-spell-checker
+sumneko.lua
 tailwindlabs.tailwindcss-vscode-theme
 tamasfe.even-better-toml
 usernamehw.errorlens
