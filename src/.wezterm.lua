@@ -40,7 +40,7 @@ config.macos_window_background_blur = 20
 config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.use_ime = true
-config.window_background_opacity = 0.9
+config.window_background_opacity = 0.96
 config.window_close_confirmation = 'NeverPrompt'
 
 return config
