@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+size=${1:-s}
+
+case $size in
+  s|small)
+    height=24
+    width=80
+    ;;
+  m|medium)
+    height=36
+    width=120
+    ;;
+  l|large)
+    height=48
+    width=160
+    ;;
+  xl|xlarge)
+    height=72
+    width=240
+    ;;
+  *)
+    height=24
+    width=80
+    ;;
+esac
+
+printf '\e[8;%d;%dt' "$height" "$width"
