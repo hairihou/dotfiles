@@ -1,5 +1,6 @@
 angular.ng-template
 anthropic.claude-code
+astral-sh.ty
 bmewburn.vscode-intelephense-client
 bradlc.vscode-tailwindcss
 charliermarsh.ruff
@@ -15,6 +16,7 @@ github.copilot-chat
 github.vscode-github-actions
 github.vscode-pull-request-github
 gruntfuggly.todo-tree
+intellsmi.comment-translate
 ms-azuretools.vscode-containers
 ms-python.debugpy
 ms-python.python
