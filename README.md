@@ -20,6 +20,7 @@ Available globally after setup:
 - `cdefaults` - macOS system defaults configuration
 - `codext [--dump | --prune]` - VS Code extension manager
 - `dprune` - Remove empty directories from repository
+- `tresize [s|m|l|xl]` - Terminal window resizer
 
 ### Configuration Files (`/src`)
 
@@ -38,5 +39,4 @@ Symlinked to home directory:
 | `src/.config/zellij/config.kdl`    | `~/.config/zellij/config.kdl`                           |
 | `src/.gitconfig`                   | `~/.gitconfig` (owner only)                             |
 | `src/.vscode/settings.json`        | `~/Library/Application Support/Code/User/settings.json` |
-| `src/.wezterm.lua`                 | `~/.wezterm.lua`                                        |
 | `src/.zshrc`                       | `~/.zshrc`                                              |
