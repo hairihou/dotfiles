@@ -39,4 +39,5 @@ Symlinked to home directory:
 | `src/.config/zellij/config.kdl`    | `~/.config/zellij/config.kdl`                           |
 | `src/.gitconfig`                   | `~/.gitconfig` (owner only)                             |
 | `src/.vscode/settings.json`        | `~/Library/Application Support/Code/User/settings.json` |
+| `src/.wezterm.lua`                 | `~/.wezterm.lua`                                        |
 | `src/.zshrc`                       | `~/.zshrc`                                              |
