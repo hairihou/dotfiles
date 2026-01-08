@@ -20,7 +20,6 @@ Available globally after setup:
 - `cdefaults` - macOS system defaults configuration
 - `codext [--dump | --prune]` - VS Code extension manager
 - `dprune` - Remove empty directories from repository
-- `tresize [s|m|l|xl]` - Terminal window resizer
 
 ### Configuration Files (`/src`)
 
