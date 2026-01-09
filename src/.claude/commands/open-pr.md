@@ -53,7 +53,7 @@ Based on the context above, follow these steps:
 
    - **Base branch**: If `$ARGUMENTS` is provided, use it as the base branch. Otherwise, determine the appropriate base branch (repository default or current branch's upstream)
    - Generate PR title and description based on the changes
-   - **NOTE**: Do NOT include Claude Code co-author credits or AI tool references
+   - **CRITICAL**: Do NOT include any AI attribution footer (e.g., "🤖 Generated with Claude Code", "Co-Authored-By: Claude" etc.) in the PR body
    - Open as **draft** by default with `--assignee @me`
    - **IMPORTANT**: Always specify the base branch using `--base` option
    - Example:
@@ -62,11 +62,16 @@ Based on the context above, follow these steps:
      gh pr create --title "<title>" --body "<description>" --base <base-branch> --assignee @me --draft
      ```
 
-   - If the PR already exists, run:
+   - If the PR already exists:
 
-     ```sh
-     gh pr view --web
-     ```
+     1. Push the new commits first
+     2. Update the PR title and body to reflect all changes using `gh pr edit`
+     3. Open the PR in the browser
+
+        ```sh
+        gh pr edit --title "<updated-title>" --body "<updated-description>"
+        gh pr view --web
+        ```
 
 ## Conventional Commits Reference
 
