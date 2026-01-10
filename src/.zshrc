@@ -9,11 +9,10 @@ export PATH="$JAVA_HOME/bin:$PATH"
 export PATH="$HOME/dotfiles/bin:$PATH"
 
 HISTFILE="$HOME/.zsh_history"
-HISTSIZE=50000
-SAVEHIST=50000
+HISTSIZE=100000
+SAVEHIST=100000
 
 setopt EXTENDED_HISTORY
-setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_NO_FUNCTIONS
@@ -22,24 +21,37 @@ setopt HIST_SAVE_NO_DUPS
 setopt HIST_VERIFY
 setopt INC_APPEND_HISTORY
 setopt IGNOREEOF
+setopt PROMPT_SUBST
 
 autoload -Uz compinit
-compinit
+if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 
-# pure
-autoload -U promptinit; promptinit
-prompt pure
+autoload -Uz vcs_info
+precmd() {
+  if [[ -d .git ]] || git rev-parse --git-dir &>/dev/null; then
+    vcs_info
+  else
+    vcs_info_msg_0_=""
+  fi
+}
+zstyle ':vcs_info:git:*' formats '%b'
+PROMPT='%F{blue}%~%f %F{magenta}${vcs_info_msg_0_}%f
+'$'\u276f'' '
 
 # fzf
 export FZF_DEFAULT_OPTS='--color=hl:blue,hl+:cyan,pointer:cyan,marker:cyan --reverse'
 
 fzf-history() {
-  local selected=$(history -n 1 | fzf --query "$LBUFFER" --tac)
+  local selected=$(fc -ln 1 | fzf --query "$LBUFFER" --tac)
   if [[ -n "$selected" ]]; then
     BUFFER="$selected"
     CURSOR=$#BUFFER
   fi
-  zle clear-screen
+  zle reset-prompt
 }
 zle -N fzf-history
 bindkey '^r' fzf-history
