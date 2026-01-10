@@ -1,6 +1,5 @@
 brew "gh"
 brew "mise"
-brew "pure"
 brew "vim"
 brew "zellij"
 cask "android-studio"
