@@ -42,6 +42,9 @@ zstyle ':vcs_info:git:*' formats '%b'
 PROMPT='%F{blue}%~%f %F{magenta}${vcs_info_msg_0_}%f
 '$'\u276f'' '
 
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' menu select
+
 # fzf
 export FZF_DEFAULT_OPTS='--color=hl:blue,hl+:cyan,pointer:cyan,marker:cyan --reverse'
 
@@ -59,7 +62,8 @@ bindkey '^r' fzf-history
 fzf-ghq() {
   local repo=$(ghq list --full-path | fzf)
   if [[ -n "$repo" ]]; then
-    cd "$repo"
+    BUFFER="cd ${(q)repo}"
+    zle accept-line
   fi
   zle reset-prompt
 }
