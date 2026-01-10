@@ -1,7 +1,6 @@
 brew "gh"
 brew "mise"
 brew "vim"
-brew "zellij"
 cask "android-studio"
 cask "claude-code"
 cask "figma"
