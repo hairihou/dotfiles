@@ -2,20 +2,40 @@
 	sort = -committerdate
 [column]
 	ui = auto
+[commit]
+	verbose = true
+[core]
+	fsmonitor = true
+	untrackedCache = true
 [diff]
 	algorithm = histogram
 	colorMoved = plain
 	mnemonicPrefix = true
 	renames = true
+[fetch]
+	all = true
+	prune = true
+	pruneTags = true
 [ghq]
 	root = ~/dev
+[help]
+	autocorrect = prompt
 [init]
 	defaultBranch = main
-[tag]
-	sort = version:refname
+[merge]
+	conflictstyle = zdiff3
+[push]
+	autoSetupRemote = true
+	default = simple
+	followTags = true
+[rerere]
+	autoupdate = true
+	enabled = true
 [status]
 	branch = true
 	short = true
+[tag]
+	sort = version:refname
 [user]
 	email = 38448411+hairihou@users.noreply.github.com
 	name = Yusuke Mizuno
