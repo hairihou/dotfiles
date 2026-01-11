@@ -1,6 +1,3 @@
-# local
-**/__local__
-
 # cli
 **/.claude/settings.local.json
 **/mise.*local.toml

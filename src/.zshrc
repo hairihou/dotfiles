@@ -19,8 +19,8 @@ setopt HIST_NO_FUNCTIONS
 setopt HIST_REDUCE_BLANKS
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_VERIFY
-setopt INC_APPEND_HISTORY
 setopt IGNOREEOF
+setopt INC_APPEND_HISTORY
 setopt PROMPT_SUBST
 
 autoload -Uz compinit
@@ -38,12 +38,13 @@ precmd() {
     vcs_info_msg_0_=""
   fi
 }
-zstyle ':vcs_info:git:*' formats '%b'
-PROMPT='%F{blue}%~%f %F{magenta}${vcs_info_msg_0_}%f
-'$'\u276f'' '
-
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' menu select
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr '%F{green}+%f'
+zstyle ':vcs_info:*' unstagedstr '%F{yellow}*%f'
+zstyle ':vcs_info:git:*' formats '%b %u%c'
+PROMPT=$'%F{blue}%~%f %F{magenta}${vcs_info_msg_0_}%f\n%(?.%F{magenta}.%F{red})\u276f%f '
 
 # fzf
 export FZF_DEFAULT_OPTS='--color=hl:blue,hl+:cyan,pointer:cyan,marker:cyan --reverse'

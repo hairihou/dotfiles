@@ -13,8 +13,7 @@ dist-ssr
 *.local
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.txt
+.vscode
 .idea
 .DS_Store
 *.suo
@@ -23,6 +22,5 @@ dist-ssr
 *.sln
 *.sw?
 
-src/.claude/skills/.system
 # WIP
 src/.codex/config.toml

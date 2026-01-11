@@ -10,7 +10,7 @@ create_symlink() {
   local to="$2"
   local parent="$(dirname "$to")"
 
-  if [[ -L "$to" && "$(readlink "$to")" = "$from" ]]; then
+  if [[ -f "$from" && -L "$to" && "$(readlink "$to")" = "$from" ]]; then
     return 0
   fi
 
@@ -19,16 +19,12 @@ create_symlink() {
   fi
 
   if [[ -d "$from" ]]; then
-    if [[ -e "$to" || -L "$to" ]]; then
-      echo -n "ln: replace '$to'? "
-      read -r response < /dev/tty
-      if [[ "$response" =~ ^[Yy]([Ee][Ss])?$ ]]; then
-        rm -rf "$to"
-      else
-        return 0
-      fi
-    fi
-    ln -s "$from" "$to" < /dev/tty || :
+    [[ -L "$to" ]] && rm "$to"
+    mkdir -p "$to"
+    for file in "$from"/*; do
+      [[ -e "$file" ]] || continue
+      create_symlink "$file" "$to/$(basename "$file")"
+    done
   elif [[ -f "$from" ]]; then
     ln -sfi "$from" "$to" < /dev/tty || :
   else
@@ -48,32 +44,16 @@ else
   git -C "$dst" pull origin main
 fi
 
-echo 'Creating symlinks...'
-create_symlink "$dst/src/.claude/agents" "$HOME/.claude/agents"
-create_symlink "$dst/src/.claude/commands" "$HOME/.claude/commands"
-create_symlink "$dst/src/.claude/commands" "$HOME/.codex/prompts"
-create_symlink "$dst/src/.claude/rules" "$HOME/.claude/rules"
-create_symlink "$dst/src/.claude/skills" "$HOME/.claude/skills"
-create_symlink "$dst/src/.claude/skills" "$HOME/.codex/skills"
-create_symlink "$dst/src/.claude/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
-create_symlink "$dst/src/.claude/CLAUDE.md" "$HOME/.codex/AGENTS.md"
-create_symlink "$dst/src/.claude/settings.json" "$HOME/.claude/settings.json"
-create_symlink "$dst/src/.config/git/ignore" "$HOME/.config/git/ignore"
-create_symlink "$dst/src/.config/mise/config.toml" "$HOME/.config/mise/config.toml"
-create_symlink "$dst/src/.config/zellij/config.kdl" "$HOME/.config/zellij/config.kdl"
-create_symlink "$dst/src/.zshrc" "$HOME/.zshrc"
+apply_dir() {
+  for item in "$1"/{.*,*}; do
+    local name="$(basename "$item")"
+    [[ "$name" =~ ^\.\.?$ ]] && continue
+    [[ -n "${2:-}" && "$name" =~ $2 ]] && continue
+    create_symlink "$item" "$HOME/$name"
+  done
+}
 
-if [[ $(uname) == 'Darwin' ]]; then
-  if [[ "$as_owner" == 'true' ]]; then
-    create_symlink "$dst/src/.gitconfig" "$HOME/.gitconfig"
-    create_symlink "$dst/src/.config/brew/.Brewfile.owner" "$HOME/.Brewfile"
-  else
-    create_symlink "$dst/src/.config/brew/.Brewfile" "$HOME/.Brewfile"
-  fi
-  vscode="$HOME/Library/Application Support/Code/User"
-  if [[ -d "$vscode" ]]; then
-    create_symlink "$dst/src/.vscode/settings.json" "$vscode/settings.json"
-  fi
-else
-  echo "($(uname -a)) is not supported"
-fi
+echo 'Creating symlinks...'
+apply_dir "$dst/src" "^(darwin|owner|assets)$"
+[[ $(uname) == 'Darwin' ]] && apply_dir "$dst/src/darwin"
+[[ "$as_owner" == 'true' ]] && apply_dir "$dst/src/owner"
