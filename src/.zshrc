@@ -50,7 +50,7 @@ PROMPT=$'%F{blue}%~%f %F{magenta}${vcs_info_msg_0_}%f\n%(?.%F{magenta}.%F{red})\
 export FZF_DEFAULT_OPTS='--color=hl:blue,hl+:magenta,pointer:magenta,marker:magenta --reverse'
 
 fzf-history() {
-  local selected=$(fc -ln 1 | fzf --query "$LBUFFER" --tac)
+  local selected=$(fc -ln 1 | fzf --no-sort --query "$LBUFFER" --tac)
   if [[ -n "$selected" ]]; then
     print -s "$selected"
     BUFFER="$selected"
