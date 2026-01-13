@@ -32,7 +32,7 @@ fi
 
 autoload -Uz vcs_info
 precmd() {
-  if [[ -d .git ]] || git rev-parse --git-dir &>/dev/null; then
+  if git rev-parse --git-dir &>/dev/null; then
     vcs_info
   else
     vcs_info_msg_0_=""
@@ -47,11 +47,12 @@ zstyle ':vcs_info:git:*' formats '%b %u%c'
 PROMPT=$'%F{blue}%~%f %F{magenta}${vcs_info_msg_0_}%f\n%(?.%F{magenta}.%F{red})\u276f%f '
 
 # fzf
-export FZF_DEFAULT_OPTS='--color=hl:blue,hl+:cyan,pointer:cyan,marker:cyan --reverse'
+export FZF_DEFAULT_OPTS='--color=hl:blue,hl+:magenta,pointer:magenta,marker:magenta --reverse'
 
 fzf-history() {
   local selected=$(fc -ln 1 | fzf --query "$LBUFFER" --tac)
   if [[ -n "$selected" ]]; then
+    print -s "$selected"
     BUFFER="$selected"
     CURSOR=$#BUFFER
   fi
@@ -66,7 +67,6 @@ fzf-ghq() {
     BUFFER="cd ${(q)repo}"
     zle accept-line
   fi
-  zle reset-prompt
 }
 zle -N fzf-ghq
 bindkey '^g' fzf-ghq
