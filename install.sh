@@ -50,8 +50,14 @@ create_symlink() {
   fi
 
   if [ -d "$from" ]; then
-    [ -L "$to" ] && rm "$to"
-    mkdir -p "$to"
+    if [ -d "$to" ]; then
+      :
+    elif [ -e "$to" ]; then
+      echo "Warning: Cannot create directory '$to': file exists. Skipping." >&2
+      return 0
+    else
+      mkdir -p "$to"
+    fi
     find "$from" -maxdepth 1 -mindepth 1 | while IFS= read -r file; do
       create_symlink "$file" "$to/$(basename "$file")"
     done
