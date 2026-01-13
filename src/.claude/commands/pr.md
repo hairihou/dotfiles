@@ -4,13 +4,13 @@ argument-hint: [base-branch]
 description: Create a branch and GitHub pull request from current changes (draft by default)
 ---
 
-# Open Pull Request
+# Pull Request
 
 ## Context
 
 - Git status: !`git status -b --porcelain`
 - Current branch: !`git rev-parse --abbrev-ref HEAD`
-- Differences: !`git diff HEAD`
+- Diff summary: !`git diff HEAD --stat`
 
 ## Your task
 
@@ -19,7 +19,7 @@ Based on the context above, follow these steps:
 1. **Safety check**:
 
    - If currently on `main` branch with uncommitted changes, create a new branch first
-   - Suggest a descriptive branch name based on the changes shown in the diff (e.g., `feature/add-user-auth`, `fix/handle-null-errors`, `docs/update-readme`)
+   - Suggest a descriptive branch name based on the changes shown in the diff (e.g., `feat/add-user-auth`, `fix/handle-null-errors`, `docs/update-readme`)
 
 2. **Create branch** (if needed):
 
@@ -29,6 +29,7 @@ Based on the context above, follow these steps:
 
 3. **Stage and commit changes**:
 
+   - If the diff summary is insufficient, run `git diff HEAD` to see full details
    - **IMPORTANT**: Check for repository-specific commit message rules first (look for CONTRIBUTING.md, .gitmessage, or project documentation)
    - If no specific rules exist, follow Conventional Commits format
    - Analyze the diff to suggest an appropriate commit message
@@ -52,14 +53,23 @@ Based on the context above, follow these steps:
 5. **Create pull request**:
 
    - **Base branch**: If `$ARGUMENTS` is provided, use it as the base branch. Otherwise, determine the appropriate base branch (repository default or current branch's upstream)
+   - **Issue linking**: Extract `#<number>` from branch name (e.g., `#123_feat/function-name`). If found, prepend `closes #<number>\n\n---\n\n` to PR body
    - Generate PR title and description based on the changes
    - **CRITICAL**: Do NOT include any AI attribution footer (e.g., "🤖 Generated with Claude Code", "Co-Authored-By: Claude" etc.) in the PR body
    - Open as **draft** by default with `--assignee @me`
    - **IMPORTANT**: Always specify the base branch using `--base` option
-   - Example:
+   - Example (with issue auto-close):
 
      ```sh
-     gh pr create --title "<title>" --body "<description>" --base <base-branch> --assignee @me --draft
+     # Branch: #42_fix/null-pointer
+     gh pr create --title "<title>" --body "closes #42
+
+     ---
+
+     ## Summary
+
+     <description>
+     " --base <base-branch> --assignee @me --draft
      ```
 
    - If the PR already exists:
