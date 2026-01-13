@@ -9,13 +9,15 @@ is_owner() {
 }
 
 resolve_symlink() {
-  link="$1"
+  local link="$1"
+  local target
   target="$(readlink "$link")"
   case "$target" in
     /*)
       echo "$target"
       ;;
     *)
+      local dir
       dir="$(cd "$(dirname "$link")" && pwd -P)"
       echo "$dir/$target"
       ;;
@@ -37,8 +39,9 @@ sync_repo() {
 }
 
 create_symlink() {
-  from="$1"
-  to="$2"
+  local from="$1"
+  local to="$2"
+  local parent
   parent="$(dirname "$to")"
 
   if [ -f "$from" ] && [ -L "$to" ] && [ "$(resolve_symlink "$to")" = "$from" ]; then
@@ -58,6 +61,7 @@ create_symlink() {
     else
       mkdir -p "$to"
     fi
+    local file
     find "$from" -maxdepth 1 -mindepth 1 | while IFS= read -r file; do
       create_symlink "$file" "$to/$(basename "$file")"
     done
@@ -69,8 +73,9 @@ create_symlink() {
 }
 
 apply_dir() {
-  dir="$1"
-  exclude="${2:-}"
+  local dir="$1"
+  local exclude="${2:-}"
+  local item name
   find "$dir" -maxdepth 1 -mindepth 1 | while IFS= read -r item; do
     name="$(basename "$item")"
     case "$name" in
