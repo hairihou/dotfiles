@@ -4,7 +4,7 @@
 
 - Comment only: complex logic, business rules, non-obvious behavior
 - No unnecessary blank lines
-- Rule/doc file sections: alphabetical order
+- Rule/doc file sections: semantic order first, alphabetical within same priority
 
 ---
 
