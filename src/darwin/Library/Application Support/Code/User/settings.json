@@ -50,6 +50,7 @@
   "tailwindCSS.experimental.classRegex": [["[\"']([^\"']*)[\"']"]],
   "terminal.integrated.fontFamily": "'UDEV Gothic 35NFLG', monospace",
   "terminal.integrated.fontSize": 12,
+  "terminal.integrated.initialHint": false,
   "terminal.integrated.stickyScroll.enabled": false,
   "terminal.integrated.suggest.enabled": false,
   "typescript.implementationsCodeLens.enabled": true,
