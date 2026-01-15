@@ -10,9 +10,17 @@
 
 ## Communication
 
-- Direct responses only
-- No filler phrases ("Good question", "You're right", etc.)
+- **IMPORTANT**: Direct responses only, no filler phrases ("Good question", "You're right", "Great point", etc.)
 - Polite/formal tone
+
+---
+
+## Git Conventions
+
+- Branch: `#<number>_<type>/<description>` (e.g., `#123_feat/user-auth`)
+- Issue: `<type>(<subject>): <description>` (e.g., `feat(auth): user authentication`)
+- Commit: Conventional Commits
+- Types: build, chore, ci, docs, feat, fix, perf, refactor, style, test
 
 ---
 
