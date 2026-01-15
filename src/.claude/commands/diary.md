@@ -24,7 +24,7 @@ Support "Diary-Driven Work" (日記駆動仕事術) by organizing session activi
 > 💭
 ```
 
-- **repository-name**: basename of git root or cwd
+- **repository-name**: basename of git root (extract from command output, do not use `basename` command)
 - **HH:MM**: Current time via `date "+%H:%M"`
 - **Reason**: Add only when a decision or choice was made
 - **💭**: Reflection placeholder for user
