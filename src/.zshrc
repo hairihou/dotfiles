@@ -34,8 +34,10 @@ autoload -Uz vcs_info
 precmd() {
   if git rev-parse --git-dir &>/dev/null; then
     vcs_info
+    prompt_path="%F{blue}${vcs_info_msg_1_}%f"
   else
     vcs_info_msg_0_=""
+    prompt_path="%F{blue}%~%f"
   fi
 }
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -43,8 +45,8 @@ zstyle ':completion:*' menu select
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr '%F{green}+%f'
 zstyle ':vcs_info:*' unstagedstr '%F{yellow}*%f'
-zstyle ':vcs_info:git:*' formats '%b %u%c'
-PROMPT=$'%F{blue}%~%f %F{magenta}${vcs_info_msg_0_}%f\n%(?.%F{magenta}.%F{red})\u276f%f '
+zstyle ':vcs_info:git:*' formats '(%F{magenta}%b%f) %u%c' '%r'
+PROMPT=$'${prompt_path} ${vcs_info_msg_0_}\n%(?.%F{magenta}.%F{red})\u276f%f '
 
 # fzf
 export FZF_DEFAULT_OPTS='--color=hl:blue,hl+:magenta,pointer:magenta,marker:magenta --reverse'
