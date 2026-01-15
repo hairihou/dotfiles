@@ -26,13 +26,13 @@ Available globally after setup:
 
 Symlinked to home directory:
 
-| Source                    | Target                         |
-| ------------------------- | ------------------------------ |
-| `src/.Brewfile`           | `~/.Brewfile`                  |
-| `src/.claude/**/*`        | `~/.claude/**/*`               |
-| `src/.codex/**/*`         | `~/.codex/**/*`                |
-| `src/.config/**/*`        | `~/.config/**/*`               |
-| `src/.zshrc`              | `~/.zshrc`                     |
-| `src/darwin/Library/**/*` | `~/Library/**/*` (Darwin only) |
-| `src/owner/.Brewfile`     | `~/.Brewfile` (owner only)     |
-| `src/owner/.gitconfig`    | `~/.gitconfig` (owner only)    |
+| Source                     | Target                         |
+| -------------------------- | ------------------------------ |
+| `src/.Brewfile`            | `~/.Brewfile`                  |
+| `src/.claude/**/*`         | `~/.claude/**/*`               |
+| `src/.codex/**/*`          | `~/.codex/**/*`                |
+| `src/.config/**/*`         | `~/.config/**/*`               |
+| `src/.zshrc`               | `~/.zshrc`                     |
+| `src/_darwin/Library/**/*` | `~/Library/**/*` (Darwin only) |
+| `src/.Brewfile.owner`      | `~/.Brewfile` (owner only)     |
+| `src/.gitconfig.owner`     | `~/.gitconfig` (owner only)    |

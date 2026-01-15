@@ -83,7 +83,7 @@ apply_dir() {
     esac
     if [ -n "$exclude" ]; then
       case "$name" in
-        darwin|assets|*.owner) continue ;;
+        _*|*.owner) continue ;;
       esac
     fi
     create_symlink "$item" "$HOME/$name"
@@ -95,7 +95,7 @@ main() {
 
   echo 'Creating symlinks...'
   apply_dir "$dst/src" 'exclude'
-  [ "$(uname)" = 'Darwin' ] && apply_dir "$dst/src/darwin"
+  [ "$(uname)" = 'Darwin' ] && apply_dir "$dst/src/_darwin"
   if is_owner; then
     create_symlink "$dst/src/.Brewfile.owner" "$HOME/.Brewfile"
     create_symlink "$dst/src/.gitconfig.owner" "$HOME/.gitconfig"

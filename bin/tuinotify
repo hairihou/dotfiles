@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-afplay "$HOME/dotfiles/src/assets/my-turn.mp3"
+afplay "$HOME/dotfiles/public/my-turn.mp3"

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly extensions_file="$HOME/dotfiles/src/assets/vscode-extensions.txt"
+readonly extensions_file="$HOME/dotfiles/public/vscode-extensions.txt"
 readonly ignored_extensions=(
   "tailwindlabs.tailwindcss-vscode-theme"
 )
