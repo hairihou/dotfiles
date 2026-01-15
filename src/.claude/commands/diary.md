@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(date:*), Bash(git:*), Edit("~/Documents/Obsidian Vault/Diary/**"), Read("~/Documents/Obsidian Vault/Diary/**"), Write("~/Documents/Obsidian Vault/Diary/**")
+allowed-tools: Bash(date *), Bash(git *), Edit("~/Documents/Obsidian Vault/Diary/*.md"), Read("~/Documents/Obsidian Vault/Diary/*.md"), Write("~/Documents/Obsidian Vault/Diary/*.md")
 description: Append session work summary to Obsidian diary
 ---
 
@@ -13,39 +13,21 @@ Support "Diary-Driven Work" (日記駆動仕事術) by organizing session activi
 
 ## Entry Format
 
-### New Repository
-
 ```markdown
 ### repository-name
 
 #### HH:MM
 
 - [What was done]
-
-> 💭
-```
-
-### Adding to Existing Repository
-
-```markdown
-### repository-name
-
-#### HH:MM (existing)
-
-- [Previous work]
-
-> 💭
-
-#### HH:MM (new)
-
-- [What was done]
+  - [Reason for decision, if applicable]
 
 > 💭
 ```
 
 - **repository-name**: basename of git root or cwd
 - **HH:MM**: Current time via `date "+%H:%M"`
-- **💭**: Each time entry gets its own reflection placeholder
+- **Reason**: Add only when a decision or choice was made
+- **💭**: Reflection placeholder for user
 
 ## Steps
 
@@ -56,28 +38,28 @@ Support "Diary-Driven Work" (日記駆動仕事術) by organizing session activi
    ```sh
    date "+%H:%M"
    date "+%Y%m%d"
-   git rev-parse --show-toplevel | xargs basename
+   git rev-parse --show-toplevel
    ```
 
 3. **Read/Create**: `~/Documents/Obsidian Vault/Diary/<date>.md`
 
-4. **Append**: Follow Entry Format above
+   New file template:
+
+   ```markdown
+   ## Tasks
+
+   - [ ]
+
+   ## Meeting
+
+   -
+
+   ## Memo
+   ```
+
+4. **Append**: Add new time entry under existing repository section, or create new repository section
 
 5. **Confirm**: Show appended content
-
-## New File Template
-
-```markdown
-## Tasks
-
-- [ ]
-
-## Meeting
-
--
-
-## Memo
-```
 
 ## Guidelines
 
