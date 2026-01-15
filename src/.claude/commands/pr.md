@@ -11,82 +11,76 @@ description: Create a branch and GitHub pull request from current changes (draft
 - Git status: !`git status -b --porcelain`
 - Current branch: !`git rev-parse --abbrev-ref HEAD`
 - Diff summary: !`git diff HEAD --stat`
+- Remote: !`git remote -v | head -1`
 
-## Your task
+## Rules
 
-Based on the context above, follow these steps:
+- No AI attribution in commits or PR body (user's own work)
+- Branch naming: `<type>/<description>` or `#<issue>_<type>/<description>` (for auto issue linking)
+- Commit format: Check CONTRIBUTING.md, .gitmessage first, fallback to Conventional Commits (respect project conventions)
+- Base branch: `$ARGUMENTS` if provided, otherwise default branch
+- PR body ends with a trailing newline
 
-1. **Safety check**:
+## Steps
 
-   - If currently on `main` branch with uncommitted changes, create a new branch first
-   - Suggest a descriptive branch name based on the changes shown in the diff (e.g., `feat/add-user-auth`, `fix/handle-null-errors`, `docs/update-readme`)
+1. **Validate**: If no changes exist, inform user and exit
 
-2. **Create branch** (if needed):
+2. **Branch**: If on `main`/`master`, create new branch first
 
    ```sh
-   git switch -c <suggested-branch-name>
+   git switch -c <branch-name>
    ```
 
-3. **Stage and commit changes**:
-
-   - If the diff summary is insufficient, run `git diff HEAD` to see full details
-   - **IMPORTANT**: Check for repository-specific commit message rules first (look for CONTRIBUTING.md, .gitmessage, or project documentation)
-   - If no specific rules exist, follow Conventional Commits format
-   - Analyze the diff to suggest an appropriate commit message
-   - **NOTE**: Do NOT include Claude Code co-author credits or AI tool references in commit messages
-   - Examples:
-     - `feat(auth): add user login functionality`
-     - `fix(api): handle null response errors`
-     - `docs: update installation instructions`
+3. **Commit**:
 
    ```sh
+   # if more context needed
+   git diff HEAD
+
    git add .
-   git commit -m "<suggested-commit-message>"
+   git commit -m "<type>(scope): <description>"
    ```
 
-4. **Push branch**:
+4. **Push**:
 
    ```sh
    git push -u origin <branch-name>
    ```
 
-5. **Create pull request**:
+5. **Create PR** (or update if exists):
 
-   - **Base branch**: If `$ARGUMENTS` is provided, use it as the base branch. Otherwise, determine the appropriate base branch (repository default or current branch's upstream)
-   - **Issue linking**: Extract `#<number>` from branch name (e.g., `#123_feat/function-name`). If found, prepend `closes #<number>\n\n---\n\n` to PR body
-   - Generate PR title and description based on the changes
-   - **CRITICAL**: Do NOT include any AI attribution footer (e.g., "🤖 Generated with Claude Code", "Co-Authored-By: Claude" etc.) in the PR body
-   - Open as **draft** by default with `--assignee @me`
-   - **IMPORTANT**: Always specify the base branch using `--base` option
-   - Example (with issue auto-close):
+   ```sh
+   # Get default branch if $ARGUMENTS not provided
+   gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'
 
-     ```sh
-     # Branch: #42_fix/null-pointer
-     gh pr create --title "<title>" --body "closes #42
+   # New PR (if branch starts with #<number>_, prepend "closes #<number>" to body)
+   gh pr create --title "<title>" --body "<body>" --base <base-branch> --assignee @me --draft
 
-     ---
+   # Existing PR
+   gh pr edit --title "<title>" --body "<body>"
+   gh pr view --web
+   ```
 
-     ## Summary
+   Body template:
 
-     <description>
-     " --base <base-branch> --assignee @me --draft
-     ```
+   ```markdown
+   ## Summary
 
-   - If the PR already exists:
+   <description>
+   ```
 
-     1. Push the new commits first
-     2. Update the PR title and body to reflect all changes using `gh pr edit`
-     3. Open the PR in the browser
+   With issue linking (`#<number>_` branch):
 
-        ```sh
-        gh pr edit --title "<updated-title>" --body "<updated-description>"
-        gh pr view --web
-        ```
+   ```markdown
+   closes #<number>
 
-## Conventional Commits Reference
+   ---
 
-**Use only if no repository-specific commit rules exist**
+   ## Summary
 
-- **Types**: `chore`, `docs`, `feat`, `fix`, `perf`, `refactor`, `style`, `test`
-- **Scopes**: Use relevant area like `api`, `auth`, `ui`, `config`, `deps`
-- **Format**: `type(scope): description`
+   <description>
+   ```
+
+## Conventional Commits Types
+
+`chore`, `docs`, `feat`, `fix`, `perf`, `refactor`, `style`, `test`
