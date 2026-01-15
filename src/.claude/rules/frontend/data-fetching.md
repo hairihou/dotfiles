@@ -39,104 +39,27 @@ onSuccess: (newUser) => {
 - Paginated lists
 - Response lacks required data
 
-## Implementation
+## Cache Update Patterns
 
-### React (TanStack Query)
+| Operation | Pattern                                           |
+| --------- | ------------------------------------------------- |
+| Create    | `[...old, newItem]`                               |
+| Update    | `old.map(x => x.id === updated.id ? updated : x)` |
+| Delete    | `old.filter(x => x.id !== deletedId)`             |
 
-```tsx
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+## Framework Reference
 
-const queryClient = useQueryClient();
-
-// Read
-const { data: users } = useQuery({
-  queryKey: ["users"],
-  queryFn: fetchUsers,
-});
-
-// Create
-const { mutate: createUser } = useMutation({
-  mutationFn: createUserApi,
-  onSuccess: (newUser) => {
-    queryClient.setQueryData(["users"], (old) => [...(old ?? []), newUser]);
-  },
-});
-
-// Update
-const { mutate: updateUser } = useMutation({
-  mutationFn: updateUserApi,
-  onSuccess: (updatedUser) => {
-    queryClient.setQueryData(["users"], (old) =>
-      (old ?? []).map((user) =>
-        user.id === updatedUser.id ? updatedUser : user
-      )
-    );
-  },
-});
-
-// Delete
-const { mutate: deleteUser } = useMutation({
-  mutationFn: deleteUserApi,
-  onSuccess: (_, deletedId) => {
-    queryClient.setQueryData(["users"], (old) =>
-      (old ?? []).filter((user) => user.id !== deletedId)
-    );
-  },
-});
-```
-
-### Vue (Pinia Colada)
-
-```vue
-<script setup lang="ts">
-import { useQuery, useMutation, useQueryCache } from "@pinia/colada";
-
-const queryCache = useQueryCache();
-
-// Read
-const { data: users } = useQuery({
-  key: ["users"],
-  query: fetchUsers,
-});
-
-// Create
-const { mutate: createUser } = useMutation({
-  mutation: createUserApi,
-  onSuccess: (newUser) => {
-    queryCache.setQueryData(["users"], (old) => [...(old ?? []), newUser]);
-  },
-});
-
-// Update
-const { mutate: updateUser } = useMutation({
-  mutation: updateUserApi,
-  onSuccess: (updatedUser) => {
-    queryCache.setQueryData(["users"], (old) =>
-      (old ?? []).map((user) =>
-        user.id === updatedUser.id ? updatedUser : user
-      )
-    );
-  },
-});
-
-// Delete
-const { mutate: deleteUser } = useMutation({
-  mutation: deleteUserApi,
-  onSuccess: (_, deletedId) => {
-    queryCache.setQueryData(["users"], (old) =>
-      (old ?? []).filter((user) => user.id !== deletedId)
-    );
-  },
-});
-</script>
-```
+| Framework              | Cache Access       | Key Prop   |
+| ---------------------- | ------------------ | ---------- |
+| TanStack Query (React) | `useQueryClient()` | `queryKey` |
+| Pinia Colada (Vue)     | `useQueryCache()`  | `key`      |
 
 ## API Design Prerequisite
 
-This strategy requires REST APIs to return mutated data:
+REST APIs must return mutated data:
 
 ```
-POST   /users     → { id: 1, name: "John", ... }  // created resource
-PUT    /users/:id → { id: 1, name: "Jane", ... }  // updated resource
-DELETE /users/:id → 204 No Content                // id from request
+POST   /users     → { id, name, ... }  // created resource
+PUT    /users/:id → { id, name, ... }  // updated resource
+DELETE /users/:id → 204 No Content     // id from request
 ```
