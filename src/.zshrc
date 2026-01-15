@@ -34,6 +34,12 @@ autoload -Uz vcs_info
 precmd() {
   if git rev-parse --git-dir &>/dev/null; then
     vcs_info
+    local ahead=$(git rev-list --count @{upstream}..HEAD 2>/dev/null)
+    local behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null)
+    local arrows=""
+    [[ $behind -gt 0 ]] && arrows+="⇣"
+    [[ $ahead -gt 0 ]] && arrows+="⇡"
+    [[ -n $arrows ]] && vcs_info_msg_0_="${vcs_info_msg_0_} %F{cyan}${arrows}%f"
   else
     vcs_info_msg_0_=""
   fi
