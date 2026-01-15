@@ -14,14 +14,6 @@ paths: "**/*.{ts,tsx,vue}"
 - `T[]` for simple types
 - `Array<T>` for complex types (unions, generics)
 
-## Constructor Functions (Prohibited)
-
-NEVER use `Boolean`, `String`, `Number` as conversion functions:
-
-- `items.filter(Boolean)` → `items.filter((item) => item !== undefined && item !== null)`
-- `String(value)` → `` `${value}` ``
-- `Number(input)` → `parseFloat(input)` or `parseInt(input, 10)`
-
 ## Control Flow
 
 Always use block statements (`if (x) { return; }`, not `if (x) return;`)
@@ -60,6 +52,18 @@ Avoid default exports unless framework requires.
 
 - Prefer `| undefined` when callers must consciously decide
 - Use `?:` when omission is the common case
+
+## Prohibited Patterns
+
+### Primitive Wrappers
+
+- `items.filter(Boolean)` → `items.filter((item) => item !== undefined && item !== null)`
+- `Number(input)` → `parseFloat(input)` or `parseInt(input, 10)`
+- `String(value)` → `value.toString()`
+
+### Other
+
+- `isNaN(x)` → `Number.isNaN(x)`
 
 ## Property Order
 
