@@ -45,7 +45,7 @@ zstyle ':completion:*' menu select
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr '%F{green}+%f'
 zstyle ':vcs_info:*' unstagedstr '%F{yellow}*%f'
-zstyle ':vcs_info:git:*' formats '(%F{magenta}%b%f) %u%c' '%r'
+zstyle ':vcs_info:git:*' formats '%F{magenta}%b%f %u%c' '%r'
 PROMPT=$'${prompt_path} ${vcs_info_msg_0_}\n%(?.%F{magenta}.%F{red})\u276f%f '
 
 # fzf
