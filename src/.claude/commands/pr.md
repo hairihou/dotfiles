@@ -15,7 +15,6 @@ description: Create a branch and GitHub pull request from current changes (draft
 
 ## Rules
 
-- No AI attribution in commits or PR body (user's own work)
 - Branch naming: `<type>/<description>` or `#<issue>_<type>/<description>` (for auto issue linking)
 - Commit format: Check CONTRIBUTING.md, .gitmessage first, fallback to Conventional Commits (respect project conventions)
 - Base branch: `$ARGUMENTS` if provided, otherwise default branch
