@@ -21,6 +21,7 @@
 - Issue: `<type>(<subject>): <description>` (e.g., `feat(auth): user authentication`)
 - Commit: Conventional Commits
 - Types: build, chore, ci, docs, feat, fix, perf, refactor, style, test
+- No AI attribution in commits, PRs, or issues (user's own work)
 
 ---
 
