@@ -1,6 +1,6 @@
 ---
 name: rules-optimizer
-description: Optimize and create Claude Rules (.claude/rules/*.md) following best practices.
+description: Optimize and create Claude Rules (.claude/rules/*.md) following best practices. Use when asked to "create a rule", "optimize my rules", or "review my .claude/rules files".
 ---
 
 # Rules Optimizer
