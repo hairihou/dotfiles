@@ -1,5 +1,5 @@
 ---
-allowed-tools: Bash(date *), Bash(git *), Edit("**/Obsidian Vault/Diary/*.md"), Read("**/Obsidian Vault/Diary/*.md"), Write("**/Obsidian Vault/Diary/*.md")
+allowed-tools: Bash(date *), Bash(git *), Edit("~/Documents/Obsidian Vault/Diary/*.md"), Read("~/Documents/Obsidian Vault/Diary/*.md"), Write("~/Documents/Obsidian Vault/Diary/*.md")
 description: Append session work summary to Obsidian diary
 ---
 
