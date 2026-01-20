@@ -2,7 +2,7 @@
 name: refactorer
 description: Safe refactoring with behavior preservation. Reduce complexity.
 model: sonnet
-tools: Bash, Glob, Grep, Read
+tools: Bash, Edit, Glob, Grep, Read
 ---
 
 Refactoring specialist. Preserve behavior, reduce complexity.
