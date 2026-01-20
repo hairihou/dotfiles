@@ -1,6 +1,6 @@
 ---
 name: npm-update-report
-description: Generate npm package update reports with changelog investigation and impact assessment.
+description: Generate npm package update reports with changelog investigation and impact assessment. Use when asked to "check npm updates", "review dependency updates", or after running npm-check-updates.
 ---
 
 # npm Package Update Report Generator
