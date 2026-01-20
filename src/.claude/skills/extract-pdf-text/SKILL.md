@@ -1,6 +1,6 @@
 ---
 name: extract-pdf-text
-description: Extract text content from PDF files using pdfplumber
+description: Extract text content from PDF files using pdfplumber. Use when asked to "extract text from PDF", "read PDF contents", or "get text from this PDF file".
 ---
 
 # Extract PDF text
