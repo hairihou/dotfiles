@@ -29,8 +29,8 @@
 
 ## Language
 
-- Generated documentation/config files: English
-- Respond in Japanese (exceptions: code, commands, URLs, proper nouns)
+- File output (code, config, documentation): English
+- Chat response: Japanese (exceptions: code, commands, URLs, proper nouns)
 
 ---
 
