@@ -4,7 +4,7 @@
 
 - Comment only: complex logic, business rules, non-obvious behavior
 - No unnecessary blank lines
-- Rule/doc file sections: semantic order first, alphabetical within same priority
+- Ordering: main rule → exceptions/modifiers → details; alphabetical within same level
 
 ---
 
@@ -29,8 +29,8 @@
 
 ## Language
 
-- Respond in Japanese
-- Exceptions: code, commands, URLs, proper nouns
+- Generated documentation/config files: English
+- Respond in Japanese (exceptions: code, commands, URLs, proper nouns)
 
 ---
 
