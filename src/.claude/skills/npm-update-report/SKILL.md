@@ -1,24 +1,45 @@
 ---
 name: npm-update-report
-description: Generate npm package update reports with changelog investigation and impact assessment. Use when asked to "check npm updates", "review dependency updates", or after running npm-check-updates.
+description: Check for outdated npm/pnpm/yarn packages, update them, and generate impact/risk assessment reports with changelog investigation and security audit. Use when asked to "check npm updates", "update dependencies", "review package updates", "update and report", or "check for breaking changes".
 ---
 
-# npm Package Update Report Generator
-
-Generate investigation reports for npm dependency updates with changelog research and verification.
+# Package Update Report
 
 ## Workflow
 
-| Step | Action            | Details                                                         |
-| ---- | ----------------- | --------------------------------------------------------------- |
-| 1    | Sync package.json | Match versions to lock file, keep semver prefix (`^`, `~`)      |
-| 2    | Identify changes  | Extract diff from `package.json`, classify as major/minor/patch |
-| 3    | Investigate       | Web search changelogs for major/minor bumps and key packages    |
-| 4    | Assess impact     | Grep for package usage, evaluate breaking changes               |
-| 5    | Verify            | Run scripts from package.json (lint, typecheck, test, build)    |
-| 6    | Output            | Write report to `./reports/{yyyyMMdd}-{branch-name}.md`         |
+| Step | Action           | Details                                                            |
+| ---- | ---------------- | ------------------------------------------------------------------ |
+| 1    | Detect PM        | Check lock file to determine package manager                       |
+| 2    | Check outdated   | List packages with available updates                               |
+| 3    | Update packages  | Update according to strategy below                                 |
+| 4    | Classify changes | Extract diff from `package.json`, classify as major/minor/patch    |
+| 5    | Investigate      | Web search changelogs for major/minor bumps and key packages       |
+| 6    | Assess impact    | Grep for package usage, evaluate breaking changes                  |
+| 7    | Audit            | Run security audit, include advisory URLs for vulnerabilities      |
+| 8    | Verify           | Run scripts from package.json (lint, typecheck, test, build)       |
+| 9    | Output           | See [references/report-template.md](references/report-template.md) |
+
+## Package Manager Detection
+
+| Lock File           | PM   | Outdated        | Update                       | Audit        |
+| ------------------- | ---- | --------------- | ---------------------------- | ------------ |
+| `package-lock.json` | npm  | `npm outdated`  | `npm update` / `npm install` | `npm audit`  |
+| `pnpm-lock.yaml`    | pnpm | `pnpm outdated` | `pnpm update` / `pnpm add`   | `pnpm audit` |
+| `yarn.lock`         | yarn | `yarn outdated` | `yarn upgrade` / `yarn add`  | `yarn audit` |
+
+For monorepos: `pnpm --filter {pkg}`, `npm -w {pkg}`, `yarn workspace {pkg}`
+
+## Update Strategy
+
+| Type  | Action                                |
+| ----- | ------------------------------------- |
+| Patch | Auto-update via `{pm} update`         |
+| Minor | Auto-update, investigate key packages |
+| Major | Confirm with user before update       |
 
 ## Investigation Criteria
+
+**Sources:** GitHub Releases, CHANGELOG.md, official blogs only
 
 **Always investigate:**
 
@@ -29,15 +50,7 @@ Generate investigation reports for npm dependency updates with changelog researc
 
 - Any package that may be related to the failure
 
-**Skip investigation:**
-
-- Patch-only updates with passing verification
-
-## Key Rules
-
-- Reference primary sources only: GitHub Releases, CHANGELOG.md, official blogs
-- Detect package manager from lock file: `package-lock.json` (npm), `pnpm-lock.yaml` (pnpm), `yarn.lock` (yarn)
-- For monorepos, use workspace filters (`pnpm --filter`, `npm -w`)
+**Skip:** Patch-only updates with passing verification
 
 ## Verification Failure Handling
 
@@ -48,61 +61,3 @@ If verification fails:
 3. Investigate those packages' changelogs for breaking changes
 4. Document findings in report under "Verification Results"
 5. Set conclusion to "Needs attention" with specific action items
-
-## Report Template
-
-```markdown
-# Package Update Report: {branch-name}
-
-## Summary
-
-| Metric       | Value            |
-| ------------ | ---------------- |
-| Verification | PASSED / !FAILED |
-| Major        | {count}          |
-| Minor        | {count}          |
-| Patch        | {count}          |
-
-## Notable Changes
-
-### {package-name} ({old-version} -> {new-version}) [major/minor]
-
-**Changes:**
-
-- !Breaking: {description}
-- New: {description}
-- Fix: {description}
-
-**Project Impact:** Affected / Not affected
-
-- {affected-files-or-features}
-
-**Reference:** [CHANGELOG]({url})
-
-## Other Updates
-
-| Package | Change             | Type  | Notes |
-| ------- | ------------------ | ----- | ----- |
-| {name}  | {x.x.x} -> {y.y.y} | patch | -     |
-
-## Verification Results
-
-### {script-name}
-
-\`\`\`
-{output-summary}
-\`\`\`
-
-## Conclusion
-
-- **Breaking Changes:** No action required / !Action required: {details}
-- **Recommendation:** Ready to merge / !Needs attention: {details}
-```
-
-## Formatting Rules
-
-| Rule                   | Example                  |
-| ---------------------- | ------------------------ |
-| Version transition     | `18.2.0 -> 18.3.1`       |
-| Breaking change prefix | `!Breaking: API removed` |
-| Placeholder format     | `{placeholder-name}`     |
