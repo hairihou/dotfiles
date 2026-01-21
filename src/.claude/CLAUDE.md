@@ -21,6 +21,7 @@
 - Issue: `<type>(<subject>): <description>` (e.g., `feat(auth): user authentication`)
 - Commit: Conventional Commits
 - Types: build, chore, ci, docs, feat, fix, perf, refactor, style, test
+- **IMPORTANT**: NEVER commit or push without explicit user instruction
 - **IMPORTANT**: No AI attribution in commits, PRs, or issues (user's own work)
   - No `Co-Authored-By: Claude`
   - No `🤖 Generated with Claude Code`
