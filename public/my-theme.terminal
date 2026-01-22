@@ -281,15 +281,23 @@
 	<false/>
 	<key>ShowActiveProcessInTitle</key>
 	<false/>
+	<key>ShowCommandKeyInTitle</key>
+	<false/>
 	<key>ShowDimensionsInTitle</key>
 	<false/>
 	<key>ShowRepresentedURLInTabTitle</key>
-	<false/>
+	<true/>
 	<key>ShowRepresentedURLInTitle</key>
 	<false/>
 	<key>ShowRepresentedURLPathInTabTitle</key>
-	<false/>
+	<true/>
 	<key>ShowRepresentedURLPathInTitle</key>
+	<false/>
+	<key>ShowShellCommandInTitle</key>
+	<false/>
+	<key>ShowTTYNameInTitle</key>
+	<false/>
+	<key>ShowWindowSettingsNameInTitle</key>
 	<false/>
 	<key>TextColor</key>
 	<data>
@@ -302,6 +310,8 @@
 	</data>
 	<key>UseBrightBold</key>
 	<false/>
+	<key>WindowTitle</key>
+	<string></string>
 	<key>columnCount</key>
 	<integer>120</integer>
 	<key>name</key>
