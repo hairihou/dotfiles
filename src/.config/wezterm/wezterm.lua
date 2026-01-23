@@ -69,7 +69,7 @@ config.macos_window_background_blur = 20
 config.native_macos_fullscreen_mode = false
 config.use_fancy_tab_bar = false
 config.warn_about_missing_glyphs = false
-config.window_background_opacity = 0.80
+config.window_background_opacity = 0.90
 config.window_close_confirmation = "NeverPrompt"
 
 return config
