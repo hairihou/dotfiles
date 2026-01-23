@@ -56,7 +56,7 @@ config.colors = {
     new_tab_hover = { bg_color = theme.bg_emphasis, fg_color = theme.fg },
   },
 }
-config.default_cursor_style = "BlinkingBar"
+config.default_cursor_style = "SteadyBlock"
 config.font = wezterm.font("UDEV Gothic 35NFLG")
 config.font_size = 14.0
 config.hide_tab_bar_if_only_one_tab = true
