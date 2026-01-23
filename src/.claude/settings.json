@@ -18,6 +18,17 @@
         ]
       }
     ],
+    "PreToolUse": [
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "tuinotify"
+          }
+        ]
+      }
+    ],
     "Stop": [
       {
         "matcher": "",
