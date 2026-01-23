@@ -60,8 +60,8 @@ config.default_cursor_style = "SteadyBlock"
 config.font = wezterm.font("UDEV Gothic 35NFLG")
 config.font_size = 14.0
 config.hide_tab_bar_if_only_one_tab = true
-config.initial_cols = 120
-config.initial_rows = 36
+config.initial_cols = 128
+config.initial_rows = 40
 config.keys = {
   { key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\n") },
 }
