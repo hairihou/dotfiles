@@ -32,8 +32,5 @@
   },
   "enabledPlugins": {
     "document-skills@anthropic-agent-skills": true
-  },
-  "permissions": {
-    "allow": ["Bash(pbcopy:*)"]
   }
 }
