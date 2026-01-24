@@ -6,6 +6,9 @@
     "commit": "",
     "pr": ""
   },
+  "enabledPlugins": {
+    "document-skills@anthropic-agent-skills": true
+  },
   "hooks": {
     "PostToolUse": [
       {
@@ -41,7 +44,5 @@
       }
     ]
   },
-  "enabledPlugins": {
-    "document-skills@anthropic-agent-skills": true
-  }
+  "language": "Japanese"
 }
