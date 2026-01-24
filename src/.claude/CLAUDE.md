@@ -17,7 +17,7 @@
 
 ## Git Conventions
 
-- Branch: `#<number>_<type>/<description>` (e.g., `#123_feat/user-auth`)
+- Branch: `#<number>_<type>/<description>` (e.g., `#123_feat/user-auth`)a
 - Issue: `<type>(<subject>): <description>` (e.g., `feat(auth): user authentication`)
 - Commit: Conventional Commits
 - Types: build, chore, ci, docs, feat, fix, perf, refactor, style, test
@@ -31,7 +31,7 @@
 ## Language
 
 - File output (code, config, documentation): English
-- Chat response: Japanese (exceptions: code, commands, URLs, proper nouns)
+- Exceptions from Japanese: code, commands, URLs, proper nouns
 
 ---
 
