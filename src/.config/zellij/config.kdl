@@ -1,17 +1,21 @@
+// Tailwind CSS Colors: https://tailwindcss.com/docs/colors
 themes {
-    tailwind-dark {
-        fg 226 232 240
-        bg 15 23 42
-        black 71 85 105
-        red 248 113 113
-        green 74 222 128
-        yellow 251 191 36
-        blue 96 165 250
-        magenta 244 114 182
-        cyan 34 211 238
-        white 203 213 225
-        orange 251 146 60
+    tailwindcss-dark {
+        bg 15 23 42           // slate-900
+        fg 226 232 240        // slate-200
+        black 71 85 105       // slate-600
+        blue 96 165 250       // blue-400
+        cyan 34 211 238       // cyan-400
+        green 74 222 128      // green-400
+        magenta 244 114 182   // pink-400
+        orange 251 146 60     // orange-400
+        red 248 113 113       // red-400
+        white 203 213 225     // slate-300
+        yellow 251 191 36     // amber-400
     }
 }
 
-theme "tailwind-dark"
+pane_frames false
+show_startup_tips false
+simplified_ui true
+theme "tailwindcss-dark"
