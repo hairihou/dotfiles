@@ -2,58 +2,41 @@ local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
 local theme = {
-  bg = "#0f172a",
-  bg_subtle = "#1e293b",
-  bg_emphasis = "#334155",
-  fg = "#e2e8f0",
-  fg_muted = "#94a3b8",
-  fg_emphasis = "#f1f5f9",
-  fg_on_emphasis = "#f8fafc",
-  ansi = {
-    black = "#475569",
-    red = "#f87171",
-    green = "#4ade80",
-    yellow = "#fbbf24",
-    blue = "#60a5fa",
-    magenta = "#f472b6",
-    cyan = "#22d3ee",
-    white = "#cbd5e1",
-  },
-  ansi_bright = {
-    black = "#64748b",
-    red = "#fca5a5",
-    green = "#86efac",
-    yellow = "#fcd34d",
-    blue = "#93c5fd",
-    magenta = "#f9a8d4",
-    cyan = "#67e8f9",
-    white = "#f1f5f9",
+  amber = { [300] = "#fcd34d", [400] = "#fbbf24" },
+  blue = { [300] = "#93c5fd", [400] = "#60a5fa" },
+  cyan = { [300] = "#67e8f9", [400] = "#22d3ee" },
+  green = { [300] = "#86efac", [400] = "#4ade80" },
+  pink = { [300] = "#f9a8d4", [400] = "#f472b6" },
+  red = { [300] = "#fca5a5", [400] = "#f87171" },
+  slate = {
+    [50] = "#f8fafc", [100] = "#f1f5f9", [200] = "#e2e8f0", [300] = "#cbd5e1",
+    [400] = "#94a3b8", [500] = "#64748b", [600] = "#475569", [700] = "#334155",
+    [800] = "#1e293b", [900] = "#0f172a",
   },
 }
 
 config.colors = {
   ansi = {
-    theme.ansi.black, theme.ansi.red, theme.ansi.green, theme.ansi.yellow,
-    theme.ansi.blue, theme.ansi.magenta, theme.ansi.cyan, theme.ansi.white,
+    theme.slate[600], theme.red[400], theme.green[400], theme.amber[400],
+    theme.blue[400], theme.pink[400], theme.cyan[400], theme.slate[300],
   },
-  background = theme.bg,
+  background = theme.slate[900],
   brights = {
-    theme.ansi_bright.black, theme.ansi_bright.red, theme.ansi_bright.green, theme.ansi_bright.yellow,
-    theme.ansi_bright.blue, theme.ansi_bright.magenta, theme.ansi_bright.cyan, theme.ansi_bright.white,
+    theme.slate[500], theme.red[300], theme.green[300], theme.amber[300],
+    theme.blue[300], theme.pink[300], theme.cyan[300], theme.slate[100],
   },
-  cursor_bg = theme.fg_on_emphasis,
-  cursor_border = theme.fg_on_emphasis,
-  cursor_fg = theme.bg,
-  foreground = theme.fg,
-  selection_bg = theme.bg_emphasis,
-  selection_fg = theme.fg_emphasis,
+  cursor_bg = theme.slate[50],
+  cursor_fg = theme.slate[900],
+  foreground = theme.slate[200],
+  selection_bg = theme.slate[700],
+  selection_fg = theme.slate[100],
   tab_bar = {
-    background = theme.bg,
-    active_tab = { bg_color = theme.bg_emphasis, fg_color = theme.fg_emphasis },
-    inactive_tab = { bg_color = theme.bg_subtle, fg_color = theme.fg_muted },
-    inactive_tab_hover = { bg_color = theme.bg_emphasis, fg_color = theme.fg },
-    new_tab = { bg_color = theme.bg_subtle, fg_color = theme.fg_muted },
-    new_tab_hover = { bg_color = theme.bg_emphasis, fg_color = theme.fg },
+    active_tab = { bg_color = theme.slate[700], fg_color = theme.slate[100] },
+    background = theme.slate[900],
+    inactive_tab = { bg_color = theme.slate[800], fg_color = theme.slate[400] },
+    inactive_tab_hover = { bg_color = theme.slate[700], fg_color = theme.slate[200] },
+    new_tab = { bg_color = theme.slate[800], fg_color = theme.slate[400] },
+    new_tab_hover = { bg_color = theme.slate[700], fg_color = theme.slate[200] },
   },
 }
 config.default_cursor_style = "SteadyBlock"
@@ -63,13 +46,15 @@ config.hide_tab_bar_if_only_one_tab = true
 config.initial_cols = 128
 config.initial_rows = 40
 config.keys = {
-  { key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\n") },
+  { key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\x1b[13;2u") },
 }
-config.macos_window_background_blur = 22
 config.native_macos_fullscreen_mode = false
+config.scrollback_lines = 10000
+config.send_composed_key_when_left_alt_is_pressed = false
+config.send_composed_key_when_right_alt_is_pressed = false
 config.use_fancy_tab_bar = false
 config.warn_about_missing_glyphs = false
-config.window_background_opacity = 0.88
+config.window_background_opacity = 0.96
 config.window_close_confirmation = "NeverPrompt"
 
 return config
