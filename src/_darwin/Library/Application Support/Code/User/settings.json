@@ -4,14 +4,14 @@
   "cSpell.customDictionaries": {
     "knownWords": {
       "name": "knownWords",
-      "path": "~/dotfiles/dist/.tmp/known-words.txt",
-      "scope": "user"
-    }
+      "path": "${userHome}/dotfiles/dist/.tmp/known-words.txt",
+      "scope": "user",
+    },
   },
   "diffEditor.ignoreTrimWhitespace": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
-    "source.organizeImports": "explicit"
+    "source.organizeImports": "explicit",
   },
   "editor.cursorBlinking": "phase",
   "editor.cursorSmoothCaretAnimation": "explicit",
@@ -19,9 +19,10 @@
   "editor.fontFamily": "'UDEV Gothic 35NFLG', monospace",
   "editor.fontSize": 12,
   "editor.formatOnSave": true,
+  "editor.linkedEditing": true,
   "editor.minimap.enabled": false,
   "editor.quickSuggestions": {
-    "strings": "on"
+    "strings": "on",
   },
   "editor.renderLineHighlight": "all",
   "editor.renderLineHighlightOnlyWhenFocus": true,
@@ -31,19 +32,19 @@
   "extensions.ignoreRecommendations": true,
   "files.associations": {
     "*.css": "tailwindcss",
-    "*ignore": "ignore"
+    "*ignore": "ignore",
   },
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "github.copilot.enable": {
     "*": true,
     "plaintext": false,
-    "scminput": false
+    "scminput": false,
   },
   "github.copilot.nextEditSuggestions.enabled": false,
   "githubPullRequests.pullBranch": "never",
   "notebook.codeActionsOnSave": {
-    "notebook.source.fixAll": "explicit"
+    "notebook.source.fixAll": "explicit",
   },
   "notebook.formatOnSave.enabled": true,
   "python.languageServer": "None",
@@ -60,22 +61,22 @@
   "window.title": "\u0020",
   "workbench.colorTheme": "Tailwind CSS Dark",
   "workbench.editorAssociations": {
-    "*.svg": "default"
+    "*.svg": "default",
   },
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.tree.indent": 16,
   "[python]": {
-    "editor.defaultFormatter": "charliermarsh.ruff"
+    "editor.defaultFormatter": "charliermarsh.ruff",
   },
   "[toml]": {
-    "editor.defaultFormatter": "tamasfe.even-better-toml"
+    "editor.defaultFormatter": "tamasfe.even-better-toml",
   },
   "[php]": {
-    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
   },
   "php.suggest.basic": false,
   "php.validate.enable": false,
-  "todo-tree.filtering.excludeGlobs": ["node_modules", "dist"],
+  "todo-tree.filtering.excludeGlobs": ["dist", "node_modules"],
   "todo-tree.general.tags": [
     "BUG",
     "HACK",
@@ -84,10 +85,10 @@
     "XXX",
     "[ ]",
     "[x]",
-    "@todo"
+    "@todo",
   ],
   "todo-tree.general.tagGroups": {
-    "TODO": ["@todo", "ToDo", "TODO"]
+    "TODO": ["@todo", "ToDo", "TODO"],
   },
   "todo-tree.highlights.useColourScheme": true,
   "todo-tree.highlights.backgroundColourScheme": [
@@ -97,12 +98,12 @@
     "#a6e3a1",
     "#89b4fa",
     "#b4befe",
-    "#cdd6f4"
+    "#cdd6f4",
   ],
   "todo-tree.highlights.foregroundColourScheme": ["#1e1e2e"],
   "todo-tree.highlights.defaultHighlight": {
     "fontStyle": "italic",
-    "type": "text-and-comment"
+    "type": "text-and-comment",
   },
-  "todo-tree.regex.regex": "(\\*|//|#|<!--|;|/\\*|^|^[ \\t]*\\*)\\s*($TAGS)"
+  "todo-tree.regex.regex": "(\\*|//|#|<!--|;|/\\*|^|^[ \\t]*\\*)\\s*($TAGS)",
 }
