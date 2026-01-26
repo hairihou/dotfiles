@@ -15,7 +15,9 @@ themes {
     }
 }
 
+default_layout "compact"
 pane_frames false
+scrollback_editor "vim"
 show_startup_tips false
 simplified_ui true
 theme "tailwindcss-dark"
