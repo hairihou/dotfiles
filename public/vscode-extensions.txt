@@ -7,7 +7,6 @@ charliermarsh.ruff
 christian-kohler.path-intellisense
 dbaeumer.vscode-eslint
 denoland.vscode-deno
-editorconfig.editorconfig
 esbenp.prettier-vscode
 formulahendry.auto-close-tag
 formulahendry.auto-rename-tag
@@ -16,7 +15,6 @@ github.copilot-chat
 github.vscode-github-actions
 github.vscode-pull-request-github
 gruntfuggly.todo-tree
-intellsmi.comment-translate
 ms-azuretools.vscode-containers
 ms-python.debugpy
 ms-python.python
@@ -25,9 +23,7 @@ ms-python.vscode-python-envs
 ms-vscode-remote.remote-containers
 ms-vscode.vscode-js-profile-flame
 naumovs.color-highlight
-rangav.vscode-thunder-client
 streetsidesoftware.code-spell-checker
-sumneko.lua
 tailwindlabs.tailwindcss-vscode-theme
 tamasfe.even-better-toml
 usernamehw.errorlens
