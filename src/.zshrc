@@ -61,7 +61,7 @@ export FZF_DEFAULT_OPTS='--color=hl:blue,hl+:magenta,pointer:magenta,marker:mage
 fzf-ghq() {
   local repo=$(ghq list --full-path | fzf)
   if [[ -n "$repo" ]]; then
-    BUFFER="cd ${(q)repo}"
+    BUFFER="${(q)repo}"
     zle accept-line
   fi
 }
