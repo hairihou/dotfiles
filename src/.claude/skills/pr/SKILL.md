@@ -2,6 +2,7 @@
 name: pr
 description: Create a branch and GitHub pull request from current changes (draft by default). Use when the user says "create PR", "open pull request", "submit changes", or wants to push their work for review.
 argument-hint: [base-branch]
+disable-model-invocation: true
 allowed-tools: Bash(gh:*), Bash(git:*)
 ---
 
