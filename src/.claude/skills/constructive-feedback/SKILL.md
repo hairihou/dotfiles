@@ -18,13 +18,15 @@ $ARGUMENTS
 
 ## Output Format
 
+Respond in user's language.
+
 ```
-【Situation】(when, where)
-【Behavior】(observable action)
-【Impact】(effect)
+[Situation] (when, where)
+[Behavior] (observable action)
+[Impact] (effect)
 
 ---
 
-【Suggestion】
-【Expected Outcome】
+[Suggestion]
+[Expected Outcome]
 ```
