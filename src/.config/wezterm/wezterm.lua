@@ -40,6 +40,7 @@ config.colors = {
   },
 }
 config.default_cursor_style = "SteadyBlock"
+config.use_ime = true
 config.font = wezterm.font("UDEV Gothic 35NFLG")
 config.font_size = 14.0
 config.hide_tab_bar_if_only_one_tab = true
