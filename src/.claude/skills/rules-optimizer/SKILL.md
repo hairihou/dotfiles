@@ -1,10 +1,17 @@
 ---
 name: rules-optimizer
 description: Optimize and create Claude Rules (.claude/rules/*.md) following best practices. Use when asked to "create a rule", "optimize my rules", or "review my .claude/rules files".
+argument-hint: [rule-file-or-pattern]
 allowed-tools: Edit, Glob, Read, Write
 ---
 
 # Rules Optimizer
+
+## Context
+
+- Existing rules: !`ls .claude/rules/**/*.md .claude/rules/*.md 2>/dev/null`
+
+Target: $ARGUMENTS (if not specified, optimize all existing rules)
 
 Create and optimize `.claude/rules/*.md` files for effective AI guidance.
 
