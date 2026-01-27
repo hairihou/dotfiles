@@ -1,6 +1,7 @@
 ---
 name: npm-update-report
 description: Check for outdated npm/pnpm/yarn packages, update them, and generate impact/risk assessment reports with changelog investigation and security audit. Use when asked to "check npm updates", "update dependencies", "review package updates", "update and report", or "check for breaking changes".
+disable-model-invocation: true
 ---
 
 # Package Update Report
