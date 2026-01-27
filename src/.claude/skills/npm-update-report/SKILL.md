@@ -2,9 +2,15 @@
 name: npm-update-report
 description: Check for outdated npm/pnpm/yarn packages, update them, and generate impact/risk assessment reports with changelog investigation and security audit. Use when asked to "check npm updates", "update dependencies", "review package updates", "update and report", or "check for breaking changes".
 disable-model-invocation: true
+allowed-tools: Bash(npm:*), Bash(pnpm:*), Bash(yarn:*), Bash(node:*), Grep, Read, WebSearch
 ---
 
 # Package Update Report
+
+## Context
+
+- Lock files: !`ls package-lock.json pnpm-lock.yaml yarn.lock 2>/dev/null`
+- Available scripts: !`node -e "const p=require('./package.json');console.log(Object.keys(p.scripts||{}).join(', '))" 2>/dev/null`
 
 ## Workflow
 
