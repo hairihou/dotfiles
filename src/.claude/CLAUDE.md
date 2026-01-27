@@ -32,9 +32,3 @@
 
 - File output (code, config, documentation): English
 - Exceptions from Japanese: code, commands, URLs, proper nouns
-
----
-
-## Skills
-
-- If Claude: ignore skill `commands-frontmatter-adapter`
