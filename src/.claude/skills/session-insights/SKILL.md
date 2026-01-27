@@ -7,6 +7,12 @@ allowed-tools: Bash(gh issue create:*), Edit, Glob, Grep, Read, TodoWrite
 
 # Session Insights
 
+## Context
+
+- Repository root: !`git rev-parse --show-toplevel`
+- Memory files: !`ls CLAUDE.md .claude/CLAUDE.md AGENTS.md .codex/AGENTS.md 2>/dev/null`
+- Recent commits: !`git log --oneline -10`
+
 ## Guidelines
 
 - Use user's session language for all output
