@@ -23,6 +23,8 @@ Critical only: correctness, security, over-engineering, production risks.
 
 Skip: formatting, naming, preferences, theoretical concerns.
 
+For common anti-patterns to check, see [references/anti-patterns.md](references/anti-patterns.md).
+
 ## Output
 
 Per issue:
