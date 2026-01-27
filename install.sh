@@ -44,8 +44,17 @@ create_symlink() {
   local parent
   parent="$(dirname "$to")"
 
-  if [ -f "$from" ] && [ -L "$to" ] && [ "$(resolve_symlink "$to")" = "$from" ]; then
+  if [ -L "$to" ] && [ "$(resolve_symlink "$to")" = "$from" ]; then
     return 0
+  fi
+
+  # Prevent circular symlinks
+  if [ -L "$parent" ]; then
+    local parent_target
+    parent_target="$(resolve_symlink "$parent")"
+    case "$parent_target" in
+      "$dst/src"*) return 0 ;;
+    esac
   fi
 
   if [ "$parent" != "$HOME" ] && [ ! -d "$parent" ]; then
@@ -78,9 +87,6 @@ apply_dir() {
   local item name
   find "$dir" -maxdepth 1 -mindepth 1 | while IFS= read -r item; do
     name="$(basename "$item")"
-    case "$name" in
-      ..|.) continue ;;
-    esac
     if [ -n "$exclude" ]; then
       case "$name" in
         _*|*.owner) continue ;;
