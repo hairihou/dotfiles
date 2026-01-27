@@ -1,6 +1,7 @@
 ---
 name: diary
 description: Append session work summary to Obsidian diary. Use when the user says "diary", "record this session", "log what we did", or wants to save session activities to their daily note.
+disable-model-invocation: true
 allowed-tools: Bash(date *), Bash(git *), Edit("~/Documents/Obsidian Vault/Diary/*.md"), Read("~/Documents/Obsidian Vault/Diary/*.md"), Write("~/Documents/Obsidian Vault/Diary/*.md")
 ---
 
