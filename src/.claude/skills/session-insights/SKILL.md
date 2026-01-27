@@ -3,7 +3,6 @@ name: session-insights
 description: Session retrospective using Kolb's Learning Cycle and KPT framework. Updates memory file (CLAUDE.md/AGENTS.md) and creates GitHub Issues. Use when the user says "session insights", "what did we learn", "update memory", or wants to extract reusable principles from the session.
 disable-model-invocation: true
 allowed-tools: Bash(gh issue create:*), Edit, Glob, Grep, Read, TodoWrite
-context: fork
 ---
 
 # Session Insights
