@@ -7,6 +7,12 @@ allowed-tools: Bash(date *), Bash(git *), Edit("~/Documents/Obsidian Vault/Diary
 
 # Diary
 
+## Context
+
+- Date: !`date "+%Y%m%d"`
+- Time: !`date "+%H:%M"`
+- Repository: !`git rev-parse --show-toplevel`
+
 Target: `~/Documents/Obsidian Vault/Diary/YYYYMMDD.md`
 
 ## Entry Format
@@ -31,15 +37,7 @@ Target: `~/Documents/Obsidian Vault/Diary/YYYYMMDD.md`
 
 1. **Analyze**: Review conversation and `git log` for completed tasks
 
-2. **Get Metadata**:
-
-   ```sh
-   date "+%H:%M"
-   date "+%Y%m%d"
-   git rev-parse --show-toplevel
-   ```
-
-3. **Read/Create**: `~/Documents/Obsidian Vault/Diary/<date>.md`
+2. **Read/Create**: `~/Documents/Obsidian Vault/Diary/<date>.md`
 
    New file template:
 
@@ -55,9 +53,9 @@ Target: `~/Documents/Obsidian Vault/Diary/YYYYMMDD.md`
    ## Memo
    ```
 
-4. **Append**: Add new time entry under existing repository section, or create new repository section
+3. **Append**: Add new time entry under existing repository section, or create new repository section
 
-5. **Confirm**: Show appended content
+4. **Confirm**: Show appended content
 
 ## Guidelines
 
