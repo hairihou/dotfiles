@@ -31,3 +31,20 @@ Respond in user's language.
 [Suggestion]
 [Expected Outcome]
 ```
+
+## Example
+
+**Input**: "He's always late to meetings and doesn't care about the team."
+
+**Output**:
+
+```
+[Situation] In the last 3 weekly standups (Jan 6, 13, 20)
+[Behavior] Joined 10-15 minutes after the scheduled start time
+[Impact] Other members had to repeat context, reducing discussion time by ~30%
+
+---
+
+[Suggestion] Confirm the meeting time works, or agree on async updates if schedule conflicts
+[Expected Outcome] Full participation from the start, more productive use of meeting time
+```
