@@ -40,9 +40,9 @@ precmd() {
     local ahead=$(git rev-list --count @{upstream}..HEAD 2>/dev/null)
     local behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null)
     local arrows=""
-    [[ $behind -gt 0 ]] && arrows+="⇣"
-    [[ $ahead -gt 0 ]] && arrows+="⇡"
-    [[ -n $arrows ]] && vcs_info_msg_0_="${vcs_info_msg_0_} %F{magenta}${arrows}%f"
+    [[ $behind -gt 0 ]] && arrows+="%F{yellow}⇣%f"
+    [[ $ahead -gt 0 ]] && arrows+="%F{cyan}⇡%f"
+    [[ -n $arrows ]] && vcs_info_msg_0_="${vcs_info_msg_0_} ${arrows}"
   else
     vcs_info_msg_0_=""
   fi
@@ -57,8 +57,7 @@ PROMPT=$'%F{blue}%~%f\u0020${vcs_info_msg_0_}\n%(?.%F{magenta}.%F{red})\u276f%f\
 
 # fzf
 export FZF_DEFAULT_OPTS="
-  --color=bg:#0f172a,fg:#e2e8f0,hl:#93c5fd
-  --color=bg+:#334155,fg+:#f1f5f9,hl+:#93c5fd
+  --color=hl:#93c5fd,bg+:#334155,fg+:#f1f5f9,hl+:#93c5fd
   --color=info:#94a3b8,prompt:#93c5fd,pointer:#f9a8d4
   --color=marker:#86efac,spinner:#93c5fd,header:#94a3b8
   --reverse
