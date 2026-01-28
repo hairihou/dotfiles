@@ -1,5 +1,17 @@
 [branch]
 	sort = -committerdate
+[color "diff"]
+	context = "#e2e8f0"
+	frag = "#93c5fd"
+	meta = "#94a3b8"
+	new = "#86efac"
+	newMoved = "#67e8f9"
+	old = "#fca5a5"
+	oldMoved = "#f9a8d4"
+[color "status"]
+	added = "#86efac"
+	changed = "#fcd34d"
+	untracked = "#94a3b8"
 [column]
 	ui = auto
 [commit]
