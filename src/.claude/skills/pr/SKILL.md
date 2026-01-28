@@ -26,7 +26,8 @@ allowed-tools: Bash(gh:*), Bash(git:*)
 
 1. **Validate**: If no changes exist, inform user and exit
 
-2. **Branch**: If on `main`/`master`, create new branch first
+2. **Branch**: If current branch is `main`/`master` OR equals the base branch, create new branch first
+   - Infer issue number from base branch name if possible (e.g., `feature-7509-...` → `#7509`)
 
    ```sh
    git switch -c <branch-name>
