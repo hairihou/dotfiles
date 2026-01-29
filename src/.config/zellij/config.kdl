@@ -1,18 +1,131 @@
 // https://tailwindcss.com/docs/colors
+// Tailwind CSS Dark theme (new format)
 themes {
     tailwindcss-dark {
-        bg 15 23 42          // slate-900
-        fg 226 232 240       // slate-200
-        black 71 85 105      // slate-600
-        blue 96 165 250      // blue-400
-        cyan 34 211 238      // cyan-400
-        gray 100 116 139     // slate-500
-        green 74 222 128     // green-400
-        magenta 244 114 182  // pink-400
-        orange 251 146 60    // orange-400
-        red 248 113 113      // red-400
-        white 203 213 225    // slate-300
-        yellow 251 191 36    // amber-400
+        text_unselected {
+            base 226 232 240         // slate-200
+            background 15 23 42      // slate-900
+            emphasis_0 96 165 250    // blue-400 (info)
+            emphasis_1 74 222 128    // green-400 (success)
+            emphasis_2 251 191 36    // amber-400 (warning)
+            emphasis_3 248 113 113   // red-400 (error)
+        }
+        text_selected {
+            base 241 245 249         // slate-100
+            background 51 65 85      // slate-700
+            emphasis_0 96 165 250    // blue-400
+            emphasis_1 74 222 128    // green-400
+            emphasis_2 251 191 36    // amber-400
+            emphasis_3 248 113 113   // red-400
+        }
+        ribbon_unselected {
+            base 148 163 184         // slate-400
+            background 30 41 59      // slate-800
+            emphasis_0 96 165 250    // blue-400
+            emphasis_1 74 222 128    // green-400
+            emphasis_2 251 191 36    // amber-400
+            emphasis_3 248 113 113   // red-400
+        }
+        ribbon_selected {
+            base 241 245 249         // slate-100
+            background 51 65 85      // slate-700
+            emphasis_0 96 165 250    // blue-400
+            emphasis_1 74 222 128    // green-400
+            emphasis_2 251 191 36    // amber-400
+            emphasis_3 248 113 113   // red-400
+        }
+        table_title {
+            base 226 232 240         // slate-200
+            background 15 23 42      // slate-900
+            emphasis_0 96 165 250    // blue-400
+            emphasis_1 74 222 128    // green-400
+            emphasis_2 251 191 36    // amber-400
+            emphasis_3 248 113 113   // red-400
+        }
+        table_cell_unselected {
+            base 203 213 225         // slate-300
+            background 15 23 42      // slate-900
+            emphasis_0 96 165 250    // blue-400
+            emphasis_1 74 222 128    // green-400
+            emphasis_2 251 191 36    // amber-400
+            emphasis_3 248 113 113   // red-400
+        }
+        table_cell_selected {
+            base 241 245 249         // slate-100
+            background 51 65 85      // slate-700
+            emphasis_0 96 165 250    // blue-400
+            emphasis_1 74 222 128    // green-400
+            emphasis_2 251 191 36    // amber-400
+            emphasis_3 248 113 113   // red-400
+        }
+        list_unselected {
+            base 203 213 225         // slate-300
+            background 15 23 42      // slate-900
+            emphasis_0 96 165 250    // blue-400
+            emphasis_1 74 222 128    // green-400
+            emphasis_2 251 191 36    // amber-400
+            emphasis_3 248 113 113   // red-400
+        }
+        list_selected {
+            base 241 245 249         // slate-100
+            background 51 65 85      // slate-700
+            emphasis_0 96 165 250    // blue-400
+            emphasis_1 74 222 128    // green-400
+            emphasis_2 251 191 36    // amber-400
+            emphasis_3 248 113 113   // red-400
+        }
+        frame_unselected {
+            base 100 116 139         // slate-500
+            background 15 23 42      // slate-900
+            emphasis_0 96 165 250    // blue-400
+            emphasis_1 74 222 128    // green-400
+            emphasis_2 251 191 36    // amber-400
+            emphasis_3 248 113 113   // red-400
+        }
+        frame_selected {
+            base 96 165 250          // blue-400
+            background 15 23 42      // slate-900
+            emphasis_0 96 165 250    // blue-400
+            emphasis_1 74 222 128    // green-400
+            emphasis_2 251 191 36    // amber-400
+            emphasis_3 248 113 113   // red-400
+        }
+        frame_highlight {
+            base 34 211 238          // cyan-400
+            background 15 23 42      // slate-900
+            emphasis_0 96 165 250    // blue-400
+            emphasis_1 74 222 128    // green-400
+            emphasis_2 251 191 36    // amber-400
+            emphasis_3 248 113 113   // red-400
+        }
+        exit_code_success {
+            base 74 222 128          // green-400
+            background 15 23 42      // slate-900
+            emphasis_0 96 165 250    // blue-400
+            emphasis_1 74 222 128    // green-400
+            emphasis_2 251 191 36    // amber-400
+            emphasis_3 248 113 113   // red-400
+        }
+        exit_code_error {
+            base 248 113 113         // red-400
+            background 15 23 42      // slate-900
+            emphasis_0 96 165 250    // blue-400
+            emphasis_1 74 222 128    // green-400
+            emphasis_2 251 191 36    // amber-400
+            emphasis_3 248 113 113   // red-400
+        }
+        multiplayer_user_colors {
+            player_1 96 165 250      // blue-400
+            player_2 74 222 128      // green-400
+            player_3 251 191 36      // amber-400
+            player_4 248 113 113     // red-400
+            player_5 244 114 182     // pink-400
+            player_6 34 211 238      // cyan-400
+            player_7 251 146 60      // orange-400
+            player_8 167 139 250     // violet-400
+            player_9 203 213 225     // slate-300
+            player_10 100 116 139    // slate-500
+        }
     }
 }
 
