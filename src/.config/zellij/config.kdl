@@ -1,5 +1,4 @@
 // https://tailwindcss.com/docs/colors
-// Tailwind CSS Dark theme (new format)
 themes {
     tailwindcss-dark {
         text_unselected {
