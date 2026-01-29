@@ -53,7 +53,7 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr '%F{green}+%f'
 zstyle ':vcs_info:*' unstagedstr '%F{blue}*%f'
 zstyle ':vcs_info:git:*' formats '%F{magenta}%b%f%u%c'
-PROMPT=$'%F{blue}%~%f\u0020${vcs_info_msg_0_}\n%(?.%F{magenta}.%F{red})\u276f%f\u0020'
+PROMPT=$'%F{blue}%~%f\u0020${vcs_info_msg_0_}\n%(?.%f.%F{red})\u276f%f\u0020'
 
 fzf-ghq() {
   local repo=$(ghq list --full-path | fzf --reverse)
