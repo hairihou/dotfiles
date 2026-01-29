@@ -8,6 +8,7 @@ export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
 export PATH="$JAVA_HOME/bin:$PATH"
 export PATH="$HOME/.rd/bin:$PATH"
 export PATH="$HOME/dotfiles/bin:$PATH"
+export HOMEBREW_FORBIDDEN_FORMULAE="node npm pip python python3"
 
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=100000
