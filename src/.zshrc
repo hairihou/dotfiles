@@ -56,7 +56,7 @@ zstyle ':vcs_info:git:*' formats '%F{magenta}%b%f%u%c'
 PROMPT=$'%F{blue}%~%f\u0020${vcs_info_msg_0_}\n%(?.%F{magenta}.%F{red})\u276f%f\u0020'
 
 fzf-ghq() {
-  local repo=$(ghq list --full-path | fzf)
+  local repo=$(ghq list --full-path | fzf --reverse)
   if [[ -n "$repo" ]]; then
     BUFFER="${(q)repo}"
     zle accept-line
@@ -66,7 +66,7 @@ zle -N fzf-ghq
 bindkey '^g' fzf-ghq
 
 fzf-history() {
-  local selected=$(fc -ln 1 | fzf --no-sort --query "$LBUFFER" --tac)
+  local selected=$(fc -ln 1 | fzf --no-sort --query "$LBUFFER" --reverse --tac)
   if [[ -n "$selected" ]]; then
     print -s "$selected"
     BUFFER="$selected"
