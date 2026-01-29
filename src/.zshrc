@@ -23,8 +23,8 @@ setopt HIST_REDUCE_BLANKS
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_VERIFY
 setopt IGNOREEOF
-setopt INC_APPEND_HISTORY
 setopt PROMPT_SUBST
+setopt SHARE_HISTORY
 
 autoload -Uz compinit
 if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
