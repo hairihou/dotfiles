@@ -55,14 +55,6 @@ zstyle ':vcs_info:*' unstagedstr '%F{blue}*%f'
 zstyle ':vcs_info:git:*' formats '%F{magenta}%b%f%u%c'
 PROMPT=$'%F{blue}%~%f\u0020${vcs_info_msg_0_}\n%(?.%F{magenta}.%F{red})\u276f%f\u0020'
 
-# fzf
-export FZF_DEFAULT_OPTS="
-  --color=hl:#93c5fd,bg+:#334155,fg+:#f1f5f9,hl+:#93c5fd
-  --color=info:#94a3b8,prompt:#93c5fd,pointer:#f9a8d4
-  --color=marker:#86efac,spinner:#93c5fd,header:#94a3b8
-  --reverse
-"
-
 fzf-ghq() {
   local repo=$(ghq list --full-path | fzf)
   if [[ -n "$repo" ]]; then
