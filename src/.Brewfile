@@ -1,6 +1,6 @@
 brew "gh"
 brew "mise"
-brew "vim"
+brew "neovim"
 cask "android-studio"
 cask "claude-code"
 cask "figma"
