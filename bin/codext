@@ -1,36 +1,36 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly extensions_file="$HOME/dotfiles/public/vscode-extensions.txt"
+readonly extensions_list="$HOME/dotfiles/public/vscode-extensions.txt"
+readonly extensions_dir="$HOME/.vscode/extensions"
 readonly ignored_extensions=(
   "tailwindlabs.tailwindcss-vscode-theme"
 )
 
 dump_extensions() {
-  code --list-extensions | sort > "$extensions_file"
-  local count=$(wc -l < "$extensions_file")
-  echo "Dumped $count extensions to $extensions_file"
+  code --list-extensions | sort > "$extensions_list"
+  local count=$(wc -l < "$extensions_list")
+  echo "Dumped $count extensions to $extensions_list"
 }
 
 prune_extensions() {
-  local installed_extensions=$(code --list-extensions 2>/dev/null || echo "")
-  local expected_extensions=$(grep -v '^#' "$extensions_file" | grep -v '^$' || echo "")
+  local listed
+  listed=$(grep -v '^#' "$extensions_list" | grep -v '^$')
+
   local to_remove=()
-
-  while IFS= read -r installed_ext; do
-    [[ " ${ignored_extensions[*]} " =~ " ${installed_ext} " ]] && continue
-
-    if ! echo "$expected_extensions" | grep -q "^${installed_ext}$" 2>/dev/null; then
-      to_remove+=("$installed_ext")
-    fi
-  done <<< "$installed_extensions"
+  while IFS= read -r ext; do
+    [[ -z "$ext" ]] && continue
+    [[ " ${ignored_extensions[*]} " =~ " ${ext} " ]] && continue
+    echo "$listed" | grep -qx "$ext" && continue
+    to_remove+=("$ext")
+  done < <(code --list-extensions 2>/dev/null)
 
   if [[ ${#to_remove[@]} -eq 0 ]]; then
     echo 'No extensions to remove'
     return 0
   fi
 
-  echo "The following extensions are not in $extensions_file:"
+  echo "The following extensions are not in $extensions_list:"
   for ext in "${to_remove[@]}"; do
     echo "  - $ext"
   done
@@ -53,46 +53,49 @@ prune_extensions() {
   echo "Removed $removed extensions"
 }
 
-install_extensions() {
-  local installed_extensions
-  installed_extensions=$(code --list-extensions 2>/dev/null || echo "")
+sync_extensions() {
+  local installed
+  installed=$(code --list-extensions 2>/dev/null || echo "")
 
-  local total=0
-  local installed=0
+  local listed=()
+  while IFS= read -r ext; do
+    [[ -z "$ext" || "$ext" =~ ^# ]] && continue
+    [[ " ${ignored_extensions[*]} " =~ " ${ext} " ]] && continue
+    listed+=("$ext")
+  done < "$extensions_list"
+
+  local total=${#listed[@]}
+  local added=0
   local failed=0
   local skipped=0
-
-  while IFS= read -r extension; do
-    [[ -z "$extension" || "$extension" =~ ^# ]] && continue
-    [[ " ${ignored_extensions[*]} " =~ " ${extension} " ]] && continue
-
-    total=$((total + 1))
-  done < "$extensions_file"
-
   local current=0
 
-  while IFS= read -r extension; do
-    [[ -z "$extension" || "$extension" =~ ^# ]] && continue
-    [[ " ${ignored_extensions[*]} " =~ " ${extension} " ]] && continue
-
+  for ext in "${listed[@]}"; do
     current=$((current + 1))
-    echo "[$current/$total] $extension"
+    echo "[$current/$total] $ext"
 
-    if echo "$installed_extensions" | grep -q "^$extension$" 2>/dev/null; then
+    if echo "$installed" | grep -qx "$ext"; then
       echo 'Already installed'
       skipped=$((skipped + 1))
     else
-      if code --install-extension "$extension" > /dev/null 2>&1; then
+      if code --install-extension "$ext" > /dev/null 2>&1; then
         echo 'Installed'
-        installed=$((installed + 1))
+        added=$((added + 1))
       else
         echo 'Failed'
         failed=$((failed + 1))
       fi
     fi
-  done < "$extensions_file"
+  done
 
-  echo "Installed: $installed, Failed: $failed, Skipped: $skipped"
+  echo "Added: $added, Failed: $failed, Skipped: $skipped"
+
+  rm -f "$extensions_dir/.obsolete" 2>/dev/null || true
+
+  local state="$extensions_dir/extensions.json"
+  if [[ -f "$state" ]] && command -v jq > /dev/null 2>&1; then
+    jq 'map(del(.pinned))' "$state" > "${state}.tmp" && mv "${state}.tmp" "$state"
+  fi
 }
 
 main() {
@@ -105,18 +108,20 @@ main() {
     --dump)
       dump_extensions
       ;;
-    --prune | '')
-      if [[ ! -f "$extensions_file" ]]; then
-        echo "Error: $extensions_file not found"
-        [[ "${1:-}" == '--prune' ]] || echo 'Run with --dump to create it'
+    --prune)
+      if [[ ! -f "$extensions_list" ]]; then
+        echo "Error: $extensions_list not found"
         exit 1
       fi
-
-      if [[ "${1:-}" == '--prune' ]]; then
-        prune_extensions
-      else
-        install_extensions
+      prune_extensions
+      ;;
+    '')
+      if [[ ! -f "$extensions_list" ]]; then
+        echo "Error: $extensions_list not found"
+        echo 'Run with --dump to create it'
+        exit 1
       fi
+      sync_extensions
       ;;
     *)
       echo "Error: Unknown option: $1"
