@@ -71,11 +71,6 @@
   "[toml]": {
     "editor.defaultFormatter": "tamasfe.even-better-toml",
   },
-  "[php]": {
-    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
-  },
-  "php.suggest.basic": false,
-  "php.validate.enable": false,
   "todo-tree.filtering.excludeGlobs": ["dist", "node_modules"],
   "todo-tree.general.tags": [
     "BUG",
