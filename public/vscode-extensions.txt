@@ -1,7 +1,6 @@
 angular.ng-template
 anthropic.claude-code
 astral-sh.ty
-bmewburn.vscode-intelephense-client
 bradlc.vscode-tailwindcss
 charliermarsh.ruff
 christian-kohler.path-intellisense
@@ -10,12 +9,9 @@ denoland.vscode-deno
 esbenp.prettier-vscode
 formulahendry.auto-close-tag
 formulahendry.auto-rename-tag
-github.copilot
-github.copilot-chat
 github.vscode-github-actions
 github.vscode-pull-request-github
 gruntfuggly.todo-tree
-ms-azuretools.vscode-containers
 ms-python.debugpy
 ms-python.python
 ms-python.vscode-pylance
@@ -23,6 +19,7 @@ ms-python.vscode-python-envs
 ms-vscode-remote.remote-containers
 ms-vscode.vscode-js-profile-flame
 naumovs.color-highlight
+openai.chatgpt
 streetsidesoftware.code-spell-checker
 tailwindlabs.tailwindcss-vscode-theme
 tamasfe.even-better-toml
