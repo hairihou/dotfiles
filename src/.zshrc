@@ -1,5 +1,5 @@
 typeset -U PATH
-export EDITOR='vim'
+export EDITOR='nvim'
 export LANG='en_US.UTF-8'
 
 export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
