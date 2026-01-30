@@ -129,6 +129,11 @@ themes {
 }
 
 default_layout "compact"
+keybinds {
+    shared {
+        bind "Shift Enter" { WriteChars "\u{001b}[13;2u"; }
+    }
+}
 pane_frames false
 scrollback_editor "nvim"
 show_startup_tips false
