@@ -1,6 +1,7 @@
 require("config.options")
 vim.g.mapleader = vim.keycode("<Space>")
 vim.g.maplocalleader = vim.keycode("<Space>")
+require("plugins")
 local colors = require("util.colors")
 local function setup_colorscheme()
   vim.cmd("highlight clear")
