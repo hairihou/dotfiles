@@ -9,6 +9,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
   {
+    "saghen/blink.cmp",
+    version = "1.*",
+    opts = {
+      keymap = { preset = "default" },
+      sources = { default = { "lsp", "path", "buffer" } },
+    },
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
     build = ":TSUpdate",
@@ -22,11 +30,14 @@ require("lazy").setup({
     end,
   },
   {
-    "saghen/blink.cmp",
-    version = "1.*",
-    opts = {
-      keymap = { preset = "default" },
-      sources = { default = { "lsp", "path", "buffer" } },
+    "toppair/peek.nvim",
+    ft = { "markdown" },
+    build = "deno task --quiet build:fast",
+    keys = {
+      { "<leader>mp", function()
+        local peek = require("peek")
+        if peek.is_open() then peek.close() else peek.open() end
+      end, desc = "Markdown Preview" },
     },
   },
 })
