@@ -78,7 +78,7 @@ fzf-history() {
 zle -N fzf-history
 bindkey '^r' fzf-history
 
-continue-line() { LBUFFER+=$'\\\n' }
+continue-line() { LBUFFER+=$'\\\n\u0020\u0020' }
 zle -N continue-line
 bindkey '\e[13;2u' continue-line
 
