@@ -1,6 +1,6 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
-
+-- https://tailwindcss.com/docs/colors
 local theme = {
   amber = { [300] = "#fcd34d", [400] = "#fbbf24" },
   blue = { [300] = "#93c5fd", [400] = "#60a5fa" },
@@ -14,7 +14,6 @@ local theme = {
     [800] = "#1e293b", [900] = "#0f172a",
   },
 }
-
 config.colors = {
   ansi = {
     theme.slate[600], theme.red[400], theme.green[400], theme.amber[400],
@@ -40,9 +39,8 @@ config.colors = {
   },
 }
 config.default_cursor_style = "SteadyBlock"
-config.use_ime = true
 config.font = wezterm.font("UDEV Gothic 35NFLG")
-config.font_size = 14.0
+config.font_size = 12.0
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 config.hide_tab_bar_if_only_one_tab = true
 config.initial_cols = 128
@@ -55,8 +53,8 @@ config.scrollback_lines = 10000
 config.send_composed_key_when_left_alt_is_pressed = false
 config.send_composed_key_when_right_alt_is_pressed = false
 config.use_fancy_tab_bar = false
+config.use_ime = true
 config.warn_about_missing_glyphs = false
 config.window_background_opacity = 0.96
 config.window_close_confirmation = "NeverPrompt"
-
 return config
