@@ -8,9 +8,9 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
+  { "folke/todo-comments.nvim", opts = {} },
   {
     "nvim-treesitter/nvim-treesitter",
-    branch = "main",
     build = ":TSUpdate",
     lazy = false,
     config = function()
@@ -23,7 +23,6 @@ require("lazy").setup({
   },
   {
     "saghen/blink.cmp",
-    version = "1.*",
     opts = {
       keymap = { preset = "default" },
       sources = { default = { "lsp", "path", "buffer" } },
