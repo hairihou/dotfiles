@@ -41,6 +41,7 @@ config.colors = {
 config.default_cursor_style = "SteadyBlock"
 config.font = wezterm.font("UDEV Gothic 35NFLG")
 config.font_size = 12.0
+config.freetype_load_target = "Light"
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 config.hide_tab_bar_if_only_one_tab = true
 config.initial_cols = 128
@@ -55,4 +56,5 @@ config.send_composed_key_when_right_alt_is_pressed = false
 config.use_ime = true
 config.warn_about_missing_glyphs = false
 config.window_close_confirmation = "NeverPrompt"
+
 return config
