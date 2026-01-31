@@ -2,12 +2,12 @@
 themes {
     tailwindcss-dark {
         text_unselected {
-            base 226 232 240         // slate-200
+            base 203 213 225         // slate-300
             background 15 23 42      // slate-900
-            emphasis_0 96 165 250    // blue-400 (info)
-            emphasis_1 74 222 128    // green-400 (success)
-            emphasis_2 251 191 36    // amber-400 (warning)
-            emphasis_3 248 113 113   // red-400 (error)
+            emphasis_0 96 165 250    // blue-400
+            emphasis_1 74 222 128    // green-400
+            emphasis_2 251 191 36    // amber-400
+            emphasis_3 248 113 113   // red-400
         }
         text_selected {
             base 241 245 249         // slate-100
@@ -34,7 +34,7 @@ themes {
             emphasis_3 248 113 113   // red-400
         }
         table_title {
-            base 226 232 240         // slate-200
+            base 203 213 225         // slate-300
             background 15 23 42      // slate-900
             emphasis_0 96 165 250    // blue-400
             emphasis_1 74 222 128    // green-400
