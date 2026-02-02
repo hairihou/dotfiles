@@ -1,5 +1,5 @@
 vim.g.mapleader = vim.keycode("<Space>")
 vim.g.maplocalleader = vim.keycode("<Space>")
 require("config.options")
-require("plugins")
+require("config.lazy")
 require("config.colorscheme")

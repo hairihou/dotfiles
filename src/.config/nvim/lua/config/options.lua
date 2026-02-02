@@ -1,3 +1,5 @@
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 local opt = vim.opt
 opt.clipboard = "unnamedplus"
 opt.completeopt = { "menu", "menuone", "noselect" }
