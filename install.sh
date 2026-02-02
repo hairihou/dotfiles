@@ -73,9 +73,9 @@ create_symlink() {
       mkdir -p "$to"
     fi
     local file
-    find "$from" -maxdepth 1 -mindepth 1 | while IFS= read -r file; do
+    while IFS= read -r file; do
       create_symlink "$file" "$to/$(basename "$file")"
-    done
+    done < <(find "$from" -maxdepth 1 -mindepth 1)
   elif [ -f "$from" ]; then
     if ln -sfi "$from" "$to" < /dev/tty; then
       record_symlink "$to"
@@ -89,7 +89,7 @@ apply_dir() {
   local dir="$1"
   local exclude="${2:-}"
   local item name
-  find "$dir" -maxdepth 1 -mindepth 1 | while IFS= read -r item; do
+  while IFS= read -r item; do
     name="$(basename "$item")"
     if [ -n "$exclude" ]; then
       case "$name" in
@@ -97,7 +97,7 @@ apply_dir() {
       esac
     fi
     create_symlink "$item" "$HOME/$name"
-  done
+  done < <(find "$dir" -maxdepth 1 -mindepth 1)
 }
 
 cleanup_broken_symlinks_in() {
