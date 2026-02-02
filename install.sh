@@ -3,6 +3,7 @@ set -euo pipefail
 
 readonly dst="$HOME/dotfiles"
 readonly src='https://github.com/hairihou/dotfiles.git'
+readonly symlinks_record="$dst/dist/.symlinks"
 
 is_owner() {
   [ "$(whoami)" = 'hairihou' ]
@@ -45,6 +46,7 @@ create_symlink() {
   parent="$(dirname "$to")"
 
   if [ -L "$to" ] && [ "$(resolve_symlink "$to")" = "$from" ]; then
+    record_symlink "$to"
     return 0
   fi
 
@@ -63,7 +65,7 @@ create_symlink() {
 
   if [ -d "$from" ]; then
     if [ -d "$to" ]; then
-      :
+      cleanup_broken_symlinks_in "$to"
     elif [ -e "$to" ]; then
       echo "Warning: Cannot create directory '$to': file exists. Skipping." >&2
       return 0
@@ -75,7 +77,9 @@ create_symlink() {
       create_symlink "$file" "$to/$(basename "$file")"
     done
   elif [ -f "$from" ]; then
-    if ! ln -sfi "$from" "$to" < /dev/tty; then
+    if ln -sfi "$from" "$to" < /dev/tty; then
+      record_symlink "$to"
+    else
       echo "Warning: Failed to create symlink: $to" >&2
     fi
   fi
@@ -96,16 +100,56 @@ apply_dir() {
   done
 }
 
+cleanup_broken_symlinks_in() {
+  local dir="$1"
+  local link target
+  while IFS= read -r link; do
+    target="$(resolve_symlink "$link")"
+    case "$target" in
+      "$dst/src"*)
+        if [ ! -e "$target" ]; then
+          echo "Removing broken symlink: $link"
+          rm "$link"
+        fi
+        ;;
+    esac
+  done < <(find "$dir" -maxdepth 1 -type l 2>/dev/null)
+}
+
+cleanup_recorded_symlinks() {
+  [ -f "$symlinks_record" ] || return 0
+  local link
+  while IFS= read -r link; do
+    [ -n "$link" ] || continue
+    if [ -L "$link" ] && [ ! -e "$link" ]; then
+      echo "Removing broken symlink: $link"
+      rm "$link"
+    fi
+  done < "$symlinks_record"
+}
+
+record_symlink() {
+  echo "$1" >> "$symlinks_record.new"
+}
+
 main() {
   sync_repo
 
+  echo 'Cleaning up broken symlinks...'
+  cleanup_recorded_symlinks
+
   echo 'Creating symlinks...'
+  mkdir -p "$(dirname "$symlinks_record")"
+  : > "$symlinks_record.new"
+  cleanup_broken_symlinks_in "$HOME"
   apply_dir "$dst/src" 'exclude'
   [ "$(uname)" = 'Darwin' ] && apply_dir "$dst/src/_darwin"
   if is_owner; then
     create_symlink "$dst/src/.Brewfile.owner" "$HOME/.Brewfile"
     create_symlink "$dst/src/.gitconfig.owner" "$HOME/.gitconfig"
   fi
+  sort -u "$symlinks_record.new" -o "$symlinks_record"
+  rm -f "$symlinks_record.new"
 }
 
 main
