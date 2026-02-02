@@ -57,6 +57,7 @@
   "terminal.integrated.suggest.enabled": false,
   "typescript.implementationsCodeLens.enabled": true,
   "typescript.referencesCodeLens.enabled": true,
+  "vim.disableExtension": true,
   "window.commandCenter": false,
   "window.title": "\u0020",
   "workbench.colorTheme": "Tailwind CSS Dark",

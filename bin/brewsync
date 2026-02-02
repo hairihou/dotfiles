@@ -2,6 +2,20 @@
 set -euo pipefail
 
 readonly brewfile="$HOME/.Brewfile"
+readonly include_types=(brew cask tap)
+
+dump_packages() {
+  echo "Dumping installed packages to Brewfile..."
+  brew bundle dump --global --force
+  local pattern content
+  pattern=$(IFS='|'; echo "${include_types[*]}")
+  content=$(grep -E "^(${pattern}) " "$brewfile" || true)
+  printf '%s\n' "$content" > "$brewfile"
+  local formulae_count=$(grep -c "^brew " "$brewfile" 2>/dev/null || echo 0)
+  local cask_count=$(grep -c "^cask " "$brewfile" 2>/dev/null || echo 0)
+  local total=$((formulae_count + cask_count))
+  echo "Dumped $total packages to $brewfile"
+}
 
 install_packages() {
   if [[ ! -f "$brewfile" ]]; then
@@ -10,17 +24,8 @@ install_packages() {
   fi
 
   echo "Installing packages from Brewfile..."
-  brew bundle --global --no-vscode
+  brew bundle --global
   echo "Installation complete"
-}
-
-dump_packages() {
-  echo "Dumping installed packages to Brewfile..."
-  brew bundle dump --global --no-vscode --force
-  local formulae_count=$(grep -c "^brew " "$brewfile" 2>/dev/null || echo 0)
-  local cask_count=$(grep -c "^cask " "$brewfile" 2>/dev/null || echo 0)
-  local total=$((formulae_count + cask_count))
-  echo "Dumped $total packages to $brewfile"
 }
 
 prune_packages() {
@@ -29,7 +34,7 @@ prune_packages() {
     exit 1
   fi
 
-  local to_remove=$(brew bundle cleanup --global --no-vscode 2>&1 | grep "^Would uninstall" | sed 's/^Would uninstall //' || echo "")
+  local to_remove=$(brew bundle cleanup --global 2>&1 | grep "^Would uninstall" | sed 's/^Would uninstall //' || echo "")
 
   if [[ -z "$to_remove" ]]; then
     echo 'No packages to remove'
@@ -47,7 +52,7 @@ prune_packages() {
   fi
 
   echo "Removing packages..."
-  brew bundle cleanup --force --global --no-vscode
+  brew bundle cleanup --force --global
   echo "Cleanup complete"
 }
 
