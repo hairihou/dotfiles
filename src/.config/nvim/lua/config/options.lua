@@ -23,4 +23,5 @@ opt.termguicolors = true
 opt.timeoutlen = 300
 opt.undofile = true
 opt.updatetime = 250
+opt.winbar = "%f"
 opt.wrap = false
