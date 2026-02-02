@@ -1,6 +1,7 @@
 local opt = vim.opt
 opt.clipboard = "unnamedplus"
 opt.completeopt = { "menu", "menuone", "noselect" }
+opt.cursorcolumn = true
 opt.cursorline = true
 opt.expandtab = true
 opt.fileencoding = "utf-8"
