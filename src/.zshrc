@@ -34,12 +34,33 @@ else
   compinit -C
 fi
 
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' menu select
+
 autoload -Uz vcs_info
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr '%F{green}+%f'
+zstyle ':vcs_info:*' unstagedstr '%F{blue}*%f'
+zstyle ':vcs_info:git:*' formats '%F{magenta}%b%f%u%c'
+typeset prompt_path=""
 precmd() {
+  local p="${PWD/#$HOME/~}"
+  if [[ "$p" == "/" ]]; then
+    prompt_path="/"
+  else
+    local -a parts=("${(@s:/:)p}")
+    prompt_path=""
+    for ((i=1; i<${#parts[@]}; i++)); do
+      prompt_path+="${parts[i]:0:1}/"
+    done
+    prompt_path+="${parts[-1]}"
+  fi
   if git rev-parse --git-dir &>/dev/null; then
     vcs_info
-    local ahead=$(git rev-list --count @{upstream}..HEAD 2>/dev/null)
-    local behind=$(git rev-list --count HEAD..@{upstream} 2>/dev/null)
+    local lr
+    lr=$(git rev-list --left-right --count @{upstream}...HEAD 2>/dev/null)
+    local behind=${lr%%$'\t'*}
+    local ahead=${lr##*$'\t'}
     local arrows=""
     [[ $behind -gt 0 ]] && arrows+="%F{yellow}⇣%f"
     [[ $ahead -gt 0 ]] && arrows+="%F{cyan}⇡%f"
@@ -48,13 +69,11 @@ precmd() {
     vcs_info_msg_0_=""
   fi
 }
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*' menu select
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr '%F{green}+%f'
-zstyle ':vcs_info:*' unstagedstr '%F{blue}*%f'
-zstyle ':vcs_info:git:*' formats '%F{magenta}%b%f%u%c'
-PROMPT=$'%F{blue}%~%f${vcs_info_msg_0_:+\u0020${vcs_info_msg_0_}}\u0020%(?.%f.%F{red})\u276f%f\u0020'
+PROMPT='%F{blue}${prompt_path}%f${vcs_info_msg_0_:+ ${vcs_info_msg_0_}} %(?.%f.%F{red})❯%f '
+
+continue-line() { LBUFFER+=$'\\\n\u0020\u0020' }
+zle -N continue-line
+bindkey '\e[13;2u' continue-line
 
 fzf-ghq() {
   local repo=$(ghq list --full-path | fzf --reverse)
@@ -78,9 +97,4 @@ fzf-history() {
 zle -N fzf-history
 bindkey '^r' fzf-history
 
-continue-line() { LBUFFER+=$'\\\n\u0020\u0020' }
-zle -N continue-line
-bindkey '\e[13;2u' continue-line
-
-# mise
 eval "$(mise activate zsh)"
