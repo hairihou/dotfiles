@@ -28,7 +28,6 @@ Symlinked to home directory:
 | Source                     | Target                         |
 | -------------------------- | ------------------------------ |
 | `src/.Brewfile`            | `~/.Brewfile`                  |
-| `src/.claude/**/*`         | `~/.claude/**/*`               |
 | `src/.codex/**/*`          | `~/.codex/**/*`                |
 | `src/.config/**/*`         | `~/.config/**/*`               |
 | `src/.zshrc`               | `~/.zshrc`                     |
