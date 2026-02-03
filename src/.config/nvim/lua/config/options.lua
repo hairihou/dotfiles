@@ -1,6 +1,7 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 local opt = vim.opt
+opt.autoread = true
 opt.clipboard = "unnamedplus"
 opt.completeopt = { "menu", "menuone", "noselect" }
 opt.cursorcolumn = true
@@ -27,3 +28,6 @@ opt.undofile = true
 opt.updatetime = 250
 opt.winbar = "%f"
 opt.wrap = false
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+  command = "checktime",
+})
