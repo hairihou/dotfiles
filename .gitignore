@@ -23,7 +23,4 @@ dist-ssr
 *.sw?
 
 # WIP
-src/.config/claude/skills/agent-browser
-src/.config/claude/skills/vercel-react-best-practices
-src/.config/claude/skills/web-design-guidelines
 src/.codex/config.toml
