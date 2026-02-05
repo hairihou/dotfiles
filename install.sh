@@ -6,7 +6,13 @@ readonly src='https://github.com/hairihou/dotfiles.git'
 readonly symlinks_record="$dst/dist/.symlinks"
 
 is_owner() {
-  [ "$(whoami)" = 'hairihou' ]
+  local email
+  email="$(git config --global user.email)"
+  case "$email" in
+    *+hairihou@users.noreply.github.com) return 0 ;;
+    hairihou@*) return 0 ;;
+    *) return 1 ;;
+  esac
 }
 
 resolve_symlink() {
