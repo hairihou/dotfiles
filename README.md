@@ -6,7 +6,7 @@
 ## Setup
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh | sh
 ```
 
 ## Overview
