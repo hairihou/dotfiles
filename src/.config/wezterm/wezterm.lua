@@ -41,13 +41,18 @@ config.colors = {
 config.default_cursor_style = "SteadyBlock"
 config.font = wezterm.font("UDEV Gothic 35NFLG")
 config.font_size = 12.0
-config.freetype_load_target = "Light"
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 config.hide_tab_bar_if_only_one_tab = true
-config.initial_cols = 128
-config.initial_rows = 40
+config.initial_cols = 120
+config.initial_rows = 36
+local is_transparent = false
+wezterm.on("toggle-opacity", function(window, _)
+  is_transparent = not is_transparent
+  window:set_config_overrides({ window_background_opacity = is_transparent and 0.5 or 1.0 })
+end)
 config.keys = {
-  { key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\x1b[13;2u") },
+  { key = "o", mods = "CMD|SHIFT", action = wezterm.action.EmitEvent("toggle-opacity") }, -- Toggle background transparency
+  { key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\x1b[13;2u") }, -- CSI u encoding for Zsh
 }
 config.native_macos_fullscreen_mode = false
 config.scrollback_lines = 10000
