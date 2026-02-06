@@ -49,13 +49,6 @@ const handleSubmit = () => { ... }
 - Cleanup via `onCleanup` callback inside effect
 - Avoid writing to signals inside effects (use `allowSignalWrites` only when necessary)
 
-### Signals
-
-- `signal`: writable state
-- `computed`: derived values (pure, no side effects)
-- `effect`: side effects in response to signal changes
-- Prefer signals over zone-based change detection
-
 ---
 
 ## React
@@ -63,12 +56,6 @@ const handleSubmit = () => { ... }
 ### Declaration Order
 
 props → external hooks → `useQuery`/`useMutation` → feature blocks → component-level `useEffect` → early returns → JSX
-
-### Rules of Hooks
-
-- Call hooks at top level only (never inside conditions, loops, or nested functions)
-- Call hooks from React function components or custom hooks only
-- Custom hook names must start with `use`
 
 ### useEffect Guidelines
 
@@ -81,16 +68,38 @@ props → external hooks → `useQuery`/`useMutation` → feature blocks → com
 
 ## Vue
 
-### Declaration Order
-
-imports → props/emits → external composables → `useQuery`/`useMutation` → feature blocks → lifecycle → `defineExpose`
-
 ### Composables
 
-- Name must start with `use`
 - Return reactive refs (not raw values) for reactivity preservation
 - Accept refs as parameters when reactivity is needed (`MaybeRef<T>`)
 - Keep composables focused on single responsibility
+
+### Computed
+
+- Always specify generic type parameter: `computed<T>(() => ...)`
+- Never rely on return type inference
+
+```vue
+<!-- NG -->
+const label = computed(() => {
+  if (status.value === Status.Active) {
+    return t('status.active')
+  }
+  return t('status.inactive')
+})
+
+<!-- OK -->
+const label = computed<string>(() => {
+  if (status.value === Status.Active) {
+    return t('status.active')
+  }
+  return t('status.inactive')
+})
+```
+
+### Declaration Order
+
+imports → props/emits → external composables → `useQuery`/`useMutation` → feature blocks → lifecycle → `defineExpose`
 
 ### Watch Guidelines
 
