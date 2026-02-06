@@ -20,7 +20,22 @@ Always use block statements (`if (x) { return; }`, not `if (x) return;`)
 
 ## Enums
 
-Use `as const` objects instead of enums.
+Use `as const` objects instead of enums. Keys must be PascalCase.
+
+```typescript
+// NG
+const Status = {
+  activeUser: "ACTIVE",
+  INACTIVE_USER: "INACTIVE",
+} as const;
+
+// OK
+const Status = {
+  Active: "ACTIVE",
+  Inactive: "INACTIVE",
+} as const;
+type Status = (typeof Status)[keyof typeof Status];
+```
 
 ## Equality & Boolean Checks
 
