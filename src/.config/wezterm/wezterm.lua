@@ -25,6 +25,7 @@ config.colors = {
     theme.blue[300], theme.pink[300], theme.cyan[300], theme.slate[200],
   },
   cursor_bg = theme.slate[100],
+  cursor_border = theme.slate[100],
   cursor_fg = theme.slate[900],
   foreground = theme.slate[300],
   selection_bg = theme.slate[700],
