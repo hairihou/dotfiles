@@ -18,7 +18,3 @@ uv = "0.9.30"
 xh = "0.25.3"
 zellij = "0.43.1"
 
-[settings]
-
-[settings.npm]
-package_manager = "bun"
