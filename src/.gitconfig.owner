@@ -16,8 +16,6 @@
 	all = true
 	prune = true
 	pruneTags = true
-[ghq]
-	root = ~/dev
 [help]
 	autocorrect = prompt
 [init]
