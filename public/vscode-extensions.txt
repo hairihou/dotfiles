@@ -12,9 +12,7 @@ formulahendry.auto-rename-tag
 github.copilot-chat
 github.vscode-github-actions
 github.vscode-pull-request-github
-gleam.gleam
 gruntfuggly.todo-tree
-moonbit.moonbit-lang
 ms-python.debugpy
 ms-python.python
 ms-python.vscode-pylance
