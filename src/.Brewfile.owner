@@ -1,5 +1,4 @@
 brew "gh"
-brew "ghq"
 brew "mise"
 brew "neovim"
 brew "ripgrep"
