@@ -41,9 +41,5 @@
       }
     ]
   },
-  "enabledPlugins": {
-    "document-skills@anthropic-agent-skills": true,
-    "playwright-cli@playwright-cli": true
-  },
   "language": "Japanese"
 }
