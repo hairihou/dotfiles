@@ -1,8 +1,11 @@
 typeset -U PATH
 export CLAUDE_CONFIG_DIR="$HOME/.config/claude"
+export CLICOLOR=1
 export EDITOR='nvim'
+export FZF_DEFAULT_OPTS='--color=hl:6,fg+:15,hl+:14,info:8,prompt:4,pointer:5,marker:2,spinner:8,border:8'
 export HOMEBREW_FORBIDDEN_FORMULAE="node npm pip python python3"
 export LANG='en_US.UTF-8'
+export LSCOLORS='exGxFxDxcxDxDxhbadacec'
 
 export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
 export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
@@ -40,14 +43,10 @@ else
   compinit -C
 fi
 
-autoload -Uz add-zsh-hook vcs_info
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr '%F{green}+%f'
-zstyle ':vcs_info:*' unstagedstr '%F{yellow}*%f'
-zstyle ':vcs_info:git:*' formats '%F{magenta}%b%f%u%c'
-typeset prompt_path=""
+autoload -Uz add-zsh-hook
+typeset prompt_path="" prompt_git=""
 _update_prompt() {
-  local p="${PWD/#$HOME/~}" lr behind ahead arrows i
+  local p="${PWD/#$HOME/~}" i
   local -a parts
   if [[ "$p" == "/" ]]; then
     prompt_path="/"
@@ -59,21 +58,25 @@ _update_prompt() {
     done
     prompt_path+="${parts[-1]}"
   fi
-  if git rev-parse --git-dir &>/dev/null; then
-    vcs_info
-    lr=$(git rev-list --left-right --count @{upstream}...HEAD 2>/dev/null)
-    behind=${lr%%$'\t'*}
-    ahead=${lr##*$'\t'}
-    arrows=""
-    [[ $behind -gt 0 ]] && arrows+="%F{red}⇣%f"
-    [[ $ahead -gt 0 ]] && arrows+="%F{cyan}⇡%f"
-    [[ -n $arrows ]] && vcs_info_msg_0_="${vcs_info_msg_0_} ${arrows}"
-  else
-    vcs_info_msg_0_=""
-  fi
+  local output header branch staged="" unstaged="" arrows="" line
+  output=$(git status --porcelain -b 2>/dev/null) || { prompt_git=""; return }
+  header="${output%%$'\n'*}"
+  branch="${header#\#\# }"
+  branch="${branch%%...*}"
+  [[ "$branch" == "No commits yet on "* ]] && branch="${branch#No commits yet on }"
+  [[ "$branch" == "HEAD (no branch)" ]] && branch="detached"
+  for line in ${(f)output}; do
+    [[ "$line" == "##"* ]] && continue
+    [[ -n "$staged" && -n "$unstaged" ]] && break
+    [[ "${line[1]}" != " " && "${line[1]}" != "?" ]] && staged="%F{10}+%f"
+    [[ "${line[2]}" != " " && "${line[1]}" != "?" ]] && unstaged="%F{11}*%f"
+  done
+  [[ "$header" == *"behind "* ]] && arrows+="%F{9}⇣%f"
+  [[ "$header" == *"ahead "* ]] && arrows+="%F{14}⇡%f"
+  prompt_git="%F{5}${branch}%f${staged}${unstaged}${arrows:+ ${arrows}}"
 }
 add-zsh-hook precmd _update_prompt
-PROMPT='%F{blue}${prompt_path}%f${vcs_info_msg_0_:+ ${vcs_info_msg_0_}} %(?.%f.%F{red})❯%f '
+PROMPT=$'%F{4}${prompt_path}%f${prompt_git:+\u0020${prompt_git}}\u0020%(?.%f.%F{1})\u276f%f\u0020'
 
 continue-line() { LBUFFER+=$'\\\n\u0020\u0020' }
 zle -N continue-line
