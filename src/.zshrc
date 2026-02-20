@@ -105,4 +105,13 @@ fzf-history() {
 zle -N fzf-history
 bindkey '^r' fzf-history
 
+if [[ -n "$ZELLIJ" ]]; then
+  zellij() {
+    case "${1:-}" in
+      ""|attach|a|-s|--session) echo "Already inside a Zellij session." >&2; return 1 ;;
+      *) command zellij "$@" ;;
+    esac
+  }
+fi
+
 eval "$(mise activate zsh)"
