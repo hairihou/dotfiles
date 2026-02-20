@@ -15,9 +15,16 @@
 
 ---
 
+## Documentation
+
+- Write from the reader's perspective with code examples
+- No excessive advertising or flashy expressions; simple and honest
+
+---
+
 ## Git Conventions
 
-- Branch: `#<number>_<type>/<description>` (e.g., `#123_feat/user-auth`)a
+- Branch: `#<number>_<type>/<description>` (e.g., `#123_feat/user-auth`)
 - Issue: `<type>(<subject>): <description>` (e.g., `feat(auth): user authentication`)
 - Commit: Conventional Commits
 - Types: build, chore, ci, docs, feat, fix, perf, refactor, style, test
