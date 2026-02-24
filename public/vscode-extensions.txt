@@ -1,7 +1,6 @@
 angular.ng-template
 anthropic.claude-code
 astral-sh.ty
-bmewburn.vscode-intelephense-client
 bradlc.vscode-tailwindcss
 charliermarsh.ruff
 christian-kohler.path-intellisense
