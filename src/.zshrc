@@ -14,11 +14,11 @@ export PATH="$JAVA_HOME/bin:$PATH"
 export PATH="$HOME/.rd/bin:$PATH"
 export PATH="$HOME/dotfiles/bin:$PATH"
 
-DIRSTACKSIZE=20
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=100000
 SAVEHIST=100000
 
+DIRSTACKSIZE=20
 setopt AUTO_CD
 setopt AUTO_PUSHD
 setopt EXTENDED_HISTORY
@@ -81,7 +81,6 @@ PROMPT=$'%F{4}${prompt_path}%f${prompt_git:+\u0020${prompt_git}}\u0020%(?.%f.%F{
 continue-line() { LBUFFER+=$'\\\n\u0020\u0020' }
 zle -N continue-line
 bindkey '\e[13;2u' continue-line
-
 fzf-ghq() {
   local repo=$(ghq list --full-path | fzf --reverse)
   if [[ -n "$repo" ]]; then
@@ -105,12 +104,32 @@ fzf-history() {
 zle -N fzf-history
 bindkey '^r' fzf-history
 
+fzf-zellij() {
+  local session=$(zellij list-sessions -ns 2>/dev/null | fzf --reverse)
+  if [[ -n "$session" ]]; then
+    BUFFER="zellij attach ${(q)session}"
+    zle accept-line
+  fi
+  zle reset-prompt
+}
+zle -N fzf-zellij
+bindkey '^\]^\]' fzf-zellij
+
 if [[ -n "$ZELLIJ" ]]; then
   zellij() {
     case "${1:-}" in
       ""|attach|a|-s|--session) echo "Already inside a Zellij session." >&2; return 1 ;;
       *) command zellij "$@" ;;
     esac
+  }
+else
+  zellij() {
+    if [[ $# -eq 0 ]]; then
+      local name="${PWD:t}"
+      command zellij attach --create "$name"
+    else
+      command zellij "$@"
+    fi
   }
 fi
 
