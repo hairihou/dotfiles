@@ -81,6 +81,7 @@ PROMPT=$'%F{4}${prompt_path}%f${prompt_git:+\u0020${prompt_git}}\u0020%(?.%f.%F{
 continue-line() { LBUFFER+=$'\\\n\u0020\u0020' }
 zle -N continue-line
 bindkey '\e[13;2u' continue-line
+
 fzf-ghq() {
   local repo=$(ghq list --full-path | fzf --reverse)
   if [[ -n "$repo" ]]; then
