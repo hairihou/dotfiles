@@ -18,7 +18,7 @@
 ## Documentation
 
 - Write from the reader's perspective with code examples
-- No excessive advertising or flashy expressions; simple and honest
+- Tone: no advertising, no flashy expressions; simple and honest
 
 ---
 
