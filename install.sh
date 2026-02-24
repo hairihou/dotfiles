@@ -51,9 +51,21 @@ create_symlink() {
   local parent
   parent="$(dirname "$to")"
 
-  if [ -L "$to" ] && [ "$(resolve_symlink "$to")" = "$from" ]; then
-    record_symlink "$to"
-    return 0
+  if [ -L "$to" ]; then
+    local existing_target
+    existing_target="$(resolve_symlink "$to")"
+    if [ "$existing_target" = "$from" ]; then
+      record_symlink "$to"
+      return 0
+    fi
+    case "$existing_target" in
+      "$dst/src"*)
+        if [ -e "$existing_target" ]; then
+          record_symlink "$to"
+          return 0
+        fi
+        ;;
+    esac
   fi
 
   # Prevent circular symlinks
@@ -145,12 +157,12 @@ main() {
   mkdir -p "$(dirname "$symlinks_record")"
   : > "$symlinks_record.new"
   cleanup_broken_symlinks_in "$HOME"
-  apply_dir "$dst/src" 'exclude'
-  [ "$(uname)" = 'Darwin' ] && apply_dir "$dst/src/_darwin"
   if is_owner; then
     create_symlink "$dst/src/.Brewfile.owner" "$HOME/.Brewfile"
     create_symlink "$dst/src/.gitconfig.owner" "$HOME/.gitconfig"
   fi
+  apply_dir "$dst/src" 'exclude'
+  [ "$(uname)" = 'Darwin' ] && apply_dir "$dst/src/_darwin"
   sort -u "$symlinks_record.new" -o "$symlinks_record"
   rm -f "$symlinks_record.new"
 }
