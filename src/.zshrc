@@ -83,6 +83,7 @@ zle -N continue-line
 bindkey '\e[13;2u' continue-line
 
 fzf-ghq() {
+  TRAPINT() { :; }
   local repo=$(ghq list --full-path | fzf --reverse)
   if [[ -n "$repo" ]]; then
     BUFFER="cd ${(q)repo}"
@@ -94,6 +95,7 @@ zle -N fzf-ghq
 bindkey '^\]' fzf-ghq
 
 fzf-history() {
+  TRAPINT() { :; }
   local selected=$(fc -ln 1 | fzf --no-sort --query "$LBUFFER" --reverse --tac)
   if [[ -n "$selected" ]]; then
     print -s "$selected"
@@ -106,6 +108,7 @@ zle -N fzf-history
 bindkey '^r' fzf-history
 
 fzf-zellij() {
+  TRAPINT() { :; }
   local session=$(zellij list-sessions -ns 2>/dev/null | fzf --reverse)
   if [[ -n "$session" ]]; then
     BUFFER="zellij attach ${(q)session}"
