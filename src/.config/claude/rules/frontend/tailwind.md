@@ -2,42 +2,18 @@
 paths: "**/*.{component.ts,css,html,tsx,vue}"
 ---
 
-# Critical (Must Know)
+# Tailwind CSS v4
 
-## Removed Utilities
+## v4 Architecture (LLMs often get wrong)
 
-Never use these — they don't exist in v4:
-
-| Deprecated          | Use Instead       |
-| ------------------- | ----------------- |
-| `bg-opacity-*`      | `bg-black/50`     |
-| `text-opacity-*`    | `text-black/50`   |
-| `border-opacity-*`  | `border-black/50` |
-| `flex-shrink-*`     | `shrink-*`        |
-| `flex-grow-*`       | `grow-*`          |
-| `overflow-ellipsis` | `text-ellipsis`   |
-
-## Renamed Utilities
-
-Always use the v4 name:
-
-| v3               | v4               |
-| ---------------- | ---------------- |
-| `bg-gradient-*`  | `bg-linear-*`    |
-| `shadow-sm`      | `shadow-xs`      |
-| `shadow`         | `shadow-sm`      |
-| `drop-shadow-sm` | `drop-shadow-xs` |
-| `drop-shadow`    | `drop-shadow-sm` |
-| `blur-sm`        | `blur-xs`        |
-| `blur`           | `blur-sm`        |
-| `rounded-sm`     | `rounded-xs`     |
-| `rounded`        | `rounded-sm`     |
-| `outline-none`   | `outline-hidden` |
-| `ring`           | `ring-3`         |
-
----
-
-# Tailwind CSS v4 Rules
+- `tailwind.config.js` does not exist — all configuration lives in CSS
+- Entry point is `@import "tailwindcss"`, not `@tailwind base/components/utilities`
+- Custom utilities use `@utility`, not `@layer utilities { ... }` or `@layer components { ... }`
+- Custom variants use `@custom-variant`, not plugin API
+- Important modifier is trailing: `flex!`, not `!flex`
+- CSS variable references use parentheses: `bg-(--brand)`, not `bg-[--brand]`
+- Default border color is `currentColor`, not `gray-200` — always specify color explicitly
+- Variant stacking reads left-to-right: `*:first:pt-0`, not `first:*:pt-0`
 
 ## Avoid
 
@@ -52,7 +28,6 @@ Access theme values:
 .custom {
   background: var(--color-blue-500);
   padding: var(--spacing-4);
-  /* or use --spacing() function */
   margin: calc(100vh - --spacing(16));
 }
 ```
@@ -79,6 +54,9 @@ Light mode first, then `dark:` variants:
 <!-- Linear -->
 <div class="bg-linear-to-r from-blue-500 to-purple-500"></div>
 
+<!-- Custom angle -->
+<div class="bg-linear-45 from-blue-500 to-purple-500"></div>
+
 <!-- Radial -->
 <div class="bg-radial from-white to-black"></div>
 
@@ -91,10 +69,10 @@ Light mode first, then `dark:` variants:
 Only add breakpoint variants when values change:
 
 ```html
-<!-- ❌ BAD - redundant -->
+<!-- NG - redundant -->
 <div class="px-4 md:px-4 lg:px-8"></div>
 
-<!-- ✅ GOOD -->
+<!-- OK -->
 <div class="px-4 lg:px-8"></div>
 ```
 
@@ -103,16 +81,14 @@ Only add breakpoint variants when values change:
 Use `gap-*` in flex/grid, never `space-x-*` or `space-y-*`:
 
 ```html
-<!-- ❌ BAD -->
+<!-- NG -->
 <div class="flex space-x-4"></div>
 
-<!-- ✅ GOOD -->
+<!-- OK -->
 <div class="flex gap-4"></div>
 ```
 
-Other spacing rules:
-
-- Use `min-h-dvh` not `min-h-screen` (mobile Safari bug)
+- Use `min-h-dvh` not `min-h-screen` (mobile Safari)
 - Use `size-*` for equal width/height
 
 ## Typography
@@ -120,9 +96,9 @@ Other spacing rules:
 Always use line-height modifiers, never separate `leading-*`:
 
 ```html
-<!-- ❌ BAD -->
+<!-- NG -->
 <p class="text-base leading-7"></p>
 
-<!-- ✅ GOOD -->
+<!-- OK -->
 <p class="text-base/7"></p>
 ```
