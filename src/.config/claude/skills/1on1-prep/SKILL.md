@@ -201,7 +201,7 @@ Output a structured 1on1 agenda including:
 **Example output (Anxiety Zone):**
 
 ```markdown
-## 1on1 Agenda: Tanaka — 2025-01-15
+## 1on1 Agenda: Mizuno — 2025-01-15
 
 **Assessed zone:** Anxiety (Low Safety x High Responsibility)
 **Basis:** Increased overtime, shorter PR review comments, snapped at teammate in standup
@@ -220,7 +220,7 @@ Output a structured 1on1 agenda including:
 
 - [ ] **Manager:** Take over the infrastructure migration task by Friday
 - [ ] **Manager:** Block 2 hours of focus time on their calendar for Wednesday
-- [ ] **Tanaka:** Identify one task to delegate or descope, share by tomorrow EOD
+- [ ] **Mizuno:** Identify one task to delegate or descope, share by tomorrow EOD
 
 ### Follow-up
 
