@@ -6,6 +6,10 @@
     "commit": "",
     "pr": ""
   },
+  "enabledPlugins": {
+    "claude-md-management@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
+  },
   "hooks": {
     "PermissionRequest": [
       {
@@ -52,5 +56,9 @@
       }
     ]
   },
-  "language": "Japanese"
+  "language": "Japanese",
+  "statusLine": {
+    "type": "command",
+    "command": "claude-statusline"
+  }
 }

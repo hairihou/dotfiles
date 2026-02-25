@@ -2,7 +2,6 @@ typeset -U PATH
 export CLAUDE_CONFIG_DIR="$HOME/.config/claude"
 export CLICOLOR=1
 export EDITOR='nvim'
-export FZF_DEFAULT_OPTS='--color=hl:6,fg+:15,hl+:14,info:8,prompt:4,pointer:5,marker:2,spinner:8,border:8'
 export HOMEBREW_FORBIDDEN_FORMULAE="node npm pip python python3"
 export LANG='en_US.UTF-8'
 export LSCOLORS='exGxFxDxcxDxDxhbadacec'
@@ -76,7 +75,7 @@ _update_prompt() {
   prompt_git="%F{5}${branch}%f${staged}${unstaged}${arrows:+ ${arrows}}"
 }
 add-zsh-hook precmd _update_prompt
-PROMPT=$'%F{4}${prompt_path}%f${prompt_git:+\u0020${prompt_git}}\u0020%(?.%f.%F{1})\u276f%f\u0020'
+PROMPT=$'%F{12}${prompt_path}%f${prompt_git:+\u0020${prompt_git}}\u0020%(?.%f.%F{1})\u276f%f\u0020'
 
 continue-line() { LBUFFER+=$'\\\n\u0020\u0020' }
 zle -N continue-line
