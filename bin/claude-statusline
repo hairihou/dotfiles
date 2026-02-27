@@ -29,5 +29,5 @@ fi
 git_info=""
 [[ -n "$branch" ]] && git_info=" | ${magenta}${branch}${reset}"
 
-cost_fmt=$(printf '$%.4f' "$cost")
+cost_fmt=$(printf '$%.2f' "$cost")
 echo -e "[$model] ${dir##*/}${git_info} ${bar_color}${bar}${reset} ${pct}% ${gray}${cost_fmt}${reset}"
