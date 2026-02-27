@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>hairihou/renovate-config", "group:allNonMajor"],
   "assignees": ["hairihou"],
+  "automerge": true,
   "draftPR": false,
-  "automerge": true
+  "extends": ["github>hairihou/renovate-config", "group:allNonMajor"]
 }
