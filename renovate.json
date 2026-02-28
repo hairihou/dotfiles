@@ -3,5 +3,6 @@
   "extends": ["github>hairihou/renovate-config", "group:all"],
   "assignees": ["hairihou"],
   "automerge": true,
-  "draftPR": false
+  "draftPR": false,
+  "platformAutomerge": false
 }
