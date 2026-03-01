@@ -5,27 +5,12 @@
 - Comment only: complex logic, business rules, non-obvious behavior
 - No unnecessary blank lines
 - Ordering (code, config, documentation): main rule → exceptions/modifiers → details; alphabetical within same level
+  - Example in CSS: `display` → `overflow` → `margin`/`padding`; in config: required fields → optional fields
 
 ## Communication
 
-- **IMPORTANT**: Direct responses only, no filler phrases ("Good question", "You're right", "Great point", etc.)
+- Direct responses only, no filler phrases ("Good question", "You're right", "Great point", etc.)
 - Polite/formal tone
-
-## Documentation
-
-- Write from the reader's perspective with code examples
-- Tone: no advertising, no flashy expressions; simple and honest
-
-## Git Conventions
-
-- Branch: `#<number>_<type>/<description>` (e.g., `#123_feat/user-auth`)
-- Issue: `<type>(<subject>): <description>` (e.g., `feat(auth): user authentication`)
-- Commit: Conventional Commits
-- Types: build, chore, ci, docs, feat, fix, perf, refactor, style, test
-- **CRITICAL**: NEVER run `git commit` or `git push` without explicit user instruction. Exception: when invoked via skills like `/pr`.
-- **IMPORTANT**: No AI attribution in commits, PRs, or issues (user's own work)
-  - No `Co-Authored-By: Claude`
-  - No `🤖 Generated with Claude Code`
 
 ## Critical Thinking
 
@@ -45,8 +30,28 @@
 - Apply the above to design decisions and code review only
 - Simple tasks (typo fixes, one-line changes, straightforward bug fixes): skip critical review
 
+## Documentation
+
+- Write from the reader's perspective with code examples
+- Tone: no advertising, no flashy expressions; simple and honest
+
+## Git Conventions
+
+- Branch: `#<number>_<type>/<description>` (e.g., `#123_feat/user-auth`)
+- Issue: `<type>(<subject>): <description>` (e.g., `feat(auth): user authentication`)
+- Commit: Conventional Commits
+- Types: build, chore, ci, docs, feat, fix, perf, refactor, style, test
+- **CRITICAL**: NEVER run `git commit` or `git push` without explicit user instruction. Exception: when invoked via skills like `/pr`.
+- **CRITICAL**: No AI attribution in commits, PRs, or issues (user's own work)
+  - No `Co-Authored-By: Claude`
+  - No `🤖 Generated with Claude Code`
+
 ## Language
 
 - Conversation: Japanese
 - File output (code, config, documentation): English
 - Keep in original form within Japanese text: code, commands, URLs, proper nouns
+
+## Tooling
+
+- **CRITICAL**: Detect package manager from lockfile before running commands (`pnpm-lock.yaml` → pnpm, `package-lock.json` → npm, `yarn.lock` → yarn, `bun.lockb`/`bun.lock` → bun). Never assume npm.
