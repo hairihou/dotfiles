@@ -18,7 +18,7 @@
 
 - Present alternatives not chosen and their trade-offs
 - State the biggest risk of the chosen approach
-- When multiple viable alternatives exist, use `/devils-advocate` to run structured analysis
+- When multiple viable alternatives exist, run structured analysis with advocate and critic perspectives
 
 ### Code Review
 
@@ -41,7 +41,7 @@
 - Issue: `<type>(<subject>): <description>` (e.g., `feat(auth): user authentication`)
 - Commit: Conventional Commits
 - Types: build, chore, ci, docs, feat, fix, perf, refactor, style, test
-- **CRITICAL**: NEVER run `git commit` or `git push` without explicit user instruction. Exception: when invoked via skills like `/pr`.
+- **CRITICAL**: NEVER run `git commit` or `git push` without explicit user instruction. Exception: when invoked via a skill that explicitly instructs committing or pushing.
 - **CRITICAL**: No AI attribution in commits, PRs, or issues (user's own work)
   - No `Co-Authored-By: Claude`
   - No `🤖 Generated with Claude Code`
