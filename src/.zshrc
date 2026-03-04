@@ -32,9 +32,10 @@ setopt PROMPT_SUBST
 setopt PUSHD_IGNORE_DUPS
 setopt SHARE_HISTORY
 
+# OpenSpec
+fpath=("$HOME/.zsh/completions" $fpath)
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' menu select
-
 autoload -Uz compinit
 if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
   compinit
