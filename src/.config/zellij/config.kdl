@@ -128,7 +128,6 @@ themes {
     }
 }
 
-default_layout "compact"
 keybinds {
     shared {
         bind "Shift Enter" { WriteChars "\u{001b}[13;2u"; }
@@ -136,5 +135,4 @@ keybinds {
 }
 pane_frames false
 show_startup_tips false
-simplified_ui true
 theme "tailwindcss-dark"
