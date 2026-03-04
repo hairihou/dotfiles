@@ -1,7 +1,8 @@
 ---
 name: code-critic
-description: Detect over-engineering and YAGNI violations. Stricter than /review. Use when asked to "critique my code", "find over-engineering", or "check for unnecessary complexity".
+description: Detect over-engineering and YAGNI violations.
 argument-hint: <file-or-pattern>
+disable-model-invocation: true
 allowed-tools: Glob, Grep, Read
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: npm-update-report
-description: Check for outdated npm/pnpm/yarn packages, update them, and generate impact/risk assessment reports with changelog investigation and security audit. Use when asked to "check npm updates", "update dependencies", "review package updates", "update and report", or "check for breaking changes".
+description: Check for outdated packages, update them, and generate impact/risk assessment report.
 disable-model-invocation: true
 allowed-tools: Bash(npm:*), Bash(pnpm:*), Bash(yarn:*), Bash(node:*), Grep, Read, WebSearch
 ---

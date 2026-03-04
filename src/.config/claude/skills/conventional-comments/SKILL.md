@@ -1,6 +1,7 @@
 ---
 name: conventional-comments
-description: Write structured code review comments using Conventional Comments format. Use when reviewing PRs, writing code review feedback, or asked to "comment on this code" or "review this PR".
+description: Format code review comments using Conventional Comments standard.
+disable-model-invocation: true
 ---
 
 # Conventional Comments

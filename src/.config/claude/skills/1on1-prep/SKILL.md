@@ -1,6 +1,6 @@
 ---
 name: 1on1-prep
-description: Use when a manager prepares for a 1on1 meeting, wants to assess a team member's state, or needs guidance on how to approach a 1on1 conversation
+description: Structured 1on1 preparation using the Psychological Safety x Responsibility 4-zone framework.
 disable-model-invocation: true
 argument-hint: "[member-name]"
 ---

@@ -1,7 +1,8 @@
 ---
 name: gemini-search
-description: Google search via Gemini CLI. Use when Claude's WebSearch is insufficient, the user needs Google-specific results, or explicitly requests Gemini/Google search.
+description: Google search via Gemini CLI.
 argument-hint: [query]
+disable-model-invocation: true
 allowed-tools: Bash(gemini:*)
 ---
 

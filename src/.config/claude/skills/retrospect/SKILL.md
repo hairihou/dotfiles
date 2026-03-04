@@ -1,6 +1,6 @@
 ---
 name: retrospect
-description: Facilitate metacognitive reflection using Fact-Interpretation-Emotion (FIE) framework. Use when the user wants to reflect on an event, process emotions, separate facts from interpretations, or understand their reactions to a situation.
+description: Facilitate metacognitive reflection using Fact-Interpretation-Emotion (FIE) framework.
 argument-hint: <event or situation>
 disable-model-invocation: true
 ---
