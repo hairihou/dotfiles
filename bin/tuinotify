@@ -1,4 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-afplay "$HOME/dotfiles/public/my-turn.mp3"
+dir="$HOME/dotfiles/public/sounds"
+case "${1:-}" in
+  long)
+    sounds=("$dir"/beep*.mp3)
+    ;;
+  error)
+    sounds=("$dir/error.mp3")
+    ;;
+  *)
+    sounds=("$dir/glockenspiel.mp3" "$dir/xylophone.mp3" "$dir/xylophone-like.mp3")
+    ;;
+esac
+afplay "${sounds[RANDOM % ${#sounds[@]}]}" &
