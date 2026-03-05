@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-dir="$HOME/dotfiles/public/sounds"
-event="${1:-stop}"
-
-sounds=("$dir"/${event}-*.mp3)
-if [[ ! -e "${sounds[0]}" ]]; then
-  sounds=("$dir/${event}.mp3")
-fi
-
-tty_hash=$(tty 2>/dev/null | cksum | awk '{print $1}')
-idx=$((tty_hash % ${#sounds[@]}))
-afplay "${sounds[$idx]}" &
+file="$HOME/dotfiles/public/${1:-stop}.mp3"
+[[ -e "$file" ]] && afplay "$file" &
