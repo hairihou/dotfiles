@@ -1,6 +1,6 @@
 ---
 name: session-insights
-description: Analyze the current session to identify inefficiencies and suggest improvements.
+description: Use at the end of a session to identify inefficiencies and improvement opportunities, especially for L/XL sessions (16+ turns).
 disable-model-invocation: true
 allowed-tools: Read, Glob, Grep
 ---
@@ -8,6 +8,8 @@ allowed-tools: Read, Glob, Grep
 # Session Insights
 
 Analyze the current conversation session and produce an improvement report.
+
+**Before starting:** Read [references/taxonomy.md](references/taxonomy.md) for category, size, and issue type definitions. Read [references/schema.md](references/schema.md) for output format constraints.
 
 ## 1. Session Overview
 
@@ -18,42 +20,16 @@ Assess the session and output:
 
 | Metric       | Value          |
 | ------------ | -------------- |
-| Category     | [see below]    |
-| Session Size | [XS/S/M/L/XL]  |
+| Category     | [from taxonomy] |
+| Session Size | [from taxonomy] |
 | Turns        | [approx count] |
 | Tools Used   | [list]         |
 | Skills Used  | [list]         |
 ```
 
-### Categories
-
-Classify into one of: Feature Development, Bug Fix, Code Review, Refactoring, Test, CI/CD, Documentation, Configuration, Research, Coaching
-
-### Session Size
-
-| Size | Criteria                                      |
-| ---- | --------------------------------------------- |
-| XS   | 1-3 turns, single focused task                |
-| S    | 4-8 turns, straightforward task               |
-| M    | 9-15 turns, moderate complexity               |
-| L    | 16-25 turns, multiple subtasks or corrections |
-| XL   | 26+ turns, significant scope or difficulties  |
-
-L/XL sessions indicate potential inefficiencies worth analyzing.
-
 ## 2. Issue Timeline
 
-Scan the conversation for these issue types:
-
-| Issue Type       | Signal                                                         |
-| ---------------- | -------------------------------------------------------------- |
-| Misunderstanding | User corrected agent's interpretation                          |
-| Retry loop       | Same action attempted multiple times                           |
-| Scope creep      | Task grew beyond original request                              |
-| Missing context  | Agent asked for information that should have been in CLAUDE.md |
-| Wrong tool/skill | Agent used wrong approach, user redirected                     |
-| Wasted work      | Agent produced output that was discarded                       |
-| Hallucination    | Agent assumed facts not in evidence                            |
+Scan the conversation for issue types from taxonomy.
 
 Output as timeline:
 
@@ -64,9 +40,11 @@ Output as timeline:
    [What happened and what the correct action was]
 ```
 
-If no issues found, state that explicitly with reasoning.
+If no issues found: "No issues identified. [one-sentence reasoning why session was efficient]"
 
 ## 3. Actionable Feedback
+
+At least one of the following subsections must be present. Omit subsections only when genuinely not applicable.
 
 ### Prompt Improvement
 

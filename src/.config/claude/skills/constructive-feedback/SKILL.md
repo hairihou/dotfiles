@@ -1,6 +1,6 @@
 ---
 name: constructive-feedback
-description: Transform text into constructive feedback using SBI (Situation-Behavior-Impact) framework.
+description: Use when feedback text feels harsh, vague, or emotionally charged and needs to be restructured into actionable form.
 argument-hint: <feedback content>
 disable-model-invocation: true
 ---

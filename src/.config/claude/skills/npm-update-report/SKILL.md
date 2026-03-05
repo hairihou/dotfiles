@@ -1,8 +1,8 @@
 ---
 name: npm-update-report
-description: Check for outdated packages, update them, and generate impact/risk assessment report.
+description: Use for periodic dependency maintenance, when security vulnerabilities are reported, or when outdated packages need assessment.
 disable-model-invocation: true
-allowed-tools: Bash(npm:*), Bash(pnpm:*), Bash(yarn:*), Bash(node:*), Grep, Read, WebSearch
+allowed-tools: Bash(npm:*), Bash(pnpm:*), Bash(yarn:*), Bash(node:*), Bash(python*), Grep, Read, WebSearch
 ---
 
 # Package Update Report
@@ -16,25 +16,21 @@ allowed-tools: Bash(npm:*), Bash(pnpm:*), Bash(yarn:*), Bash(node:*), Grep, Read
 
 | Step | Action           | Details                                                            |
 | ---- | ---------------- | ------------------------------------------------------------------ |
-| 1    | Detect PM        | Check lock file to determine package manager                       |
+| 1    | Detect PM        | Identify PM from lockfile (see command table below)                |
 | 2    | Check outdated   | List packages with available updates                               |
 | 3    | Update packages  | Update according to strategy below                                 |
 | 4    | Classify changes | Extract diff from `package.json`, classify as major/minor/patch    |
 | 5    | Investigate      | Web search changelogs for major/minor bumps and key packages       |
 | 6    | Assess impact    | Grep for package usage, evaluate breaking changes                  |
 | 7    | Audit            | Run security audit, include advisory URLs for vulnerabilities      |
-| 8    | Verify           | Run scripts from package.json (lint, typecheck, test, build)       |
-| 9    | Output           | See [references/report-template.md](references/report-template.md) |
+| 8    | Verify           | Run `python scripts/run-verification.py <pm>` — outputs PASS/FAIL/SKIP per script |
+| 9    | Output           | Follow [references/report-template.md](references/report-template.md) and [references/schema.md](references/schema.md) |
 
 ## Package Manager Detection
 
-| Lock File           | PM   | Outdated        | Update                       | Audit        |
-| ------------------- | ---- | --------------- | ---------------------------- | ------------ |
-| `package-lock.json` | npm  | `npm outdated`  | `npm update` / `npm install` | `npm audit`  |
-| `pnpm-lock.yaml`    | pnpm | `pnpm outdated` | `pnpm update` / `pnpm add`   | `pnpm audit` |
-| `yarn.lock`         | yarn | `yarn outdated` | `yarn upgrade` / `yarn add`  | `yarn audit` |
+Detect PM from lockfile per CLAUDE.md rules. If no lockfile found, stop and inform user.
 
-For monorepos: `pnpm --filter {pkg}`, `npm -w {pkg}`, `yarn workspace {pkg}`
+**Monorepo workspace commands:** `pnpm --filter {pkg}`, `npm -w {pkg}`, `yarn workspace {pkg}`
 
 ## Update Strategy
 
@@ -58,6 +54,13 @@ For monorepos: `pnpm --filter {pkg}`, `npm -w {pkg}`, `yarn workspace {pkg}`
 - Any package that may be related to the failure
 
 **Skip:** Patch-only updates with passing verification
+
+## Error Handling
+
+- **No lockfile found** → stop, inform user to run package manager install first
+- **`outdated` command returns empty** → report "all packages up to date", skip remaining steps
+- **Verification script not found** (e.g., no `test` script) → skip that check, note in report
+- **Major update causes verification failure** → revert that specific package, note in report as "requires manual migration"
 
 ## Verification Failure Handling
 

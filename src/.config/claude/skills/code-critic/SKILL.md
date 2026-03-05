@@ -1,7 +1,7 @@
 ---
 name: code-critic
-description: Detect over-engineering and YAGNI violations.
-argument-hint: <file-or-pattern>
+description: Use when reviewing code for over-engineering, YAGNI violations, premature abstraction, or defensive excess.
+argument-hint: <file-path or glob-pattern>
 disable-model-invocation: true
 allowed-tools: Glob, Grep, Read
 ---
@@ -24,9 +24,11 @@ Critical only: correctness, security, over-engineering, production risks.
 
 Skip: formatting, naming, preferences, theoretical concerns.
 
-For common anti-patterns to check, see [references/anti-patterns.md](references/anti-patterns.md).
+For common anti-patterns to check, read [references/anti-patterns.md](references/anti-patterns.md).
 
 ## Output
+
+Follow the format defined in [references/schema.md](references/schema.md).
 
 Per issue:
 

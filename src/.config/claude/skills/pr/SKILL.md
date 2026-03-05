@@ -1,6 +1,6 @@
 ---
 name: pr
-description: Create a branch and GitHub pull request from current changes (draft by default).
+description: Use when ready to submit work as a GitHub pull request, or when asked to "create a PR", "open a PR", or "submit for review".
 argument-hint: [base-branch]
 disable-model-invocation: true
 allowed-tools: Bash(gh:*), Bash(git:*)
@@ -15,25 +15,19 @@ allowed-tools: Bash(gh:*), Bash(git:*)
 - Diff summary: !`git diff HEAD --stat`
 - Remote: !`git remote -v | head -1`
 
-## Rules
-
-- Branch naming: `<type>/<description>` or `#<issue>_<type>/<description>` (for auto issue linking)
-- Commit format: Check CONTRIBUTING.md, .gitmessage first, fallback to Conventional Commits (respect project conventions)
-- Base branch: `$ARGUMENTS` if provided, otherwise default branch
-- PR body ends with a trailing newline
+**Before starting:** Read [references/conventions.md](references/conventions.md) for branch naming, commit format, and PR body templates.
 
 ## Steps
 
-1. **Validate**: If no changes exist, inform user and exit
+1. **Validate**: If no staged/unstaged changes AND no untracked files in `git status`, inform user and exit
 
 2. **Branch**: If current branch is `main`/`master` OR equals the base branch, create new branch first
-   - Infer issue number from base branch name if possible (e.g., `feature-7509-...` → `#7509`)
 
    ```sh
    git switch -c <branch-name>
    ```
 
-3. **Commit**:
+3. **Commit** (use types and format from conventions.md):
 
    ```sh
    # if more context needed
@@ -55,6 +49,7 @@ allowed-tools: Bash(gh:*), Bash(git:*)
    # Get default branch if $ARGUMENTS not provided
    gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'
 
+   # PR title: same as commit message subject (without scope prefix if redundant)
    # New PR (if branch starts with #<number>_, prepend "closes #<number>" to body)
    gh pr create --title "<title>" --body "<body>" --base <base-branch> --assignee @me --draft
 
@@ -63,26 +58,9 @@ allowed-tools: Bash(gh:*), Bash(git:*)
    gh pr view --web
    ```
 
-   Body template:
+## Error Handling
 
-   ```markdown
-   ## Summary
-
-   <description>
-   ```
-
-   With issue linking (`#<number>_` branch):
-
-   ```markdown
-   closes #<number>
-
-   ---
-
-   ## Summary
-
-   <description>
-   ```
-
-## Conventional Commits Types
-
-`chore`, `docs`, `feat`, `fix`, `perf`, `refactor`, `style`, `test`
+- **`gh` not installed or not authenticated** → stop, instruct user to run `gh auth login`
+- **Current branch already has an open PR** → update existing PR instead of creating new
+- **Push rejected** → check if remote branch exists, suggest `git pull --rebase`
+- **No changes to commit** (clean working tree) → inform user, skip workflow

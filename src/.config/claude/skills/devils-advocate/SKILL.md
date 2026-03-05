@@ -1,6 +1,6 @@
 ---
 name: devils-advocate
-description: Run advocate and critic subagents in parallel for design decisions. Use when asked to "evaluate a decision", "devils advocate", "challenge this approach", or when making architecture/technology choices that need structured critical analysis.
+description: Use when asked to "evaluate a decision", "devils advocate", "challenge this approach", or when making architecture/technology choices that need structured critical analysis.
 argument-hint: <topic or decision to evaluate>
 ---
 
@@ -10,7 +10,7 @@ Topic: $ARGUMENTS
 
 ## 1. Gather Context
 
-Read relevant code, documentation, and configuration to understand the decision space. Identify:
+Search the codebase for code, documentation, and configuration related to the topic (Glob/Grep to locate, Read up to 5 key files). Identify:
 
 - Current state and constraints
 - Stakeholders and affected systems
@@ -18,7 +18,7 @@ Read relevant code, documentation, and configuration to understand the decision 
 
 ## 2. Run Parallel Sub-agents
 
-Use the Task tool to launch **both agents simultaneously in a single message** (two Task tool calls in parallel). Each agent receives the gathered context but cannot see the other's output.
+Use the Agent tool to launch **both agents simultaneously in a single message** (two Agent tool calls in parallel). Each agent receives the gathered context but cannot see the other's output.
 
 ### Advocate Agent
 
@@ -37,7 +37,6 @@ prompt: |
   - Why alternatives are weaker
 
   Be specific, not generic. Ground arguments in the actual codebase and constraints.
-  Respond in Japanese.
 ```
 
 ### Critic Agent
@@ -57,7 +56,6 @@ prompt: |
   - What would need to be true for this to fail
 
   Be specific, not generic. Ground arguments in the actual codebase and constraints.
-  Respond in Japanese.
 ```
 
 ## 3. Synthesize
@@ -77,7 +75,9 @@ After both agents return, combine their outputs into the following format. Do no
 
 ## Key Tensions
 
-[Where advocate and critic directly contradict each other, listed as pairs]
+| Advocate claims | Critic claims |
+|----------------|---------------|
+| [Position A]   | [Counter A]   |
 
 ## Decision Factors
 
