@@ -2,15 +2,13 @@
 set -euo pipefail
 
 dir="$HOME/dotfiles/public/sounds"
-case "${1:-}" in
-  long)
-    sounds=("$dir"/beep*.mp3)
-    ;;
-  error)
-    sounds=("$dir/error.mp3")
-    ;;
-  *)
-    sounds=("$dir/glockenspiel.mp3" "$dir/xylophone.mp3" "$dir/xylophone-like.mp3")
-    ;;
-esac
-afplay "${sounds[RANDOM % ${#sounds[@]}]}" &
+event="${1:-stop}"
+
+sounds=("$dir"/${event}-*.mp3)
+if [[ ! -e "${sounds[0]}" ]]; then
+  sounds=("$dir/${event}.mp3")
+fi
+
+tty_hash=$(tty 2>/dev/null | cksum | awk '{print $1}')
+idx=$((tty_hash % ${#sounds[@]}))
+afplay "${sounds[$idx]}" &
