@@ -6,5 +6,6 @@
   "automerge": true,
   "draftPR": false,
   "ignoreTests": true,
-  "platformAutomerge": false
+  "platformAutomerge": false,
+  "schedule": ["before 4am"]
 }
