@@ -5,10 +5,11 @@
 """Decision log database operations.
 
 Usage:
+  ./db.py detail <id>
   ./db.py init
   ./db.py insert <date> <repository> <topic> <chosen> <alternatives> <reasoning>
-  ./db.py search [--repo REPO] [--from DATE] [--to DATE] [--match KEYWORD]
-  ./db.py detail <id>
+  ./db.py search [--from DATE] [--match KEYWORD] [--repo REPO] [--to DATE]
+  ./db.py summary [--limit N]
   ./db.py update-outcome <id> <outcome>
 """
 
@@ -70,6 +71,10 @@ def get_connection():
     return sqlite3.connect(DB_PATH)
 
 
+def detail(conn, args):
+    print_rows(conn, "SELECT * FROM decisions WHERE id = ?", (args.id,))
+
+
 def init_db(conn):
     conn.executescript(INIT_SQL)
     print("OK")
@@ -95,28 +100,43 @@ def insert(conn, args):
 def search(conn, args):
     conditions = []
     params = []
-    if args.repo:
-        conditions.append("d.repository = ?")
-        params.append(args.repo)
     if args.from_date:
         conditions.append("d.date >= ?")
         params.append(args.from_date)
-    if args.to:
-        conditions.append("d.date <= ?")
-        params.append(args.to)
     if args.match:
         conditions.append("decisions_fts MATCH ?")
         params.append(args.match)
-        where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+    if args.repo:
+        conditions.append("d.repository = ?")
+        params.append(args.repo)
+    if args.to:
+        conditions.append("d.date <= ?")
+        params.append(args.to)
+    where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+    if args.match:
         sql = f"SELECT d.* FROM decisions d JOIN decisions_fts f ON d.id = f.rowid {where} ORDER BY d.date DESC"
     else:
-        where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
         sql = f"SELECT d.* FROM decisions d {where} ORDER BY d.date DESC"
     print_rows(conn, sql, params)
 
 
-def detail(conn, args):
-    print_rows(conn, "SELECT * FROM decisions WHERE id = ?", (args.id,))
+def summary(conn, args):
+    total = conn.execute("SELECT COUNT(*) FROM decisions").fetchone()[0]
+    if total == 0:
+        print("No decisions recorded yet.")
+        return
+    repos = conn.execute(
+        "SELECT repository, COUNT(*) as cnt FROM decisions GROUP BY repository ORDER BY cnt DESC"
+    ).fetchall()
+    recent = conn.execute(
+        "SELECT date, repository, topic FROM decisions ORDER BY date DESC, id DESC LIMIT ?",
+        (args.limit,),
+    ).fetchall()
+    print(f"Total: {total} decisions across {len(repos)} repos")
+    print(f"Repos: {', '.join(f'{r[0]}({r[1]})' for r in repos)}")
+    print("Recent:")
+    for row in recent:
+        print(f"  {row[0]} {row[1]}: {row[2]}")
 
 
 def update_outcome(conn, args):
@@ -152,6 +172,8 @@ def print_rows(conn, sql, params=()):
 def main():
     parser = argparse.ArgumentParser(description="Decision log database operations")
     sub = parser.add_subparsers(dest="command", required=True)
+    p_detail = sub.add_parser("detail")
+    p_detail.add_argument("id", type=int)
     sub.add_parser("init")
     p_insert = sub.add_parser("insert")
     p_insert.add_argument("date")
@@ -161,12 +183,12 @@ def main():
     p_insert.add_argument("alternatives")
     p_insert.add_argument("reasoning")
     p_search = sub.add_parser("search")
-    p_search.add_argument("--repo")
     p_search.add_argument("--from", dest="from_date")
-    p_search.add_argument("--to")
     p_search.add_argument("--match")
-    p_detail = sub.add_parser("detail")
-    p_detail.add_argument("id", type=int)
+    p_search.add_argument("--repo")
+    p_search.add_argument("--to")
+    p_summary = sub.add_parser("summary")
+    p_summary.add_argument("--limit", type=int, default=5)
     p_update = sub.add_parser("update-outcome")
     p_update.add_argument("id", type=int)
     p_update.add_argument("outcome")
@@ -174,10 +196,11 @@ def main():
     conn = get_connection()
     try:
         {
+            "detail": lambda: detail(conn, args),
             "init": lambda: init_db(conn),
             "insert": lambda: insert(conn, args),
             "search": lambda: search(conn, args),
-            "detail": lambda: detail(conn, args),
+            "summary": lambda: summary(conn, args),
             "update-outcome": lambda: update_outcome(conn, args),
         }[args.command]()
     finally:

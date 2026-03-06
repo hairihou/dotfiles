@@ -2,7 +2,7 @@
 name: decision-log
 description: Record or search technical decisions. Default mode records the most recent decision from conversation. Use with "search" argument to query past decisions.
 disable-model-invocation: true
-allowed-tools: Bash(python *), Bash(date *), Bash(git *)
+allowed-tools: Bash(python*), Bash(date *), Bash(git *)
 ---
 
 # Decision Log
@@ -12,6 +12,7 @@ allowed-tools: Bash(python *), Bash(date *), Bash(git *)
 - Date: !`date "+%Y%m%d"`
 - Repository: !`git rev-parse --show-toplevel` (use basename only, e.g., `dotfiles` not the full path)
 - DB: !`python ~/.config/claude/skills/decision-log/scripts/db.py init`
+- Summary: !`python ~/.config/claude/skills/decision-log/scripts/db.py summary`
 
 Script: `~/.config/claude/skills/decision-log/scripts/db.py`
 
