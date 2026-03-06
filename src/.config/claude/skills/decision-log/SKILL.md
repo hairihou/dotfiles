@@ -36,7 +36,7 @@ Use when no argument is provided or argument is not "search".
    - Reasoning: <why this was chosen>
    ```
 
-   Suggested responses: ["OK", "修正あり"]
+   Suggested responses: ["OK", "Revise"]
    If the user wants changes, revise and re-confirm.
 4. **Insert**:
 
