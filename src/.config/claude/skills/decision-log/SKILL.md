@@ -11,10 +11,10 @@ allowed-tools: AskUserQuestion, Bash(python:*), Bash(date:*), Bash(git rev-parse
 
 - Date: !`date "+%Y%m%d"`
 - Repository: !`git rev-parse --show-toplevel` (use basename only, e.g., `dotfiles` not the full path)
-- DB: !`python ~/.config/claude/skills/decision-log/scripts/db.py init`
-- Summary: !`python ~/.config/claude/skills/decision-log/scripts/db.py summary`
+- DB: !`python scripts/db.py init`
+- Summary: !`python scripts/db.py summary`
 
-Script: `~/.config/claude/skills/decision-log/scripts/db.py`
+Script: `scripts/db.py`
 
 ## Mode: Record (default)
 
@@ -42,7 +42,7 @@ Use when no argument is provided or argument is not "search".
 4. **Insert**:
 
    ```sh
-   python ~/.config/claude/skills/decision-log/scripts/db.py insert '<date>' '<repo>' '<topic>' '<chosen>' '<alternatives>' '<reasoning>'
+   python scripts/db.py insert '<date>' '<repo>' '<topic>' '<chosen>' '<alternatives>' '<reasoning>'
    ```
 
 5. The script prints the inserted row.
@@ -58,22 +58,22 @@ Use when argument contains "search".
 
    ```sh
    # All decisions for current repo
-   python ~/.config/claude/skills/decision-log/scripts/db.py search --repo '<repo>'
+   python scripts/db.py search --repo '<repo>'
 
    # Full-text search
-   python ~/.config/claude/skills/decision-log/scripts/db.py search --match '<keyword>'
+   python scripts/db.py search --match '<keyword>'
 
    # Date range
-   python ~/.config/claude/skills/decision-log/scripts/db.py search --from '<start>' --to '<end>'
+   python scripts/db.py search --from '<start>' --to '<end>'
 
    # Combined filters
-   python ~/.config/claude/skills/decision-log/scripts/db.py search --repo '<repo>' --match '<keyword>'
+   python scripts/db.py search --repo '<repo>' --match '<keyword>'
 
    # Full detail for a specific decision
-   python ~/.config/claude/skills/decision-log/scripts/db.py detail <id>
+   python scripts/db.py detail <id>
 
    # Update outcome
-   python ~/.config/claude/skills/decision-log/scripts/db.py update-outcome <id> '<outcome>'
+   python scripts/db.py update-outcome <id> '<outcome>'
    ```
 
 3. **Format**: Present results in a readable format
