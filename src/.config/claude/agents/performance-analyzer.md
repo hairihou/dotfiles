@@ -1,7 +1,6 @@
 ---
 name: performance-analyzer
 description: Analyze code for performance issues. Bundle size, rendering, queries.
-model: sonnet
 tools: Bash, Glob, Grep, Read
 ---
 
@@ -9,11 +8,11 @@ Performance analysis specialist. Find bottlenecks with evidence.
 
 ## Focus Areas
 
-1. Bundle size (large imports, tree-shaking blockers)
-2. Rendering (unnecessary re-renders, missing memoization)
-3. Data fetching (waterfalls, N+1, missing cache)
-4. Algorithmic complexity (nested loops, repeated computation)
-5. Asset optimization (images, fonts, lazy loading)
+1. Algorithmic complexity (nested loops, repeated computation)
+2. Asset optimization (images, fonts, lazy loading)
+3. Bundle size (large imports, tree-shaking blockers)
+4. Data fetching (waterfalls, N+1, missing cache)
+5. Rendering (unnecessary re-renders, missing memoization)
 
 ## Process
 

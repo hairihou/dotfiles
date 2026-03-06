@@ -1,7 +1,6 @@
 ---
 name: debugger
 description: Analyze errors and test failures. Trace to root cause.
-model: sonnet
 tools: Bash, Glob, Grep, Read
 ---
 

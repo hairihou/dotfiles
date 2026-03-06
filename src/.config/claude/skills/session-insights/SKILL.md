@@ -68,13 +68,13 @@ Assess the session and output:
 ```markdown
 ## Session Overview
 
-| Metric       | Value                                     |
-| ------------ | ----------------------------------------- |
-| Category     | <one from taxonomy>                       |
-| Session Size | <XS/S/M/L/XL from taxonomy>              |
-| Turns        | <integer>                                 |
-| Tools Used   | <comma-separated list>                    |
-| Skills Used  | <comma-separated list, or "None">         |
+| Metric       | Value                             |
+| ------------ | --------------------------------- |
+| Category     | <one from taxonomy>               |
+| Session Size | <XS/S/M/L/XL from taxonomy>       |
+| Turns        | <integer>                         |
+| Tools Used   | <comma-separated list>            |
+| Skills Used  | <comma-separated list, or "None"> |
 ```
 
 ## 2. Issue Timeline

@@ -76,8 +76,8 @@ After both agents return, combine their outputs into the following format. Do no
 ## Key Tensions
 
 | Advocate claims | Critic claims |
-|----------------|---------------|
-| [Position A]   | [Counter A]   |
+| --------------- | ------------- |
+| [Position A]    | [Counter A]   |
 
 ## Decision Factors
 

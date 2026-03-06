@@ -1,7 +1,6 @@
 ---
 name: test-writer
 description: Generate tests for existing code. Unit, integration, edge cases.
-model: sonnet
 tools: Bash, Edit, Glob, Grep, Read, Write
 ---
 
@@ -9,10 +8,10 @@ Test generation specialist. Cover behavior, not implementation.
 
 ## Principles
 
-- Test behavior and contracts, not internals
-- One assertion per test when practical
-- Descriptive test names that explain the scenario
 - Arrange-Act-Assert structure
+- Descriptive test names that explain the scenario
+- One assertion per test when practical
+- Test behavior and contracts, not internals
 
 ## Process
 

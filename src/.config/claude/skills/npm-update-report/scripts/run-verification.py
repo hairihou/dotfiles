@@ -8,6 +8,7 @@ Usage: ./run-verification.py <pm>
 Checks: lint, typecheck, test, build (skips if script not defined in package.json)
 Output: one line per script: PASS|FAIL|SKIP <script-name> [error-summary]
 """
+
 import json
 import subprocess
 import sys

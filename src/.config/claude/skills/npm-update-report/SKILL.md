@@ -14,17 +14,17 @@ allowed-tools: Bash(npm:*), Bash(pnpm:*), Bash(python*), Bash(yarn:*), Grep, Rea
 
 ## Workflow
 
-| Step | Action           | Details                                                            |
-| ---- | ---------------- | ------------------------------------------------------------------ |
-| 1    | Detect PM        | Identify PM from lockfile (see command table below)                |
-| 2    | Check outdated   | List packages with available updates                               |
-| 3    | Update packages  | Update according to strategy below                                 |
-| 4    | Classify changes | Extract diff from `package.json`, classify as major/minor/patch    |
-| 5    | Investigate      | Web search changelogs for major/minor bumps and key packages       |
-| 6    | Assess impact    | Grep for package usage, evaluate breaking changes                  |
-| 7    | Audit            | Run security audit, include advisory URLs for vulnerabilities      |
+| Step | Action           | Details                                                                           |
+| ---- | ---------------- | --------------------------------------------------------------------------------- |
+| 1    | Detect PM        | Identify PM from lockfile (see command table below)                               |
+| 2    | Check outdated   | List packages with available updates                                              |
+| 3    | Update packages  | Update according to strategy below                                                |
+| 4    | Classify changes | Extract diff from `package.json`, classify as major/minor/patch                   |
+| 5    | Investigate      | Web search changelogs for major/minor bumps and key packages                      |
+| 6    | Assess impact    | Grep for package usage, evaluate breaking changes                                 |
+| 7    | Audit            | Run security audit, include advisory URLs for vulnerabilities                     |
 | 8    | Verify           | Run `python scripts/run-verification.py <pm>` — outputs PASS/FAIL/SKIP per script |
-| 9    | Output           | Follow Report Template and Schema below                            |
+| 9    | Output           | Follow Report Template and Schema below                                           |
 
 ## Package Manager Detection
 
@@ -133,4 +133,3 @@ No vulnerabilities found. / {count} vulnerabilities found:
 - **Vulnerabilities:** None / !{count} found: {details}
 - **Recommendation:** Ready to merge / !Needs attention: {details}
 ```
-
