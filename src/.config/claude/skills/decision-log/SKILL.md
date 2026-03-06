@@ -2,7 +2,7 @@
 name: decision-log
 description: Record or search technical decisions. Default mode records the most recent decision from conversation. Use with "search" argument to query past decisions.
 disable-model-invocation: true
-allowed-tools: AskUserQuestion, Bash(python*), Bash(date *), Bash(git *)
+allowed-tools: AskUserQuestion, Bash(python:*), Bash(date:*), Bash(git rev-parse:*)
 ---
 
 # Decision Log
