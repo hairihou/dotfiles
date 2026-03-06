@@ -2,7 +2,7 @@
 name: decision-log
 description: Record or search technical decisions. Default mode records the most recent decision from conversation. Use with "search" argument to query past decisions.
 disable-model-invocation: true
-allowed-tools: Bash(python*), Bash(date *), Bash(git *)
+allowed-tools: AskUserQuestion, Bash(python*), Bash(date *), Bash(git *)
 ---
 
 # Decision Log
@@ -24,10 +24,10 @@ Use when no argument is provided or argument is not "search".
 
 1. **Analyze**: Review conversation for the most recent design/architecture/technology decision
 2. **Extract**: Identify topic, chosen approach, alternatives considered, and reasoning
-3. **Present**: Show the extracted decision to the user for confirmation:
+3. **Confirm**: Use AskUserQuestion to present the decision and get approval. Format the question as:
 
    ```
-   **Decision Record**
+   Decision Record
    - Date: <date>
    - Repository: <repo-basename>
    - Topic: <short-label>
@@ -36,14 +36,15 @@ Use when no argument is provided or argument is not "search".
    - Reasoning: <why this was chosen>
    ```
 
-4. **Confirm**: Wait for user approval. If user wants changes, revise and re-present.
-5. **Insert**:
+   Suggested responses: ["OK", "修正あり"]
+   If the user wants changes, revise and re-confirm.
+4. **Insert**:
 
    ```sh
    python ~/.config/claude/skills/decision-log/scripts/db.py insert '<date>' '<repo>' '<topic>' '<chosen>' '<alternatives>' '<reasoning>'
    ```
 
-6. The script prints the inserted row. Show it to the user.
+5. The script prints the inserted row.
 
 ## Mode: Search
 
