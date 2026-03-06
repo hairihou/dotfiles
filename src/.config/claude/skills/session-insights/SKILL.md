@@ -9,7 +9,68 @@ allowed-tools: Read, Glob, Grep
 
 Analyze the current conversation session and produce an improvement report.
 
-**Before starting:** Read [references/taxonomy.md](references/taxonomy.md) for category, size, and issue type definitions. Read [references/schema.md](references/schema.md) for output format constraints.
+## Taxonomy
+
+### Session Categories
+
+Classify into one of: Feature Development, Bug Fix, Code Review, Refactoring, Test, CI/CD, Documentation, Configuration, Research, Coaching
+
+### Session Size
+
+| Size | Criteria                                      |
+| ---- | --------------------------------------------- |
+| XS   | 1-3 turns, single focused task                |
+| S    | 4-8 turns, straightforward task               |
+| M    | 9-15 turns, moderate complexity               |
+| L    | 16-25 turns, multiple subtasks or corrections |
+| XL   | 26+ turns, significant scope or difficulties  |
+
+L/XL sessions indicate potential inefficiencies worth analyzing.
+
+### Issue Types
+
+| Issue Type       | Signal                                                         |
+| ---------------- | -------------------------------------------------------------- |
+| Misunderstanding | User corrected agent's interpretation                          |
+| Retry loop       | Same action attempted multiple times                           |
+| Scope creep      | Task grew beyond original request                              |
+| Missing context  | Agent asked for information that should have been in CLAUDE.md |
+| Wrong tool/skill | Agent used wrong approach, user redirected                     |
+| Wasted work      | Agent produced output that was discarded                       |
+| Hallucination    | Agent assumed facts not in evidence                            |
+
+### Feedback Types
+
+#### Prompt Improvement
+
+Rewrite the user's initial request to prevent issues observed in the session.
+
+#### CLAUDE.md / Rules Suggestions
+
+Rules or preferences that would prevent issues. Only suggest additions that would prevent issues observed in THIS session.
+
+#### Skill Suggestions
+
+Skills that were missing, underperformed, or misused.
+
+### Knowledge Usage Categories
+
+| Category   | Description                                                       |
+| ---------- | ----------------------------------------------------------------- |
+| Applied    | Rule/instruction that was followed and helped                     |
+| Missed     | Rule/instruction that existed but was not applied when it should  |
+| Misleading | Rule/instruction that caused incorrect behavior — consider update |
+
+## Schema
+
+### Input
+
+- Current conversation session (implicit context)
+- No arguments required
+
+### Output
+
+The report consists of four required sections. At least one Actionable Feedback subsection must be present. Each Knowledge Usage category may be "None" if not applicable.
 
 ## 1. Session Overview
 
@@ -18,13 +79,13 @@ Assess the session and output:
 ```markdown
 ## Session Overview
 
-| Metric       | Value          |
-| ------------ | -------------- |
-| Category     | [from taxonomy] |
-| Session Size | [from taxonomy] |
-| Turns        | [approx count] |
-| Tools Used   | [list]         |
-| Skills Used  | [list]         |
+| Metric       | Value                                     |
+| ------------ | ----------------------------------------- |
+| Category     | <one from taxonomy>                       |
+| Session Size | <XS/S/M/L/XL from taxonomy>              |
+| Turns        | <integer>                                 |
+| Tools Used   | <comma-separated list>                    |
+| Skills Used  | <comma-separated list, or "None">         |
 ```
 
 ## 2. Issue Timeline
@@ -36,8 +97,8 @@ Output as timeline:
 ```markdown
 ## Issue Timeline
 
-1. **[Turn N]** [Issue Type] (Impact: high/medium/low)
-   [What happened and what the correct action was]
+1. **[Turn <N>]** <Issue Type from taxonomy> (Impact: high/medium/low)
+   <What happened> → <What the correct action was>
 ```
 
 If no issues found: "No issues identified. [one-sentence reasoning why session was efficient]"

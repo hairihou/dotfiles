@@ -3,7 +3,7 @@ name: pr
 description: Use when ready to submit work as a GitHub pull request, or when asked to "create a PR", "open a PR", or "submit for review".
 argument-hint: [base-branch]
 disable-model-invocation: true
-allowed-tools: Bash(gh:*), Bash(git:*)
+allowed-tools: Bash(gh:*), Bash(git:*), Read
 ---
 
 # Pull Request
@@ -15,7 +15,49 @@ allowed-tools: Bash(gh:*), Bash(git:*)
 - Diff summary: !`git diff HEAD --stat`
 - Remote: !`git remote -v | head -1`
 
-**Before starting:** Read [references/conventions.md](references/conventions.md) for branch naming, commit format, and PR body templates.
+## Conventions
+
+### Branch Naming
+
+- `<type>/<description>` — standard format
+- `#<issue>_<type>/<description>` — with auto issue linking
+
+### Commit Format
+
+1. Check CONTRIBUTING.md, .gitmessage first (respect project conventions)
+2. Fallback to Conventional Commits
+
+### Conventional Commits Types
+
+`chore`, `docs`, `feat`, `fix`, `perf`, `refactor`, `style`, `test`
+
+### PR Body Templates
+
+Standard:
+
+```markdown
+## Summary
+
+<description>
+```
+
+With issue linking (`#<number>_` branch):
+
+```markdown
+closes #<number>
+
+---
+
+## Summary
+
+<description>
+```
+
+### Rules
+
+- PR body ends with a trailing newline
+- Base branch: argument if provided, otherwise default branch
+- Infer issue number from base branch name if possible (e.g., `feature-7509-...` → `#7509`)
 
 ## Steps
 
@@ -27,7 +69,7 @@ allowed-tools: Bash(gh:*), Bash(git:*)
    git switch -c <branch-name>
    ```
 
-3. **Commit** (use types and format from conventions.md):
+3. **Commit** (use types and format from Conventions above):
 
    ```sh
    # if more context needed

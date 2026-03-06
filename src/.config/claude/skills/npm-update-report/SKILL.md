@@ -24,7 +24,7 @@ allowed-tools: Bash(npm:*), Bash(pnpm:*), Bash(yarn:*), Bash(node:*), Bash(pytho
 | 6    | Assess impact    | Grep for package usage, evaluate breaking changes                  |
 | 7    | Audit            | Run security audit, include advisory URLs for vulnerabilities      |
 | 8    | Verify           | Run `python scripts/run-verification.py <pm>` — outputs PASS/FAIL/SKIP per script |
-| 9    | Output           | Follow [references/report-template.md](references/report-template.md) and [references/schema.md](references/schema.md) |
+| 9    | Output           | Follow Report Template and Schema below                            |
 
 ## Package Manager Detection
 
@@ -71,3 +71,134 @@ If verification fails:
 3. Investigate those packages' changelogs for breaking changes
 4. Document findings in report under "Verification Results"
 5. Set conclusion to "Needs attention" with specific action items
+
+## Report Template
+
+Write to `./reports/{yyyyMMdd}-{branch-name}.md`. Use `!` prefix for warnings (e.g., `!Breaking:`, `!FAILED`).
+
+```markdown
+# Package Update Report: {branch-name}
+
+## Summary
+
+| Metric          | Value            |
+| --------------- | ---------------- |
+| Verification    | PASSED / !FAILED |
+| Vulnerabilities | {count} / None   |
+| Major           | {count}          |
+| Minor           | {count}          |
+| Patch           | {count}          |
+
+## Notable Changes
+
+### {package-name} ({old-version} -> {new-version}) [major/minor]
+
+**Changes:**
+
+- !Breaking: {description}
+- New: {description}
+- Fix: {description}
+
+**Project Impact:** Affected / Not affected
+
+- {affected-files-or-features}
+
+**Reference:** [CHANGELOG]({url})
+
+## Other Updates
+
+| Package | Change             | Type  | Notes |
+| ------- | ------------------ | ----- | ----- |
+| {name}  | {x.x.x} -> {y.y.y} | patch | -     |
+
+## Security Audit
+
+No vulnerabilities found. / {count} vulnerabilities found:
+
+| Severity | Package | Advisory               |
+| -------- | ------- | ---------------------- |
+| {level}  | {name}  | [{id}]({advisory-url}) |
+
+## Verification Results
+
+### {script-name}
+
+\`\`\`
+{output-summary}
+\`\`\`
+
+## Conclusion
+
+- **Breaking Changes:** No action required / !Action required: {details}
+- **Vulnerabilities:** None / !{count} found: {details}
+- **Recommendation:** Ready to merge / !Needs attention: {details}
+```
+
+## Schema
+
+### Input
+
+- Working directory with `package.json` and lockfile
+- No arguments required
+
+### Output: Report
+
+#### Summary (required)
+
+```markdown
+| Metric          | Value                   |
+| --------------- | ----------------------- |
+| Verification    | Pass / Fail             |
+| Vulnerabilities | <count> (<severity>)    |
+| Major updates   | <count>                 |
+| Minor updates   | <count>                 |
+| Patch updates   | <count>                 |
+```
+
+#### Notable Changes (required)
+
+Per package with major or investigated minor update:
+
+```markdown
+#### <package-name>: <old-version> → <new-version> (<major|minor>)
+
+- **Breaking changes:** <list or "None">
+- **Migration required:** Yes / No
+- **Usage in project:** <grep results summary>
+- **Source:** <changelog URL>
+```
+
+#### Other Updates (required)
+
+```markdown
+| Package | Old | New | Type  |
+| ------- | --- | --- | ----- |
+| <name>  | x.y | x.z | patch |
+```
+
+#### Security Audit (required)
+
+```markdown
+| Severity | Package | Advisory | Fix |
+| -------- | ------- | -------- | --- |
+```
+
+If no vulnerabilities: "No vulnerabilities found."
+
+#### Verification Results (required)
+
+Per script run (lint, typecheck, test, build):
+
+```markdown
+- **<script>**: Pass / Fail
+  - [If fail: error summary]
+```
+
+#### Conclusion (required)
+
+```markdown
+**Status:** Ready to merge / Needs attention
+
+**Action items:**
+- [ ] <specific action>
+```
