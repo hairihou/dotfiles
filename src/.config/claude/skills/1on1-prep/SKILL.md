@@ -3,6 +3,7 @@ name: 1on1-prep
 description: Use before scheduled 1on1 meetings, when noticing behavioral changes in a team member, or when unsure how to approach a difficult conversation with a report.
 disable-model-invocation: true
 argument-hint: "[member-name]"
+allowed-tools: AskUserQuestion, Glob, Grep, Read
 ---
 
 # 1on1 Prep

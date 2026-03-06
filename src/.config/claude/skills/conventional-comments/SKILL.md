@@ -1,7 +1,6 @@
 ---
 name: conventional-comments
 description: Use when writing PR or code review comments to ensure consistent format, clarity, and actionability.
-disable-model-invocation: true
 ---
 
 # Conventional Comments
@@ -29,10 +28,10 @@ Write code review comments in Conventional Comments format (<https://conventiona
 | Label        | Description                                          |
 | ------------ | ---------------------------------------------------- |
 | `issue`      | Identifies a problem that needs to be addressed.     |
+| `note`       | Information for the reader. Does not require action. |
+| `question`   | Seeks clarification or investigation.                |
 | `suggestion` | Proposes an improvement with an explicit change.     |
 | `todo`       | Small, necessary change. Less severe than an issue.  |
-| `question`   | Seeks clarification or investigation.                |
-| `note`       | Information for the reader. Does not require action. |
 | `typo`       | Points out a typographical error.                    |
 
 **Do NOT use**: `praise`, `nitpick`, `quibble` — focus on actionable feedback only.
@@ -41,9 +40,9 @@ Write code review comments in Conventional Comments format (<https://conventiona
 
 | Decoration      | Use when                                     |
 | --------------- | -------------------------------------------- |
-| `(security)`    | Comment relates to security vulnerabilities. |
-| `(performance)` | Comment relates to performance impact.       |
 | `(a11y)`        | Comment relates to accessibility.            |
+| `(performance)` | Comment relates to performance impact.       |
+| `(security)`    | Comment relates to security vulnerabilities. |
 | `(ux)`          | Comment relates to user experience.          |
 
 ## Examples

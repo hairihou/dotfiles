@@ -1,6 +1,6 @@
 ---
 name: code-critic
-description: Use when reviewing code for over-engineering, YAGNI violations, premature abstraction, or defensive excess.
+description: Use when asked to deeply review code for over-engineering, YAGNI violations, premature abstraction, or defensive excess. Not for writing PR comments — use conventional-comments for that.
 argument-hint: <file-path or glob-pattern>
 disable-model-invocation: true
 allowed-tools: Glob, Grep, Read
@@ -26,6 +26,22 @@ Skip: formatting, naming, preferences, theoretical concerns.
 
 ## Anti-Patterns to Check
 
+### Complexity Signals
+
+- Abstraction named `Manager`, `Handler`, `Processor`, `Helper` with unclear responsibility
+- More than 3 layers between caller and actual logic
+- Dependency injection for objects that never change
+- Module re-exports without transformation
+- Constants file with values used once
+
+### Defensive Excess
+
+- Null check on value that cannot be null (e.g., internal function return)
+- Try-catch around code that cannot throw
+- Validation of data already validated upstream
+- Fallback value for required field
+- Retry logic for idempotent, reliable internal calls
+
 ### Premature Abstraction
 
 - Interface/protocol with single implementation
@@ -42,14 +58,6 @@ Skip: formatting, naming, preferences, theoretical concerns.
 - Plugin system with no plugins
 - Event system with one emitter and one listener
 
-### Defensive Excess
-
-- Null check on value that cannot be null (e.g., internal function return)
-- Try-catch around code that cannot throw
-- Validation of data already validated upstream
-- Fallback value for required field
-- Retry logic for idempotent, reliable internal calls
-
 ### Unnecessary Indirection
 
 - Wrapper that only delegates to inner object
@@ -57,14 +65,6 @@ Skip: formatting, naming, preferences, theoretical concerns.
 - Repository class that mirrors ORM methods 1:1
 - Service class with one method calling one function
 - Util file with one function used in one place
-
-### Complexity Signals
-
-- Abstraction named `Manager`, `Handler`, `Processor`, `Helper` with unclear responsibility
-- More than 3 layers between caller and actual logic
-- Dependency injection for objects that never change
-- Module re-exports without transformation
-- Constants file with values used once
 
 ## Output
 

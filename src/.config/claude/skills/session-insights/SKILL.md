@@ -2,7 +2,7 @@
 name: session-insights
 description: Use at the end of a session to identify inefficiencies and improvement opportunities, especially for L/XL sessions (16+ turns).
 disable-model-invocation: true
-allowed-tools: Read, Glob, Grep
+allowed-tools: Glob, Grep, Read
 ---
 
 # Session Insights
@@ -13,7 +13,7 @@ Analyze the current conversation session and produce an improvement report.
 
 ### Session Categories
 
-Classify into one of: Feature Development, Bug Fix, Code Review, Refactoring, Test, CI/CD, Documentation, Configuration, Research, Coaching
+Classify into one of: Bug Fix, CI/CD, Coaching, Code Review, Configuration, Documentation, Feature Development, Refactoring, Research, Test
 
 ### Session Size
 
@@ -60,17 +60,6 @@ Skills that were missing, underperformed, or misused.
 | Applied    | Rule/instruction that was followed and helped                     |
 | Missed     | Rule/instruction that existed but was not applied when it should  |
 | Misleading | Rule/instruction that caused incorrect behavior — consider update |
-
-## Schema
-
-### Input
-
-- Current conversation session (implicit context)
-- No arguments required
-
-### Output
-
-The report consists of four required sections. At least one Actionable Feedback subsection must be present. Each Knowledge Usage category may be "None" if not applicable.
 
 ## 1. Session Overview
 

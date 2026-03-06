@@ -1,6 +1,6 @@
 ---
 name: constructive-feedback
-description: Use when feedback text feels harsh, vague, or emotionally charged and needs to be restructured into actionable form.
+description: Use when you already have draft feedback text that feels harsh, vague, or emotionally charged and need to restructure it into actionable form.
 argument-hint: <feedback content>
 disable-model-invocation: true
 ---
