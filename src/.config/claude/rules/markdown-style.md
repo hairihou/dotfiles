@@ -15,6 +15,7 @@ Write plain, readable prose. Avoid AI-generated feel.
 - Do not over-structure with excessive headings for short content
 - Avoid preamble patterns like "Here is an overview of X:" followed by a bullet list
 - Tables only when data is truly tabular, not as a formatting gimmick
+- Fenced code blocks for shell commands: use `sh`, not `bash`
 
 ## Language
 
@@ -31,10 +32,10 @@ Every sentence must carry information the reader did not already have. Apply the
 
 ## Exceptions
 
-This rule does NOT apply to documents whose primary audience is an LLM, not a human reader. These include:
+The Language and prose-style rules (bold, bullet lists, headings) do not apply to documents whose primary audience is an LLM:
 
 - CLAUDE.md, AGENTS.md
-- .claude/rules/\*_/_.md
-- Skill definition files (\*.md with YAML frontmatter containing `name:` / `description:`)
+- `.claude/rules/**/*.md`
+- Skill definition files (`.md` with YAML frontmatter containing `name:` / `description:`)
 
-Such documents may use structural emphasis, bullet lists, and `**bold**` freely for functional clarity.
+The Formatting section (code block language tags, etc.) applies to all markdown files without exception.
