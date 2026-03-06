@@ -11,10 +11,10 @@ allowed-tools: AskUserQuestion, Bash(python:*), Bash(date:*), Bash(git rev-parse
 
 - Date: !`date "+%Y%m%d"`
 - Repository: !`git rev-parse --show-toplevel` (use basename only, e.g., `dotfiles` not the full path)
-- DB: !`python scripts/db.py init`
-- Summary: !`python scripts/db.py summary`
+- DB: !`python ${CLAUDE_SKILL_DIR}/scripts/db.py init`
+- Summary: !`python ${CLAUDE_SKILL_DIR}/scripts/db.py summary`
 
-Script: `scripts/db.py`
+Script: `${CLAUDE_SKILL_DIR}/scripts/db.py`
 
 ## Mode: Record (default)
 
@@ -42,7 +42,7 @@ Use when no argument is provided or argument is not "search".
 4. **Insert**:
 
    ```sh
-   python scripts/db.py insert '<date>' '<repo>' '<topic>' '<chosen>' '<alternatives>' '<reasoning>'
+   python ${CLAUDE_SKILL_DIR}/scripts/db.py insert '<date>' '<repo>' '<topic>' '<chosen>' '<alternatives>' '<reasoning>'
    ```
 
 5. The script prints the inserted row.
@@ -58,22 +58,22 @@ Use when argument contains "search".
 
    ```sh
    # All decisions for current repo
-   python scripts/db.py search --repo '<repo>'
+   python ${CLAUDE_SKILL_DIR}/scripts/db.py search --repo '<repo>'
 
    # Full-text search
-   python scripts/db.py search --match '<keyword>'
+   python ${CLAUDE_SKILL_DIR}/scripts/db.py search --match '<keyword>'
 
    # Date range
-   python scripts/db.py search --from '<start>' --to '<end>'
+   python ${CLAUDE_SKILL_DIR}/scripts/db.py search --from '<start>' --to '<end>'
 
    # Combined filters
-   python scripts/db.py search --repo '<repo>' --match '<keyword>'
+   python ${CLAUDE_SKILL_DIR}/scripts/db.py search --repo '<repo>' --match '<keyword>'
 
    # Full detail for a specific decision
-   python scripts/db.py detail <id>
+   python ${CLAUDE_SKILL_DIR}/scripts/db.py detail <id>
 
    # Update outcome
-   python scripts/db.py update-outcome <id> '<outcome>'
+   python ${CLAUDE_SKILL_DIR}/scripts/db.py update-outcome <id> '<outcome>'
    ```
 
 3. **Format**: Present results in a readable format
