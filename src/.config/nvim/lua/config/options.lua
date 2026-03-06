@@ -26,6 +26,7 @@ opt.timeoutlen = 300
 opt.undofile = true
 opt.updatetime = 250
 opt.winbar = "%f"
+opt.winborder = "single"
 opt.wrap = false
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
   command = "checktime",
