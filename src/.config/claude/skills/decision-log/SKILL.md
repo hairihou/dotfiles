@@ -38,6 +38,7 @@ Use when no argument is provided or argument is not "search".
 
    Suggested responses: ["OK", "Revise"]
    If the user wants changes, revise and re-confirm.
+
 4. **Insert**:
 
    ```sh
