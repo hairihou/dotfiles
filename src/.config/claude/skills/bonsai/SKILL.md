@@ -1,6 +1,6 @@
 ---
 name: bonsai
-description: Maintain and groom config files in the current repository. Use when asked to "bonsai", "tidy up", "prune configs", "clean up", or when the user wants to review and improve repository health.
+description: Maintain and groom config files in the current repository. Use when asked to "bonsai", "tidy up", "prune configs", "clean up", or when the user wants to review repository health.
 ---
 
 # Bonsai

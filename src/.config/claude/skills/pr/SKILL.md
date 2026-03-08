@@ -1,6 +1,6 @@
 ---
 name: pr
-description: Use when ready to submit work as a GitHub pull request, or when asked to "create a PR", "open a PR", or "submit for review".
+description: Create or update a GitHub pull request with proper branch naming, conventional commits, and structured PR body. Use when asked to create a PR, open a PR, or submit for review.
 argument-hint: [base-branch]
 disable-model-invocation: true
 allowed-tools: Bash(gh:*), Bash(git:*), Read

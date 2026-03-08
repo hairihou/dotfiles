@@ -1,6 +1,6 @@
 ---
 name: session-insights
-description: Use at the end of a session to identify inefficiencies and improvement opportunities, especially for L/XL sessions (16+ turns).
+description: Analyze the current conversation for inefficiencies and improvement opportunities. Use at the end of long sessions (16+ turns) to identify misunderstandings, wasted work, and areas for prompting or rule improvement. Not for personal reflection — use retrospect. Not for logging work — use diary.
 disable-model-invocation: true
 allowed-tools: Glob, Grep, Read
 ---

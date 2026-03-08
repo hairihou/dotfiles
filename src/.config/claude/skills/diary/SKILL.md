@@ -1,6 +1,6 @@
 ---
 name: diary
-description: Use at the end of a work session to capture completed tasks, decisions, and learnings in Obsidian daily note.
+description: Capture completed tasks, decisions, and learnings in an Obsidian daily note. Use at the end of a work session when the user says "diary" or wants to log what was done. Not for analyzing session quality — use session-insights for that.
 disable-model-invocation: true
 allowed-tools: Bash(date *), Bash(git *), Edit("~/Documents/Obsidian Vault/Diary/*.md"), Read("~/Documents/Obsidian Vault/Diary/*.md"), Write("~/Documents/Obsidian Vault/Diary/*.md")
 ---

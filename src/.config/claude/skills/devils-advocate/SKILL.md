@@ -1,6 +1,6 @@
 ---
 name: devils-advocate
-description: Use when asked to "evaluate a decision", "devils advocate", "challenge this approach", or when making architecture/technology choices that need structured critical analysis.
+description: Structured critical analysis using parallel advocate and critic agents. Use when asked to evaluate a decision, play devils advocate, challenge an approach, or weigh pros and cons of architecture/technology choices.
 argument-hint: <topic or decision to evaluate>
 ---
 

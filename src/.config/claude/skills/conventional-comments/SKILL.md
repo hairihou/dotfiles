@@ -1,6 +1,6 @@
 ---
 name: conventional-comments
-description: Use when writing PR or code review comments to ensure consistent format, clarity, and actionability.
+description: Consistent code review comments using a curated Conventional Comments label and decoration set. Use when writing any PR or code review comments. Not for deep complexity analysis — use code-critic for that.
 ---
 
 # Conventional Comments

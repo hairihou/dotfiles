@@ -1,6 +1,6 @@
 ---
 name: retrospect
-description: Use when processing complex situations, conflicts, or decisions that feel unclear and need structured reflection.
+description: Guided personal reflection that separates fact, interpretation, and emotion through structured inquiry. Use when processing complex situations, conflicts, or decisions that feel unclear. Not for technical decision analysis — use devils-advocate for that.
 argument-hint: <event or situation>
 disable-model-invocation: true
 ---

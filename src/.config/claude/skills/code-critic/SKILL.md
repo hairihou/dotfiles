@@ -1,6 +1,6 @@
 ---
 name: code-critic
-description: Use when asked to deeply review code for over-engineering, YAGNI violations, premature abstraction, or defensive excess. Not for writing PR comments — use conventional-comments for that.
+description: Brutally honest code review targeting over-engineering, YAGNI violations, premature abstraction, and defensive excess. Use when asked to critique code for complexity or unnecessary abstraction. Not for writing PR comments — use conventional-comments for that.
 argument-hint: <file-path or glob-pattern>
 disable-model-invocation: true
 allowed-tools: Glob, Grep, Read

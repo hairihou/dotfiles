@@ -1,6 +1,6 @@
 ---
 name: 1on1-prep
-description: Use before scheduled 1on1 meetings, when noticing behavioral changes in a team member, or when unsure how to approach a difficult conversation with a report.
+description: Prepare for 1on1 meetings using a Psychological Safety x Responsibility framework. Use when preparing for a 1on1, noticing behavioral changes in a team member, or planning a difficult conversation with a report.
 disable-model-invocation: true
 argument-hint: "[member-name]"
 allowed-tools: AskUserQuestion, Glob, Grep, Read
@@ -14,13 +14,7 @@ Structured 1on1 preparation using the **Psychological Safety x Responsibility** 
 
 Core principle: 1on1 is a diagnostic tool — assess the zone first, then adapt your approach accordingly.
 
-## When to Use
-
-- Before a scheduled 1on1 meeting
-- When noticing behavioral changes in a team member
-- When unsure how to approach a difficult conversation with a report
-
-**Scope:** One member at a time. This skill is for preparing a single 1on1, not for team-wide assessment.
+**Scope:** One member at a time. Not for team-wide assessment.
 
 ## The 4-Zone Framework
 
