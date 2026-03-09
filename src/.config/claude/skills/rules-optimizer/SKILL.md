@@ -1,6 +1,6 @@
 ---
 name: rules-optimizer
-description: Create and optimize .claude/rules/*.md files for repository-specific coding conventions. Use when asked to create, optimize, or review rules. Not for editing CLAUDE.md — edit that file directly.
+description: Create and optimize .claude/rules/*.md files for repository-specific coding conventions. Use when asked to create, optimize, or review rules, when a pattern keeps recurring that Claude gets wrong, or when codifying a convention. Not for editing CLAUDE.md — edit that file directly.
 argument-hint: [rule-file-or-pattern]
 allowed-tools: Edit, Glob, Read, Write
 ---
@@ -13,81 +13,11 @@ allowed-tools: Edit, Glob, Read, Write
 
 Target: $ARGUMENTS (if not specified, optimize all existing rules)
 
-Create and optimize `.claude/rules/*.md` files for effective AI guidance.
-
-## Best Practices
-
-### File Structure
-
-```
-.claude/rules/
-├── typescript.md        # Language-specific
-├── python.md
-├── frontend/
-│   ├── react.md         # Framework-specific
-│   ├── tailwind.md
-│   └── component-structure.md
-└── backend/
-    └── api.md
-```
-
-### Rule File Format
-
-```markdown
----
-paths: "**/*.{ts,tsx}" # Glob pattern (quoted)
----
-
-# [Topic] Rules
-
-## [Category]
-
-[Rule statement]
-
-\`\`\`typescript
-// ❌ BAD
-[anti-pattern]
-
-// ✅ GOOD
-[correct pattern]
-\`\`\`
-```
-
-### Content Guidelines
-
-1. **One topic per file** — keep focused
-2. **150-200 lines ideal** — enough for examples, not overwhelming
-3. **Include examples** — 1 BAD/GOOD pair per rule that needs clarity
-4. **Skip obvious rules** — focus on what AI gets wrong
-5. **No "why" explanations** — AI reads rules repeatedly; reasoning adds noise that dilutes the pattern to match
-6. **Use tables** for mappings (e.g., v3→v4 migrations)
-
-### Path Patterns
-
-| Pattern               | Matches         |
-| --------------------- | --------------- |
-| `**/*.ts`             | All TS files    |
-| `**/*.{ts,tsx}`       | TS and TSX      |
-| `src/**/*`            | All under src/  |
-| `components/**/*.tsx` | Components only |
-
-### What to Include
-
-- ❌ Anti-patterns AI commonly generates
-- ✅ Correct patterns with minimal example
-- Migration mappings (old → new)
-- Framework-specific conventions
-
-### What to Exclude
-
-- Self-evident rules (use semicolons, etc.)
-- Long explanations of "why"
-- Multiple examples for same rule
-- Style preferences (let linters handle)
+Create and optimize `.claude/rules/*.md` files. Best practices: `${CLAUDE_SKILL_DIR}/references/best-practices.md`
 
 ## Workflow
 
-1. Read existing rule file
+1. Read existing rule file and best practices reference
 2. Identify: redundancy, missing examples, excessive length
 3. Compress to essentials with 1 example per rule
 4. Ensure paths pattern is appropriate

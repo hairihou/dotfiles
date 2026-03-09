@@ -1,6 +1,6 @@
 ---
 name: session-insights
-description: Analyze the current conversation for inefficiencies and improvement opportunities. Use when "how did this session go", "what went wrong", or reviewing session quality. Not for personal reflection — use retrospect. Not for logging work — use diary.
+description: Analyze the current conversation for inefficiencies and improvement opportunities. Use when "how did this session go", "what went wrong", "what could I have done better", or reviewing session quality. Not for personal reflection — use retrospect. Not for logging work — use diary.
 disable-model-invocation: true
 allowed-tools: Glob, Grep, Read
 ---

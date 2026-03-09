@@ -1,6 +1,6 @@
 ---
 name: npm-update-report
-description: Dependency update workflow with vulnerability assessment and verification. Use for periodic dependency maintenance, when security vulnerabilities are reported, or when asked to update or audit packages.
+description: Dependency update workflow with vulnerability assessment and verification. Use when asked to check outdated packages, bump dependencies, run audit, do periodic dependency maintenance, or when security vulnerabilities are reported.
 disable-model-invocation: true
 allowed-tools: Bash(npm:*), Bash(pnpm:*), Bash(python*), Bash(yarn:*), Grep, Read, WebSearch
 ---
@@ -24,7 +24,7 @@ allowed-tools: Bash(npm:*), Bash(pnpm:*), Bash(python*), Bash(yarn:*), Grep, Rea
 | 6    | Assess impact    | Grep for package usage, evaluate breaking changes                                 |
 | 7    | Audit            | Run security audit, include advisory URLs for vulnerabilities                     |
 | 8    | Verify           | Run `python scripts/run-verification.py <pm>` — outputs PASS/FAIL/SKIP per script |
-| 9    | Output           | Follow Report Template and Schema below                                           |
+| 9    | Output           | Follow report template in `${CLAUDE_SKILL_DIR}/references/report-template.md`     |
 
 ## Package Manager Detection
 
@@ -71,65 +71,3 @@ If verification fails:
 3. Investigate those packages' changelogs for breaking changes
 4. Document findings in report under "Verification Results"
 5. Set conclusion to "Needs attention" with specific action items
-
-## Report Template
-
-Write to `./reports/{yyyyMMdd}-{branch-name}.md`. Use `!` prefix for warnings (e.g., `!Breaking:`, `!FAILED`).
-
-```markdown
-# Package Update Report: {branch-name}
-
-## Summary
-
-| Metric          | Value            |
-| --------------- | ---------------- |
-| Verification    | PASSED / !FAILED |
-| Vulnerabilities | {count} / None   |
-| Major           | {count}          |
-| Minor           | {count}          |
-| Patch           | {count}          |
-
-## Notable Changes
-
-### {package-name} ({old-version} -> {new-version}) [major/minor]
-
-**Changes:**
-
-- !Breaking: {description}
-- New: {description}
-- Fix: {description}
-
-**Project Impact:** Affected / Not affected
-
-- {affected-files-or-features}
-
-**Reference:** [CHANGELOG]({url})
-
-## Other Updates
-
-| Package | Change             | Type  | Notes |
-| ------- | ------------------ | ----- | ----- |
-| {name}  | {x.x.x} -> {y.y.y} | patch | -     |
-
-## Security Audit
-
-No vulnerabilities found. / {count} vulnerabilities found:
-
-| Severity | Package | Advisory               |
-| -------- | ------- | ---------------------- |
-| {level}  | {name}  | [{id}]({advisory-url}) |
-
-## Verification Results
-
-### {script-name}
-
-\`\`\`
-{output-summary}
-\`\`\`
-
-## Conclusion
-
-- **Breaking Changes:** No action required / !Action required: {details}
-- **Vulnerabilities:** None / !{count} found: {details}
-- **Recommendation:** Ready to merge / !Needs attention: {details}
-```
