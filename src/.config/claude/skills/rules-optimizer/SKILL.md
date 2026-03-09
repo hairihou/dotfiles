@@ -1,6 +1,6 @@
 ---
 name: rules-optimizer
-description: Create and optimize .claude/rules/*.md files for repository-specific coding conventions. Use when asked to create, optimize, or review rules.
+description: Create and optimize .claude/rules/*.md files for repository-specific coding conventions. Use when asked to create, optimize, or review rules. Not for editing CLAUDE.md — edit that file directly.
 argument-hint: [rule-file-or-pattern]
 allowed-tools: Edit, Glob, Read, Write
 ---
@@ -59,7 +59,7 @@ paths: "**/*.{ts,tsx}" # Glob pattern (quoted)
 2. **150-200 lines ideal** — enough for examples, not overwhelming
 3. **Include examples** — 1 BAD/GOOD pair per rule that needs clarity
 4. **Skip obvious rules** — focus on what AI gets wrong
-5. **No "why" explanations** — just the rule and example
+5. **No "why" explanations** — AI reads rules repeatedly; reasoning adds noise that dilutes the pattern to match
 6. **Use tables** for mappings (e.g., v3→v4 migrations)
 
 ### Path Patterns

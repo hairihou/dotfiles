@@ -1,6 +1,6 @@
 ---
 name: npm-update-report
-description: Dependency update workflow with vulnerability assessment and verification. Use for periodic dependency maintenance, when security vulnerabilities are reported, or when asked to update or audit packages. Produces a report with breaking change investigation and verification results.
+description: Dependency update workflow with vulnerability assessment and verification. Use for periodic dependency maintenance, when security vulnerabilities are reported, or when asked to update or audit packages.
 disable-model-invocation: true
 allowed-tools: Bash(npm:*), Bash(pnpm:*), Bash(python*), Bash(yarn:*), Grep, Read, WebSearch
 ---

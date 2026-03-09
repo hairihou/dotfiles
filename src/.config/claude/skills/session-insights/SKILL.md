@@ -1,6 +1,6 @@
 ---
 name: session-insights
-description: Analyze the current conversation for inefficiencies and improvement opportunities. Use at the end of long sessions (16+ turns) to identify misunderstandings, wasted work, and areas for prompting or rule improvement. Not for personal reflection — use retrospect. Not for logging work — use diary.
+description: Analyze the current conversation for inefficiencies and improvement opportunities. Use when "how did this session go", "what went wrong", or reviewing session quality. Not for personal reflection — use retrospect. Not for logging work — use diary.
 disable-model-invocation: true
 allowed-tools: Glob, Grep, Read
 ---
@@ -9,57 +9,7 @@ allowed-tools: Glob, Grep, Read
 
 Analyze the current conversation session and produce an improvement report.
 
-## Taxonomy
-
-### Session Categories
-
-Classify into one of: Bug Fix, CI/CD, Coaching, Code Review, Configuration, Documentation, Feature Development, Refactoring, Research, Test
-
-### Session Size
-
-| Size | Criteria                                      |
-| ---- | --------------------------------------------- |
-| XS   | 1-3 turns, single focused task                |
-| S    | 4-8 turns, straightforward task               |
-| M    | 9-15 turns, moderate complexity               |
-| L    | 16-25 turns, multiple subtasks or corrections |
-| XL   | 26+ turns, significant scope or difficulties  |
-
-L/XL sessions indicate potential inefficiencies worth analyzing.
-
-### Issue Types
-
-| Issue Type       | Signal                                                         |
-| ---------------- | -------------------------------------------------------------- |
-| Misunderstanding | User corrected agent's interpretation                          |
-| Retry loop       | Same action attempted multiple times                           |
-| Scope creep      | Task grew beyond original request                              |
-| Missing context  | Agent asked for information that should have been in CLAUDE.md |
-| Wrong tool/skill | Agent used wrong approach, user redirected                     |
-| Wasted work      | Agent produced output that was discarded                       |
-| Hallucination    | Agent assumed facts not in evidence                            |
-
-### Feedback Types
-
-#### Prompt Improvement
-
-Rewrite the user's initial request to prevent issues observed in the session.
-
-#### CLAUDE.md / Rules Suggestions
-
-Rules or preferences that would prevent issues. Only suggest additions that would prevent issues observed in THIS session.
-
-#### Skill Suggestions
-
-Skills that were missing, underperformed, or misused.
-
-### Knowledge Usage Categories
-
-| Category   | Description                                                       |
-| ---------- | ----------------------------------------------------------------- |
-| Applied    | Rule/instruction that was followed and helped                     |
-| Missed     | Rule/instruction that existed but was not applied when it should  |
-| Misleading | Rule/instruction that caused incorrect behavior — consider update |
+Taxonomy and classification reference: `${CLAUDE_SKILL_DIR}/references/taxonomy.md`
 
 ## 1. Session Overview
 
@@ -68,25 +18,25 @@ Assess the session and output:
 ```markdown
 ## Session Overview
 
-| Metric       | Value                             |
-| ------------ | --------------------------------- |
-| Category     | <one from taxonomy>               |
-| Session Size | <XS/S/M/L/XL from taxonomy>       |
-| Turns        | <integer>                         |
-| Tools Used   | <comma-separated list>            |
-| Skills Used  | <comma-separated list, or "None"> |
+| Metric       | Value                                 |
+| ------------ | ------------------------------------- |
+| Category     | <one from taxonomy reference>         |
+| Session Size | <XS/S/M/L/XL from taxonomy reference> |
+| Turns        | <integer>                             |
+| Tools Used   | <comma-separated list>                |
+| Skills Used  | <comma-separated list, or "None">     |
 ```
 
 ## 2. Issue Timeline
 
-Scan the conversation for issue types from taxonomy.
+Scan the conversation for issue types from taxonomy reference.
 
 Output as timeline:
 
 ```markdown
 ## Issue Timeline
 
-1. **[Turn <N>]** <Issue Type from taxonomy> (Impact: high/medium/low)
+1. **[Turn <N>]** <Issue Type from taxonomy reference> (Impact: high/medium/low)
    <What happened> → <What the correct action was>
 ```
 
@@ -163,6 +113,7 @@ Read CLAUDE.md and relevant .claude/rules/ files to cross-reference.
 
 ## Guidelines
 
+- Most valuable for longer sessions (16+ turns) where patterns emerge
 - Be specific — cite conversation turns, not vague observations
 - Focus on actionable improvements, not praise
 - L/XL sessions deserve deeper analysis
