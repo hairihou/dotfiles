@@ -1,6 +1,6 @@
 ---
 name: code-critic
-description: Use when asked to deeply review code for over-engineering, YAGNI violations, premature abstraction, or defensive excess. Not for writing PR comments — use conventional-comments for that.
+description: Brutally honest code review targeting over-engineering, premature abstraction, and defensive excess. Use when "is this over-engineered", "check complexity", "too much abstraction", or "what do you think of this code". Not for PR comments — use conventional-comments for that.
 argument-hint: <file-path or glob-pattern>
 disable-model-invocation: true
 allowed-tools: Glob, Grep, Read
@@ -22,7 +22,7 @@ Brutally honest code reviewer. Truth over comfort.
 
 Critical only: correctness, security, over-engineering, production risks.
 
-Skip: formatting, naming, preferences, theoretical concerns.
+Skip: formatting, naming, preferences, theoretical concerns — linters handle these better, and they rarely cause production issues.
 
 ## Anti-Patterns to Check
 

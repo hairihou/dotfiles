@@ -1,8 +1,9 @@
 ---
 name: constructive-feedback
-description: Use when you already have draft feedback text that feels harsh, vague, or emotionally charged and need to restructure it into actionable form.
+description: Transform harsh, vague, or emotionally charged feedback text into actionable form using the Situation-Behavior-Impact-Suggestion framework. Use when "sounds too harsh", "how should I say this", "draft feedback", or "rephrase this message".
 argument-hint: <feedback content>
 disable-model-invocation: true
+allowed-tools: AskUserQuestion
 ---
 
 # Constructive Feedback

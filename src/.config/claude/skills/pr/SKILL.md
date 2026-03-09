@@ -1,6 +1,6 @@
 ---
 name: pr
-description: Use when ready to submit work as a GitHub pull request, or when asked to "create a PR", "open a PR", or "submit for review".
+description: Create or update a GitHub pull request. Use when asked to create a PR, submit for review, or push changes as a PR. Not for code review comments — use conventional-comments for that.
 argument-hint: [base-branch]
 disable-model-invocation: true
 allowed-tools: Bash(gh:*), Bash(git:*), Read
@@ -55,7 +55,7 @@ closes #<number>
 
 ### Rules
 
-- PR body ends with a trailing newline
+- PR body ends with a trailing newline (prevents `gh pr create` HEREDOC from corrupting the last line)
 - Base branch: argument if provided, otherwise default branch
 - Infer issue number from base branch name if possible (e.g., `feature-7509-...` → `#7509`)
 
@@ -75,7 +75,7 @@ closes #<number>
    # if more context needed
    git diff HEAD
 
-   git add .
+   git add <specific-files>  # prefer specific files over `git add .`
    git commit -m "<type>(scope): <description>"
    ```
 

@@ -1,6 +1,8 @@
 ---
 name: conventional-comments
-description: Use when writing PR or code review comments to ensure consistent format, clarity, and actionability.
+description: Format code review comments using Conventional Comments labels and decorations. Use when writing inline review comments on a PR diff. Not for creating PRs — use pr for that. Not for complexity analysis — use code-critic for that.
+disable-model-invocation: true
+allowed-tools: Bash(gh:*), Read
 ---
 
 # Conventional Comments

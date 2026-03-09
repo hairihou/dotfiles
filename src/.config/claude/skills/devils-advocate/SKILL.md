@@ -1,7 +1,8 @@
 ---
 name: devils-advocate
-description: Use when asked to "evaluate a decision", "devils advocate", "challenge this approach", or when making architecture/technology choices that need structured critical analysis.
+description: Structured critical analysis using parallel advocate and critic agents. Use when asked to evaluate a decision, play devils advocate, challenge an approach, or weigh pros and cons of architecture/technology choices.
 argument-hint: <topic or decision to evaluate>
+allowed-tools: Agent, Glob, Grep, Read
 ---
 
 # Devil's Advocate
@@ -20,43 +21,12 @@ Search the codebase for code, documentation, and configuration related to the to
 
 Use the Agent tool to launch **both agents simultaneously in a single message** (two Agent tool calls in parallel). Each agent receives the gathered context but cannot see the other's output.
 
-### Advocate Agent
+For each agent, read the prompt template from `${CLAUDE_SKILL_DIR}/agents/` and substitute `{{topic}}` and `{{context}}` with actual values.
 
-```
-subagent_type: general-purpose
-prompt: |
-  You are an advocate for the following proposal. Build the strongest possible case IN FAVOR.
-
-  Topic: <topic>
-  Context: <gathered context>
-
-  Provide:
-  - Core arguments why this is the right approach
-  - Concrete benefits with evidence from the codebase or industry practice
-  - Success scenarios and enabling conditions
-  - Why alternatives are weaker
-
-  Be specific, not generic. Ground arguments in the actual codebase and constraints.
-```
-
-### Critic Agent
-
-```
-subagent_type: general-purpose
-prompt: |
-  You are a critic of the following proposal. Build the strongest possible case AGAINST.
-
-  Topic: <topic>
-  Context: <gathered context>
-
-  Provide:
-  - Risks and failure scenarios with concrete consequences
-  - Stronger alternatives with trade-off comparison
-  - Hidden assumptions the proposal relies on
-  - What would need to be true for this to fail
-
-  Be specific, not generic. Ground arguments in the actual codebase and constraints.
-```
+| Agent    | Prompt file                              |
+| -------- | ---------------------------------------- |
+| Advocate | `${CLAUDE_SKILL_DIR}/agents/advocate.md` |
+| Critic   | `${CLAUDE_SKILL_DIR}/agents/critic.md`   |
 
 ## 3. Synthesize
 
