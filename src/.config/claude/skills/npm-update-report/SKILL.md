@@ -2,7 +2,7 @@
 name: npm-update-report
 description: Dependency update workflow with vulnerability assessment and verification. Use when asked to check outdated packages, bump dependencies, run audit, do periodic dependency maintenance, or when security vulnerabilities are reported.
 disable-model-invocation: true
-allowed-tools: Bash(npm:*), Bash(pnpm:*), Bash(python*), Bash(yarn:*), Grep, Read, WebSearch
+allowed-tools: Bash(npm *), Bash(pnpm *), Bash(python *), Bash(yarn *), Grep, Read, WebSearch
 ---
 
 # Package Update Report

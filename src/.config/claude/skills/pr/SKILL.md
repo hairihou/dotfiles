@@ -3,7 +3,7 @@ name: pr
 description: Create or update a GitHub pull request. Use when asked to create a PR, submit for review, or push changes as a PR. Not for code review comments — use conventional-comments for that.
 argument-hint: [base-branch]
 disable-model-invocation: true
-allowed-tools: Bash(gh:*), Bash(git:*), Read
+allowed-tools: Bash(gh *), Bash(git *), Read
 ---
 
 # Pull Request
