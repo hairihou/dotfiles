@@ -2,7 +2,7 @@
 name: decision-log
 description: Record or search technical decisions in a persistent SQLite database. Default mode records the most recent decision from conversation with alternatives and reasoning. Use with "search" argument to query past decisions.
 argument-hint: "[search]"
-allowed-tools: AskUserQuestion, Bash(date *), Bash(git rev-parse *), Bash(python *)
+allowed-tools: AskUserQuestion, Bash(date *), Bash(git *), Bash(python *)
 ---
 
 # Decision Log
