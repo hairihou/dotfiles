@@ -7,6 +7,9 @@
     "commit": "",
     "pr": ""
   },
+  "permissions": {
+    "deny": ["Bash(brew *)"]
+  },
   "hooks": {
     "PermissionRequest": [
       {
@@ -25,7 +28,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "format-on-save"
+            "command": "insert-final-newline"
           }
         ]
       }
@@ -53,17 +56,15 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "claude-statusline"
+  },
   "enabledPlugins": {
     "claude-md-management@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true
   },
   "language": "Japanese",
-  "permissions": {
-    "deny": ["Bash(brew *)"]
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "claude-statusline"
-  }
+  "voiceEnabled": true
 }

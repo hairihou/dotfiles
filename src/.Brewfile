@@ -1,8 +1,6 @@
-brew "gh"
 brew "mise"
 brew "neovim"
 brew "ripgrep"
-brew "tree-sitter-cli"
 cask "android-studio"
 cask "azookey"
 cask "claude"

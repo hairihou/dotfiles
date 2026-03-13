@@ -52,8 +52,9 @@ wezterm.on("toggle-opacity", function(window, _)
   window:set_config_overrides({ window_background_opacity = is_transparent and 0.5 or 1.0 })
 end)
 config.keys = {
-  { key = "o", mods = "CMD|SHIFT", action = wezterm.action.EmitEvent("toggle-opacity") }, -- Toggle background transparency
-  { key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\x1b[13;2u") }, -- CSI u encoding for Zsh
+  { key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\x1b[13;2u") },
+  { key = "o", mods = "CMD|SHIFT", action = wezterm.action.EmitEvent("toggle-opacity") },
+  { key = "w", mods = "CMD", action = wezterm.action.CloseCurrentTab({ confirm = false }) },
 }
 config.native_macos_fullscreen_mode = false
 config.scrollback_lines = 10000
