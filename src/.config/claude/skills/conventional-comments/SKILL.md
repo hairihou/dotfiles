@@ -6,7 +6,11 @@ allowed-tools: Bash(gh *), Read
 
 # Conventional Comments
 
-Write code review comments in Conventional Comments format (<https://conventionalcomments.org>).
+## Workflow
+
+1. Read the full diff before writing any comments.
+2. Identify blocking issues (`issue!`, `suggestion!`) first — these gate approval.
+3. Add non-blocking feedback (`suggestion`, `todo`, `question`, `note`) after.
 
 ## Format
 
@@ -26,16 +30,29 @@ Write code review comments in Conventional Comments format (<https://conventiona
 
 ## Labels
 
-| Label        | Description                                          |
-| ------------ | ---------------------------------------------------- |
-| `issue`      | Identifies a problem that needs to be addressed.     |
-| `note`       | Information for the reader. Does not require action. |
-| `question`   | Seeks clarification or investigation.                |
-| `suggestion` | Proposes an improvement with an explicit change.     |
-| `todo`       | Small, necessary change. Less severe than an issue.  |
-| `typo`       | Points out a typographical error.                    |
+| Label        | Description                                          | When to use                                                         |
+| ------------ | ---------------------------------------------------- | ------------------------------------------------------------------- |
+| `issue`      | Identifies a problem that needs to be addressed.     | Bugs, logic errors, broken contracts. Will cause failures if left.  |
+| `suggestion` | Proposes an improvement with an explicit change.     | Better approaches exist. Always include the concrete alternative.   |
+| `todo`       | Small, necessary change. Less severe than an issue.  | Missing null checks, missing edge cases, incomplete cleanup.        |
+| `question`   | Seeks clarification or investigation.                | Intent is unclear from the code alone. Not rhetorical.              |
+| `note`       | Information for the reader. Does not require action. | Related code elsewhere, upcoming changes, context the author lacks. |
+| `typo`       | Points out a typographical error.                    | Misspelled identifiers, comments, or strings.                       |
 
 **Do NOT use**: `praise`, `nitpick`, `quibble` — focus on actionable feedback only.
+
+### Label boundaries
+
+- **issue vs. todo**: `issue` breaks correctness or contracts. `todo` is a gap that should be closed but is not immediately harmful.
+- **suggestion vs. todo**: `suggestion` offers a better approach (include the alternative). `todo` points out something missing (no alternative needed).
+- **question vs. note**: `question` expects a response. `note` does not.
+
+## Anti-patterns
+
+- **Restating the diff.** "This adds a new function" — the reviewer can see that. State the consequence or concern instead.
+- **Suggestion without alternative.** "This could be improved" — how? Always include the concrete change.
+- **Rhetorical question.** "Do we really need this?" — if you know the answer, use `suggestion` or `issue` instead.
+- **Commenting on the obvious.** If the code is self-explanatory and correct, no comment is needed. Silence is a valid review output.
 
 ## Decorations
 
