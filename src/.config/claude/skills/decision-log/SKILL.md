@@ -1,6 +1,6 @@
 ---
 name: decision-log
-description: Record or search technical decisions in a persistent SQLite database. Default mode records the most recent decision from conversation with alternatives and reasoning. Use with "search" argument to query past decisions.
+description: Record or search decisions in a persistent SQLite database. Applicable when a decision with alternatives is finalized — design, process, tooling, workflow, or otherwise. Use with "search" argument to query past decisions.
 argument-hint: "[search]"
 allowed-tools: AskUserQuestion, Bash(date *), Bash(git *), Bash(python *)
 ---
@@ -22,7 +22,7 @@ Use when no argument is provided or argument is not "search".
 
 ### Steps
 
-1. **Analyze**: Review conversation for the most recent design/architecture/technology decision
+1. **Analyze**: Review conversation for the most recent decision where alternatives were considered
 2. **Extract**: Identify topic, chosen approach, alternatives considered, and reasoning
 3. **Confirm**: Use AskUserQuestion to present the decision and get approval. Format the question as:
 
@@ -80,7 +80,7 @@ Use when argument contains "search".
 
 ## Guidelines
 
-- **topic**: Use kebab-case short labels (e.g., `db-architecture`, `cache-strategy`, `auth-flow`)
+- **topic**: Use kebab-case short labels (e.g., `db-architecture`, `cache-strategy`, `skill-trigger-method`)
 - **chosen/alternatives/reasoning**: Write in plain English, concise but complete
 - **outcome**: Update later via search mode when results are known
 - Escape single quotes in shell arguments: `'it'\''s'`
