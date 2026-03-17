@@ -1,11 +1,13 @@
 ---
 name: devils-advocate
-description: Structured critical analysis using parallel advocate and critic agents. Use when asked to evaluate a decision, play devils advocate, challenge an approach, or weigh pros and cons of architecture/technology choices.
+description: Use when evaluating a decision, challenging an approach, or weighing pros and cons of architecture/technology choices.
 argument-hint: <topic or decision to evaluate>
 allowed-tools: Agent, Glob, Grep, Read
 ---
 
 # Devil's Advocate
+
+Parallel advocate/critic analysis that surfaces tensions and decision factors for a given topic.
 
 Topic: $ARGUMENTS
 
@@ -32,7 +34,7 @@ For each agent, read the prompt template from `${CLAUDE_SKILL_DIR}/agents/` and 
 
 After both agents return, combine their outputs into the following format. Do not editorialize — present both sides faithfully, then identify where they conflict.
 
-## Output Format
+### Output Format
 
 ```markdown
 ## Advocate
@@ -53,3 +55,9 @@ After both agents return, combine their outputs into the following format. Do no
 
 [What information or validation would resolve each tension — actionable next steps]
 ```
+
+## Common Mistakes
+
+- Topic too broad (e.g., "frontend strategy" → narrow to "adopting React Server Components for the dashboard")
+- Editorializing in synthesis — present both agents' outputs faithfully before identifying tensions
+- Ignoring Decision Factors — the actionable next steps are the most valuable part, not just the debate itself

@@ -1,11 +1,13 @@
 ---
 name: decision-log
-description: Record or search decisions in a persistent SQLite database. Applicable when a decision with alternatives is finalized — design, process, tooling, workflow, or otherwise. Use with "search" argument to query past decisions.
+description: Use when a decision with alternatives is finalized — design, process, tooling, workflow, or otherwise. Also trigger when the conversation includes comparing options and one is chosen or recommended, or when recalling past decisions.
 argument-hint: "[search]"
 allowed-tools: AskUserQuestion, Bash(date *), Bash(git *), Bash(python *)
 ---
 
 # Decision Log
+
+Persistent decision record with alternatives and reasoning. Enables retrospective review of past choices and their outcomes.
 
 ## Context
 
@@ -54,28 +56,7 @@ Use when argument contains "search".
 ### Steps
 
 1. **Parse intent**: Understand what the user is looking for from conversation context
-2. **Build and run query**:
-
-   ```sh
-   # All decisions for current repo
-   python ${CLAUDE_SKILL_DIR}/scripts/db.py search --repo '<repo>'
-
-   # Full-text search
-   python ${CLAUDE_SKILL_DIR}/scripts/db.py search --match '<keyword>'
-
-   # Date range
-   python ${CLAUDE_SKILL_DIR}/scripts/db.py search --from '<start>' --to '<end>'
-
-   # Combined filters
-   python ${CLAUDE_SKILL_DIR}/scripts/db.py search --repo '<repo>' --match '<keyword>'
-
-   # Full detail for a specific decision
-   python ${CLAUDE_SKILL_DIR}/scripts/db.py detail <id>
-
-   # Update outcome
-   python ${CLAUDE_SKILL_DIR}/scripts/db.py update-outcome <id> '<outcome>'
-   ```
-
+2. **Build and run query**: Run `python ${CLAUDE_SKILL_DIR}/scripts/db.py search --help` for available filters (`--repo`, `--match`, `--from`, `--to`). Also supports `detail <id>` and `update-outcome <id> '<outcome>'`.
 3. **Format**: Present results in a readable format
 
 ## Guidelines
@@ -84,3 +65,9 @@ Use when argument contains "search".
 - **chosen/alternatives/reasoning**: Write in plain English, concise but complete
 - **outcome**: Update later via search mode when results are known
 - Escape single quotes in shell arguments: `'it'\''s'`
+
+## Common Mistakes
+
+- Writing a sentence as topic instead of a kebab-case label (e.g., `We decided to use PostgreSQL` → `database-selection`)
+- Recording only the chosen approach without alternatives — the value is in knowing what was rejected and why
+- Recording trivial decisions (variable naming, minor formatting) — only record decisions where alternatives had meaningful trade-offs
