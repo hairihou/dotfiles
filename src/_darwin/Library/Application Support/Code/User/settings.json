@@ -1,5 +1,4 @@
 {
-  "claudeCode.preferredLocation": "panel",
   "claudeCode.useTerminal": true,
   "cSpell.customDictionaries": {
     "knownWords": {
@@ -44,6 +43,8 @@
   },
   "github.copilot.nextEditSuggestions.enabled": false,
   "githubPullRequests.pullBranch": "never",
+  "js/ts.implementationsCodeLens.enabled": true,
+  "js/ts.referencesCodeLens.enabled": true,
   "notebook.codeActionsOnSave": {
     "notebook.source.fixAll": "explicit",
   },
@@ -56,8 +57,6 @@
   "terminal.integrated.initialHint": false,
   "terminal.integrated.stickyScroll.enabled": false,
   "terminal.integrated.suggest.enabled": false,
-  "typescript.implementationsCodeLens.enabled": true,
-  "typescript.referencesCodeLens.enabled": true,
   "vim.disableExtension": true,
   "window.commandCenter": false,
   "window.title": "\u0020",
