@@ -21,6 +21,7 @@ Available globally after setup:
 - `codext [--dump | --prune]` - VS Code extension manager
 - `dprune` - Remove `.DS_Store` and empty directories from git repository
 - `linkup [--dry-run]` - Symlink manager (re-apply or preview changes)
+- `xdgclean [--dry-run]` - Remove broken symlinks and empty directories from XDG base directories
 
 ### Configuration Files (`/src`)
 

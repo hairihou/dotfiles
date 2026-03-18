@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly xdg_dirs=(
+  "${XDG_CONFIG_HOME:-$HOME/.config}"
+  "${XDG_DATA_HOME:-$HOME/.local/share}"
+  "${XDG_STATE_HOME:-$HOME/.local/state}"
+  "${XDG_CACHE_HOME:-$HOME/.cache}"
+)
+
+dry_run=false
+
+usage() {
+  echo "Usage: xdgclean [--dry-run]"
+  echo "  --dry-run  Show what would be removed without applying"
+}
+
+case "${1:-}" in
+  --dry-run) dry_run=true ;;
+  --help) usage; exit 0 ;;
+  ?*) echo "Unknown option: $1" >&2; exit 1 ;;
+esac
+
+count=0
+
+for dir in "${xdg_dirs[@]}"; do
+  [ -d "$dir" ] || continue
+  while IFS= read -r link; do
+    if "$dry_run"; then
+      echo "[remove] $link -> $(readlink "$link")"
+    else
+      rm "$link"
+      echo "Removed: $link"
+    fi
+    ((count++))
+  done < <(find "$dir" -not -path '*/.git/*' -type l ! -exec test -e {} \; -print 2>/dev/null)
+done
+
+while true; do
+  found=0
+  for dir in "${xdg_dirs[@]}"; do
+    [ -d "$dir" ] || continue
+    while IFS= read -r empty; do
+      if "$dry_run"; then
+        echo "[rmdir] $empty"
+      else
+        rmdir "$empty"
+        echo "Removed: $empty"
+      fi
+      ((count++))
+      ((found++))
+    done < <(find "$dir" -not -path '*/.git/*' -not -name '.git' -type d -empty 2>/dev/null | sort -r)
+  done
+  [[ $found -gt 0 ]] || break
+done
+
+if [[ $count -eq 0 ]]; then
+  echo 'Nothing to clean'
+elif "$dry_run"; then
+  echo "Found $count item$([[ $count -eq 1 ]] && echo '' || echo 's') (run without --dry-run to remove)"
+else
+  echo "Cleaned $count item$([[ $count -eq 1 ]] && echo '' || echo 's')"
+fi
