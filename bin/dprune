@@ -1,7 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+if ! git rev-parse --show-toplevel &>/dev/null; then
+  echo 'Error: Not inside a git repository' >&2
+  exit 1
+fi
+
 count=0
+
+while IFS= read -r file; do
+  git check-ignore "$file" &>/dev/null && continue
+  rm "$file"
+  echo "Removed: $file"
+  ((count++))
+done < <(find . -name '.DS_Store' -not -path '*/.git/*' 2>/dev/null)
+
 while IFS= read -r dir; do
   git check-ignore "$dir" &>/dev/null && continue
   rmdir "$dir" 2>/dev/null || continue
@@ -10,7 +23,7 @@ while IFS= read -r dir; do
 done < <(find . -type d -empty -not -path '*/.git/*' -not -name '.git' 2>/dev/null | sort -r)
 
 if [[ $count -eq 0 ]]; then
-  echo 'No empty directories found'
+  echo 'Nothing to clean'
 else
-  echo "Removed $count empty director$([[ $count -eq 1 ]] && echo 'y' || echo 'ies')"
+  echo "Cleaned $count item$([[ $count -eq 1 ]] && echo '' || echo 's')"
 fi

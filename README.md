@@ -19,7 +19,7 @@ Available globally after setup:
 - `brewup [--all]` - Homebrew batch update utility
 - `cdefaults` - macOS system defaults configuration
 - `codext [--dump | --prune]` - VS Code extension manager
-- `dprune` - Remove empty directories from repository
+- `dprune` - Remove `.DS_Store` and empty directories from git repository
 - `linkup [--dry-run]` - Symlink manager (re-apply or preview changes)
 
 ### Configuration Files (`/src`)
