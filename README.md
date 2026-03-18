@@ -20,6 +20,7 @@ Available globally after setup:
 - `cdefaults` - macOS system defaults configuration
 - `codext [--dump | --prune]` - VS Code extension manager
 - `dprune` - Remove empty directories from repository
+- `linkup [--dry-run]` - Symlink manager (re-apply or preview changes)
 
 ### Configuration Files (`/src`)
 
