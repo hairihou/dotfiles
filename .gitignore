@@ -24,6 +24,3 @@ dist-ssr
 
 # Claude
 docs
-
-# WIP
-src/.codex/config.toml
