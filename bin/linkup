@@ -1,0 +1,218 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly dst="$(cd "$(dirname "$0")/.." && pwd -P)"
+readonly symlinks_record="$dst/dist/.symlinks"
+
+dry_run=false
+
+usage() {
+  echo "Usage: linkup [--dry-run]"
+  echo "  --dry-run  Show what would change without applying"
+}
+
+case "${1:-}" in
+  --dry-run) dry_run=true ;;
+  --help) usage; exit 0 ;;
+  ?*) echo "Unknown option: $1" >&2; exit 1 ;;
+esac
+
+changes_file="$(mktemp)"
+trap 'rm -f "$changes_file"' EXIT
+
+mark_change() {
+  echo 1 >> "$changes_file"
+}
+
+has_changes() {
+  [ -s "$changes_file" ]
+}
+
+do_symlink() {
+  local from="$1" to="$2"
+  mark_change
+  if "$dry_run"; then
+    echo "[create] $to -> $from"
+  else
+    ln -sfi "$from" "$to" < /dev/tty
+  fi
+}
+
+do_remove() {
+  local path="$1"
+  mark_change
+  if "$dry_run"; then
+    echo "[remove] $path"
+  else
+    echo "Removing broken symlink: $path"
+    rm "$path"
+  fi
+}
+
+do_mkdir() {
+  local path="$1"
+  mark_change
+  if "$dry_run"; then
+    echo "[mkdir] $path"
+  else
+    mkdir -p "$path"
+  fi
+}
+
+is_owner() {
+  local email
+  email="$(git config --global user.email)"
+  case "$email" in
+    *+hairihou@users.noreply.github.com) return 0 ;;
+    hairihou@*) return 0 ;;
+    *) return 1 ;;
+  esac
+}
+
+resolve_symlink() {
+  local link="$1"
+  local target
+  target="$(readlink "$link")"
+  case "$target" in
+    /*)
+      echo "$target"
+      ;;
+    *)
+      local dir
+      dir="$(cd "$(dirname "$link")" && pwd -P)"
+      echo "$dir/$target"
+      ;;
+  esac
+}
+
+cleanup_broken_symlinks_in() {
+  local dir="$1"
+  find "$dir" -maxdepth 1 -type l 2>/dev/null | while IFS= read -r link; do
+    local target
+    target="$(resolve_symlink "$link")"
+    case "$target" in
+      "$dst/src"*)
+        if [ ! -e "$target" ]; then
+          do_remove "$link"
+        fi
+        ;;
+    esac
+  done
+}
+
+cleanup_recorded_symlinks() {
+  [ -f "$symlinks_record" ] || return 0
+  local link
+  while IFS= read -r link; do
+    [ -n "$link" ] || continue
+    if [ -L "$link" ] && [ ! -e "$link" ]; then
+      do_remove "$link"
+    fi
+  done < "$symlinks_record"
+}
+
+record_symlink() {
+  "$dry_run" || echo "$1" >> "$symlinks_record.new"
+}
+
+create_symlink() {
+  local from="$1"
+  local to="$2"
+  local parent
+  parent="$(dirname "$to")"
+
+  if [ -L "$to" ]; then
+    local existing_target
+    existing_target="$(resolve_symlink "$to")"
+    if [ "$existing_target" = "$from" ]; then
+      record_symlink "$to"
+      return 0
+    fi
+    case "$existing_target" in
+      "$dst/src"*)
+        if [ -e "$existing_target" ]; then
+          record_symlink "$to"
+          return 0
+        fi
+        ;;
+    esac
+  fi
+
+  # Prevent circular symlinks
+  if [ -L "$parent" ]; then
+    local parent_target
+    parent_target="$(resolve_symlink "$parent")"
+    case "$parent_target" in
+      "$dst/src"*) return 0 ;;
+    esac
+  fi
+
+  if [ "$parent" != "$HOME" ] && [ ! -d "$parent" ]; then
+    do_mkdir "$parent"
+  fi
+
+  if [ -d "$from" ]; then
+    if [ -d "$to" ]; then
+      cleanup_broken_symlinks_in "$to"
+    elif [ -e "$to" ]; then
+      echo "Warning: Cannot create directory '$to': file exists. Skipping." >&2
+      return 0
+    else
+      do_mkdir "$to"
+    fi
+    find "$from" -maxdepth 1 -mindepth 1 | while IFS= read -r file; do
+      create_symlink "$file" "$to/$(basename "$file")"
+    done
+  elif [ -f "$from" ]; then
+    if do_symlink "$from" "$to"; then
+      record_symlink "$to"
+    else
+      echo "Warning: Failed to create symlink: $to" >&2
+    fi
+  fi
+}
+
+apply_dir() {
+  local dir="$1"
+  local exclude="${2:-}"
+  find "$dir" -maxdepth 1 -mindepth 1 | while IFS= read -r item; do
+    local name
+    name="$(basename "$item")"
+    if [ -n "$exclude" ]; then
+      case "$name" in
+        _*|*.owner) continue ;;
+      esac
+    fi
+    create_symlink "$item" "$HOME/$name"
+  done
+}
+
+main() {
+  "$dry_run" || echo 'Cleaning up broken symlinks...'
+  cleanup_recorded_symlinks
+  cleanup_broken_symlinks_in "$HOME"
+
+  "$dry_run" || echo 'Creating symlinks...'
+  if ! "$dry_run"; then
+    mkdir -p "$(dirname "$symlinks_record")"
+    : > "$symlinks_record.new"
+  fi
+
+  if is_owner; then
+    create_symlink "$dst/src/.Brewfile.owner" "$HOME/.Brewfile"
+    create_symlink "$dst/src/.gitconfig.owner" "$HOME/.gitconfig"
+  fi
+  apply_dir "$dst/src" 'exclude'
+  [ "$(uname)" = 'Darwin' ] && apply_dir "$dst/src/_darwin"
+
+  if ! "$dry_run"; then
+    sort -u "$symlinks_record.new" -o "$symlinks_record"
+    rm -f "$symlinks_record.new"
+  fi
+
+  if ! has_changes; then
+    echo 'No changes needed'
+  fi
+}
+
+main
