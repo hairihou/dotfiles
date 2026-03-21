@@ -4,7 +4,8 @@ set -euo pipefail
 eval "$(jq -r '
   @sh "model=\(.model.display_name)",
   "pct=\(.context_window.used_percentage // 0 | floor)",
-  "cost=\(.cost.total_cost_usd // 0)"
+  "rl5h=\(.rate_limits.five_hour.used_percentage // -1 | floor)",
+  "rl7d=\(.rate_limits.seven_day.used_percentage // -1 | floor)"
 ')"
 
 green='\033[92m'; yellow='\033[93m'; red='\033[91m'
@@ -16,10 +17,29 @@ case "$model" in
   *)        model_color='\033[97m' ;;
 esac
 
-bars=('░░░░░░░░' '█░░░░░░░' '██░░░░░░' '███░░░░░' '████░░░░' '█████░░░' '██████░░' '███████░' '████████')
-bar=${bars[pct * 8 / 100]}
-if ((pct >= 90)); then bar_color=$red
-elif ((pct >= 70)); then bar_color=$yellow
-else bar_color=$green; fi
+sparks=(▁ ▂ ▃ ▄ ▅ ▆ ▇ █)
 
-echo -e "${model_color}${model}${reset} ${gray}|${reset} ${bar_color}${bar} ${pct}%${reset} ${gray}|${reset} ${gray}$(printf '$%.2f' "$cost")${reset}"
+spark_for_pct() {
+  local i=$(($1 * 7 / 100))
+  ((i > 7)) && i=7
+  echo "${sparks[$i]}"
+}
+
+color_for_thresholds() {
+  if (($1 >= $3)); then echo "$red"
+  elif (($1 >= $2)); then echo "$yellow"
+  else echo "$green"; fi
+}
+
+gauge() {
+  local label=$1 pct=$2 warn=$3 crit=$4
+  local color=$(color_for_thresholds "$pct" "$warn" "$crit")
+  echo "${gray}${label}${reset} ${color}$(spark_for_pct "$pct") ${pct}%${reset}"
+}
+
+out="${model_color}${model}${reset}"
+out+=" ${gray}|${reset} $(gauge ctx "$pct" 70 90)"
+[[ $rl5h -ge 0 ]] && out+=" ${gray}|${reset} $(gauge 5h "$rl5h" 60 80)"
+[[ $rl7d -ge 0 ]] && out+=" ${gray}|${reset} $(gauge 7d "$rl7d" 50 70)"
+
+echo -e "$out"
