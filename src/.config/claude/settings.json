@@ -56,10 +56,6 @@
       }
     ]
   },
-  "statusLine": {
-    "type": "command",
-    "command": "claude-statusline"
-  },
   "enabledPlugins": {
     "claude-md-management@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
@@ -73,5 +69,9 @@
     "lua-lsp@claude-plugins-official": true
   },
   "language": "Japanese",
+  "statusLine": {
+    "type": "command",
+    "command": "claude-statusline"
+  },
   "voiceEnabled": true
 }
