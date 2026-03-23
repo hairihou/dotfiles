@@ -46,12 +46,6 @@
   - No `Co-Authored-By: Claude`
   - No `🤖 Generated with Claude Code`
 
-## Language
-
-- Conversation: Japanese
-- File output (code, config, documentation): English
-- Keep in original form within Japanese text: code, commands, URLs, proper nouns
-
 ## Tooling
 
 - **CRITICAL**: Detect package manager from lockfile before running commands (`pnpm-lock.yaml` → pnpm, `package-lock.json` → npm, `yarn.lock` → yarn, `bun.lockb`/`bun.lock` → bun). Never assume npm.
