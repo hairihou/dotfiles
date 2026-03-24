@@ -1,39 +1,38 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-eval "$(jq -r '
-  @sh "model=\(.model.display_name | split(" ") | .[0])",
+if ! eval "$(jq -r '
+  @sh "model=\(.model.display_name // "unknown" | split(" ") | .[0])",
   "ctx_pct=\(.context_window.used_percentage // 0 | floor)",
   "rate_5h_pct=\(.rate_limits.five_hour.used_percentage // -1 | floor)",
   "rate_7d_pct=\(.rate_limits.seven_day.used_percentage // -1 | floor)"
-')"
+')"; then
+  echo "claude"; exit
+fi
 
 green='\033[92m'; yellow='\033[93m'; red='\033[91m'
 gray='\033[90m'; reset='\033[0m'
 braille=(⠀ ⡀ ⣀ ⣤ ⣶ ⣿)
-
-case "$model" in
-  *Opus*)   model_color='\033[95m' ;;
-  *Sonnet*) model_color='\033[93m' ;;
-  *)        model_color='\033[97m' ;;
-esac
 
 gauge() {
   local pct=$1 warning=$2 critical=$3 color level hi lo
   if ((pct >= critical)); then color=$red
   elif ((pct >= warning)); then color=$yellow
   else color=$green; fi
-  level=$((pct * 9 / 100))
-  ((level > 9)) && level=9
-  if ((level >= 5)); then hi=${braille[5]} lo=${braille[level - 4]}
-  else hi=${braille[level + 1]} lo=${braille[0]}; fi
-  echo "${color}${hi}${lo} ${pct}%${reset}"
+  level=$((pct * 10 / 100))
+  ((level < 1)) && level=1
+  ((level > 10)) && level=10
+  if ((level >= 5)); then hi=${braille[5]} lo=${braille[level - 5]}
+  else hi=${braille[level]} lo=${braille[0]}; fi
+  echo "${color}${hi}${lo}${pct}%${reset}"
 }
 
 sep=" ${gray}|${reset} "
-line="${model_color}${model}${reset}"
+line="${model}"
 line+="${sep}${gray}ctx${reset} $(gauge "$ctx_pct" 70 90)"
-((rate_5h_pct >= 0)) && line+="${sep}${gray}5h${reset} $(gauge "$rate_5h_pct" 60 80)"
-((rate_7d_pct >= 0)) && line+="${sep}${gray}7d${reset} $(gauge "$rate_7d_pct" 50 70)"
+if ((rate_5h_pct >= 0)); then line+="${sep}${gray}5h${reset} $(gauge "$rate_5h_pct" 60 80)"
+else line+="${sep}${gray}5h ${braille[0]}${braille[0]}--%${reset}"; fi
+if ((rate_7d_pct >= 0)); then line+="${sep}${gray}7d${reset} $(gauge "$rate_7d_pct" 50 70)"
+else line+="${sep}${gray}7d ${braille[0]}${braille[0]}--%${reset}"; fi
 
 echo -e "$line"
