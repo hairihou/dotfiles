@@ -1,5 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-file="$HOME/dotfiles/public/${1:-stop}.mp3"
-[[ -e "$file" ]] && afplay "$file" &

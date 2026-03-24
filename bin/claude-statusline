@@ -1,38 +1,51 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/usr/bin/env python3
+import json
+import sys
 
-if ! eval "$(jq -r '
-  @sh "model=\(.model.display_name // "unknown" | split(" ") | .[0])",
-  "ctx_pct=\(.context_window.used_percentage // 0 | floor)",
-  "rate_5h_pct=\(.rate_limits.five_hour.used_percentage // -1 | floor)",
-  "rate_7d_pct=\(.rate_limits.seven_day.used_percentage // -1 | floor)"
-')"; then
-  echo "claude"; exit
-fi
+BRAILLE = "⠀⡀⣀⣤⣶⣿"
+GREEN, YELLOW, RED = "\033[92m", "\033[93m", "\033[91m"
+GRAY, RESET = "\033[90m", "\033[0m"
+SEP = f" {GRAY}|{RESET} "
 
-green='\033[92m'; yellow='\033[93m'; red='\033[91m'
-gray='\033[90m'; reset='\033[0m'
-braille=(⠀ ⡀ ⣀ ⣤ ⣶ ⣿)
 
-gauge() {
-  local pct=$1 warning=$2 critical=$3 color level hi lo
-  if ((pct >= critical)); then color=$red
-  elif ((pct >= warning)); then color=$yellow
-  else color=$green; fi
-  level=$((pct * 10 / 100))
-  ((level < 1)) && level=1
-  ((level > 10)) && level=10
-  if ((level >= 5)); then hi=${braille[5]} lo=${braille[level - 5]}
-  else hi=${braille[level]} lo=${braille[0]}; fi
-  echo "${color}${hi}${lo}${pct}%${reset}"
-}
+def gauge(pct: int, warning: int, critical: int) -> str:
+    if pct >= critical:
+        color = RED
+    elif pct >= warning:
+        color = YELLOW
+    else:
+        color = GREEN
+    level = max(1, min(10, pct * 10 // 100))
+    if level >= 5:
+        hi, lo = BRAILLE[5], BRAILLE[level - 5]
+    else:
+        hi, lo = BRAILLE[level], BRAILLE[0]
+    return f"{color}{hi}{lo}{pct}%{RESET}"
 
-sep=" ${gray}|${reset} "
-line="${model}"
-line+="${sep}${gray}ctx${reset} $(gauge "$ctx_pct" 70 90)"
-if ((rate_5h_pct >= 0)); then line+="${sep}${gray}5h${reset} $(gauge "$rate_5h_pct" 60 80)"
-else line+="${sep}${gray}5h ${braille[0]}${braille[0]}--%${reset}"; fi
-if ((rate_7d_pct >= 0)); then line+="${sep}${gray}7d${reset} $(gauge "$rate_7d_pct" 50 70)"
-else line+="${sep}${gray}7d ${braille[0]}${braille[0]}--%${reset}"; fi
 
-echo -e "$line"
+try:
+    data = json.load(sys.stdin)
+    model = (data.get("model", {}).get("display_name") or "unknown").split()[0]
+    ctx_pct = int(data.get("context_window", {}).get("used_percentage") or 0)
+    rate_5h_pct = int(
+        data.get("rate_limits", {}).get("five_hour", {}).get("used_percentage") or -1
+    )
+    rate_7d_pct = int(
+        data.get("rate_limits", {}).get("seven_day", {}).get("used_percentage") or -1
+    )
+except Exception:
+    print("claude")
+    sys.exit()
+
+line = model
+line += f"{SEP}{GRAY}ctx{RESET} {gauge(ctx_pct, 70, 90)}"
+if rate_5h_pct >= 0:
+    line += f"{SEP}{GRAY}5h{RESET} {gauge(rate_5h_pct, 60, 80)}"
+else:
+    line += f"{SEP}{GRAY}5h {BRAILLE[0]}{BRAILLE[0]}--%{RESET}"
+if rate_7d_pct >= 0:
+    line += f"{SEP}{GRAY}7d{RESET} {gauge(rate_7d_pct, 50, 70)}"
+else:
+    line += f"{SEP}{GRAY}7d {BRAILLE[0]}{BRAILLE[0]}--%{RESET}"
+
+print(line)

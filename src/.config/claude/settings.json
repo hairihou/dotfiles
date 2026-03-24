@@ -17,7 +17,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "tuinotify permission-request"
+            "command": "claude-notify permission-request"
           }
         ]
       }
@@ -39,7 +39,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "tuinotify ask-user-question"
+            "command": "claude-notify ask-user-question"
           }
         ]
       }
@@ -50,7 +50,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "tuinotify stop"
+            "command": "claude-notify stop"
           }
         ]
       }
