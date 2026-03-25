@@ -1,6 +1,5 @@
 brew "mise"
 brew "neovim"
-brew "ripgrep"
 cask "android-studio"
 cask "azookey"
 cask "claude"
