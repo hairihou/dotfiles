@@ -25,7 +25,7 @@ ripgrep = "15.1.0"
 swiftlint = "0.63.2"
 uv = "0.11.1"
 xh = "0.25.3"
-zellij = "0.43.1"
+zellij = "0.44.0"
 
 [settings]
 lockfile = true

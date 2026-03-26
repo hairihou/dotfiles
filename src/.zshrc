@@ -119,22 +119,4 @@ peco-zellij() {
 zle -N peco-zellij
 bindkey '^\]^\]' peco-zellij
 
-if [[ -n "$ZELLIJ" ]]; then
-  zellij() {
-    case "${1:-}" in
-      ""|attach|a|-s|--session) echo "Already inside a Zellij session." >&2; return 1 ;;
-      *) command zellij "$@" ;;
-    esac
-  }
-else
-  zellij() {
-    if [[ $# -eq 0 ]]; then
-      local name="${PWD:t}"
-      command zellij attach --create "$name"
-    else
-      command zellij "$@"
-    fi
-  }
-fi
-
 eval "$(mise activate zsh)"
