@@ -4,32 +4,32 @@ paths: "**/*.{ts,tsx,vue}"
 
 # TypeScript Rules
 
-## Array Methods
+Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow project linter config when present; these rules supplement it.
 
-- Prefer `map`/`filter`/`reduce` over `forEach`
-- Use `forEach` only for side effects (logging, API calls)
+## Prohibited Patterns
 
-## Array Types
+- `any` → use `unknown` and narrow
+  - Exception: generic function bodies where TypeScript cannot infer correctly
+- `as` type assertion → use type guards or `satisfies`
+  - Exception: `as const`, unavoidable DOM casts (`as HTMLInputElement`), library `.d.ts` that lacks generics or returns `any`/`object`
+- `enum` → use `as const` objects (see Naming Conventions)
+- `!` (non-null assertion) → use type guards or restructure
+  - Exception: test code where the value is guaranteed by setup
+- Fire-and-forget promises → always `await` or return; if intentionally discarding, use `void someAsyncFn()`
+- Bare `if (value)` for nullish checks → use `value !== undefined` or `value !== null`; boolean types allow truthy checks; `if (name)` on `string` allowed only when excluding empty string is intentional
+- `!!value` → allowed only for coercing union with multiple falsy values (`string | null | undefined` → `boolean`)
+- `items.filter(Boolean)` → `items.filter((item) => item !== undefined && item !== null)`
+- `isNaN(x)` → `Number.isNaN(x)`
+- `Number(input)` → `parseFloat(input)` or `parseInt(input, 10)`
+- `String(value)` → `value.toString()`
 
-- `T[]` for simple types
-- `Array<T>` for complex types (unions, generics)
+## Naming Conventions
 
-## Control Flow
-
-Always use block statements (`if (x) { return; }`, not `if (x) return;`)
-
-## Enums
-
-Use `as const` objects instead of enums. Keys must be PascalCase.
+- `as const` objects: `PascalCase` (keys also `PascalCase`); derive union type alongside
+- Discriminated union discriminant: `type`
+- `SCREAMING_CASE`: reserved for environment variables only
 
 ```typescript
-// NG
-const Status = {
-  activeUser: "ACTIVE",
-  INACTIVE_USER: "INACTIVE",
-} as const;
-
-// OK
 const Status = {
   Active: "ACTIVE",
   Inactive: "INACTIVE",
@@ -37,69 +37,8 @@ const Status = {
 type Status = (typeof Status)[keyof typeof Status];
 ```
 
-## Equality & Boolean Checks
+## Error Handling
 
-- Use strict equality (`===`, `!==`)
-- Explicit nullish checks (`value !== undefined`, not `if (value)`)
-- Boolean types allow truthy/falsy checks (`if (isEnabled)`)
-- `!!value` allowed only for multiple falsy values (string | null | undefined)
-
-## Exports
-
-Avoid default exports unless framework requires.
-
-## Functions
-
-- Prefer arrow functions with explicit return types
-- JSX components don't need return type annotations
-- Use function declarations when hoisting is required
-
-## Generic Functions
-
-`as any` is acceptable inside generic function bodies when TypeScript cannot infer correctly.
-
-## Nullish Coalescing
-
-- `??` for nullish values
-- `||` only when falsy fallback is intentional
-
-## Optional Properties
-
-- Prefer `| undefined` when callers must consciously decide
-- Use `?:` when omission is the common case
-
-## Prohibited Patterns
-
-### Primitive Wrappers
-
-- `items.filter(Boolean)` → `items.filter((item) => item !== undefined && item !== null)`
-- `Number(input)` → `parseFloat(input)` or `parseInt(input, 10)`
-- `String(value)` → `value.toString()`
-
-### Other
-
-- `isNaN(x)` → `Number.isNaN(x)`
-
-## Property Order
-
-Order by stability: `id` → readonly required → writable required → readonly optional → writable optional
-
-## Readonly & Immutability
-
-Use `readonly` by default.
-
-## Result Type
-
-Consider Result type (`{ ok: true; value: T } | { ok: false; error: E }`) for recoverable errors.
-
-## Type Definitions
-
-- `interface` for object types (extendable, better error messages)
-- `type` for unions, tuples, primitives, mapped types
-- Prefer `interface extends` over `&` intersections
-- Use discriminated unions for variant data (avoid bag of optionals)
-
-## Unknown Type
-
-- Use `unknown` instead of `any`
-- `any` acceptable only in: generic function bodies, legacy code migration, third-party workarounds (with TODO)
+- `return await` inside `try`/`catch`/`finally`: required (without `await` the promise escapes the block)
+- `return await` outside error-handling blocks: omit (redundant)
+- When `@typescript-eslint/return-await` is configured: linter takes precedence
