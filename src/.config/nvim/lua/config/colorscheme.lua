@@ -36,6 +36,10 @@ hl("MiniIconsOrange", { fg = colors.orange[300] })
 hl("MiniIconsPurple", { fg = colors.purple[300] })
 hl("MiniIconsRed", { fg = colors.rose[300] })
 hl("MiniIconsYellow", { fg = colors.amber[300] })
+-- render-markdown
+hl("RenderMarkdownH", { fg = colors.blue[400], bold = true })
+hl("RenderMarkdownHBg", { bg = colors.blue[950] })
+hl("RenderMarkdownCode", { bg = colors.slate[800] })
 -- treesitter
 hl("@punctuation.bracket", { fg = colors.slate[400] })
 hl("@type.builtin", { italic = true })

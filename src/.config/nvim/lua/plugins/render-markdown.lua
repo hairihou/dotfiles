@@ -5,5 +5,10 @@ return {
   keys = {
     { "<leader>md", "<Cmd>RenderMarkdown toggle<CR>", desc = "Markdown Preview" },
   },
-  opts = {},
+  opts = {
+    heading = {
+      backgrounds = { "RenderMarkdownHBg" },
+      foregrounds = { "RenderMarkdownH" },
+    },
+  },
 }
