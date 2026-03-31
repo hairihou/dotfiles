@@ -1,15 +1,17 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 local opt = vim.opt
-opt.autoread = true
+opt.breakindent = true
 opt.clipboard = "unnamedplus"
-opt.completeopt = { "menu", "menuone", "noselect" }
+opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 opt.cursorcolumn = true
 opt.cursorline = true
 opt.expandtab = true
 opt.fileencoding = "utf-8"
 opt.ignorecase = true
+opt.linebreak = true
 opt.number = true
+opt.pumborder = "single"
 opt.relativenumber = true
 opt.scrolloff = 8
 opt.shiftwidth = 2
@@ -27,8 +29,6 @@ opt.undofile = true
 opt.updatetime = 250
 opt.winbar = "%f"
 opt.winborder = "single"
-opt.breakindent = true
-opt.linebreak = true
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
   command = "checktime",
 })
