@@ -28,7 +28,6 @@
   "editor.renderLineHighlightOnlyWhenFocus": true,
   "editor.stickyScroll.enabled": false,
   "editor.tabSize": 2,
-  // "extensions.autoUpdate": false,
   "extensions.ignoreRecommendations": true,
   "files.associations": {
     "*.css": "tailwindcss",
@@ -84,7 +83,7 @@
     "@todo",
   ],
   "todo-tree.general.tagGroups": {
-    "TODO": ["@todo", "ToDo", "TODO"],
+    "TODO": ["@todo", "TODO"],
   },
   "todo-tree.highlights.useColourScheme": true,
   "todo-tree.highlights.backgroundColourScheme": [

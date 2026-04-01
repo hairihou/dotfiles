@@ -1,8 +1,6 @@
 brew "mise"
 cask "android-studio"
 cask "azookey"
-cask "claude"
-cask "claude-code"
 cask "drawio"
 cask "figma"
 cask "firefox"

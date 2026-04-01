@@ -1,8 +1,6 @@
 brew "mise"
 cask "android-studio"
 cask "azookey"
-cask "claude"
-cask "claude-code"
 cask "font-udev-gothic-nf"
 cask "orbstack"
 cask "raycast"
