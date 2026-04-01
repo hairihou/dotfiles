@@ -2,6 +2,7 @@
 set -euo pipefail
 
 readonly brewfile="$HOME/.Brewfile"
+readonly cleanup_exclude_flags=(--no-mas --no-whalebrew --no-vscode)
 readonly include_types=(brew cask tap)
 
 dump_packages() {
@@ -10,6 +11,10 @@ dump_packages() {
   local pattern content
   pattern=$(IFS='|'; echo "${include_types[*]}")
   content=$(grep -E "^(${pattern}) " "$brewfile" || true)
+  if [[ -z "$content" ]]; then
+    echo "Warning: No matching packages found, keeping existing Brewfile"
+    return 0
+  fi
   printf '%s\n' "$content" > "$brewfile"
   local formulae_count=$(grep -c "^brew " "$brewfile" 2>/dev/null || echo 0)
   local cask_count=$(grep -c "^cask " "$brewfile" 2>/dev/null || echo 0)
@@ -34,15 +39,20 @@ prune_packages() {
     exit 1
   fi
 
-  local to_remove=$(brew bundle cleanup --global 2>&1 | grep "^Would uninstall" | sed 's/^Would uninstall //' || echo "")
+  local cleanup_output
+  if ! cleanup_output=$(brew bundle cleanup --global "${cleanup_exclude_flags[@]}" 2>&1); then
+    echo "Error: brew bundle cleanup failed"
+    echo "$cleanup_output"
+    return 1
+  fi
 
-  if [[ -z "$to_remove" ]]; then
+  if [[ -z "$cleanup_output" ]]; then
     echo 'No packages to remove'
     return 0
   fi
 
   echo "The following packages are not in $brewfile:"
-  echo "$to_remove" | sed 's/^/  - /'
+  echo "$cleanup_output"
   echo -n 'Remove these packages? (y/n): '
   read -r response < /dev/tty
 
@@ -52,7 +62,7 @@ prune_packages() {
   fi
 
   echo "Removing packages..."
-  brew bundle cleanup --force --global
+  brew bundle cleanup --force --global "${cleanup_exclude_flags[@]}"
   echo "Cleanup complete"
 }
 
