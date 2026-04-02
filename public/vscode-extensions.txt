@@ -1,4 +1,5 @@
 angular.ng-template
+anthropic.claude-code
 astral-sh.ty
 bradlc.vscode-tailwindcss
 charliermarsh.ruff
