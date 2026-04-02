@@ -1,6 +1,6 @@
 [tools]
 "aqua:BurntSushi/ripgrep" = "15.1.0"
-"aqua:anthropics/claude-code" = "2.1.89"
+"aqua:anthropics/claude-code" = "2.1.90"
 "aqua:ducaale/xh" = "0.25.3"
 "aqua:neovim/neovim" = "0.12.0"
 "aqua:peco/peco" = "0.6.0"
@@ -21,11 +21,11 @@ node = "24.14.1"
 "npm:ccusage" = "18.0.10"
 "npm:ntn" = "0.5.5"
 pipx = "1.11.1"
-"pipx:git+https://github.com/github/spec-kit.git" = "v0.4.4"
+"pipx:git+https://github.com/github/spec-kit.git" = "v0.4.5"
 pnpm = "10.33.0"
 python = "3.14.3"
 swiftlint = "0.63.2"
-uv = "0.11.2"
+uv = "0.11.3"
 
 [settings]
 lockfile = true
