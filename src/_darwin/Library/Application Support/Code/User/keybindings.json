@@ -1,22 +1,22 @@
 [
   {
     "key": "cmd+r",
-    "command": "workbench.action.reloadWindow"
+    "command": "workbench.action.reloadWindow",
   },
   {
     "key": "cmd+,",
-    "command": "workbench.action.openSettingsJson"
+    "command": "workbench.action.openSettingsJson",
   },
   {
     "key": "cmd+.",
-    "command": "workbench.action.openGlobalKeybindingsFile"
+    "command": "workbench.action.openGlobalKeybindingsFile",
   },
   {
     "key": "shift+enter",
     "command": "workbench.action.terminal.sendSequence",
     "args": {
-      "text": "\\\r\n"
+      "text": "\\\r\n",
     },
-    "when": "terminalFocus"
-  }
+    "when": "terminalFocus",
+  },
 ]

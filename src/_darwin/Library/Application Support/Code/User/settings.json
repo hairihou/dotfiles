@@ -55,6 +55,11 @@
   "terminal.integrated.gpuAcceleration": "off",
   "terminal.integrated.initialHint": false,
   "terminal.integrated.stickyScroll.enabled": false,
+  "terminal.integrated.allowChords": false,
+  "terminal.integrated.commandsToSkipShell": [
+    "-workbench.action.quickOpen",
+    "-workbench.action.quickOpenView",
+  ],
   "terminal.integrated.suggest.enabled": false,
   "vim.disableExtension": true,
   "window.commandCenter": false,

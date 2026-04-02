@@ -2,8 +2,7 @@
 set -euo pipefail
 
 readonly brewfile="$HOME/.Brewfile"
-readonly cleanup_exclude_flags=(--no-mas --no-whalebrew --no-vscode)
-readonly include_types=(brew cask tap)
+readonly include_types=(brew cask tap vscode)
 
 dump_packages() {
   echo "Dumping installed packages to Brewfile..."
@@ -40,7 +39,7 @@ prune_packages() {
   fi
 
   local cleanup_output
-  if ! cleanup_output=$(brew bundle cleanup --global "${cleanup_exclude_flags[@]}" 2>&1); then
+  if ! cleanup_output=$(brew bundle cleanup --global 2>&1); then
     echo "Error: brew bundle cleanup failed"
     echo "$cleanup_output"
     return 1
@@ -62,7 +61,7 @@ prune_packages() {
   fi
 
   echo "Removing packages..."
-  brew bundle cleanup --force --global "${cleanup_exclude_flags[@]}"
+  brew bundle cleanup --force --global
   echo "Cleanup complete"
 }
 
