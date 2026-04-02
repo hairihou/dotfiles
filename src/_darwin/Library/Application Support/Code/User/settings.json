@@ -56,6 +56,7 @@
   "terminal.integrated.initialHint": false,
   "terminal.integrated.stickyScroll.enabled": false,
   "terminal.integrated.allowChords": false,
+  "terminal.integrated.macOptionIsMeta": true,
   "terminal.integrated.commandsToSkipShell": [
     "-workbench.action.quickOpen",
     "-workbench.action.quickOpenView",
