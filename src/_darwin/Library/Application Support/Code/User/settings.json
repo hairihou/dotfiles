@@ -1,5 +1,4 @@
 {
-  "claudeCode.useTerminal": true,
   "cSpell.customDictionaries": {
     "knownWords": {
       "name": "knownWords",
@@ -63,7 +62,6 @@
   "workbench.editorAssociations": {
     "*.svg": "default",
   },
-  "workbench.secondarySideBar.defaultVisibility": "hidden",
   "workbench.tree.indent": 16,
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff",
@@ -71,34 +69,4 @@
   "[toml]": {
     "editor.defaultFormatter": "tamasfe.even-better-toml",
   },
-  "todo-tree.filtering.excludeGlobs": ["dist", "node_modules"],
-  "todo-tree.general.tags": [
-    "BUG",
-    "HACK",
-    "FIXME",
-    "TODO",
-    "XXX",
-    "[ ]",
-    "[x]",
-    "@todo",
-  ],
-  "todo-tree.general.tagGroups": {
-    "TODO": ["@todo", "TODO"],
-  },
-  "todo-tree.highlights.useColourScheme": true,
-  "todo-tree.highlights.backgroundColourScheme": [
-    "#fda4af",
-    "#fdba74",
-    "#fcd34d",
-    "#6ee7b7",
-    "#93c5fd",
-    "#d8b4fe",
-    "#e2e8f0",
-  ],
-  "todo-tree.highlights.foregroundColourScheme": ["#0f172a"],
-  "todo-tree.highlights.defaultHighlight": {
-    "fontStyle": "italic",
-    "type": "text-and-comment",
-  },
-  "todo-tree.regex.regex": "(\\*|//|#|<!--|;|/\\*|^|^[ \\t]*\\*)\\s*($TAGS)",
 }

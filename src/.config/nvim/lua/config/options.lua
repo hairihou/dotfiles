@@ -7,7 +7,6 @@ opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 opt.cursorcolumn = true
 opt.cursorline = true
 opt.expandtab = true
-opt.fileencoding = "utf-8"
 opt.ignorecase = true
 opt.linebreak = true
 opt.number = true
