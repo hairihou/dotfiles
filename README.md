@@ -30,7 +30,6 @@ Symlinked to home directory:
 | Source                     | Target                         |
 | -------------------------- | ------------------------------ |
 | `src/.Brewfile`            | `~/.Brewfile`                  |
-| `src/.codex/**/*`          | `~/.codex/**/*`                |
 | `src/.config/**/*`         | `~/.config/**/*`               |
 | `src/.zshrc`               | `~/.zshrc`                     |
 | `src/_darwin/Library/**/*` | `~/Library/**/*` (Darwin only) |
