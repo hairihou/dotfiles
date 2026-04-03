@@ -14,6 +14,11 @@ local theme = {
     [900] = "#0f172a",
   },
 }
+local is_transparent = false
+wezterm.on("toggle-opacity", function(window, _)
+  is_transparent = not is_transparent
+  window:set_config_overrides({ window_background_opacity = is_transparent and 0.5 or 1.0 })
+end)
 config.colors = {
   ansi = {
     theme.slate[600], theme.rose[400], theme.emerald[400], theme.amber[400],
@@ -46,11 +51,6 @@ config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 config.hide_tab_bar_if_only_one_tab = true
 config.initial_cols = 120
 config.initial_rows = 36
-local is_transparent = false
-wezterm.on("toggle-opacity", function(window, _)
-  is_transparent = not is_transparent
-  window:set_config_overrides({ window_background_opacity = is_transparent and 0.5 or 1.0 })
-end)
 config.keys = {
   { key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\x1b[13;2u") },
   { key = "o", mods = "CMD|SHIFT", action = wezterm.action.EmitEvent("toggle-opacity") },
@@ -60,6 +60,8 @@ config.native_macos_fullscreen_mode = false
 config.scrollback_lines = 10000
 config.send_composed_key_when_left_alt_is_pressed = false
 config.send_composed_key_when_right_alt_is_pressed = false
+config.show_close_tab_button_in_tabs = false
+config.show_new_tab_button_in_tab_bar = false
 config.use_ime = true
 config.warn_about_missing_glyphs = false
 return config
