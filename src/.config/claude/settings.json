@@ -28,7 +28,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "insert-final-newline"
+            "command": "claude-eof"
           }
         ]
       }
@@ -44,7 +44,7 @@
         ]
       },
       {
-        "matcher": "Bash(git push *)",
+        "matcher": "Bash(git push*)",
         "hooks": [
           {
             "type": "command",

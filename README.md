@@ -34,3 +34,7 @@ Symlinked to home directory:
 | `src/_darwin/Library/**/*` | `~/Library/**/*` (Darwin only) |
 | `src/.Brewfile.owner`      | `~/.Brewfile` (owner only)     |
 | `src/.gitconfig.owner`     | `~/.gitconfig` (owner only)    |
+
+## Machine-Local Configuration
+
+`~/.zshrc.local` is sourced at the end of `.zshrc` for machine-specific environment variables. This file is not managed by this repository.

@@ -10,7 +10,6 @@ export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
 export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 export PATH="$ANDROID_SDK_ROOT/platform-tools:$PATH"
 export PATH="$JAVA_HOME/bin:$PATH"
-export PATH="$HOME/.rd/bin:$PATH"
 export PATH="$HOME/dotfiles/bin:$PATH"
 
 HISTFILE="$HOME/.zsh_history"
@@ -120,3 +119,5 @@ zle -N peco-zellij
 bindkey '^\]^\]' peco-zellij
 
 eval "$(mise activate zsh)"
+
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
