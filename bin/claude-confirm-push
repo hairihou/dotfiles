@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo 'git push requires explicit user instruction.'
+exit 2

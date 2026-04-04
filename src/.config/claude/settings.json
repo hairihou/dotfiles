@@ -42,6 +42,15 @@
             "command": "claude-notify ask-user-question"
           }
         ]
+      },
+      {
+        "matcher": "Bash(git push *)",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-confirm-push"
+          }
+        ]
       }
     ],
     "Stop": [
