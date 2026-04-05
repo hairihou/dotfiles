@@ -6,7 +6,6 @@
 "aqua:peco/peco" = "0.6.0"
 "aqua:x-motemen/ghq" = "1.9.4"
 "aqua:zellij-org/zellij" = "0.44.0"
-bun = "1.3.11"
 deno = "2.7.11"
 gh = "2.89.0"
 go = "1.26.1"
