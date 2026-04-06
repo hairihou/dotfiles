@@ -1,0 +1,64 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "auto_install_extensions": {
+    "angular": true,
+    "codebook": true,
+    "colored-zed-icons-theme": true,
+    "toml": true,
+    "vue": true,
+  },
+  "base_keymap": "VSCode",
+  "buffer_font_family": "UDEV Gothic 35NFLG",
+  "buffer_font_fallbacks": [".ZedMono"],
+  "buffer_font_size": 12.0,
+  "code_actions_on_format": {
+    "source.fixAll": true,
+    "source.organizeImports": true,
+  },
+  "current_line_highlight": "all",
+  "cursor_blink": true,
+  "ensure_final_newline_on_save": true,
+  "file_types": {
+    "ignore": ["*ignore"],
+    "tailwindcss": ["*.css"],
+  },
+  "format_on_save": "on",
+  "gutter": {
+    "line_numbers": true,
+  },
+  "icon_theme": "Colored Zed Icons Theme Dark",
+  "linked_edits": true,
+  "minimap": {
+    "show": "never",
+  },
+  "relative_line_numbers": "enabled",
+  "remove_trailing_whitespace_on_save": true,
+  "sticky_scroll": {
+    "enabled": false,
+  },
+  "tab_size": 2,
+  "telemetry": {
+    "diagnostics": true,
+    "metrics": true,
+  },
+  "terminal": {
+    "font_family": "UDEV Gothic 35NFLG",
+    "font_fallbacks": [".ZedMono"],
+    "font_size": 12.0,
+    "option_as_meta": true,
+  },
+  "theme": {
+    "dark": "One Dark",
+    "light": "One Light",
+    "mode": "system",
+  },
+  "ui_font_size": 14,
+  "vim_mode": false,
+}

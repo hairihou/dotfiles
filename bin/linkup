@@ -2,7 +2,7 @@
 set -euo pipefail
 
 readonly dst="$(cd "$(dirname "$0")/.." && pwd -P)"
-readonly symlinks_record="$dst/dist/.symlinks"
+readonly symlinks_record="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/.symlinks"
 
 dry_run=false
 

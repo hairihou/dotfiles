@@ -39,7 +39,7 @@ prune_packages() {
   fi
 
   local cleanup_output
-  if ! cleanup_output=$(brew bundle cleanup --global 2>&1); then
+  if ! cleanup_output=$(brew bundle cleanup --force --global 2>&1); then
     echo "Error: brew bundle cleanup failed"
     echo "$cleanup_output"
     return 1
