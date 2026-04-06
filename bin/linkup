@@ -174,15 +174,12 @@ create_symlink() {
 
 apply_dir() {
   local dir="$1"
-  local exclude="${2:-}"
   find "$dir" -maxdepth 1 -mindepth 1 | while IFS= read -r item; do
     local name
     name="$(basename "$item")"
-    if [ -n "$exclude" ]; then
-      case "$name" in
-        _*|*.owner) continue ;;
-      esac
-    fi
+    case "$name" in
+      *.owner) continue ;;
+    esac
     create_symlink "$item" "$HOME/$name"
   done
 }
@@ -202,8 +199,7 @@ main() {
     create_symlink "$dst/src/.Brewfile.owner" "$HOME/.Brewfile"
     create_symlink "$dst/src/.gitconfig.owner" "$HOME/.gitconfig"
   fi
-  apply_dir "$dst/src" 'exclude'
-  [ "$(uname)" = 'Darwin' ] && apply_dir "$dst/src/_darwin"
+  apply_dir "$dst/src"
 
   if ! "$dry_run"; then
     sort -u "$symlinks_record.new" -o "$symlinks_record"
