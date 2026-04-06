@@ -15,7 +15,6 @@
     "vue": true,
   },
   "buffer_font_family": "UDEV Gothic 35NFLG",
-  "buffer_font_fallbacks": [".ZedMono"],
   "buffer_font_size": 12.0,
   "code_actions_on_format": {
     "source.fixAll": true,
@@ -28,15 +27,25 @@
   "icon_theme": {
     "mode": "dark",
     "light": "Colored Zed Icons Theme Dark",
-    "dark": "Colored Zed Icons Theme Dark"
+    "dark": "Colored Zed Icons Theme Dark",
+  },
+  "lsp": {
+    "eslint": {
+      "enabled": false
+    },
+    "tailwindcss-language-server": {
+      "settings": {
+        "includeLanguages": {
+          "vue": "html"
+        }
+      }
+    }
   },
   "relative_line_numbers": "enabled",
   "tab_size": 2,
   "terminal": {
     "font_family": "UDEV Gothic 35NFLG",
-    "font_fallbacks": [".ZedMono"],
     "font_size": 12.0,
-    "option_as_meta": true,
   },
   "theme": {
     "dark": "Tailwind CSS Dark",
