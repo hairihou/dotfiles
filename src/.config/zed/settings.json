@@ -11,6 +11,7 @@
     "angular": true,
     "codebook": true,
     "colored-zed-icons-theme": true,
+    "kotlin": true,
     "toml": true,
     "vue": true,
   },
