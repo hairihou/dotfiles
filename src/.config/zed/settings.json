@@ -10,7 +10,6 @@
   "auto_install_extensions": {
     "angular": true,
     "codebook": true,
-    "colored-zed-icons-theme": true,
     "kotlin": true,
     "toml": true,
     "vue": true,
@@ -24,7 +23,6 @@
   "file_types": {
     "tailwindcss": ["*.css"],
   },
-  "icon_theme": "Colored Zed Icons Theme Dark",
   "languages": {
     "TypeScript": {
       "language_servers": ["!eslint", "..."],
@@ -52,6 +50,7 @@
   "tab_size": 2,
   "terminal": {
     "dock": "right",
+    "option_as_meta": true,
   },
   "theme": "Tailwind CSS Dark",
   "ui_font_size": 14,
