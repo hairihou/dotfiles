@@ -54,7 +54,6 @@ config.initial_rows = 36
 config.keys = {
   { key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\x1b[13;2u") },
   { key = "o", mods = "CMD|SHIFT", action = wezterm.action.EmitEvent("toggle-opacity") },
-  { key = "w", mods = "CMD", action = wezterm.action.CloseCurrentTab({ confirm = false }) },
 }
 config.native_macos_fullscreen_mode = false
 config.scrollback_lines = 10000
