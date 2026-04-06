@@ -26,13 +26,14 @@ Available globally after setup:
 
 Symlinked to home directory:
 
-| Source                     | Target                         |
-| -------------------------- | ------------------------------ |
-| `src/.Brewfile`            | `~/.Brewfile`                  |
-| `src/.config/**/*`         | `~/.config/**/*`               |
-| `src/.zshrc`               | `~/.zshrc`                     |
-| `src/.Brewfile.owner`      | `~/.Brewfile` (owner only)     |
-| `src/.gitconfig.owner`     | `~/.gitconfig` (owner only)    |
+| Source                 | Target                      |
+| ---------------------- | --------------------------- |
+| `src/.config/**/*`     | `~/.config/**/*`            |
+| `src/.Brewfile`        | `~/.Brewfile`               |
+| `src/.npmrc`           | `~/.npmrc`                  |
+| `src/.zshrc`           | `~/.zshrc`                  |
+| `src/.Brewfile.owner`  | `~/.Brewfile` (owner only)  |
+| `src/.gitconfig.owner` | `~/.gitconfig` (owner only) |
 
 ## Machine-Local Configuration
 
