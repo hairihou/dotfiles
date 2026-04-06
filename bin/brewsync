@@ -2,7 +2,7 @@
 set -euo pipefail
 
 readonly brewfile="$HOME/.Brewfile"
-readonly include_types=(brew cask tap vscode)
+readonly include_types=(brew cask tap)
 
 dump_packages() {
   echo "Dumping installed packages to Brewfile..."
