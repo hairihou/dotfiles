@@ -21,7 +21,6 @@
     "source.organizeImports": true,
   },
   "file_types": {
-    "ignore": ["*ignore"],
     "tailwindcss": ["*.css"],
   },
   "icon_theme": "Colored Zed Icons Theme Dark",
@@ -36,14 +35,20 @@
         "includeLanguages": {
           "vue": "html",
         },
+        "tailwindCSS": {
+          "experimental": {
+            "classRegex": [
+              ["\"([^\"]*)\"", "\"([^\"]*)\""],
+              ["'([^']*)'", "'([^']*)'"],
+              ["`([^`]*)`", "`([^`]*)`"]
+            ]
+          }
+        },
       },
     },
   },
   "relative_line_numbers": "enabled",
   "tab_size": 2,
-  "terminal": {
-    "option_as_meta_key": true,
-  },
   "theme": "Tailwind CSS Dark",
   "ui_font_size": 14,
 }
