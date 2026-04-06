@@ -49,6 +49,9 @@
   },
   "relative_line_numbers": "enabled",
   "tab_size": 2,
+  "terminal": {
+    "dock": "right",
+  },
   "theme": "Tailwind CSS Dark",
   "ui_font_size": 14,
 }
