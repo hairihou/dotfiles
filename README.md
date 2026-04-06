@@ -31,7 +31,6 @@ Symlinked to home directory:
 | `src/.Brewfile`            | `~/.Brewfile`                  |
 | `src/.config/**/*`         | `~/.config/**/*`               |
 | `src/.zshrc`               | `~/.zshrc`                     |
-| `src/_darwin/Library/**/*` | `~/Library/**/*` (Darwin only) |
 | `src/.Brewfile.owner`      | `~/.Brewfile` (owner only)     |
 | `src/.gitconfig.owner`     | `~/.gitconfig` (owner only)    |
 
