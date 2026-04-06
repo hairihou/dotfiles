@@ -15,7 +15,7 @@
     "vue": true,
   },
   "buffer_font_family": "UDEV Gothic 35NFLG",
-  "buffer_font_size": 12.0,
+  "buffer_font_size": 12,
   "code_actions_on_format": {
     "source.fixAll": true,
     "source.organizeImports": true,
@@ -24,33 +24,23 @@
     "ignore": ["*ignore"],
     "tailwindcss": ["*.css"],
   },
-  "icon_theme": {
-    "mode": "dark",
-    "light": "Colored Zed Icons Theme Dark",
-    "dark": "Colored Zed Icons Theme Dark",
+  "icon_theme": "Colored Zed Icons Theme Dark",
+  "languages": {
+    "TypeScript": {
+      "language_servers": ["!eslint", "..."],
+    },
   },
   "lsp": {
-    "eslint": {
-      "enabled": false
-    },
     "tailwindcss-language-server": {
       "settings": {
         "includeLanguages": {
-          "vue": "html"
-        }
-      }
-    }
+          "vue": "html",
+        },
+      },
+    },
   },
   "relative_line_numbers": "enabled",
   "tab_size": 2,
-  "terminal": {
-    "font_family": "UDEV Gothic 35NFLG",
-    "font_size": 12.0,
-  },
-  "theme": {
-    "dark": "Tailwind CSS Dark",
-    "light": "Tailwind CSS Light",
-    "mode": "dark",
-  },
+  "theme": "Tailwind CSS Dark",
   "ui_font_size": 14,
 }

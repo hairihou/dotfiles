@@ -30,7 +30,7 @@
         "editor.background": "#1d293d",
         "editor.document_highlight.bracket_background": "#e2e8f01a",
         "editor.document_highlight.read_background": "#e2e8f01a",
-        "editor.document_highlight.write_background": "#e2e8f026",
+        "editor.document_highlight.write_background": "#e2e8f01a",
         "editor.foreground": "#f8fafc",
         "editor.gutter.background": "#1d293d",
         "editor.highlighted_line.background": "#31415840",
@@ -139,6 +139,13 @@
         "warning": "#ffb900",
         "warning.background": "#ffb90040",
         "warning.border": "#ffb900",
+        "players": [
+          {
+            "cursor": "#f8fafc",
+            "background": "#f8fafc",
+            "selection": "#e2e8f026"
+          }
+        ],
         "syntax": {
           "attribute": { "color": "#cad5e2" },
           "boolean": { "color": "#fb64b6" },
@@ -316,6 +323,13 @@
         "warning": "#e17100",
         "warning.background": "#fee68540",
         "warning.border": "#e17100",
+        "players": [
+          {
+            "cursor": "#314158",
+            "background": "#314158",
+            "selection": "#2b7fff40"
+          }
+        ],
         "syntax": {
           "attribute": { "color": "#62748e" },
           "boolean": { "color": "#fe9a00" },
