@@ -26,5 +26,5 @@ dist-ssr
 # Claude
 docs
 
-# Spell checker
-src/.config/codebook/codebook.toml
+# Codebook
+src/.config/codebook

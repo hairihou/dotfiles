@@ -1,18 +1,11 @@
 [
   {
-    "bindings": {
-      "cmd-,": "zed::OpenSettingsFile",
-    },
-  },
-  {
     "context": "Terminal",
     "bindings": {
-      "alt-[": null,
-      "alt-]": null,
-      "alt-down": null,
-      "alt-left": null,
-      "alt-right": null,
-      "alt-up": null,
-    },
-  },
+      "shift-enter": [
+        "terminal::SendText",
+        "\u001b\r"
+      ]
+    }
+  }
 ]
