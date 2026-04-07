@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+command=$(jq -r '.tool_input.command' < /dev/stdin)
+
+if [[ "$command" =~ ^git\ (commit|push) ]]; then
+  echo "git ${BASH_REMATCH[1]} requires explicit user instruction."
+  exit 2
+fi

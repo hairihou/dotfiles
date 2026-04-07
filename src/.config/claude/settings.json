@@ -44,11 +44,11 @@
         ]
       },
       {
-        "matcher": "Bash(git push*)",
+        "matcher": "Bash(git *)",
         "hooks": [
           {
             "type": "command",
-            "command": "claude-confirm-push"
+            "command": "claude-guard-git"
           }
         ]
       }
