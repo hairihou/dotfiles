@@ -1,6 +1,6 @@
 // https://tailwindcss.com/docs/colors
 themes {
-    tailwindcss-dark {
+    zephyr-dark {
         text_unselected {
             base 203 213 225         // slate-300
             background 30 41 59      // slate-800
@@ -135,4 +135,4 @@ keybinds {
 }
 pane_frames false
 show_startup_tips false
-theme "tailwindcss-dark"
+theme "zephyr-dark"
