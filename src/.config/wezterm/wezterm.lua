@@ -1,18 +1,9 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
--- https://tailwindcss.com/docs/colors
-local theme = {
-  amber = { [300] = "#fcd34d", [400] = "#fbbf24" },
-  blue = { [300] = "#93c5fd", [400] = "#60a5fa", [500] = "#3b82f6" },
-  cyan = { [300] = "#67e8f9", [400] = "#22d3ee" },
-  emerald = { [300] = "#6ee7b7", [400] = "#34d399" },
-  purple = { [300] = "#d8b4fe", [400] = "#c084fc" },
-  rose = { [300] = "#fda4af", [400] = "#fb7185" },
-  slate = {
-    [50] = "#f8fafc", [100] = "#f1f5f9", [200] = "#e2e8f0", [300] = "#cbd5e1", [400] = "#94a3b8",
-    [500] = "#64748b", [600] = "#475569", [700] = "#334155", [800] = "#1e293b",
-    [900] = "#0f172a",
-  },
+local gray = {
+  [50] = "#f9fafb", [100] = "#f3f4f6", [200] = "#e5e7eb", [300] = "#d1d5dc",
+  [400] = "#99a1af", [500] = "#6a7282", [600] = "#4a5567", [700] = "#364153",
+  [800] = "#1e2939", [900] = "#101828", [950] = "#030712",
 }
 local is_transparent = false
 wezterm.on("toggle-opacity", function(window, _)
@@ -21,27 +12,27 @@ wezterm.on("toggle-opacity", function(window, _)
 end)
 config.colors = {
   ansi = {
-    theme.slate[600], theme.rose[400], theme.emerald[400], theme.amber[400],
-    theme.blue[500], theme.purple[400], theme.cyan[400], theme.slate[300],
+    "#ffffff", "#ff6467", "#00d492", "#ffb900",
+    "#2b7fff", "#c27aff", "#00d3f3", "#cad5e2",
   },
-  background = theme.slate[800],
+  background = gray[900],
   brights = {
-    theme.slate[400], theme.rose[300], theme.emerald[300], theme.amber[300],
-    theme.blue[400], theme.purple[300], theme.cyan[300], theme.slate[200],
+    "#90a1b9", "#ff6467", "#5ee9b5", "#ffd230",
+    "#51a2ff", "#dab2ff", "#53eafd", "#ffffff",
   },
-  cursor_bg = theme.slate[50],
-  cursor_border = theme.slate[50],
-  cursor_fg = theme.slate[900],
-  foreground = theme.slate[300],
-  selection_bg = theme.slate[700],
-  selection_fg = theme.slate[100],
+  cursor_bg = gray[50],
+  cursor_border = gray[50],
+  cursor_fg = gray[900],
+  foreground = gray[100],
+  selection_bg = gray[700],
+  selection_fg = gray[100],
   tab_bar = {
-    active_tab = { bg_color = theme.slate[700], fg_color = theme.slate[100] },
-    background = theme.slate[800],
-    inactive_tab = { bg_color = theme.slate[800], fg_color = theme.slate[400] },
-    inactive_tab_hover = { bg_color = theme.slate[700], fg_color = theme.slate[300] },
-    new_tab = { bg_color = theme.slate[800], fg_color = theme.slate[400] },
-    new_tab_hover = { bg_color = theme.slate[700], fg_color = theme.slate[300] },
+    active_tab = { bg_color = gray[800], fg_color = gray[100] },
+    background = gray[900],
+    inactive_tab = { bg_color = gray[900], fg_color = gray[500] },
+    inactive_tab_hover = { bg_color = gray[800], fg_color = gray[300] },
+    new_tab = { bg_color = gray[900], fg_color = gray[500] },
+    new_tab_hover = { bg_color = gray[800], fg_color = gray[300] },
   },
 }
 config.font = wezterm.font("UDEV Gothic 35NFLG")
