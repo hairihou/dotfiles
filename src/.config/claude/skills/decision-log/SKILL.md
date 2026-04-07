@@ -1,6 +1,6 @@
 ---
 name: decision-log
-description: Use when a decision with alternatives is finalized — design, process, tooling, workflow, or otherwise. Also trigger when the conversation includes comparing options and one is chosen or recommended, or when recalling past decisions.
+description: Use when discussing trade-offs, comparing alternatives, choosing between options, making design/architecture/tooling/workflow decisions, or answering "which should I use?" questions. Also trigger when a decision is finalized, when reviewing or recalling past decisions, or when the user asks "why did we choose X?"
 argument-hint: "[search|supersede <id>]"
 allowed-tools: AskUserQuestion, Bash(date *), Bash(git *), Bash(python *)
 ---
