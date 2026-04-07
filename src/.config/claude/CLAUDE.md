@@ -2,8 +2,10 @@
 
 ## Reasoning
 
-- Code review: never just "no issues found" — state impact scope or explain why safe (e.g., "no side effects because X is pure")
+- Code review: never just "no issues found" — state impact scope or explain why safe
+- Code review: distinguish surface fix (symptom) from root fix (cause); label which
 - Design decisions (architecture, technology selection, large-scale refactoring): present alternatives with trade-offs using advocate/critic analysis, state biggest risk
+- Implementation: do not fix, refactor, or improve code beyond what was asked
 
 ## Style
 
