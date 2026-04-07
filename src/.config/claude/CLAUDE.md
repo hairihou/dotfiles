@@ -19,4 +19,3 @@
 - Branch: `#<number>_<type>/<description>`
 - Issue: `<type>(<subject>): <description>`
 - Commit: Conventional Commits (build, chore, ci, docs, feat, fix, perf, refactor, style, test)
-- No AI attribution in commits, PRs, or issues
