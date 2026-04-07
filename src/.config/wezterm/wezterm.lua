@@ -44,7 +44,6 @@ config.colors = {
     new_tab_hover = { bg_color = theme.slate[700], fg_color = theme.slate[300] },
   },
 }
-config.default_cursor_style = "SteadyBlock"
 config.font = wezterm.font("UDEV Gothic 35NFLG")
 config.font_size = 12.0
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
