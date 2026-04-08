@@ -11,6 +11,7 @@
     "angular": true,
     "codebook": true,
     "kotlin": true,
+    "lua": true,
     "toml": true,
     "vue": true,
   },

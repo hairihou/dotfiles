@@ -1,62 +1,63 @@
-local z = {
-  bg1 = "#1e2939",
-  bg2 = "#364153",
-  fg = "#f9fafb",
-  fg1 = "#d1d5dc",
-  fg2 = "#6a7282",
-  blue = "#51a2ff",
-  cyan = "#74d4ff",
-  green = "#46ecd5",
-  indigo = "#a3b3ff",
-  pink = "#fb64b6",
-  purple = "#f4a8ff",
-  red = "#ff6467",
-  yellow = "#ffb900",
+local theme = {
+  amber400 = "#ffb900",
+  blue400 = "#51a2ff",
+  cyan300 = "#74d4ff",
+  fuchsia300 = "#f4a8ff",
+  gray50 = "#f9fafb",
+  gray300 = "#d1d5dc",
+  gray500 = "#6a7282",
+  gray700 = "#364153",
+  gray800 = "#1e2939",
+  gray950 = "#030712",
+  indigo300 = "#a3b3ff",
+  pink400 = "#fb64b6",
+  red400 = "#ff6467",
+  teal300 = "#46ecd5",
 }
 local hl = function(name, opts)
   vim.api.nvim_set_hl(0, name, opts)
 end
 -- syntax
-hl("Comment", { fg = z.fg2, italic = true })
-hl("Constant", { fg = z.pink })
-hl("Delimiter", { fg = z.fg2 })
-hl("Special", { fg = z.purple })
-hl("Statement", { fg = z.indigo })
-hl("String", { fg = z.cyan })
-hl("Type", { fg = z.green })
+hl("Comment", { fg = theme.gray500, italic = true })
+hl("Constant", { fg = theme.pink400 })
+hl("Delimiter", { fg = theme.gray500 })
+hl("Special", { fg = theme.fuchsia300 })
+hl("Statement", { fg = theme.indigo300 })
+hl("String", { fg = theme.cyan300 })
+hl("Type", { fg = theme.teal300 })
 -- ui
-hl("CursorColumn", { bg = z.bg1 })
-hl("CursorLine", { bg = z.bg1 })
+hl("CursorColumn", { bg = theme.gray800 })
+hl("CursorLine", { bg = theme.gray800 })
 hl("CursorLineNr", { bold = true })
-hl("FloatBorder", { fg = z.bg2 })
-hl("IncSearch", { fg = z.bg1, bg = z.yellow })
-hl("LineNr", { fg = z.fg2 })
+hl("FloatBorder", { fg = theme.gray700 })
+hl("IncSearch", { fg = theme.gray800, bg = theme.amber400 })
+hl("LineNr", { fg = theme.gray500 })
 hl("Normal", { bg = "NONE" })
 hl("NormalFloat", { link = "Normal" })
-hl("PmenuBorder", { fg = z.bg2 })
-hl("PmenuSel", { fg = z.fg, bg = z.bg2 })
-hl("Search", { fg = z.bg1, bg = z.yellow })
+hl("PmenuBorder", { fg = theme.gray700 })
+hl("PmenuSel", { fg = theme.gray50, bg = theme.gray700 })
+hl("Search", { fg = theme.gray800, bg = theme.amber400 })
 hl("StatusLine", { bg = "NONE" })
-hl("Visual", { bg = z.bg2 })
+hl("Visual", { bg = theme.gray700 })
 hl("WinBar", { bg = "NONE" })
-hl("WinSeparator", { fg = z.bg1 })
+hl("WinSeparator", { fg = theme.gray800 })
 -- mini.icons
-hl("MiniIconsAzure", { fg = z.blue })
-hl("MiniIconsBlue", { fg = z.blue })
-hl("MiniIconsCyan", { fg = z.cyan })
-hl("MiniIconsGreen", { fg = z.green })
+hl("MiniIconsAzure", { fg = theme.blue400 })
+hl("MiniIconsBlue", { fg = theme.blue400 })
+hl("MiniIconsCyan", { fg = theme.cyan300 })
+hl("MiniIconsGreen", { fg = theme.teal300 })
 hl("MiniIconsGrey", { link = "Normal" })
-hl("MiniIconsOrange", { fg = z.yellow })
-hl("MiniIconsPurple", { fg = z.purple })
-hl("MiniIconsRed", { fg = z.red })
-hl("MiniIconsYellow", { fg = z.yellow })
+hl("MiniIconsOrange", { fg = theme.amber400 })
+hl("MiniIconsPurple", { fg = theme.fuchsia300 })
+hl("MiniIconsRed", { fg = theme.red400 })
+hl("MiniIconsYellow", { fg = theme.amber400 })
 -- render-markdown
-hl("RenderMarkdownH", { fg = z.blue, bold = true })
-hl("RenderMarkdownHBg", { bg = "#030712" })
-hl("RenderMarkdownCode", { bg = z.bg1 })
-hl("RenderMarkdownCodeInline", { fg = z.cyan, bg = z.bg1 })
+hl("RenderMarkdownH", { fg = theme.blue400, bold = true })
+hl("RenderMarkdownHBg", { bg = theme.gray950 })
+hl("RenderMarkdownCode", { bg = theme.gray800 })
+hl("RenderMarkdownCodeInline", { fg = theme.cyan300, bg = theme.gray800 })
 -- treesitter
-hl("@markup.raw", { fg = z.fg1 })
-hl("@markup.raw.block", { fg = z.fg1 })
-hl("@punctuation.bracket", { fg = z.fg2 })
+hl("@markup.raw", { fg = theme.gray300 })
+hl("@markup.raw.block", { fg = theme.gray300 })
+hl("@punctuation.bracket", { fg = theme.gray500 })
 hl("@type.builtin", { italic = true })
