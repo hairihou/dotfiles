@@ -8,7 +8,9 @@
     "pr": ""
   },
   "permissions": {
-    "deny": ["Bash(brew *)"]
+    "deny": [
+      "Bash(brew *)"
+    ]
   },
   "hooks": {
     "PermissionRequest": [
@@ -98,6 +100,5 @@
       }
     }
   },
-  "language": "Japanese",
-  "voiceEnabled": true
+  "language": "Japanese"
 }
