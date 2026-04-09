@@ -24,6 +24,9 @@
   "file_types": {
     "tailwindcss": ["*.css"],
   },
+  "git_panel": {
+    "dock": "left",
+  },
   "languages": {
     "TypeScript": {
       "language_servers": ["!eslint", "..."],
@@ -46,6 +49,9 @@
         },
       },
     },
+  },
+  "project_panel": {
+    "dock": "left",
   },
   "relative_line_numbers": "enabled",
   "tab_size": 2,
