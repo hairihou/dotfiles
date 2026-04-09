@@ -6,7 +6,7 @@ themes {
             emphasis_0 81 162 255    // blue-400
             emphasis_1 0 212 146     // emerald-400
             emphasis_2 255 185 0     // amber-400
-            emphasis_3 255 100 103   // red-400
+            emphasis_3 255 99 126    // rose-400
         }
         text_selected {
             base 249 250 251         // gray-50
@@ -14,7 +14,7 @@ themes {
             emphasis_0 81 162 255    // blue-400
             emphasis_1 0 212 146     // emerald-400
             emphasis_2 255 185 0     // amber-400
-            emphasis_3 255 100 103   // red-400
+            emphasis_3 255 99 126    // rose-400
         }
         ribbon_unselected {
             base 153 161 175         // gray-400
@@ -22,7 +22,7 @@ themes {
             emphasis_0 81 162 255    // blue-400
             emphasis_1 0 212 146     // emerald-400
             emphasis_2 255 185 0     // amber-400
-            emphasis_3 255 100 103   // red-400
+            emphasis_3 255 99 126    // rose-400
         }
         ribbon_selected {
             base 249 250 251         // gray-50
@@ -30,7 +30,7 @@ themes {
             emphasis_0 81 162 255    // blue-400
             emphasis_1 0 212 146     // emerald-400
             emphasis_2 255 185 0     // amber-400
-            emphasis_3 255 100 103   // red-400
+            emphasis_3 255 99 126    // rose-400
         }
         table_title {
             base 209 213 220         // gray-300
@@ -38,7 +38,7 @@ themes {
             emphasis_0 81 162 255    // blue-400
             emphasis_1 0 212 146     // emerald-400
             emphasis_2 255 185 0     // amber-400
-            emphasis_3 255 100 103   // red-400
+            emphasis_3 255 99 126    // rose-400
         }
         table_cell_unselected {
             base 209 213 220         // gray-300
@@ -46,7 +46,7 @@ themes {
             emphasis_0 81 162 255    // blue-400
             emphasis_1 0 212 146     // emerald-400
             emphasis_2 255 185 0     // amber-400
-            emphasis_3 255 100 103   // red-400
+            emphasis_3 255 99 126    // rose-400
         }
         table_cell_selected {
             base 249 250 251         // gray-50
@@ -54,7 +54,7 @@ themes {
             emphasis_0 81 162 255    // blue-400
             emphasis_1 0 212 146     // emerald-400
             emphasis_2 255 185 0     // amber-400
-            emphasis_3 255 100 103   // red-400
+            emphasis_3 255 99 126    // rose-400
         }
         list_unselected {
             base 209 213 220         // gray-300
@@ -62,7 +62,7 @@ themes {
             emphasis_0 81 162 255    // blue-400
             emphasis_1 0 212 146     // emerald-400
             emphasis_2 255 185 0     // amber-400
-            emphasis_3 255 100 103   // red-400
+            emphasis_3 255 99 126    // rose-400
         }
         list_selected {
             base 249 250 251         // gray-50
@@ -70,7 +70,7 @@ themes {
             emphasis_0 81 162 255    // blue-400
             emphasis_1 0 212 146     // emerald-400
             emphasis_2 255 185 0     // amber-400
-            emphasis_3 255 100 103   // red-400
+            emphasis_3 255 99 126    // rose-400
         }
         frame_unselected {
             base 106 114 130         // gray-500
@@ -78,7 +78,7 @@ themes {
             emphasis_0 81 162 255    // blue-400
             emphasis_1 0 212 146     // emerald-400
             emphasis_2 255 185 0     // amber-400
-            emphasis_3 255 100 103   // red-400
+            emphasis_3 255 99 126    // rose-400
         }
         frame_selected {
             base 81 162 255          // blue-400
@@ -86,7 +86,7 @@ themes {
             emphasis_0 81 162 255    // blue-400
             emphasis_1 0 212 146     // emerald-400
             emphasis_2 255 185 0     // amber-400
-            emphasis_3 255 100 103   // red-400
+            emphasis_3 255 99 126    // rose-400
         }
         frame_highlight {
             base 0 211 243           // cyan-400
@@ -94,7 +94,7 @@ themes {
             emphasis_0 81 162 255    // blue-400
             emphasis_1 0 212 146     // emerald-400
             emphasis_2 255 185 0     // amber-400
-            emphasis_3 255 100 103   // red-400
+            emphasis_3 255 99 126    // rose-400
         }
         exit_code_success {
             base 0 212 146           // emerald-400
@@ -102,7 +102,7 @@ themes {
             emphasis_0 81 162 255    // blue-400
             emphasis_1 0 212 146     // emerald-400
             emphasis_2 255 185 0     // amber-400
-            emphasis_3 255 100 103   // red-400
+            emphasis_3 255 99 126    // rose-400
         }
         exit_code_error {
             base 255 100 103         // red-400
@@ -110,7 +110,7 @@ themes {
             emphasis_0 81 162 255    // blue-400
             emphasis_1 0 212 146     // emerald-400
             emphasis_2 255 185 0     // amber-400
-            emphasis_3 255 100 103   // red-400
+            emphasis_3 255 99 126    // rose-400
         }
         multiplayer_user_colors {
             player_1 81 162 255      // blue-400

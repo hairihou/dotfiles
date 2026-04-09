@@ -12,12 +12,12 @@ wezterm.on("toggle-opacity", function(window, _)
 end)
 config.colors = {
   ansi = {
-    "#ffffff", "#ff6467", "#00d492", "#ffb900",
+    "#ffffff", "#ff637e", "#00d492", "#ffb900",
     "#2b7fff", "#c27aff", "#00d3f3", "#cad5e2",
   },
   background = gray[900],
   brights = {
-    "#90a1b9", "#ff6467", "#5ee9b5", "#ffd230",
+    "#90a1b9", "#ffa1ad", "#5ee9b5", "#ffd230",
     "#51a2ff", "#dab2ff", "#53eafd", "#ffffff",
   },
   cursor_bg = gray[50],
