@@ -6,15 +6,19 @@ allowed-tools: Bash, Edit, Glob, Grep, Read
 
 # Bonsai
 
-Inspect config files in the **current repository** and perform focused maintenance. Each run, pick one or more items from the checklist below — do not try to do everything at once.
+Inspect config files in the **current repository** and report maintenance opportunities. Each run, pick one or more items from the checklist below — do not try to do everything at once.
 
-**Scope: the current working directory (repository) only.** Do not inspect home directory dotfiles, shell setup, or global tool configs unless the user explicitly asks.
+**Scope:** the current working directory (repository) only. Do not inspect home directory dotfiles, shell setup, or global tool configs unless the user explicitly asks.
 
-First, explore the repository structure with Glob and Read to understand what files exist and how they are organized. Skip checklist items that have no matching files in the repository.
+## Workflow
+
+1. Explore the repository structure with Glob and Read. Skip checklist items that have no matching files.
+2. Report findings using the output format below. **Do not edit files.**
+3. If the user explicitly asks to apply changes, edit only the approved items. Do not auto-commit.
 
 ## Checklist
 
-Pick items relevant to the current state. Report findings, then propose changes for user approval.
+Pick items relevant to the current state.
 
 ### Consistency
 
@@ -54,8 +58,7 @@ Report findings as a numbered list. Each item must include:
 
 ## Guidelines
 
-- **Use the Read tool for every file individually.** Bulk reading causes misreads.
+- **Read every file individually.** Bulk reading causes misreads.
 - Read before suggesting. Never propose changes to files you have not read.
 - Scope changes narrowly. A bonsai session should produce a small, reviewable diff.
 - Explain the "why" for each change, not just the "what".
-- Do not auto-commit. Present findings and proposed changes for user approval.

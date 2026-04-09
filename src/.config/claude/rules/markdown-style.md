@@ -29,6 +29,7 @@ Every sentence must carry information the reader did not already have. Apply the
   - Good: "This fails when the input contains non-ASCII characters."
 - **Do not restate.** If you already said it, do not say it again in different words. No summary paragraphs that add nothing new.
 - **One point, one sentence.** If a point fits in one sentence, do not stretch it.
+- **Use standard English terms.** When the English form is the established technical term, use it as-is instead of translating (e.g., Bundler, Container, Runtime).
 
 ## Exceptions
 
