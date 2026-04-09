@@ -15,6 +15,6 @@
 
 ## Git Conventions
 
-- Branch: `#<number>_<type>/<description>`
-- Commit: Conventional Commits (build, chore, ci, docs, feat, fix, perf, refactor, style, test)
-- Issue: `<type>(<subject>): <description>`
+- Branch: `#<number>_<type>/<description>` (e.g., `#42_feat/add-login`)
+- Commit: Conventional Commits (build, chore, ci, docs, feat, fix, perf, refactor, style, test) (e.g., `feat(auth): add OAuth2 support`)
+- Issue: `<type>(<subject>): <description>` (e.g., `feat(auth): add OAuth2 support`)

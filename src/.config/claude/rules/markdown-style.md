@@ -24,6 +24,7 @@ Every sentence must carry information the reader did not already have. Apply the
 - **Assessment is not information.** Calling something "important", "critical", or "significant" tells the reader your judgment, not the fact behind it. State the consequence instead.
   - Bad: "This is a significant breaking change."
   - Good: "This removes the `getUser()` method that 12 callsites depend on."
+- **Claims need sourced or unsourced status.** When asserting validity from a domain (accessibility, security, performance, etc.), cite the specific standard or spec. If no authoritative source exists, state that the claim is based on general practice, not a formal standard.
 - **Hedging without a condition is noise.** Qualifiers like "generally", "in most cases", or "it depends" are only useful when followed by the actual conditions.
   - Bad: "This may cause issues in some cases."
   - Good: "This fails when the input contains non-ASCII characters."
