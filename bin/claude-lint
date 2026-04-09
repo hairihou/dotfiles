@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+import subprocess
+import sys
+from pathlib import Path
+
+ESLINT = Path("node_modules/.bin/eslint")
+EXTENSIONS = ("*.js", "*.ts", "*.tsx", "*.vue")
+
+if not ESLINT.is_file():
+    sys.exit(0)
+
+result = subprocess.run(
+    ["git", "diff", "--name-only", "--diff-filter=ACMR", "HEAD", "--"] + list(EXTENSIONS),
+    capture_output=True,
+    text=True,
+)
+files = [f for f in result.stdout.splitlines() if f]
+if not files:
+    sys.exit(0)
+
+subprocess.run(
+    [str(ESLINT), "--fix", "--rule", "curly: error", "--rule", "eqeqeq: error", "--"] + files,
+    capture_output=True,
+)

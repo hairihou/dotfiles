@@ -8,9 +8,7 @@
     "pr": ""
   },
   "permissions": {
-    "deny": [
-      "Bash(brew *)"
-    ]
+    "deny": ["Bash(brew *)"]
   },
   "hooks": {
     "PermissionRequest": [
@@ -59,6 +57,10 @@
       {
         "matcher": "",
         "hooks": [
+          {
+            "type": "command",
+            "command": "claude-lint"
+          },
           {
             "type": "command",
             "command": "claude-notify stop"
