@@ -1,19 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly dst="$HOME/dotfiles"
-readonly src='https://github.com/hairihou/dotfiles.git'
+readonly DST="$HOME/dotfiles"
+readonly SRC='https://github.com/hairihou/dotfiles.git'
 
-if [ ! -e "$dst/.git" ]; then
-  git clone "$src" "$dst"
-elif [ "$(git -C "$dst" config --get remote.origin.url)" != "$src" ]; then
+if [ ! -e "$DST/.git" ]; then
+  git clone "$SRC" "$DST"
+elif [ "$(git -C "$DST" config --get remote.origin.url)" != "$SRC" ]; then
   echo 'Error: Remote origin URL does not match expected URL'
   exit 1
 else
   echo 'Updating existing repository...'
-  git -C "$dst" fetch --prune
-  git -C "$dst" switch main
-  git -C "$dst" pull origin main
+  git -C "$DST" fetch --prune
+  git -C "$DST" switch main
+  git -C "$DST" pull origin main
 fi
 
-"$dst/bin/linkup"
+"$DST/bin/linkup"

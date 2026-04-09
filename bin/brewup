@@ -4,9 +4,18 @@ set -euo pipefail
 brew update
 brew upgrade --formula
 
-casks="$(brew list --cask)"
-[[ "$*" != *--all* && -n "$casks" ]] && casks=$(echo "$casks" | grep -v '@' || echo '')
-[[ -n "$casks" ]] && echo "$casks" | xargs brew upgrade --greedy --cask
+casks=()
+while IFS= read -r line; do
+  [[ -n "$line" ]] && casks+=("$line")
+done < <(brew list --cask)
+if [[ "$*" != *--all* && ${#casks[@]} -gt 0 ]]; then
+  filtered=()
+  for c in "${casks[@]}"; do
+    [[ "$c" != *@* ]] && filtered+=("$c")
+  done
+  casks=("${filtered[@]+"${filtered[@]}"}")
+fi
+[[ ${#casks[@]} -gt 0 ]] && brew upgrade --greedy --cask "${casks[@]}"
 
 brew cleanup --prune=all --scrub
 brew autoremove

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly xdg_dirs=(
+readonly XDG_DIRS=(
   "${XDG_CONFIG_HOME:-$HOME/.config}"
   "${XDG_DATA_HOME:-$HOME/.local/share}"
   "${XDG_STATE_HOME:-$HOME/.local/state}"
@@ -23,7 +23,7 @@ esac
 
 count=0
 
-for dir in "${xdg_dirs[@]}"; do
+for dir in "${XDG_DIRS[@]}"; do
   [ -d "$dir" ] || continue
   while IFS= read -r link; do
     if "$dry_run"; then
@@ -32,13 +32,13 @@ for dir in "${xdg_dirs[@]}"; do
       rm "$link"
       echo "Removed: $link"
     fi
-    ((count++))
+    count=$((count + 1))
   done < <(find "$dir" -not -path '*/.git/*' -type l ! -exec test -e {} \; -print 2>/dev/null)
 done
 
 while true; do
   found=0
-  for dir in "${xdg_dirs[@]}"; do
+  for dir in "${XDG_DIRS[@]}"; do
     [ -d "$dir" ] || continue
     while IFS= read -r empty; do
       if "$dry_run"; then
@@ -47,8 +47,8 @@ while true; do
         rmdir "$empty"
         echo "Removed: $empty"
       fi
-      ((count++))
-      ((found++))
+      count=$((count + 1))
+      found=$((found + 1))
     done < <(find "$dir" -not -path '*/.git/*' -not -name '.git' -type d -empty 2>/dev/null | sort -r)
   done
   [[ $found -gt 0 ]] || break

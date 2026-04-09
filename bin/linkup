@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly dst="$(cd "$(dirname "$0")/.." && pwd -P)"
-readonly symlinks_record="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/.symlinks"
+readonly DST="$(cd "$(dirname "$0")/.." && pwd -P)"
+readonly SYMLINKS_RECORD="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/.symlinks"
 
 dry_run=false
 
@@ -91,7 +91,7 @@ cleanup_broken_symlinks_in() {
     local target
     target="$(resolve_symlink "$link")"
     case "$target" in
-      "$dst/src"*)
+      "$DST/src"*)
         if [ ! -e "$target" ]; then
           do_remove "$link"
         fi
@@ -101,18 +101,18 @@ cleanup_broken_symlinks_in() {
 }
 
 cleanup_recorded_symlinks() {
-  [ -f "$symlinks_record" ] || return 0
+  [ -f "$SYMLINKS_RECORD" ] || return 0
   local link
   while IFS= read -r link; do
     [ -n "$link" ] || continue
     if [ -L "$link" ] && [ ! -e "$link" ]; then
       do_remove "$link"
     fi
-  done < "$symlinks_record"
+  done < "$SYMLINKS_RECORD"
 }
 
 record_symlink() {
-  "$dry_run" || echo "$1" >> "$symlinks_record.new"
+  "$dry_run" || echo "$1" >> "$SYMLINKS_RECORD.new"
 }
 
 create_symlink() {
@@ -129,7 +129,7 @@ create_symlink() {
       return 0
     fi
     case "$existing_target" in
-      "$dst/src"*)
+      "$DST/src"*)
         if [ -e "$existing_target" ]; then
           record_symlink "$to"
           return 0
@@ -143,7 +143,7 @@ create_symlink() {
     local parent_target
     parent_target="$(resolve_symlink "$parent")"
     case "$parent_target" in
-      "$dst/src"*) return 0 ;;
+      "$DST/src"*) return 0 ;;
     esac
   fi
 
@@ -191,19 +191,19 @@ main() {
 
   "$dry_run" || echo 'Creating symlinks...'
   if ! "$dry_run"; then
-    mkdir -p "$(dirname "$symlinks_record")"
-    : > "$symlinks_record.new"
+    mkdir -p "$(dirname "$SYMLINKS_RECORD")"
+    : > "$SYMLINKS_RECORD.new"
   fi
 
   if is_owner; then
-    create_symlink "$dst/src/.Brewfile.owner" "$HOME/.Brewfile"
-    create_symlink "$dst/src/.gitconfig.owner" "$HOME/.gitconfig"
+    create_symlink "$DST/src/.Brewfile.owner" "$HOME/.Brewfile"
+    create_symlink "$DST/src/.gitconfig.owner" "$HOME/.gitconfig"
   fi
-  apply_dir "$dst/src"
+  apply_dir "$DST/src"
 
   if ! "$dry_run"; then
-    sort -u "$symlinks_record.new" -o "$symlinks_record"
-    rm -f "$symlinks_record.new"
+    sort -u "$SYMLINKS_RECORD.new" -o "$SYMLINKS_RECORD"
+    rm -f "$SYMLINKS_RECORD.new"
   fi
 
   if ! has_changes; then

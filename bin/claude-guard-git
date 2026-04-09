@@ -1,9 +1,11 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/usr/bin/env python3
+import json
+import sys
 
-command=$(jq -r '.tool_input.command' < /dev/stdin)
+data = json.load(sys.stdin)
+command = data.get("tool_input", {}).get("command", "")
 
-if [[ "$command" =~ ^git\ (commit|push) ]]; then
-  echo "git ${BASH_REMATCH[1]} requires explicit user instruction."
-  exit 2
-fi
+if command.startswith(("git commit", "git push")):
+    action = command.split()[1]
+    print(f"git {action} requires explicit user instruction.")
+    sys.exit(2)
