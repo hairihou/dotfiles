@@ -4,7 +4,7 @@
 "aqua:ducaale/xh" = "0.25.3"
 "aqua:neovim/neovim" = "0.12.1"
 "aqua:peco/peco" = "0.6.0"
-"aqua:x-motemen/ghq" = "1.10.0"
+"aqua:x-motemen/ghq" = "1.10.1"
 "aqua:zellij-org/zellij" = "0.44.1"
 deno = "2.7.12"
 gh = "2.89.0"
