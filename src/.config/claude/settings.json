@@ -8,7 +8,9 @@
     "pr": ""
   },
   "permissions": {
-    "deny": ["Bash(brew *)"]
+    "deny": [
+      "Bash(brew *)"
+    ]
   },
   "hooks": {
     "PermissionRequest": [
