@@ -8,6 +8,9 @@
     "pr": ""
   },
   "permissions": {
+    "ask": [
+      "Bash(git push *)"
+    ],
     "deny": [
       "Bash(brew *)"
     ]
@@ -42,15 +45,6 @@
           {
             "type": "command",
             "command": "claude-notify ask-user-question"
-          }
-        ]
-      },
-      {
-        "matcher": "Bash(git *)",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "claude-guard-git"
           }
         ]
       }
