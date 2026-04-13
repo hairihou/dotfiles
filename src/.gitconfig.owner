@@ -17,7 +17,6 @@
 	algorithm = histogram
 	colorMoved = plain
 	mnemonicPrefix = true
-	renames = true
 [fetch]
 	all = true
 	prune = true
@@ -32,7 +31,6 @@
 	autoSetupRemote = true
 	followTags = true
 [rerere]
-	autoupdate = true
 	enabled = true
 [status]
 	branch = true
