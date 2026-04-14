@@ -10,6 +10,7 @@
   "auto_install_extensions": {
     "angular": true,
     "codebook": true,
+    "git-firefly": true,
     "kotlin": true,
     "lua": true,
     "toml": true,
