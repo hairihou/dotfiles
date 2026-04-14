@@ -17,7 +17,7 @@ Available globally after setup:
 
 - `brewsync [--dump | --prune]` - Homebrew package synchronizer
 - `brewup [--all]` - Homebrew batch update utility
-- `cdefaults` - macOS system defaults configuration
+- `macos-defaults` - macOS system defaults configuration
 - `dprune` - Remove `.DS_Store` and empty directories from git repository
 - `linkup [--dry-run]` - Symlink manager (re-apply or preview changes)
 - `xdgclean [--dry-run]` - Remove broken symlinks and empty directories from XDG base directories
