@@ -77,7 +77,10 @@ Use when argument contains "search".
 ### Steps
 
 1. **Parse intent**: Understand what the user is looking for from conversation context
-2. **Build and run query**: Run `python ${CLAUDE_SKILL_DIR}/scripts/db.py search --help` for available filters (`--repo`, `--match`, `--from`, `--to`, `--status`). Also supports `detail <id>` and `update-outcome <id> '<outcome>'`.
+2. **Build and run query**: Use only these documented flags — do not invent others (e.g., no `--head`, `--limit`, `--recent`). For "recent decisions", pass `--from <YYYYMMDD>` with a date cutoff.
+   - `search` filters: `--repo`, `--match`, `--from`, `--to`, `--status`
+   - Other subcommands: `detail <id>`, `update-outcome <id> '<outcome>'`
+   - If unsure, run `python ${CLAUDE_SKILL_DIR}/scripts/db.py search --help` first
 3. **Format**: Present results in a readable format
 
 ## Guidelines
