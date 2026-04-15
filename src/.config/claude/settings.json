@@ -8,14 +8,12 @@
     "pr": ""
   },
   "permissions": {
-    "ask": [
-      "Bash(git push *)"
-    ],
     "deny": [
       "Bash(brew *)",
       "Edit(**/node_modules/**)",
       "Write(**/node_modules/**)"
-    ]
+    ],
+    "ask": ["Bash(git push *)"]
   },
   "hooks": {
     "PermissionRequest": [
@@ -72,31 +70,31 @@
     "command": "claude-statusline"
   },
   "enabledPlugins": {
+    "claude-api@anthropic-agent-skills": true,
     "claude-md-management@claude-plugins-official": true,
+    "codex@openai-codex": true,
+    "document-skills@anthropic-agent-skills": true,
+    "example-skills@anthropic-agent-skills": true,
     "frontend-design@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
-    "rust-analyzer-lsp@claude-plugins-official": true,
-    "pyright-lsp@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true,
     "jdtls-lsp@claude-plugins-official": true,
     "kotlin-lsp@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
-    "codex@openai-codex": true,
-    "claude-api@anthropic-agent-skills": true,
-    "document-skills@anthropic-agent-skills": true,
-    "example-skills@anthropic-agent-skills": true
+    "pyright-lsp@claude-plugins-official": true,
+    "rust-analyzer-lsp@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "typescript-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
-    "openai-codex": {
-      "source": {
-        "source": "github",
-        "repo": "openai/codex-plugin-cc"
-      }
-    },
     "anthropic-agent-skills": {
       "source": {
         "source": "github",
         "repo": "anthropics/skills"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
       }
     }
   },
