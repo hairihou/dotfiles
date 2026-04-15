@@ -9,17 +9,17 @@ paths: "**/*.{ts,tsx,vue}"
 Do NOT use `invalidateQueries` / `refetch` when mutation response contains complete data. Use `setQueryData` to update cache directly.
 
 ```typescript
-// ❌ BAD - unnecessary network request after mutation
+// Bad: unnecessary network request after mutation
 onSuccess: () => {
   queryClient.invalidateQueries({ queryKey: ["users"] });
 };
 
-// ❌ BAD - same problem with refetch
+// Bad: same problem with refetch
 onSuccess: () => {
   refetch();
 };
 
-// ✅ GOOD - direct cache update, no extra request
+// Good: direct cache update, no extra request
 onSuccess: (newUser) => {
   queryClient.setQueryData(["users"], (old) => [...(old ?? []), newUser]);
 };

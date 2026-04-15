@@ -8,6 +8,7 @@ paths: "**/*.vue"
 
 - No auto imports. Always write explicit imports
 - No implicit globals in `<template>` (`$router`, `$t`, etc.). Bind explicitly from `<script setup>`
+- Define blocks in order: `<script setup>` → `<template>` → `<style>`
 
 ## State Design
 
@@ -15,7 +16,7 @@ paths: "**/*.vue"
 - Only define essential state. Derive everything else with `computed`
 - Use `ref()` and `Ref<T>`. Do not use `reactive()`
 - Use nominal typing with `unique symbol` for IDs, timestamps, dimensions
-- `computed()`: object, array, and union return types require explicit type parameter
+- `computed()`: always specify generic type parameter (`computed<T>(() => ...)`); never rely on return type inference
 
 ```typescript
 // Bad: impossible combinations can exist

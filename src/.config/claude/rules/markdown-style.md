@@ -57,6 +57,6 @@ The Language and prose-style rules (bold, bullet lists, headings) do not apply t
 - CLAUDE.md
 - Rule files
 - Subagent definitions
-- Skill definition files (`.md` with YAML frontmatter containing `name:` / `description:`)
+- Skill files (`skills/**/*.md`)
 
 The Formatting section (code block language tags, etc.) applies to all markdown files without exception.

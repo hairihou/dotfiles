@@ -17,8 +17,9 @@ const fullName = computed(() => `${user.value?.first} ${user.value?.last}`)
 const handleUserUpdate = () => { ... }
 
 // form feature block
-const formData = reactive({ name: '', email: '' })
-const isValid = computed(() => formData.name.length > 0)
+const name = ref('')
+const email = ref('')
+const isValid = computed<boolean>(() => name.value.length > 0)
 const handleSubmit = () => { ... }
 ```
 
@@ -73,29 +74,6 @@ props → external hooks → `useQuery`/`useMutation` → feature blocks → com
 - Return reactive refs (not raw values) for reactivity preservation
 - Accept refs as parameters when reactivity is needed (`MaybeRef<T>`)
 - Keep composables focused on single responsibility
-
-### Computed
-
-- Always specify generic type parameter: `computed<T>(() => ...)`
-- Never rely on return type inference
-
-```vue
-<!-- NG -->
-const label = computed(() => {
-  if (status.value === Status.Active) {
-    return t('status.active')
-  }
-  return t('status.inactive')
-})
-
-<!-- OK -->
-const label = computed<string>(() => {
-  if (status.value === Status.Active) {
-    return t('status.active')
-  }
-  return t('status.inactive')
-})
-```
 
 ### Declaration Order
 

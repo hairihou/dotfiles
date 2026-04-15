@@ -69,10 +69,10 @@ Light mode first, then `dark:` variants:
 Only add breakpoint variants when values change:
 
 ```html
-<!-- NG - redundant -->
+<!-- Bad: redundant -->
 <div class="px-4 md:px-4 lg:px-8"></div>
 
-<!-- OK -->
+<!-- Good -->
 <div class="px-4 lg:px-8"></div>
 ```
 
@@ -81,10 +81,10 @@ Only add breakpoint variants when values change:
 Use `gap-*` in flex/grid, never `space-x-*` or `space-y-*`:
 
 ```html
-<!-- NG -->
+<!-- Bad -->
 <div class="flex space-x-4"></div>
 
-<!-- OK -->
+<!-- Good -->
 <div class="flex gap-4"></div>
 ```
 
@@ -96,9 +96,9 @@ Use `gap-*` in flex/grid, never `space-x-*` or `space-y-*`:
 Always use line-height modifiers, never separate `leading-*`:
 
 ```html
-<!-- NG -->
+<!-- Bad -->
 <p class="text-base leading-7"></p>
 
-<!-- OK -->
+<!-- Good -->
 <p class="text-base/7"></p>
 ```
