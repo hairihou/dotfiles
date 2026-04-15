@@ -39,8 +39,8 @@ config.font = wezterm.font("UDEV Gothic 35NFLG")
 config.font_size = 12.0
 config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 config.hide_tab_bar_if_only_one_tab = true
-config.initial_cols = 120
-config.initial_rows = 36
+config.initial_cols = 160
+config.initial_rows = 48
 config.keys = {
   { key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\x1b[13;2u") },
   { key = "o", mods = "CMD|SHIFT", action = wezterm.action.EmitEvent("toggle-opacity") },
