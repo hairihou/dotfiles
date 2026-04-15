@@ -12,7 +12,9 @@
       "Bash(git push *)"
     ],
     "deny": [
-      "Bash(brew *)"
+      "Bash(brew *)",
+      "Edit(**/node_modules/**)",
+      "Write(**/node_modules/**)"
     ]
   },
   "hooks": {
