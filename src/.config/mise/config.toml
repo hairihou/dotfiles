@@ -1,6 +1,6 @@
 [tools]
 "aqua:BurntSushi/ripgrep" = "15.1.0"
-"aqua:anthropics/claude-code" = "2.1.108"
+"aqua:anthropics/claude-code" = "2.1.110"
 "aqua:ducaale/xh" = "0.25.3"
 "aqua:neovim/neovim" = "0.12.1"
 "aqua:peco/peco" = "0.6.0"
