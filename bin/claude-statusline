@@ -25,7 +25,7 @@ def gauge(pct: int, warning: int, critical: int) -> str:
 
 try:
     data = json.load(sys.stdin)
-    model = (data.get("model", {}).get("display_name") or "unknown").split()[0]
+    model = (data.get("model", {}).get("display_name") or "unknown").split("(")[0].strip()
     ctx_pct = int(data.get("context_window", {}).get("used_percentage") or 0)
     rate_5h_pct = int(
         data.get("rate_limits", {}).get("five_hour", {}).get("used_percentage") or -1
