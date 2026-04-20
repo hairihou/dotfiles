@@ -1,8 +1,7 @@
 ---
 name: pr
-description: Create or update a GitHub pull request. Use when asked to create a PR, submit for review, or push changes as a PR. Not for code review comments — use conventional-comments for that.
+description: Create or update a GitHub pull request. Use whenever a PR is being created or updated — whether the user explicitly asked or Claude initiated it during a task (e.g., after completing work and proposing to push). Not for code review comments — use conventional-comments for that.
 argument-hint: [base-branch]
-disable-model-invocation: true
 allowed-tools: Bash(gh *), Bash(git *), Read
 ---
 
