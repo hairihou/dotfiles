@@ -1,3 +1,4 @@
+brew "git"
 brew "mise"
 cask "android-studio"
 cask "azookey"
