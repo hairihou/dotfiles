@@ -8,6 +8,7 @@
 "aqua:zellij-org/zellij" = "0.44.1"
 deno = "2.7.12"
 gh = "2.90.0"
+"github:ast-grep/ast-grep" = "0.42.1"
 "github:microsoft/apm" = "0.8.12"
 go = "1.26.2"
 node = "24.15.0"

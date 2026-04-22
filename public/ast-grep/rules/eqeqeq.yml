@@ -1,0 +1,23 @@
+id: eqeqeq-eq-ts
+language: TypeScript
+rule:
+  pattern: $A == $B
+fix: $A === $B
+---
+id: eqeqeq-neq-ts
+language: TypeScript
+rule:
+  pattern: $A != $B
+fix: $A !== $B
+---
+id: eqeqeq-eq-tsx
+language: Tsx
+rule:
+  pattern: $A == $B
+fix: $A === $B
+---
+id: eqeqeq-neq-tsx
+language: Tsx
+rule:
+  pattern: $A != $B
+fix: $A !== $B

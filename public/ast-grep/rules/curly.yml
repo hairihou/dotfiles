@@ -1,0 +1,65 @@
+id: curly-if-ts
+language: TypeScript
+rule:
+  all:
+    - pattern: if ($COND) $STMT
+    - not:
+        has:
+          field: alternative
+          pattern: $_
+constraints:
+  STMT:
+    not:
+      kind: statement_block
+rewriters:
+  - id: to-eqeqeq
+    rule:
+      pattern: $A == $B
+    fix: $A === $B
+  - id: to-neqeqeq
+    rule:
+      pattern: $A != $B
+    fix: $A !== $B
+transform:
+  FC:
+    rewrite:
+      rewriters: [to-eqeqeq, to-neqeqeq]
+      source: $COND
+  FS:
+    rewrite:
+      rewriters: [to-eqeqeq, to-neqeqeq]
+      source: $STMT
+fix: "if ($FC) { $FS }"
+---
+id: curly-if-tsx
+language: Tsx
+rule:
+  all:
+    - pattern: if ($COND) $STMT
+    - not:
+        has:
+          field: alternative
+          pattern: $_
+constraints:
+  STMT:
+    not:
+      kind: statement_block
+rewriters:
+  - id: to-eqeqeq
+    rule:
+      pattern: $A == $B
+    fix: $A === $B
+  - id: to-neqeqeq
+    rule:
+      pattern: $A != $B
+    fix: $A !== $B
+transform:
+  FC:
+    rewrite:
+      rewriters: [to-eqeqeq, to-neqeqeq]
+      source: $COND
+  FS:
+    rewrite:
+      rewriters: [to-eqeqeq, to-neqeqeq]
+      source: $STMT
+fix: "if ($FC) { $FS }"

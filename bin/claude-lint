@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
+import shutil
 import subprocess
 import sys
 from pathlib import Path
 
-ESLINT = Path("node_modules/.bin/eslint")
-EXTENSIONS = ("*.js", "*.ts", "*.tsx", "*.vue")
+EXTENSIONS = ("*.ts", "*.tsx", "*.vue")
 
-if not ESLINT.is_file():
+ast_grep = shutil.which("ast-grep")
+sgconfig = (
+    Path(__file__).resolve().parent.parent / "public" / "ast-grep" / "sgconfig.yml"
+)
+if not ast_grep or not sgconfig.is_file():
     sys.exit(0)
 
 diff_result = subprocess.run(
@@ -31,7 +35,6 @@ if not files:
     sys.exit(0)
 
 subprocess.run(
-    [str(ESLINT), "--fix", "--rule", "curly: error", "--rule", "eqeqeq: error", "--"]
-    + files,
+    [ast_grep, "scan", "--update-all", "-c", str(sgconfig), "--"] + files,
     capture_output=True,
 )

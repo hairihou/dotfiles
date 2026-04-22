@@ -12,6 +12,12 @@
     "deny": [
       "Bash(brew *)",
       "Bash(npm install -g *)",
+      "Edit(**/.env)",
+      "Read(**/.env)",
+      "Write(**/.env)",
+      "Edit(**/.env.*)",
+      "Read(**/.env.*)",
+      "Write(**/.env.*)",
       "Edit(**/node_modules/**)",
       "Write(**/node_modules/**)"
     ],

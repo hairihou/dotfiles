@@ -1,0 +1,15 @@
+id: no-console-log-ts
+language: TypeScript
+rule:
+  kind: expression_statement
+  has:
+    pattern: console.log($$$)
+fix: ""
+---
+id: no-console-log-tsx
+language: Tsx
+rule:
+  kind: expression_statement
+  has:
+    pattern: console.log($$$)
+fix: ""
