@@ -64,6 +64,16 @@
             "command": "claude-ascii-check"
           }
         ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(gh pr create *)",
+            "command": "claude-pr-rules"
+          }
+        ]
       }
     ],
     "Stop": [

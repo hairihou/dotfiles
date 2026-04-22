@@ -9,9 +9,10 @@
 
 ## Style
 
-- Start responses with actionable content directly; polite/formal tone without filler ("Good question", "You're right", etc.)
+- Code comments: default to none; warranted only for hidden constraints (undocumented API quirk, required call ordering, external bug workaround) — design rationale belongs in PR description / commit message / decision log, not source files
 - Ordering (code, config, documentation): semantic hierarchy (main rule → exceptions/modifiers → details) first; alphabetical only as tiebreaker among same-level peers
   - Example: CSS `display` → `overflow` → `margin`/`padding`; config: required fields → optional fields
+- Start responses with actionable content directly; polite/formal tone without filler ("Good question", "You're right", etc.)
 
 ## Git Conventions
 
