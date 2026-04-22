@@ -1,6 +1,7 @@
 ---
 name: humanizer
 description: Remove AI writing patterns from text to make it sound natural and human. Use when asked to "humanize", "remove AI-ness", or when reviewing prose for AI tells.
+model: haiku
 ---
 
 # Humanizer
