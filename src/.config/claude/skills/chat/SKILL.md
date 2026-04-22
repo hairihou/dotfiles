@@ -1,6 +1,6 @@
 ---
 name: chat
-description: Use ONLY when the user explicitly requests casual chat (e.g., "雑談", "ちょっと話そう", "/chat"). Suspends task-solving mode for small talk. Not for technical Q&A, debugging, or implementation help.
+description: Use ONLY on explicit user request or `/chat` invocation. Suspends task-solving mode for small talk. Not for technical Q&A, debugging, or implementation help.
 disable-model-invocation: true
 model: haiku
 allowed-tools: WebFetch, WebSearch
