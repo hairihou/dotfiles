@@ -18,10 +18,7 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 - Fire-and-forget promises → always `await` or return; if intentionally discarding, use `void someAsyncFn()`
 - Bare `if (value)` for nullish checks → use `value !== undefined` or `value !== null`; boolean types allow truthy checks; `if (name)` on `string` allowed only when excluding empty string is intentional
 - `!!value` → allowed only for coercing union with multiple falsy values (`string | null | undefined` → `boolean`)
-- `items.filter(Boolean)` → `items.filter((item) => item !== undefined && item !== null)`
-- `isNaN(x)` → `Number.isNaN(x)`
 - `Number(input)` → `parseFloat(input)` or `parseInt(input, 10)`
-- `String(value)` → `value.toString()`
 
 ## Naming Conventions
 

@@ -7,7 +7,6 @@ paths: "**/*.vue"
 ## General
 
 - No auto imports. Always write explicit imports
-- No implicit globals in `<template>` (`$router`, `$t`, etc.). Bind explicitly from `<script setup>`
 - Define blocks in order: `<script setup>` → `<template>` → `<style>`
 
 ## State Design

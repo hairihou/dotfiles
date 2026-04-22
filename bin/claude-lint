@@ -1,10 +1,18 @@
 #!/usr/bin/env python3
+import json
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 
 EXTENSIONS = ("*.ts", "*.tsx", "*.vue")
+
+stdin_data = {}
+if not sys.stdin.isatty():
+    try:
+        stdin_data = json.loads(sys.stdin.read())
+    except (json.JSONDecodeError, ValueError):
+        pass
 
 ast_grep = shutil.which("ast-grep")
 sgconfig = (
@@ -38,3 +46,24 @@ subprocess.run(
     [ast_grep, "scan", "--update-all", "-c", str(sgconfig), "--"] + files,
     capture_output=True,
 )
+
+if stdin_data.get("stop_hook_active"):
+    sys.exit(0)
+
+scan = subprocess.run(
+    [ast_grep, "scan", "--color=never", "-c", str(sgconfig), "--"] + files,
+    capture_output=True,
+    text=True,
+)
+report = scan.stdout.strip() or scan.stderr.strip()
+if report:
+    print(
+        json.dumps(
+            {
+                "decision": "block",
+                "reason": f"ast-grep found unresolved issues:\n\n{report}",
+                "hookSpecificOutput": {"hookEventName": "Stop"},
+            }
+        )
+    )
+sys.exit(0)

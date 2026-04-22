@@ -1,0 +1,11 @@
+id: is-nan-ts
+language: TypeScript
+rule:
+  pattern: isNaN($X)
+fix: Number.isNaN($X)
+---
+id: is-nan-tsx
+language: Tsx
+rule:
+  pattern: isNaN($X)
+fix: Number.isNaN($X)

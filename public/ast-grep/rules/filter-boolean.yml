@@ -1,0 +1,11 @@
+id: filter-boolean-ts
+language: TypeScript
+rule:
+  pattern: $ARR.filter(Boolean)
+fix: $ARR.filter((item) => item !== undefined && item !== null)
+---
+id: filter-boolean-tsx
+language: Tsx
+rule:
+  pattern: $ARR.filter(Boolean)
+fix: $ARR.filter((item) => item !== undefined && item !== null)

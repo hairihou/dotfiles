@@ -1,0 +1,11 @@
+id: string-cast-ts
+language: TypeScript
+rule:
+  pattern: String($X)
+fix: ($X).toString()
+---
+id: string-cast-tsx
+language: Tsx
+rule:
+  pattern: String($X)
+fix: ($X).toString()
