@@ -1,6 +1,6 @@
 ---
 name: pr
-description: Create or update a GitHub pull request. Use whenever a PR is being created or updated — whether the user explicitly asked or Claude initiated it during a task (e.g., after completing work and proposing to push). Not for code review comments — use conventional-comments for that.
+description: Create or update a GitHub pull request. TRIGGER on any intent to ship branch work upstream — explicit ("create PR") or implicit ("push this", "ship it", or Claude proposing to push after completing work). DO NOT USE for code review comments — use conventional-comments instead.
 argument-hint: [base-branch]
 allowed-tools: Bash(gh *), Bash(git *), Read
 ---
