@@ -11,6 +11,7 @@
   "permissions": {
     "deny": [
       "Bash(brew *)",
+      "Bash(npm install -g *)",
       "Edit(**/node_modules/**)",
       "Write(**/node_modules/**)"
     ],
@@ -46,6 +47,15 @@
           {
             "type": "command",
             "command": "claude-notify ask-user-question"
+          }
+        ]
+      },
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-ascii-check"
           }
         ]
       }
