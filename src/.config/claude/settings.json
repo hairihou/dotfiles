@@ -90,8 +90,6 @@
     "claude-api@anthropic-agent-skills": true,
     "claude-md-management@claude-plugins-official": true,
     "codex@openai-codex": true,
-    "document-skills@anthropic-agent-skills": true,
-    "example-skills@anthropic-agent-skills": true,
     "frontend-design@claude-plugins-official": true,
     "hookify@claude-plugins-official": true,
     "jdtls-lsp@claude-plugins-official": true,
@@ -113,12 +111,6 @@
       "source": {
         "source": "github",
         "repo": "openai/codex-plugin-cc"
-      }
-    },
-    "superpowers-marketplace": {
-      "source": {
-        "source": "github",
-        "repo": "obra/superpowers-marketplace"
       }
     }
   },
