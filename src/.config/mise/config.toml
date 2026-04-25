@@ -6,6 +6,7 @@
 "aqua:peco/peco" = "0.6.0"
 "aqua:x-motemen/ghq" = "1.10.1"
 "aqua:zellij-org/zellij" = "0.44.1"
+aube = "1.0.0"
 deno = "2.7.13"
 gh = "2.91.0"
 "github:ast-grep/ast-grep" = "0.42.1"
@@ -31,5 +32,6 @@ uv = "0.11.7"
 
 [settings]
 lockfile = true
+npm.package_manager = "aube"
 
 [env]
