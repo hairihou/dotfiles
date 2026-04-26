@@ -13,7 +13,7 @@ allowed-tools: Bash(gh *), Bash(git *), Read
 - Default branch: !`gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name' 2>/dev/null || echo 'unknown'`
 - Git status: !`git status -b --porcelain`
 
-## Commit Message
+## Title and Commit Message
 
 1. Check `.gitmessage` / `CONTRIBUTING.md` first (respect project conventions)
 2. Fallback to Conventional Commits
@@ -43,5 +43,5 @@ closes #<number>
 ## Steps
 
 1. If open PR exists (`gh pr view`) → `gh pr edit --title ... --body ...`
-2. Otherwise → `gh pr create --title ... --body ... --base <base>`
+2. Otherwise → `gh pr create --title ... --body ... --base <base> --assignee @me`
    - Base: `$ARGUMENTS` if provided, else default branch

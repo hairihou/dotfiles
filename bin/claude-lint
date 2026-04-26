@@ -56,7 +56,6 @@ if update.returncode != 0:
             {
                 "decision": "block",
                 "reason": f"ast-grep --update-all failed:\n\n{update.stderr.strip() or update.stdout.strip()}",
-                "hookSpecificOutput": {"hookEventName": "Stop"},
             }
         )
     )
@@ -74,7 +73,6 @@ if report:
             {
                 "decision": "block",
                 "reason": f"ast-grep found unresolved issues:\n\n{report}",
-                "hookSpecificOutput": {"hookEventName": "Stop"},
             }
         )
     )

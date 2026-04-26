@@ -3,6 +3,9 @@ import subprocess
 import sys
 from pathlib import Path
 
+if not sys.stdin.isatty():
+    sys.stdin.read()
+
 sound = (
     Path.home()
     / "dotfiles/public"
