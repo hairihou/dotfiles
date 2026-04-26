@@ -18,6 +18,12 @@
       "Edit(**/.env.*)",
       "Read(**/.env.*)",
       "Write(**/.env.*)",
+      "Edit(**/.ssh/**)",
+      "Read(**/.ssh/**)",
+      "Write(**/.ssh/**)",
+      "Edit(**/.zshrc.local)",
+      "Read(**/.zshrc.local)",
+      "Write(**/.zshrc.local)",
       "Edit(**/node_modules/**)",
       "Write(**/node_modules/**)"
     ],
@@ -62,16 +68,6 @@
           {
             "type": "command",
             "command": "claude-ascii-check"
-          }
-        ]
-      },
-      {
-        "matcher": "Bash",
-        "hooks": [
-          {
-            "type": "command",
-            "if": "Bash(gh pr create *)",
-            "command": "claude-pr-rules"
           }
         ]
       }
