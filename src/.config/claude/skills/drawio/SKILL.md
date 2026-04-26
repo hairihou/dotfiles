@@ -19,7 +19,7 @@ Generate draw.io diagrams as native `.drawio` files. Optionally export to PNG, S
    - Output file must exist and be non-empty: `[ -s <output> ]`
    - If either check fails, keep the source `.drawio`, report the CLI stderr to the user, and stop — do not proceed to step 5
    - If the CLI binary itself is not found, keep the `.drawio` file and tell the user to install via `brew install --cask drawio`, or open the `.drawio` file directly
-5. **Open the result** with `open <file>`. If `open` exits non-zero, print the absolute file path so the user can open it manually
+5. **Print the absolute file path** of the generated file so the user can open it when ready. Do not auto-open via `open <file>`. Only run `open <path>` if the user later expresses an intent to view or open the result
 
 ## Choosing the output format
 
@@ -68,12 +68,6 @@ Key flags:
 - `--width` / `--height`: fit into specified dimensions (preserves aspect ratio)
 - `-a` / `--all-pages`: export all pages (PDF only)
 - `-p` / `--page-index`: select a specific page (1-based)
-
-### Opening the result
-
-```sh
-open <file>
-```
 
 ## File naming
 
@@ -218,4 +212,3 @@ For all other cases, the templates above plus the Critical rules cover what you 
 | Diagram opens but looks blank | Missing root cells `id="0"` and `id="1"` | Ensure the basic mxGraphModel structure is complete |
 | Edges not rendering | Edge mxCell is self-closing (no child mxGeometry element) | Every edge must have `<mxGeometry relative="1" as="geometry"/>` as a child element |
 | Sequence messages stack at the same height | Missing `exitY`/`entryY` on message edges | Add `exitY` / `entryY` (0.0 = top, 1.0 = bottom) to each message edge to encode time order |
-| File won't open after export | Incorrect file path or missing file association | Print the absolute file path so the user can open it manually |

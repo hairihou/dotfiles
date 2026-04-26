@@ -14,6 +14,9 @@ if not sys.stdin.isatty():
     except (json.JSONDecodeError, ValueError):
         pass
 
+if stdin_data.get("stop_hook_active"):
+    sys.exit(0)
+
 ast_grep = shutil.which("ast-grep")
 sgconfig = (
     Path(__file__).resolve().parent.parent / "public" / "ast-grep" / "sgconfig.yml"
@@ -33,21 +36,30 @@ untracked_result = subprocess.run(
     text=True,
 )
 files = sorted(
-    set(
+    {
         f
         for f in diff_result.stdout.splitlines() + untracked_result.stdout.splitlines()
         if f
-    )
+    }
 )
 if not files:
     sys.exit(0)
 
-subprocess.run(
+update = subprocess.run(
     [ast_grep, "scan", "--update-all", "-c", str(sgconfig), "--"] + files,
     capture_output=True,
+    text=True,
 )
-
-if stdin_data.get("stop_hook_active"):
+if update.returncode != 0:
+    print(
+        json.dumps(
+            {
+                "decision": "block",
+                "reason": f"ast-grep --update-all failed:\n\n{update.stderr.strip() or update.stdout.strip()}",
+                "hookSpecificOutput": {"hookEventName": "Stop"},
+            }
+        )
+    )
     sys.exit(0)
 
 scan = subprocess.run(

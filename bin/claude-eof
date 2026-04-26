@@ -11,4 +11,10 @@ if not file or not os.path.isfile(file):
     sys.exit(0)
 
 p = Path(file)
-p.write_text(p.read_text().rstrip() + "\n")
+try:
+    original = p.read_text()
+except UnicodeDecodeError:
+    sys.exit(0)
+fixed = original.rstrip() + "\n"
+if fixed != original:
+    p.write_text(fixed)

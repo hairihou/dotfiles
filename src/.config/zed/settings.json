@@ -9,8 +9,6 @@
 {
   "agent": {
     "dock": "right",
-    "favorite_models": [],
-    "model_parameters": [],
   },
   "auto_install_extensions": {
     "angular": true,
