@@ -1,6 +1,6 @@
 ---
 name: devils-advocate
-description: Use when evaluating a decision, challenging an approach, or weighing pros and cons of architecture/technology choices.
+description: Run parallel advocate/critic analysis on a topic to surface tensions and decision factors. Use when evaluating a decision, challenging an approach, or weighing pros and cons of architecture/technology choices.
 argument-hint: <topic or decision to evaluate>
 allowed-tools: Agent, Glob, Grep, Read
 ---

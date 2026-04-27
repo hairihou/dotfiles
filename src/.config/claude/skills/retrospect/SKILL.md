@@ -1,6 +1,6 @@
 ---
 name: retrospect
-description: Guided personal reflection that separates fact, interpretation, and emotion through structured inquiry. Use when "something feels off", "need to process this", "had a conflict", or decisions feel unclear. Not for technical decision analysis — use devils-advocate for that.
+description: Guide personal reflection by separating fact, interpretation, and emotion through structured inquiry. Use when "something feels off", "need to process this", "had a conflict", or decisions feel unclear. Not for technical decision analysis — use devils-advocate for that.
 argument-hint: <event or situation>
 disable-model-invocation: true
 allowed-tools: AskUserQuestion

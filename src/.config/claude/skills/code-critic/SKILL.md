@@ -1,6 +1,6 @@
 ---
 name: code-critic
-description: Brutally honest code review targeting over-engineering, premature abstraction, and defensive excess. Use when "is this over-engineered", "check complexity", "too much abstraction", or "what do you think of this code". Not for PR comments — use conventional-comments for that.
+description: Critique code for over-engineering, premature abstraction, and defensive excess with brutal honesty. Use when "is this over-engineered", "check complexity", "too much abstraction", or "what do you think of this code". Not for PR comments — use conventional-comments for that.
 argument-hint: <file-path or glob-pattern>
 allowed-tools: Glob, Grep, Read
 ---

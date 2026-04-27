@@ -1,6 +1,6 @@
 ---
 name: zap
-description: Use when the user has authorization to run a runtime security scan against a live web app they own or have written permission to test — sanity-checking AI-generated code (vibe coding), pre-deploy verification, or audits after auth / form / endpoint changes. Do NOT use for static SAST, dependency CVE scans, non-web targets, or any third-party asset without authorization.
+description: Run an OWASP ZAP runtime security scan against an authorized web app and synthesize fix prompts for High/Medium alerts. Use when the user has authorization to test a live app they own — sanity-checking AI-generated code (vibe coding), pre-deploy verification, or audits after auth/form/endpoint changes. Do NOT use for static SAST, dependency CVE scans, non-web targets, or third-party assets without authorization.
 argument-hint: <target-url> [full]
 allowed-tools: Bash, Read, Write
 ---

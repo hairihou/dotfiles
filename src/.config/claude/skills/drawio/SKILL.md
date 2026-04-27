@@ -1,6 +1,6 @@
 ---
 name: drawio
-description: Use when user asks to create a draw.io diagram (.drawio file), mentions draw.io / drawio / drawoi explicitly, or requests a flowchart, architecture diagram, ER diagram, sequence diagram, class diagram, or network diagram with PNG/SVG/PDF export intent. Do NOT use for Figma mockups, generic UI wireframes without diagram intent, Mermaid syntax (```mermaid blocks), PlantUML, or ASCII art diagrams.
+description: Generate native .drawio diagrams (flowchart, architecture, ER, sequence, class, network) with optional PNG/SVG/PDF export. Use when user asks for a draw.io diagram, mentions drawio explicitly, or requests one of those diagram types with export intent. Do NOT use for Figma mockups, generic UI wireframes, Mermaid syntax, PlantUML, or ASCII art.
 ---
 
 <!-- Source: https://github.com/jgraph/drawio-mcp/blob/main/skill-cli/drawio/SKILL.md (macOS-only adaptation) -->
