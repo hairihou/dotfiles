@@ -13,7 +13,7 @@ Wrap the official ZAP Docker image (`ghcr.io/zaproxy/zaproxy:stable`) to scan a 
 
 - Docker reachable: !`docker info >/dev/null 2>&1 && echo yes || echo no`
 - Working dir: !`pwd`
-- Existing reports: !`ls -1t zap-reports 2>/dev/null | head -3 || echo "(none yet)"`
+- Existing reports: !`ls -1t zap 2>/dev/null | head -3 || echo "(none yet)"`
 
 ## Authorization gate (run BEFORE any scan)
 
@@ -31,7 +31,7 @@ If either is unclear, stop and ask. Even baseline (passive) scans crawl aggressi
 | 1 | Authorize | Per gate above |
 | 2 | Resolve target | If host is `localhost` / `127.0.0.1`, swap to `host.docker.internal` so the container can reach the host |
 | 3 | Pick scan type | Default `baseline` (passive, ~5-10 min). Use `full` only if user passed `full` as the second argument |
-| 4 | Make output dir | `mkdir -p zap-reports/<YYYYMMDD-HHMMSS>` |
+| 4 | Make output dir | `mkdir -p zap/<YYYYMMDD-HHMMSS>` |
 | 5 | Run scan | See command blocks below; image auto-pulls on first run (~265 MB) |
 | 6 | Parse alerts | Read `report.json`, take `site[].alerts[]` with `riskcode >= 2` (High/Medium) |
 | 7 | Emit fix prompts | One block per filtered alert (template below); group by alert name when an alert has multiple `instances` |
@@ -41,9 +41,9 @@ If either is unclear, stop and ask. Even baseline (passive) scans crawl aggressi
 
 ```sh
 TS="$(date +%Y%m%d-%H%M%S)"
-mkdir -p "zap-reports/${TS}"
+mkdir -p "zap/${TS}"
 docker run --rm -t \
-  -v "$(pwd)/zap-reports/${TS}:/zap/wrk:rw" \
+  -v "$(pwd)/zap/${TS}:/zap/wrk:rw" \
   ghcr.io/zaproxy/zaproxy:stable \
   zap-baseline.py -t "<url>" -r report.html -J report.json
 ```
@@ -56,7 +56,7 @@ Active scan: sends attack payloads, runs 30-60+ min, can leave test data in DBs.
 
 ```sh
 docker run --rm -t \
-  -v "$(pwd)/zap-reports/${TS}:/zap/wrk:rw" \
+  -v "$(pwd)/zap/${TS}:/zap/wrk:rw" \
   ghcr.io/zaproxy/zaproxy:stable \
   zap-full-scan.py -t "<url>" -r report.html -J report.json
 ```
@@ -66,7 +66,7 @@ docker run --rm -t \
 The JSON has shape `{ "site": [ { "alerts": [ { riskcode, name, instances: [...], solution, reference, cweid, ... } ] } ] }`. Filter to High/Medium with:
 
 ```sh
-jq '[.site[].alerts[] | select((.riskcode|tonumber) >= 2)]' "zap-reports/${TS}/report.json"
+jq '[.site[].alerts[] | select((.riskcode|tonumber) >= 2)]' "zap/${TS}/report.json"
 ```
 
 If `jq` is unavailable, read `report.json` with the Read tool and filter inline. Each alert may have multiple `instances` (different URIs/params); emit one prompt per instance, but reuse the alert-level `solution` / `reference` / `cweid` across instances of the same alert.
@@ -97,8 +97,7 @@ Empty fields (`param`, `attack`, `evidence`) are common for passive findings —
 
 ## After scan
 
-- Add `zap-reports/` to the repo's `.gitignore` if missing — alerts can include sensitive request/response excerpts
-- Direct the user at `zap-reports/<ts>/report.html` for the visual report and `report.json` as the source of truth
+- Direct the user at `zap/<ts>/report.html` for the visual report and `report.json` as the source of truth
 - Do not auto-open the HTML; print the absolute path so the user opens it when ready
 
 ## Troubleshooting
@@ -108,6 +107,6 @@ Empty fields (`param`, `attack`, `evidence`) are common for passive findings —
 | `docker: command not found` | Docker not installed / not in PATH | Install Docker Desktop or `colima` |
 | `Cannot connect to the Docker daemon` | Daemon not running | Start Docker Desktop or run `colima start` |
 | Container can reach the internet but not the target | `localhost` resolves inside the container, not the host | Use `host.docker.internal` for host-bound dev servers |
-| `report.json` missing after scan | Volume mount path mismatch | Verify `-v "$(pwd)/zap-reports/${TS}:/zap/wrk:rw"` and that the host dir was created before `docker run` |
+| `report.json` missing after scan | Volume mount path mismatch | Verify `-v "$(pwd)/zap/${TS}:/zap/wrk:rw"` and that the host dir was created before `docker run` |
 | All alerts are Informational | Target is auth-gated and ZAP only saw the login page | Out of scope for this skill; pre-authenticated scans need a ZAP context file |
 | Scan hangs past expected duration | Target rate-limits ZAP, or full scan is just slow | Baseline cap ~10 min, full ~60 min — kill the container and rerun with a smaller target scope |
