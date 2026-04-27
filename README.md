@@ -24,7 +24,7 @@ Available globally after setup:
 
 ### Configuration Files (`/src`)
 
-Symlinked to home directory:
+Files are symlinked into `$HOME`. Edit them in `src/` — `$HOME` targets are overwritten by `linkup`.
 
 | Source                 | Target                      |
 | ---------------------- | --------------------------- |
