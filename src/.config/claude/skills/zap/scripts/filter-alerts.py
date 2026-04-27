@@ -2,16 +2,6 @@
 # /// script
 # requires-python = ">=3.13"
 # ///
-"""Filter a ZAP report.json to High/Medium alerts and emit compact JSON.
-
-Usage: filter-alerts.py <path-to-report.json>
-
-Reads the raw report (potentially tens of MB) and prints a compact list of
-alerts on stdout, each carrying its instances. ZAP encodes `riskcode` as a
-string — `int()` cast is required, otherwise a naive `>= 2` comparison
-silently drops every alert.
-"""
-
 import json
 import sys
 
@@ -24,6 +14,7 @@ def main() -> None:
     out = []
     for site in data.get("site", []):
         for alert in site.get("alerts", []):
+            # ZAP encodes riskcode as a string; without int() a naive `>= 2` silently drops every alert.
             try:
                 rc = int(alert.get("riskcode", 0))
             except (TypeError, ValueError):
