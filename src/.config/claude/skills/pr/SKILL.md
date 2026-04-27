@@ -43,5 +43,6 @@ closes #<number>
 ## Steps
 
 1. If open PR exists (`gh pr view`) → `gh pr edit --title ... --body ...`
-2. Otherwise → `gh pr create --title ... --body ... --base <base> --assignee @me`
+2. Otherwise → `gh pr create --draft --title ... --body ... --base <base> --assignee @me`
    - Base: `$ARGUMENTS` if provided, else default branch
+   - Always create as draft; the author marks ready for review manually
