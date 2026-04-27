@@ -1,18 +1,18 @@
 id: vue-template-globals-text
 language: Html
 severity: warning
-message: "Vue template uses a `$`-prefixed identifier inside {{ }}; bind it from <script setup> instead"
+message: "Vue template uses an Options API global inside {{ }}; bind it from <script setup> instead"
 rule:
   kind: text
-  regex: "\\{\\{[^}]*\\$\\w+"
+  regex: "\\{\\{[^}]*\\$(attrs|emit|props|slots|el|refs|parent|root|route|router|store)\\b"
 ---
 id: vue-template-globals-attr
 language: Html
 severity: warning
-message: "Vue template uses a `$`-prefixed identifier in a directive/binding value; bind it from <script setup> instead"
+message: "Vue template uses an Options API global in a directive/binding value; bind it from <script setup> instead"
 rule:
   kind: quoted_attribute_value
-  regex: "\\$\\w+"
+  regex: "\\$(attrs|emit|props|slots|el|refs|parent|root|route|router|store)\\b"
   inside:
     kind: attribute
     has:

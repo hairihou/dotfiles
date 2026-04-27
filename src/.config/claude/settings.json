@@ -27,7 +27,9 @@
       "Edit(**/node_modules/**)",
       "Write(**/node_modules/**)"
     ],
-    "ask": ["Bash(git push *)"]
+    "ask": [
+      "Bash(git push *)"
+    ]
   },
   "hooks": {
     "PermissionRequest": [
@@ -120,5 +122,6 @@
       }
     }
   },
-  "language": "japanese"
+  "language": "japanese",
+  "skipAutoPermissionPrompt": true
 }
