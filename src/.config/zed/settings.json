@@ -8,7 +8,7 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "agent": {
-    "dock": "right",
+    "button": false,
   },
   "auto_install_extensions": {
     "angular": true,
