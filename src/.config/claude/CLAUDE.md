@@ -10,6 +10,7 @@
 ## Style
 
 - Code comments: default to none; warranted only for hidden constraints (undocumented API quirk, required call ordering, external bug workaround) — design rationale belongs in PR description / commit message / decision log, not source files
+- Quantitative work volume (line counts, file counts, `+X/-Y`, "N files changed", completion %) in PR/issue bodies, commit messages, progress updates, summaries: omit — the diff or task list already shows volume. Describe impact, rationale, and risk instead
 - Ordering (code, config, documentation): semantic hierarchy (main rule → exceptions/modifiers → details) first; alphabetical only as tiebreaker among same-level peers
   - Example: CSS `display` → `overflow` → `margin`/`padding`; config: required fields → optional fields
 - Start responses with actionable content directly; polite/formal tone without filler ("Good question", "You're right", etc.)
