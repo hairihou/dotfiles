@@ -1,5 +1,4 @@
 ---
-description: Markdown document writing style
 paths: "**/*.md"
 ---
 

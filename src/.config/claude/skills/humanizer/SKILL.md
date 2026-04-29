@@ -1,7 +1,8 @@
 ---
 name: humanizer
-description: Remove AI writing patterns from text to make it sound natural and human. Use when asked to "humanize", "remove AI-ness", or when reviewing prose for AI tells.
+description: Remove AI-generated writing patterns from text and re-inject natural human voice. Use when prose feels machine-written — significance inflation, em-dash overuse, sycophantic tone, formulaic structure — typically after generating drafts or when reviewing AI-assisted writing. Triggered also by "humanize" or "remove AI-ness".
 model: haiku
+allowed-tools: Read
 ---
 
 # Humanizer

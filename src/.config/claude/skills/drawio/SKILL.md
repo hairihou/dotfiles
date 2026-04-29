@@ -1,6 +1,7 @@
 ---
 name: drawio
 description: Generate native .drawio diagrams (flowchart, architecture, ER, sequence, class, network) with optional PNG/SVG/PDF export. Use when user asks for a draw.io diagram, mentions drawio explicitly, or requests one of those diagram types with export intent. Do NOT use for Figma mockups, generic UI wireframes, Mermaid syntax, PlantUML, or ASCII art.
+allowed-tools: Bash, Read, Write
 ---
 
 <!-- Source: https://github.com/jgraph/drawio-mcp/blob/main/skill-cli/drawio/SKILL.md (macOS-only adaptation) -->
