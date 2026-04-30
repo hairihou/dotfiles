@@ -33,8 +33,7 @@ setopt SHARE_HISTORY
 
 fpath=("$HOME/.zsh/completions" $fpath)
 autoload -U compinit && compinit
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-zstyle ':completion:*' menu select
+LISTMAX=0
 
 autoload -U add-zsh-hook
 typeset prompt_path="" prompt_git=""
