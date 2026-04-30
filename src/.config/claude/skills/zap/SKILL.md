@@ -32,16 +32,16 @@ If either is unclear, stop and ask. Even baseline (passive) scans crawl aggressi
 
 ## Workflow
 
-| Step | Action | Details |
-|------|--------|---------|
-| 1 | Authorize | Per gate above |
-| 2 | Resolve target | If host is `localhost` / `127.0.0.1`, swap to `host.docker.internal` so the container can reach the host |
-| 3 | Pick scan type | Default `baseline` (passive, ~5-10 min). Use `full` only if the user passed `full` as the second argument |
-| 4 | Run scan | `python ${CLAUDE_SKILL_DIR}/scripts/scan.py <baseline\|full> <url>` — the script handles `mkdir`, `docker run`, and exit-code normalization. Image auto-pulls on first run |
-| 5 | Locate run dir | The scan script prints `OK (<rc>) -> zap/<TS>` on success. Re-derive on later calls with `ls -1t zap \| head -1` — Bash tool calls do NOT share env vars |
-| 6 | Filter alerts | `python ${CLAUDE_SKILL_DIR}/scripts/filter-alerts.py zap/<TS>/report.json` — emits compact JSON of High/Medium alerts to stdout. Never Read the raw `report.json`; it can be tens of MB |
-| 7 | Emit fix prompts | One section per alert, with a per-instance subsection inside it. Alert-level `solution` / `reference` / `cweid` go in the section header once; do not repeat them under each instance |
-| 8 | Summarize | Counts per severity, link to `report.html`, list the prompts ready to feed an LLM |
+| Step | Action           | Details                                                                                                                                                                                 |
+| ---- | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1    | Authorize        | Per gate above                                                                                                                                                                          |
+| 2    | Resolve target   | If host is `localhost` / `127.0.0.1`, swap to `host.docker.internal` so the container can reach the host                                                                                |
+| 3    | Pick scan type   | Default `baseline` (passive, ~5-10 min). Use `full` only if the user passed `full` as the second argument                                                                               |
+| 4    | Run scan         | `python ${CLAUDE_SKILL_DIR}/scripts/scan.py <baseline\|full> <url>` — the script handles `mkdir`, `docker run`, and exit-code normalization. Image auto-pulls on first run              |
+| 5    | Locate run dir   | The scan script prints `OK (<rc>) -> zap/<TS>` on success. Re-derive on later calls with `ls -1t zap \| head -1` — Bash tool calls do NOT share env vars                                |
+| 6    | Filter alerts    | `python ${CLAUDE_SKILL_DIR}/scripts/filter-alerts.py zap/<TS>/report.json` — emits compact JSON of High/Medium alerts to stdout. Never Read the raw `report.json`; it can be tens of MB |
+| 7    | Emit fix prompts | One section per alert, with a per-instance subsection inside it. Alert-level `solution` / `reference` / `cweid` go in the section header once; do not repeat them under each instance   |
+| 8    | Summarize        | Counts per severity, link to `report.html`, list the prompts ready to feed an LLM                                                                                                       |
 
 ## Full scan caveats (opt-in only — second arg `full`)
 
@@ -82,12 +82,12 @@ Empty fields (`param`, `attack`, `evidence`) are common for passive findings —
 
 ## Troubleshooting
 
-| Problem | Cause | Fix |
-|---------|-------|-----|
-| `docker: command not found` | No Docker runtime installed / `docker` CLI not in PATH | Tell the user; let them choose a runtime (Docker Desktop, OrbStack, colima, ...) |
-| `Cannot connect to the Docker daemon` | Daemon not running | Tell the user to start whichever runtime they use; verify with `docker info` |
-| Container can reach the internet but not the target | `localhost` resolves inside the container, not the host | Use `host.docker.internal` for host-bound dev servers |
-| `report.json` missing after scan | Volume mount path mismatch (typically `$TS` lost across Bash calls when not using `scan.py`) | Use `${CLAUDE_SKILL_DIR}/scripts/scan.py` instead of inline `docker run` |
-| Filter returns zero alerts even though report has High/Medium | `riskcode` compared as string, not int | Use `${CLAUDE_SKILL_DIR}/scripts/filter-alerts.py` (it casts), do not roll your own |
-| All alerts are Informational | Target is auth-gated and ZAP only saw the login page | Out of scope for this skill; pre-authenticated scans need a ZAP context file |
-| Scan hangs past expected duration | Target rate-limits ZAP, or full scan is just slow | Baseline cap ~10 min, full ~60 min — kill the container and rerun with a smaller target scope |
+| Problem                                                       | Cause                                                                                        | Fix                                                                                           |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `docker: command not found`                                   | No Docker runtime installed / `docker` CLI not in PATH                                       | Tell the user; let them choose a runtime (Docker Desktop, OrbStack, colima, ...)              |
+| `Cannot connect to the Docker daemon`                         | Daemon not running                                                                           | Tell the user to start whichever runtime they use; verify with `docker info`                  |
+| Container can reach the internet but not the target           | `localhost` resolves inside the container, not the host                                      | Use `host.docker.internal` for host-bound dev servers                                         |
+| `report.json` missing after scan                              | Volume mount path mismatch (typically `$TS` lost across Bash calls when not using `scan.py`) | Use `${CLAUDE_SKILL_DIR}/scripts/scan.py` instead of inline `docker run`                      |
+| Filter returns zero alerts even though report has High/Medium | `riskcode` compared as string, not int                                                       | Use `${CLAUDE_SKILL_DIR}/scripts/filter-alerts.py` (it casts), do not roll your own           |
+| All alerts are Informational                                  | Target is auth-gated and ZAP only saw the login page                                         | Out of scope for this skill; pre-authenticated scans need a ZAP context file                  |
+| Scan hangs past expected duration                             | Target rate-limits ZAP, or full scan is just slow                                            | Baseline cap ~10 min, full ~60 min — kill the container and rerun with a smaller target scope |

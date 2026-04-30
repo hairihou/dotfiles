@@ -35,12 +35,12 @@ If no format is mentioned, just write the `.drawio` file and open it in draw.io.
 
 ### Supported export formats
 
-| Format | Embed XML | Notes |
-|--------|-----------|-------|
-| `png` | Yes (`-e`) | Viewable everywhere, editable in draw.io |
-| `svg` | Yes (`-e`) | Scalable, editable in draw.io |
-| `pdf` | Yes (`-e`) | Printable, editable in draw.io |
-| `jpg` | No | Lossy, no embedded XML support |
+| Format | Embed XML  | Notes                                    |
+| ------ | ---------- | ---------------------------------------- |
+| `png`  | Yes (`-e`) | Viewable everywhere, editable in draw.io |
+| `svg`  | Yes (`-e`) | Scalable, editable in draw.io            |
+| `pdf`  | Yes (`-e`) | Printable, editable in draw.io           |
+| `jpg`  | No         | Lossy, no embedded XML support           |
 
 PNG, SVG, and PDF all support `--embed-diagram` — the exported file contains the full diagram XML, so opening it in draw.io recovers the editable diagram.
 
@@ -59,6 +59,7 @@ The draw.io desktop app on macOS includes a command-line interface for exporting
 ```
 
 Key flags:
+
 - `-x` / `--export`: export mode
 - `-f` / `--format`: output format (png, svg, pdf, jpg)
 - `-e` / `--embed-diagram`: embed diagram XML in the output (PNG, SVG, PDF only)
@@ -96,8 +97,8 @@ Read these BEFORE generating any XML. Violations cause parse errors, blank diagr
 
 Use this rigid grid for placement. Pick `(col, row)` per node — never compute pixel positions in prose.
 
-- Column x = `col * 180 + 40`  (col 0 = 40, col 1 = 220, col 2 = 400, ...)
-- Row y = `row * 120 + 40`     (row 0 = 40, row 1 = 160, row 2 = 280, ...)
+- Column x = `col * 180 + 40` (col 0 = 40, col 1 = 220, col 2 = 400, ...)
+- Row y = `row * 120 + 40` (row 0 = 40, row 1 = 160, row 2 = 280, ...)
 - Default sizes: rectangle `140×60`, ellipse `120×60`, diamond `140×80`, cylinder `100×70`, lifeline `100×300`
 
 ### Basic structure
@@ -206,10 +207,10 @@ For all other cases, the templates above plus the Critical rules cover what you 
 
 ## Troubleshooting
 
-| Problem | Cause | Solution |
-|---------|-------|----------|
-| draw.io CLI not found | Desktop app not installed at `/Applications/draw.io.app` | Keep the `.drawio` file and tell the user to install via `brew install --cask drawio`, or open the file manually |
-| Export produces empty/corrupt file | Invalid XML (e.g. unescaped special characters) | Re-check the Critical rules section; ensure attribute values escape `&`, `<`, `>`, `"` |
-| Diagram opens but looks blank | Missing root cells `id="0"` and `id="1"` | Ensure the basic mxGraphModel structure is complete |
-| Edges not rendering | Edge mxCell is self-closing (no child mxGeometry element) | Every edge must have `<mxGeometry relative="1" as="geometry"/>` as a child element |
-| Sequence messages stack at the same height | Missing `exitY`/`entryY` on message edges | Add `exitY` / `entryY` (0.0 = top, 1.0 = bottom) to each message edge to encode time order |
+| Problem                                    | Cause                                                     | Solution                                                                                                         |
+| ------------------------------------------ | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| draw.io CLI not found                      | Desktop app not installed at `/Applications/draw.io.app`  | Keep the `.drawio` file and tell the user to install via `brew install --cask drawio`, or open the file manually |
+| Export produces empty/corrupt file         | Invalid XML (e.g. unescaped special characters)           | Re-check the Critical rules section; ensure attribute values escape `&`, `<`, `>`, `"`                           |
+| Diagram opens but looks blank              | Missing root cells `id="0"` and `id="1"`                  | Ensure the basic mxGraphModel structure is complete                                                              |
+| Edges not rendering                        | Edge mxCell is self-closing (no child mxGeometry element) | Every edge must have `<mxGeometry relative="1" as="geometry"/>` as a child element                               |
+| Sequence messages stack at the same height | Missing `exitY`/`entryY` on message edges                 | Add `exitY` / `entryY` (0.0 = top, 1.0 = bottom) to each message edge to encode time order                       |

@@ -8,7 +8,10 @@
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
   "agent": {
-    "button": false,
+    "dock": "right",
+    "favorite_models": [],
+    "model_parameters": [],
+    "sidebar_side": "right",
   },
   "auto_install_extensions": {
     "angular": true,
