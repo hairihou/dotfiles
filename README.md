@@ -17,9 +17,9 @@ Available globally after setup:
 
 - `brewsync [--dump | --prune]` - Homebrew package synchronizer
 - `brewup [--all]` - Homebrew batch update utility
-- `macos-defaults` - macOS system defaults configuration
-- `dprune` - Remove `.DS_Store` and empty directories from git repository
+- `dprune` - Remove `.DS_Store` files and empty directories
 - `linkup [--dry-run]` - Symlink manager (re-apply or preview changes)
+- `macos-defaults` - macOS system defaults configuration
 - `xdgclean [--dry-run]` - Remove broken symlinks and empty directories from XDG base directories
 
 ### Configuration Files (`/src`)
@@ -34,6 +34,15 @@ Files are symlinked into `$HOME`. Edit them in `src/` — `$HOME` targets are ov
 | `src/.zshrc`           | `~/.zshrc`                  |
 | `src/.Brewfile.owner`  | `~/.Brewfile` (owner only)  |
 | `src/.gitconfig.owner` | `~/.gitconfig` (owner only) |
+
+## Philosophy
+
+Principles guiding tool selection and environment management in this repository:
+
+- **Explicit over implicit** — modify shared global state via deliberate commands, not in-place edits
+- **Detect, don't assume** — detect host environment at runtime, never hardcode a product
+- **Isolation by default** — run third-party packages in ephemeral environments
+- **Registry first, upstream as source of truth** — curated registry for tools it covers, otherwise direct upstream
 
 ## Machine-Local Configuration
 
