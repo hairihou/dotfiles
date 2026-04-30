@@ -39,8 +39,8 @@ Files are symlinked into `$HOME`. Edit them in `src/` — `$HOME` targets are ov
 
 Principles guiding tool selection and environment management in this repository:
 
-- **Explicit over implicit** — modify shared global state via deliberate commands, not in-place edits
 - **Detect, don't assume** — detect host environment at runtime, never hardcode a product
+- **Explicit over implicit** — modify shared global state via deliberate commands, not in-place edits
 - **Isolation by default** — run third-party packages in ephemeral environments
 - **Registry first, upstream as source of truth** — curated registry for tools it covers, otherwise direct upstream
 
