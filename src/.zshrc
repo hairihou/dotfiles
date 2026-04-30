@@ -81,21 +81,21 @@ continue-line() { LBUFFER+=$'\\\n\u0020\u0020' }
 zle -N continue-line
 bindkey '\e[13;2u' continue-line
 
-peco-ghq() {
+fzf-ghq() {
   TRAPINT() { :; }
-  local repo=$(ghq list --full-path | peco)
+  local repo=$(ghq list --full-path | fzf --layout=reverse)
   if [[ -n "$repo" ]]; then
     BUFFER="cd ${(q)repo}"
     zle accept-line
   fi
   zle reset-prompt
 }
-zle -N peco-ghq
-bindkey '^\]' peco-ghq
+zle -N fzf-ghq
+bindkey '^\]' fzf-ghq
 
-peco-history() {
+fzf-history() {
   TRAPINT() { :; }
-  local selected=$(fc -lrn 1 | peco --query "$LBUFFER")
+  local selected=$(fc -lrn 1 | fzf --layout=reverse --no-sort --query "$LBUFFER")
   if [[ -n "$selected" ]]; then
     print -s "$selected"
     BUFFER="$selected"
@@ -103,20 +103,20 @@ peco-history() {
   fi
   zle reset-prompt
 }
-zle -N peco-history
-bindkey '^r' peco-history
+zle -N fzf-history
+bindkey '^r' fzf-history
 
-peco-zellij() {
+fzf-zellij() {
   TRAPINT() { :; }
-  local session=$(zellij list-sessions -ns 2>/dev/null | peco)
+  local session=$(zellij list-sessions -ns 2>/dev/null | fzf --layout=reverse)
   if [[ -n "$session" ]]; then
     BUFFER="zellij attach ${(q)session}"
     zle accept-line
   fi
   zle reset-prompt
 }
-zle -N peco-zellij
-bindkey '^\]^\]' peco-zellij
+zle -N fzf-zellij
+bindkey '^\]^\]' fzf-zellij
 
 eval "$(mise activate zsh)"
 
