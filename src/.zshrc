@@ -31,18 +31,12 @@ setopt PROMPT_SUBST
 setopt PUSHD_IGNORE_DUPS
 setopt SHARE_HISTORY
 
-# OpenSpec
 fpath=("$HOME/.zsh/completions" $fpath)
+autoload -U compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' menu select
-autoload -Uz compinit
-if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
-  compinit
-else
-  compinit -C
-fi
 
-autoload -Uz add-zsh-hook
+autoload -U add-zsh-hook
 typeset prompt_path="" prompt_git=""
 _update_prompt() {
   local p="${PWD/#$HOME/~}" i
@@ -119,5 +113,9 @@ zle -N fzf-zellij
 bindkey '^\]^\]' fzf-zellij
 
 eval "$(mise activate zsh)"
+
+export CARAPACE_BRIDGES='zsh'
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
 
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"

@@ -1,5 +1,6 @@
 [tools]
 ast-grep = "0.42.1"
+carapace = "1.6.5"
 claude-code = "2.1.123"
 codex = "0.125.0"
 fzf = "0.72.0"
