@@ -1,7 +1,7 @@
 typeset -U PATH
 export CLICOLOR=1
 export EDITOR='nvim'
-export HOMEBREW_FORBIDDEN_FORMULAE="node npm pip python python3"
+export HOMEBREW_FORBIDDEN_FORMULAE="node npm pip pip3 python python3"
 export LANG='en_US.UTF-8'
 export LSCOLORS='exGxFxDxcxDxDxhbadacec'
 
@@ -15,7 +15,6 @@ HISTFILE="$HOME/.zsh_history"
 HISTSIZE=100000
 SAVEHIST=100000
 
-DIRSTACKSIZE=20
 setopt AUTO_CD
 setopt AUTO_PUSHD
 setopt EXTENDED_HISTORY
@@ -31,7 +30,12 @@ setopt PUSHD_IGNORE_DUPS
 setopt SHARE_HISTORY
 
 fpath=("$HOME/.zsh/completions" $fpath)
-autoload -U compinit && compinit
+autoload -U compinit
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 LISTMAX=0
 
 autoload -U add-zsh-hook
@@ -112,7 +116,7 @@ bindkey '^\]^\]' fzf-zellij
 
 eval "$(mise activate zsh)"
 
-export CARAPACE_BRIDGES='zsh'
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 source <(carapace _carapace)
 

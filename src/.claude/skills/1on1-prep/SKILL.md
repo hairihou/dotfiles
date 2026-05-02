@@ -16,6 +16,10 @@ Core principle: 1on1 is a diagnostic tool — assess the zone first, then adapt 
 
 Framework details: `${CLAUDE_SKILL_DIR}/references/framework.md`
 
+## Skip gate
+
+After Step 1, if the manager answered "nothing notable" to 3 or more of the 5 questions, propose skipping the 1on1 or converting it to a 15-minute async check-in. A 1on1 with no observations to discuss degrades into status update theater and erodes the channel.
+
 ## Process
 
 ### Step 1: Gather Observations
@@ -28,7 +32,7 @@ Ask the manager (via AskUserQuestion) about recent observations:
 4. "How do they respond to feedback or ambiguity?"
 5. "Have they expressed frustration, boredom, or disengagement?"
 
-Supplement with objective data sources from the framework reference when available.
+If the manager struggles to answer, point them at the Objective Data Sources table in the framework reference and ask them to scan one source at a time.
 
 ### Step 2: Zone Assessment
 
@@ -78,3 +82,10 @@ Output a structured 1on1 agenda:
 ```
 
 Example output: see `${CLAUDE_SKILL_DIR}/references/framework.md` (bottom section).
+
+## Anti-patterns
+
+- **Advice mode** — manager talks more than the report. Track question-to-statement ratio in the agenda; if it skews toward statements, rebalance
+- **Skipping the prior action items** — never open without checking what was committed to last time. Silent drops corrode trust faster than missed deadlines
+- **Zone-strategy mismatch** — opening with a Learning-zone question ("what stretch are you taking?") when the report is in Anxiety zone reads as oblivious. Match the question to the assessed zone, not to the manager's preferred mode
+- **Treating the agenda as a script** — if the report opens with something urgent, abandon the agenda. The framework guides preparation, not execution

@@ -23,7 +23,7 @@ allowed-tools: Bash, Grep, Read, WebSearch
 | 5    | Investigate      | Web search changelogs for major/minor bumps and key packages                      |
 | 6    | Assess impact    | Grep for package usage, evaluate breaking changes                                 |
 | 7    | Audit            | Run security audit, include advisory URLs for vulnerabilities                     |
-| 8    | Verify           | Run `python scripts/run-verification.py <pm>` — outputs PASS/FAIL/SKIP per script |
+| 8    | Verify           | Run `${CLAUDE_SKILL_DIR}/scripts/run-verification.py <pm>` — outputs PASS/FAIL/SKIP per script |
 | 9    | Output           | Follow report template in `${CLAUDE_SKILL_DIR}/references/report-template.md`     |
 
 ## Package Manager Detection
@@ -55,6 +55,8 @@ Detect PM from lockfile per CLAUDE.md rules. If no lockfile found, stop and info
 
 **Skip:** Patch-only updates with passing verification
 
+**Search hygiene:** Cache results within the run. Never WebSearch the same `<package>@<version>` twice in one report — collect findings in working memory and reuse
+
 ## Error Handling
 
 - **No lockfile found** → stop, inform user to run package manager install first
@@ -71,3 +73,14 @@ If verification fails:
 3. Investigate those packages' changelogs for breaking changes
 4. Document findings in report under "Verification Results"
 5. Set conclusion to "Needs attention" with specific action items
+
+## Audit Severity Threshold
+
+Report `moderate` and above by default. Suppress `low` and `info` unless the user explicitly asked for an exhaustive audit — they generate noise that drowns the actionable findings.
+
+## Common Mistakes
+
+- **PASS without verification** — reporting success without running the verification script. The Update step modifies the lockfile; PASS is meaningful only after Step 8 has executed
+- **Peer dep blindness** — a package's own changelog rarely lists breaking changes that propagate from a peer dep bump. When `npm ls` warns about peer mismatches, treat it as a real signal, not noise
+- **Monorepo root-only update** — running `pnpm update` at the root leaves workspace packages on stale versions. Always iterate per-workspace or use the recursive flag
+- **Unpinning during update** — `npm update` can rewrite `^1.2.3` to `^1.5.0` in package.json. Verify the diff matches the intended scope; revert range widening that wasn't requested

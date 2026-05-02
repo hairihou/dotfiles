@@ -165,13 +165,14 @@ digraph zone_assessment {
 
 ## Objective Data Sources
 
-| Source          | What to look for                                              |
-| --------------- | ------------------------------------------------------------- |
-| PR/code reviews | Tone shifts, response time, review depth                      |
-| Slack/chat      | Participation frequency, emoji-only replies, thread avoidance |
-| Git activity    | Commit frequency changes, scope of changes                    |
-| Calendar        | Meeting load, focus time availability                         |
-| Sprint metrics  | Velocity trends, story point consistency                      |
+| Source             | What to look for                                              |
+| ------------------ | ------------------------------------------------------------- |
+| PR/code reviews    | Tone shifts, response time, review depth                      |
+| Slack/chat         | Participation frequency, emoji-only replies, thread avoidance |
+| Git activity       | Commit frequency changes, scope of changes                    |
+| Calendar           | Meeting load, focus time availability                         |
+| Sprint metrics     | Velocity trends, story point consistency                      |
+| Prior 1on1 actions | Done / deferred / silently dropped — drop rate is a signal    |
 
 These data points reduce bias from recency effects or subjective impressions. Use them to confirm or challenge the manager's narrative, not to replace it.
 

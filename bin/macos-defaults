@@ -6,6 +6,9 @@ if [[ $(uname) != 'Darwin' ]]; then
   exit 0
 fi
 
+# Autofill
+defaults write NSGlobalDomain NSAutoFillHeuristicControllerEnabled -bool false
+
 # Dock
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock magnification -bool false
@@ -16,15 +19,12 @@ defaults write com.apple.dock tilesize -int 48
 # Finder
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 defaults write com.apple.finder FXRemoveOldTrashItems -bool true
-defaults write com.apple.finder ShowPathbar -bool true
-defaults write com.apple.finder ShowStatusBar -bool true
 
 # Keyboard
 defaults write com.apple.HIToolbox AppleFnUsageType -int 0
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write NSGlobalDomain KeyRepeat -int 2
-defaults write NSGlobalDomain NSAutoFillHeuristicControllerEnabled -bool false
 
 # Safari
 if defaults write com.apple.Safari IncludeDevelopMenu -bool true 2>/dev/null; then
@@ -45,6 +45,6 @@ defaults write NSGlobalDomain com.apple.trackpad.scaling -float 3
 defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
 
-killall Dock Finder 2>/dev/null || true
+killall Dock Finder SystemUIServer 2>/dev/null || true
 
 echo 'Done. Some settings may require logout to take effect.'

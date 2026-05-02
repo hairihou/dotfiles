@@ -11,6 +11,10 @@ allowed-tools: AskUserQuestion
 
 $ARGUMENTS
 
+## Input gate
+
+Before transforming, verify $ARGUMENTS contains a specific incident: when, where, observable behavior. If any are missing, use AskUserQuestion to extract them. Do not proceed with vague input — the SBI output will be hollow and the recipient cannot act on it.
+
 ## Transform
 
 - Make vague points specific
@@ -31,6 +35,12 @@ Respond in user's language.
 [Suggestion]
 [Expected Outcome]
 ```
+
+## Common Mistakes
+
+- **Behavior contains interpretation** — "He doesn't care about the team" is interpretation. Behavior is what a camera would record: "joined 10-15 minutes after the scheduled start"
+- **Impact is generic** — "affected the team" carries no information. State who, how many, what duration, what concrete cost
+- **Suggestion is not actionable** — "be more committed" is not a change the recipient can make tomorrow. The suggestion must name the action and the trigger
 
 ## Example
 

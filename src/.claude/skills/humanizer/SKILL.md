@@ -9,6 +9,25 @@ allowed-tools: Read
 
 Identify and remove AI-generated writing patterns, then inject human voice. Two-pass process: pattern removal, then anti-AI audit.
 
+## When NOT to humanize
+
+Skip the rewrite for text where formality and predictability are features, not bugs:
+
+- Legal, compliance, security advisories — readers scan for known phrases
+- Error messages and CLI output — terseness and parallel structure aid grep and triage
+- API reference docs — consistency across endpoints outweighs voice
+- Localized strings bound to translation memory — voice changes break TM matches
+
+If the input is one of these, return the original with a one-line note instead of rewriting.
+
+## Severity (apply in this order)
+
+A heavy rewrite can damage meaning. Fix in priority order; stop when the text reads human enough.
+
+1. **Content patterns (#1-6)** — these distort meaning, not just register. Always fix
+2. **Language and Style patterns (#7-18)** — tone tells. Fix all that appear
+3. **Communication and Filler (#19-25)** — atmosphere. Fix when they remain after passes 1-2
+
 ## Patterns to detect and fix
 
 ### Content
@@ -65,7 +84,17 @@ Pattern removal alone produces sterile text. After cleaning, check for:
 
 1. Read the input text
 2. Identify all pattern instances from the list above
-3. Rewrite, preserving meaning and intended tone
+3. Rewrite, preserving meaning and intended tone, applying severity order
 4. Add voice where the text feels sterile
 5. Re-scan against the full pattern list above and fix remaining matches
 6. Present the final version with a brief summary of changes
+
+## Output modes
+
+Default: emit the rewritten text only. If the user asks for a diff, emit per-paragraph before/after blocks tagged with the pattern numbers that triggered each rewrite — useful when the user is learning to spot patterns rather than fixing one piece.
+
+## Common Mistakes
+
+- **Over-rewriting domain terms** — "underscore" in financial writing or "delve" in academic prose may be the genre's register, not AI residue. Check the source domain before flattening
+- **Replacing all em dashes** — em dash overuse is the signal, not the dash itself. A single em dash in a 500-word piece is fine; the rule fires on density, not presence
+- **Adding fake voice** — injecting "honestly," / "to be clear," / first-person reactions where the original was deliberately neutral makes the text sound performative. Voice is a fix, not a flourish

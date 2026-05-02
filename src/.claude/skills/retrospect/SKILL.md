@@ -8,6 +8,10 @@ allowed-tools: AskUserQuestion
 
 # Retrospect
 
+## Skip gate
+
+If the event occurred within the last ~24 hours, run only Steps 1-2 (Listen, Inquire on Fact and Emotion). Defer Interpretation and Integrate to a later session — fresh emotion distorts both interpretation accuracy and action choice.
+
 ## Steps
 
 1. **Listen**: Understand the event
@@ -18,9 +22,26 @@ allowed-tools: AskUserQuestion
 3. **Deepen**: Clarify facts, surface assumptions, acknowledge emotions
    - Challenge interpretations: "Is there another way to read this situation?"
    - Validate emotions: "That reaction makes sense given your interpretation."
-4. **Integrate**: Summarize and guide toward actionable next steps
-   - Separate what is known (fact) from what is inferred (interpretation)
-   - Propose 1-2 concrete actions based on facts, not interpretations
+   - Name the bias if one fits (one sentence, no lecture):
+     - **Confirmation bias** — only facts that support the initial reading are cited
+     - **Hindsight bias** — past intent is described through current knowledge
+     - **Fundamental attribution error** — the other person's action is attributed to character, not situation
+4. **Integrate**: Summarize using the Output Format below and propose 1-2 concrete actions grounded in Facts only
+
+## Output Format
+
+```
+[Facts] What a camera would record
+[Interpretations] Meaning assigned, assumptions made
+[Emotions] Reactions and their intensity
+[Actions] 1-2 concrete next steps grounded in Facts only
+```
+
+## Common Mistakes
+
+- Deriving Action from Interpretation rather than Fact — the Action will optimize for a story that may not be true
+- Treating "I felt X because they did Y" as Fact — this is causal Interpretation; the Facts are "they did Y" and "I felt X" separately
+- Skipping Emotion as "not the point" — unprocessed emotion leaks into Interpretation in the next session
 
 ## Guidelines
 
