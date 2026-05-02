@@ -14,17 +14,17 @@ allowed-tools: Bash, Grep, Read, WebSearch
 
 ## Workflow
 
-| Step | Action           | Details                                                                           |
-| ---- | ---------------- | --------------------------------------------------------------------------------- |
-| 1    | Detect PM        | Identify PM from lockfile (see command table below)                               |
-| 2    | Check outdated   | List packages with available updates                                              |
-| 3    | Update packages  | Update according to strategy below                                                |
-| 4    | Classify changes | Extract diff from `package.json`, classify as major/minor/patch                   |
-| 5    | Investigate      | Web search changelogs for major/minor bumps and key packages                      |
-| 6    | Assess impact    | Grep for package usage, evaluate breaking changes                                 |
-| 7    | Audit            | Run security audit, include advisory URLs for vulnerabilities                     |
+| Step | Action           | Details                                                                                        |
+| ---- | ---------------- | ---------------------------------------------------------------------------------------------- |
+| 1    | Detect PM        | Identify PM from lockfile (see command table below)                                            |
+| 2    | Check outdated   | List packages with available updates                                                           |
+| 3    | Update packages  | Update according to strategy below                                                             |
+| 4    | Classify changes | Extract diff from `package.json`, classify as major/minor/patch                                |
+| 5    | Investigate      | Web search changelogs for major/minor bumps and key packages                                   |
+| 6    | Assess impact    | Grep for package usage, evaluate breaking changes                                              |
+| 7    | Audit            | Run security audit, include advisory URLs for vulnerabilities                                  |
 | 8    | Verify           | Run `${CLAUDE_SKILL_DIR}/scripts/run-verification.py <pm>` — outputs PASS/FAIL/SKIP per script |
-| 9    | Output           | Follow report template in `${CLAUDE_SKILL_DIR}/references/report-template.md`     |
+| 9    | Output           | Follow report template in `${CLAUDE_SKILL_DIR}/references/report-template.md`                  |
 
 ## Package Manager Detection
 

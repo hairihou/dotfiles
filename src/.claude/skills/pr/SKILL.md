@@ -59,7 +59,7 @@ closes #<number>
 
 ## Description quality gate
 
-The Summary must state *what changed in the codebase* and *why*, not *what the author did*. Reject bare verbs without object ("updated files", "refactored") and process narration ("spent time investigating") — see CLAUDE.md Communication Style for the volume-restatement rule.
+The Summary must state _what changed in the codebase_ and _why_, not _what the author did_. Reject bare verbs without object ("updated files", "refactored") and process narration ("spent time investigating") — see CLAUDE.md Communication Style for the volume-restatement rule.
 
 ## Steps
 
