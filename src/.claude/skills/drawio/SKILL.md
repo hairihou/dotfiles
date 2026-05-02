@@ -6,7 +6,7 @@ allowed-tools: Bash, Read, Write
 
 <!-- Source: https://github.com/jgraph/drawio-mcp/blob/main/skill-cli/drawio/SKILL.md (macOS-only adaptation) -->
 
-# Draw.io Diagram Skill
+# Draw.io
 
 Generate draw.io diagrams as native `.drawio` files. Optionally export to PNG, SVG, or PDF with the diagram XML embedded (so the exported file remains editable in draw.io).
 

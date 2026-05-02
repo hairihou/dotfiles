@@ -5,7 +5,7 @@ argument-hint: <target-url> [full]
 allowed-tools: Bash, Read, Write
 ---
 
-# ZAP Security Scan
+# ZAP
 
 Wrap the official ZAP Docker image (`ghcr.io/zaproxy/zaproxy:stable`) to scan a running web app, then synthesize fix prompts for High/Medium alerts modeled on ZAP 2.17's "Generate Fix Prompt" feature (GUI-only upstream).
 

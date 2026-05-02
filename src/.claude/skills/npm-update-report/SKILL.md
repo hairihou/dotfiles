@@ -5,7 +5,7 @@ disable-model-invocation: true
 allowed-tools: Bash, Grep, Read, WebSearch
 ---
 
-# Package Update Report
+# npm Update Report
 
 ## Context
 

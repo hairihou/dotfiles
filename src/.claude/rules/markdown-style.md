@@ -14,8 +14,6 @@ Write plain, readable prose. Avoid AI-generated feel.
 - Use `*italic*` only for the first mention of a term being defined, or for titles of works
 - No emojis
 - Prefer flowing prose over bullet lists when the content is sequential or narrative
-- Do not over-structure with excessive headings for short content
-- Avoid preamble patterns like "Here is an overview of X:" followed by a bullet list
 - Tables only when data is truly tabular, not as a formatting gimmick
 - Fenced code blocks for shell commands: use `sh`, not `bash`
 
@@ -34,6 +32,13 @@ Install the CLI, then run the init command. The config file is created automatic
 - **Safety:** no destructive ops
 ```
 
+## Headings
+
+- Title Case for headings (`# Code Critic`, `## Configuration Files`)
+- Preserve canonical case for brand or product names — do not force Title Case (`npm`, `ESLint`, `ZAP`, `iOS`, `macOS`, `Draw.io`)
+- Do not over-structure with excessive headings for short content
+- For `SKILL.md` H1: omit category suffixes (`Skill`, `Tool`, `Security Scan`) — the `name` frontmatter and directory already convey the kind
+
 ## Language
 
 Every sentence must carry information the reader did not already have. Apply these tests:
@@ -46,16 +51,17 @@ Every sentence must carry information the reader did not already have. Apply the
   - Bad: "This may cause issues in some cases."
   - Good: "This fails when the input contains non-ASCII characters."
 - **Do not restate.** If you already said it, do not say it again in different words. No summary paragraphs that add nothing new.
+- **Skip preamble.** Avoid patterns like "Here is an overview of X:" followed by a bullet list — start with the content itself.
 - **One point, one sentence.** If a point fits in one sentence, do not stretch it.
 - **Use standard English terms.** When the English form is the established technical term, use it as-is instead of translating (e.g., Bundler, Container, Runtime).
 
 ## Exceptions
 
-The Language and prose-style rules (bold, bullet lists, headings) do not apply to documents whose primary audience is an LLM:
+The Language section and the prose-style aspects of Formatting (bold for emphasis, bullets-vs-prose) do not apply to documents whose primary audience is an LLM:
 
 - CLAUDE.md
 - Rule files
 - Subagent definitions
 - Skill files (`skills/**/*.md`)
 
-The Formatting section (code block language tags, etc.) applies to all markdown files without exception.
+The Headings section and the rest of Formatting (code block language tags, emojis, italic, tables) apply to all markdown files without exception.
