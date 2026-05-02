@@ -28,6 +28,7 @@ Files are symlinked into `$HOME`. Edit them in `src/` — `$HOME` targets are ov
 
 | Source                 | Target                      |
 | ---------------------- | --------------------------- |
+| `src/.claude/**/*`     | `~/.claude/**/*`            |
 | `src/.config/**/*`     | `~/.config/**/*`            |
 | `src/.Brewfile`        | `~/.Brewfile`               |
 | `src/.npmrc`           | `~/.npmrc`                  |

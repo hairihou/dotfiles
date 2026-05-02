@@ -1,5 +1,4 @@
 typeset -U PATH
-export CLAUDE_CONFIG_DIR="$HOME/.config/claude"
 export CLICOLOR=1
 export EDITOR='nvim'
 export HOMEBREW_FORBIDDEN_FORMULAE="node npm pip python python3"
