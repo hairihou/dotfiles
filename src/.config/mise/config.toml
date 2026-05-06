@@ -1,5 +1,6 @@
 [tools]
 ast-grep = "0.42.1"
+aube = "1.9.0"
 carapace = "1.6.5"
 claude-code = "2.1.128"
 codex = "0.128.0"
@@ -29,6 +30,6 @@ zellij = "0.44.2"
 
 [settings]
 lockfile = true
-npm.package_manager = "pnpm"
+npm.package_manager = "aube"
 
 [env]
