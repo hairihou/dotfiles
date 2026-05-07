@@ -21,6 +21,7 @@ Available globally after setup:
 - `linkup [--dry-run]` - Symlink manager (re-apply or preview changes)
 - `macos-defaults` - macOS system defaults configuration
 - `xdgclean [--dry-run]` - Remove broken symlinks and empty directories from XDG base directories
+- `zhistprune` - Remove `.zsh_history` entries older than 90 days
 
 ### Configuration Files (`/src`)
 

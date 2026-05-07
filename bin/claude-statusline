@@ -1,4 +1,7 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.14"
+# ///
 import json
 import sys
 
@@ -25,7 +28,9 @@ def gauge(pct: int, warning: int, critical: int) -> str:
 
 try:
     data = json.load(sys.stdin)
-    model = (data.get("model", {}).get("display_name") or "unknown").split("(")[0].strip()
+    model = (
+        (data.get("model", {}).get("display_name") or "unknown").split("(")[0].strip()
+    )
     ctx_pct = int(data.get("context_window", {}).get("used_percentage") or 0)
     raw_5h = data.get("rate_limits", {}).get("five_hour", {}).get("used_percentage")
     rate_5h_pct = int(raw_5h) if raw_5h is not None else -1

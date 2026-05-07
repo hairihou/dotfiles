@@ -36,6 +36,23 @@
     "dock": "left",
   },
   "languages": {
+    "Python": {
+      "code_actions_on_format": {
+        "source.fixAll.ruff": true,
+        "source.organizeImports.ruff": true,
+      },
+      "format_on_save": "on",
+      "formatter": [{ "language_server": { "name": "ruff" } }],
+      "language_servers": [
+        "ty",
+        "ruff",
+        "!basedpyright",
+        "!pylsp",
+        "!pyrefly",
+        "!pyright",
+        "...",
+      ],
+    },
     "TypeScript": {
       "language_servers": ["!eslint", "..."],
     },

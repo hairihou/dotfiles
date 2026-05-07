@@ -1,6 +1,6 @@
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.13"
+# requires-python = ">=3.14"
 # ///
 import json
 import sys
@@ -21,18 +21,23 @@ def main() -> None:
                 rc = 0
             if rc < 2:
                 continue
-            out.append({
-                "name": alert.get("name", ""),
-                "riskdesc": alert.get("riskdesc", ""),
-                "cweid": alert.get("cweid", ""),
-                "wascid": alert.get("wascid", ""),
-                "solution": alert.get("solution", ""),
-                "reference": alert.get("reference", ""),
-                "instances": [
-                    {k: i.get(k, "") for k in ("uri", "method", "param", "attack", "evidence")}
-                    for i in alert.get("instances", [])
-                ],
-            })
+            out.append(
+                {
+                    "name": alert.get("name", ""),
+                    "riskdesc": alert.get("riskdesc", ""),
+                    "cweid": alert.get("cweid", ""),
+                    "wascid": alert.get("wascid", ""),
+                    "solution": alert.get("solution", ""),
+                    "reference": alert.get("reference", ""),
+                    "instances": [
+                        {
+                            k: i.get(k, "")
+                            for k in ("uri", "method", "param", "attack", "evidence")
+                        }
+                        for i in alert.get("instances", [])
+                    ],
+                }
+            )
     print(json.dumps(out, indent=2, ensure_ascii=False))
 
 

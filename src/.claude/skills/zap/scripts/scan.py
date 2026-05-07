@@ -1,6 +1,6 @@
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.13"
+# requires-python = ">=3.14"
 # ///
 import subprocess
 import sys
@@ -23,10 +23,20 @@ def main() -> None:
 
     rc = subprocess.run(
         [
-            "docker", "run", "--rm", "-t",
-            "-v", f"{out_dir.resolve()}:/zap/wrk:rw",
+            "docker",
+            "run",
+            "--rm",
+            "-t",
+            "-v",
+            f"{out_dir.resolve()}:/zap/wrk:rw",
             "ghcr.io/zaproxy/zaproxy:stable",
-            zap_script, "-t", url, "-r", "report.html", "-J", "report.json",
+            zap_script,
+            "-t",
+            url,
+            "-r",
+            "report.html",
+            "-J",
+            "report.json",
         ],
     ).returncode
 

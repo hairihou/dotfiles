@@ -1,0 +1,34 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.14"
+# ///
+import os
+import pathlib
+import re
+import sys
+import tempfile
+import time
+
+DAYS = 90
+SECONDS_PER_DAY = 24 * 60 * 60
+HEADER_RE = re.compile(rb"^: (\d+):\d+;")
+
+histfile = pathlib.Path(
+    os.environ.get("HISTFILE") or pathlib.Path.home() / ".zsh_history"
+)
+
+if not histfile.is_file():
+    sys.exit(0)
+
+cutoff = time.time() - DAYS * SECONDS_PER_DAY
+
+fd, tmp_path = tempfile.mkstemp(prefix=histfile.name + ".", dir=histfile.parent)
+with os.fdopen(fd, "wb") as out, histfile.open("rb") as f:
+    keep = True
+    for line in f:
+        m = HEADER_RE.match(line)
+        if m:
+            keep = int(m.group(1)) >= cutoff
+        if keep:
+            out.write(line)
+os.replace(tmp_path, histfile)
