@@ -13,6 +13,12 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 - Path aliases (`@/...`, `~/...`): do not introduce new ones; in projects where aliases are already configured, write new imports as relative paths
 - Util / shared file extraction: only after a second concrete consumer exists — do not pre-extract
 
+## Test Files
+
+- Filename: `<name>.spec.ts` (not `.test.ts`)
+  - Rationale: BDD-style spec naming; do not mix `.test.*` and `.spec.*`
+- Test runner (Vitest etc.) `include` pattern: limit to `.spec.ts`
+
 ## Prohibited Patterns
 
 - `any` → use `unknown` and narrow
