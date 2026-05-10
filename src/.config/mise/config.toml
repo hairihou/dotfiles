@@ -1,6 +1,6 @@
 [tools]
 ast-grep = "0.42.1"
-aube = "1.9.1"
+aube = "1.10.0"
 carapace = "1.6.5"
 claude-code = "2.1.138"
 codex = "0.128.0"
