@@ -1,0 +1,10 @@
+[
+  {
+    "name": "dark",
+    "colors": "#101828,#00A6F4,#00D492,#FF637E"
+  },
+  {
+    "name": "light",
+    "colors": "#FFFFFF,#00A6F4,#00BC7D,#EC003F"
+  }
+]
