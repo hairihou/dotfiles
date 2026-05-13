@@ -2,7 +2,7 @@
 name: decision-log
 description: Record design/architecture/tooling decisions with alternatives, reasoning, and outcomes for retrospective review. Use when discussing trade-offs, comparing alternatives, finalizing a decision, recalling past decisions, or asking "why did we choose X?"
 argument-hint: "[search|supersede <id>]"
-allowed-tools: AskUserQuestion, Bash(date *), Bash(git *), Bash(python *)
+allowed-tools: AskUserQuestion, Bash
 ---
 
 # Decision Log

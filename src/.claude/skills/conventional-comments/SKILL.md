@@ -1,7 +1,7 @@
 ---
 name: conventional-comments
 description: Format code review comments using Conventional Comments labels and decorations. Use when reviewing a PR diff and leaving inline feedback. Not for opening a PR, not for standalone code critique.
-allowed-tools: Bash(gh *), Read
+allowed-tools: Bash, Read
 ---
 
 # Conventional Comments
