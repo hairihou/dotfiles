@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly DST="$(cd "$(dirname "$0")/.." && pwd -P)"
+DST="$(cd "$(dirname "$0")/.." && pwd -P)"
+readonly DST
 readonly SYMLINKS_RECORD="${XDG_STATE_HOME:-$HOME/.local/state}/dotfiles/.symlinks"
 
 dry_run=false
@@ -25,7 +26,7 @@ mark_change() {
 }
 
 has_changes() {
-  [ -s "$changes_file" ]
+  [[ -s $changes_file ]]
 }
 
 do_symlink() {
@@ -33,7 +34,7 @@ do_symlink() {
   mark_change
   if "$dry_run"; then
     echo "[create] $to -> $from"
-  elif [ -t 0 ]; then
+  elif [[ -t 0 ]]; then
     ln -sfi "$from" "$to"
   else
     ln -sf "$from" "$to"
@@ -64,11 +65,7 @@ do_mkdir() {
 is_owner() {
   local email
   email="$(git config --global user.email)"
-  case "$email" in
-    *+hairihou@users.noreply.github.com) return 0 ;;
-    hairihou@*) return 0 ;;
-    *) return 1 ;;
-  esac
+  [[ $email == hairihou@* || $email == *+hairihou@users.noreply.github.com ]]
 }
 
 resolve_symlink() {
@@ -94,20 +91,20 @@ cleanup_broken_symlinks_in() {
     target="$(resolve_symlink "$link")"
     case "$target" in
       "$DST/src"*)
-        if [ ! -e "$target" ]; then
+        if [[ ! -e $target ]]; then
           do_remove "$link"
         fi
         ;;
     esac
-  done
+  done || true
 }
 
 cleanup_recorded_symlinks() {
-  [ -f "$SYMLINKS_RECORD" ] || return 0
+  [[ -f $SYMLINKS_RECORD ]] || return 0
   local link
   while IFS= read -r link; do
-    [ -n "$link" ] || continue
-    if [ -L "$link" ] && [ ! -e "$link" ]; then
+    [[ -n $link ]] || continue
+    if [[ -L $link && ! -e $link ]]; then
       do_remove "$link"
     fi
   done < "$SYMLINKS_RECORD"
@@ -123,16 +120,16 @@ create_symlink() {
   local parent
   parent="$(dirname "$to")"
 
-  if [ -L "$to" ]; then
+  if [[ -L $to ]]; then
     local existing_target
     existing_target="$(resolve_symlink "$to")"
-    if [ "$existing_target" = "$from" ]; then
+    if [[ $existing_target == "$from" ]]; then
       record_symlink "$to"
       return 0
     fi
     case "$existing_target" in
       "$DST/src"*)
-        if [ -e "$existing_target" ]; then
+        if [[ -e $existing_target ]]; then
           record_symlink "$to"
           return 0
         fi
@@ -141,7 +138,7 @@ create_symlink() {
   fi
 
   # Prevent circular symlinks
-  if [ -L "$parent" ]; then
+  if [[ -L $parent ]]; then
     local parent_target
     parent_target="$(resolve_symlink "$parent")"
     case "$parent_target" in
@@ -149,14 +146,14 @@ create_symlink() {
     esac
   fi
 
-  if [ "$parent" != "$HOME" ] && [ ! -d "$parent" ]; then
+  if [[ $parent != "$HOME" && ! -d $parent ]]; then
     do_mkdir "$parent"
   fi
 
-  if [ -d "$from" ]; then
-    if [ -d "$to" ]; then
+  if [[ -d $from ]]; then
+    if [[ -d $to ]]; then
       cleanup_broken_symlinks_in "$to"
-    elif [ -e "$to" ]; then
+    elif [[ -e $to ]]; then
       echo "Warning: Cannot create directory '$to': file exists. Skipping." >&2
       return 0
     else
@@ -165,7 +162,7 @@ create_symlink() {
     find "$from" -maxdepth 1 -mindepth 1 | while IFS= read -r file; do
       create_symlink "$file" "$to/$(basename "$file")"
     done
-  elif [ -f "$from" ]; then
+  elif [[ -f $from ]]; then
     if do_symlink "$from" "$to"; then
       record_symlink "$to"
     else
@@ -179,9 +176,9 @@ apply_dir() {
   find "$dir" -maxdepth 1 -mindepth 1 | while IFS= read -r item; do
     local name
     name="$(basename "$item")"
-    case "$name" in
-      *.owner) continue ;;
-    esac
+    if [[ $name == *.owner ]]; then
+      continue
+    fi
     create_symlink "$item" "$HOME/$name"
   done
 }

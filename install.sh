@@ -4,9 +4,9 @@ set -euo pipefail
 readonly DST="$HOME/dotfiles"
 readonly SRC='https://github.com/hairihou/dotfiles.git'
 
-if [ ! -e "$DST/.git" ]; then
+if [[ ! -e "$DST/.git" ]]; then
   git clone "$SRC" "$DST"
-elif [ "$(git -C "$DST" config --get remote.origin.url)" != "$SRC" ]; then
+elif [[ "$(git -C "$DST" config --get remote.origin.url)" != "$SRC" ]]; then
   echo 'Error: Remote origin URL does not match expected URL'
   exit 1
 else

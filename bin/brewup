@@ -13,9 +13,10 @@ if [[ "$*" != *--all* && ${#casks[@]} -gt 0 ]]; then
   for c in "${casks[@]}"; do
     [[ "$c" != *@* ]] && filtered+=("$c")
   done
-  casks=("${filtered[@]+"${filtered[@]}"}")
+  casks=()
+  ((${#filtered[@]} > 0)) && casks=("${filtered[@]}")
 fi
-[[ ${#casks[@]} -gt 0 ]] && brew upgrade --greedy --cask "${casks[@]}"
+((${#casks[@]} > 0)) && brew upgrade --greedy --cask "${casks[@]}"
 
 brew cleanup --prune=all --scrub
 brew autoremove

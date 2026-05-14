@@ -15,12 +15,8 @@ dump_packages() {
     return 0
   fi
   printf '%s\n' "$content" > "$BREWFILE"
-  local formulae_count
-  formulae_count=$(grep -c "^brew " "$BREWFILE" 2>/dev/null || echo 0)
-  local cask_count
-  cask_count=$(grep -c "^cask " "$BREWFILE" 2>/dev/null || echo 0)
   local total
-  total=$((formulae_count + cask_count))
+  total=$(grep -cE "^(brew|cask) " "$BREWFILE" 2>/dev/null || echo 0)
   echo "Dumped $total packages to $BREWFILE"
 }
 
@@ -52,13 +48,13 @@ prune_packages() {
   echo "The following packages are not in $BREWFILE:"
   echo "$cleanup_output"
 
-  if [ ! -t 0 ]; then
+  if [[ ! -t 0 ]]; then
     echo 'No tty available for confirmation. Cancelled.'
     return 0
   fi
 
-  echo -n 'Remove these packages? (y/n): '
-  read -r response
+  local response
+  read -rp 'Remove these packages? (y/n): ' response
 
   if [[ ! "$response" =~ ^[Yy]([Ee][Ss])?$ ]]; then
     echo 'Cancelled'

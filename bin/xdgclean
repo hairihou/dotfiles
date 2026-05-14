@@ -39,7 +39,7 @@ done
 while true; do
   found=0
   for dir in "${XDG_DIRS[@]}"; do
-    [ -d "$dir" ] || continue
+    [[ -d "$dir" ]] || continue
     while IFS= read -r empty; do
       if "$dry_run"; then
         echo "[rmdir] $empty"
