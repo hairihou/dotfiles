@@ -51,8 +51,14 @@ prune_packages() {
 
   echo "The following packages are not in $BREWFILE:"
   echo "$cleanup_output"
+
+  if [ ! -t 0 ]; then
+    echo 'No tty available for confirmation. Cancelled.'
+    return 0
+  fi
+
   echo -n 'Remove these packages? (y/n): '
-  read -r response < /dev/tty
+  read -r response
 
   if [[ ! "$response" =~ ^[Yy]([Ee][Ss])?$ ]]; then
     echo 'Cancelled'
