@@ -28,8 +28,12 @@ of the skills directory.
 
 1. Parse `$ARGUMENTS` into `<host>/<owner>/<repo>` and an optional in-repo subpath
    (only present when the URL is a `…/tree/<branch>/<path>` form).
-2. Fetch the repo via the `external-repo` skill — leaves it at
-   `$(ghq root)/<host>/<owner>/<repo>` on the default branch.
+2. Resolve the local clone path:
+   ```sh
+   repo_path=$(ghq list --full-path --exact <host>/<owner>/<repo>)
+   [ -z "$repo_path" ] && ghq get <owner>/<repo> && repo_path=$(ghq list --full-path --exact <host>/<owner>/<repo>)
+   ```
+   For non-github.com hosts, pass the full URL to `ghq get`. If `ghq get` fails, stop — do not fall back.
 3. Discover skills under the relevant scope:
    ```sh
    find "$(ghq root)/<host>/<owner>/<repo>/<subpath>" -name SKILL.md
@@ -49,7 +53,7 @@ of the skills directory.
 ## Boundaries
 
 - Locally authored skills: `src/.claude/skills/<name>/`, deployed by `linkup`. Out of scope.
-- Updates: re-fetch via the `external-repo` skill. Do not edit files under
+- Updates: invoke the `external-repo` skill manually to re-sync the ghq clone. Do not edit files under
   the symlink target — that mutates the ghq clone.
 - Removal: `rm "$CLAUDE_CONFIG_DIR/skills/<skill-name>"`. The ghq clone stays
   for other consumers; delete it manually if no longer needed.
