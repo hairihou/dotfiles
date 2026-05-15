@@ -8,7 +8,7 @@ allowed-tools: Bash
 
 # Add Skill
 
-Given `$1` (a GitHub URL — either a bare repo or a subdirectory via
+Given `$ARGUMENTS` (a GitHub URL — either a bare repo or a subdirectory via
 `…/tree/<branch>/<path>`), fetch the repo and install each `SKILL.md` found
 within into `$CLAUDE_CONFIG_DIR/skills/<name>/` via symlink.
 
@@ -26,7 +26,7 @@ of the skills directory.
 
 ## Flow
 
-1. Parse `$1` into `<host>/<owner>/<repo>` and an optional in-repo subpath
+1. Parse `$ARGUMENTS` into `<host>/<owner>/<repo>` and an optional in-repo subpath
    (only present when the URL is a `…/tree/<branch>/<path>` form).
 2. Fetch the repo via the `external-repo` skill — leaves it at
    `$(ghq root)/<host>/<owner>/<repo>` on the default branch.
@@ -44,7 +44,7 @@ of the skills directory.
    ```
    `<skill-name>` defaults to the upstream `name:` frontmatter. On collision
    with an existing entry, prefix with the owner: `<owner>-<name>`.
-5. Verify each symlink: `ls -L "$CLAUDE_CONFIG_DIR/skills/<skill-name>/SKILL.md"`.
+5. Verify each symlink: `test -f "$CLAUDE_CONFIG_DIR/skills/<skill-name>/SKILL.md"`.
 
 ## Boundaries
 
