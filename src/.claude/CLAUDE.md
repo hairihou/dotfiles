@@ -6,7 +6,6 @@
 
 - Boundaries (file / module / abstraction / alias / re-export):
   - require a consumer that can be named at a concrete existing path before adding any
-  - **Rationale:** unjustified indirection is pure cost
   - speculative consumers ("future code that might import this") do not count
   - if no concrete consumer can be named, prefer inline / direct import / relative import
   - **Exception:** package public entrypoint (the file/symbol designated by the language's packaging convention as the external API surface)
@@ -14,8 +13,8 @@
 ## Reasoning
 
 - Code review: assess impact scope and articulate why a change is safe — never default to "no issues found"
-- Code review: separate surface fix (symptom) from root fix (cause); label every proposed fix with its level
-- Design decisions (architecture, technology selection, large-scale refactoring): weigh alternatives via advocate/critic analysis, identify the biggest risk before committing
+- Code review: separate surface fix (symptom) from root fix (cause); tag each proposed fix as `[surface]` or `[root]`
+- Design decisions (architecture, technology selection, large-scale refactoring): compare at least 2 named alternatives with explicit pros/cons (advocate/critic), identify the biggest risk before committing
 
 ## Code Style
 
@@ -28,12 +27,6 @@
 - Underspecified requirements/scope: ask before implementing — do not proceed on silent assumptions for non-trivial commitments
 - Tests-first for behavior changes (new logic, bug fixes, behavior modifications): write the failing test before implementation. Skip for non-behavioral changes: config, docs, simple refactors (rename/format/comment removal)
 
-## Tooling
-
-- Command execution: invoke registered scripts/tasks (`package.json` scripts, `Makefile`, `mise tasks`, etc.) — do not reach for ad-hoc runners (`npx`, `uvx`, `pnpm dlx`, `uv run --with`). If a needed command is missing, register it first
-- Global installs (system-wide / user-wide) within a session: forbidden — `npm install -g`, `pip install --user`, `gem install`, `cargo install`, `go install`, etc.
-- Python: use `uv` (`uv run`, `uv add`); never `pip`
-
 ## Communication Style
 
 - Quantitative work volume (line counts, file counts, `+X/-Y`, "N files changed", completion %) in PR/issue bodies, commit messages, progress updates, summaries: omit — the diff or task list already shows volume. Describe impact, rationale, and risk instead
@@ -42,7 +35,6 @@
 ## Git Conventions
 
 - Type vocabulary (shared across Issue / Branch / Commit): Conventional Commits (build, chore, ci, docs, feat, fix, perf, refactor, style, test)
-- Issue: `<type>(<subject>): <description>` (e.g., `fix(api): 429 responses on batch endpoint`)
+- Issue / Commit: `<type>(<subject>): <description>` (e.g., `fix(api): 429 responses on batch endpoint`, `feat(auth): add OAuth2 support`)
 - Branch: `[#<number>_]<type>/<description>` — issue number prefix when an issue exists, omit otherwise (e.g., `#42_feat/add-login`, `fix/cert-expiry`)
-- Commit: `<type>(<subject>): <description>` (e.g., `feat(auth): add OAuth2 support`)
 - Commit message: use plain text descriptions instead of `@` prefixed tags (`@link`, `@see`, `@todo`, `@param`) — they trigger unwanted mentions on GitHub
