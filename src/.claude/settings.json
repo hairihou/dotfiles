@@ -12,7 +12,8 @@
   "permissions": {
     "deny": [
       "Bash(brew *)",
-      "Bash(npm install -g *)",
+      "Bash(pip *)",
+      "Bash(pip3 *)",
       "Edit(**/.env)",
       "Read(**/.env)",
       "Write(**/.env)",

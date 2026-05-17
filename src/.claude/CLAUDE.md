@@ -28,6 +28,12 @@
 - Underspecified requirements/scope: ask before implementing — do not proceed on silent assumptions for non-trivial commitments
 - Tests-first for behavior changes (new logic, bug fixes, behavior modifications): write the failing test before implementation. Skip for non-behavioral changes: config, docs, simple refactors (rename/format/comment removal)
 
+## Tooling
+
+- Command execution: invoke registered scripts/tasks (`package.json` scripts, `Makefile`, `mise tasks`, etc.) — do not reach for ad-hoc runners (`npx`, `uvx`, `pnpm dlx`, `uv run --with`). If a needed command is missing, register it first
+- Global installs (system-wide / user-wide) within a session: forbidden — `npm install -g`, `pip install --user`, `gem install`, `cargo install`, `go install`, etc.
+- Python: use `uv` (`uv run`, `uv add`); never `pip`
+
 ## Communication Style
 
 - Quantitative work volume (line counts, file counts, `+X/-Y`, "N files changed", completion %) in PR/issue bodies, commit messages, progress updates, summaries: omit — the diff or task list already shows volume. Describe impact, rationale, and risk instead
