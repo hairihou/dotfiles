@@ -50,6 +50,10 @@
           {
             "type": "command",
             "command": "claude-eof"
+          },
+          {
+            "type": "command",
+            "command": "claude-lint"
           }
         ]
       }
@@ -78,10 +82,6 @@
       {
         "matcher": "",
         "hooks": [
-          {
-            "type": "command",
-            "command": "claude-lint"
-          },
           {
             "type": "command",
             "command": "claude-notify stop"
@@ -127,6 +127,9 @@
         "repo": "openai/codex-plugin-cc"
       }
     }
+  },
+  "skillOverrides": {
+    "claude-api:webapp-testing": "user-invocable-only"
   },
   "language": "japanese",
   "skipAutoPermissionPrompt": true

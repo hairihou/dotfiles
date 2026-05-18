@@ -3,12 +3,14 @@
 # requires-python = ">=3.14"
 # ///
 import json
+import re
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 
-EXTENSIONS = ("*.ts", "*.tsx", "*.vue")
+EXTENSION_SUFFIXES = (".ts", ".tsx", ".vue")
+SEVERITY_RE = re.compile(r"^(warning|error|note|hint)\[", re.MULTILINE)
 
 stdin_data = {}
 if not sys.stdin.isatty():
@@ -17,7 +19,8 @@ if not sys.stdin.isatty():
     except (json.JSONDecodeError, ValueError):
         pass
 
-if stdin_data.get("stop_hook_active"):
+file_path = stdin_data.get("tool_input", {}).get("file_path", "")
+if not file_path or not file_path.endswith(EXTENSION_SUFFIXES):
     sys.exit(0)
 
 ast_grep = shutil.which("ast-grep")
@@ -27,50 +30,23 @@ sgconfig = (
 if not ast_grep or not sgconfig.is_file():
     sys.exit(0)
 
-diff_result = subprocess.run(
-    ["git", "diff", "--name-only", "--diff-filter=ACMR", "HEAD", "--"]
-    + list(EXTENSIONS),
+subprocess.run(
+    [ast_grep, "scan", "--update-all", "-c", str(sgconfig), "--", file_path],
     capture_output=True,
     text=True,
 )
-untracked_result = subprocess.run(
-    ["git", "ls-files", "--others", "--exclude-standard", "--"] + list(EXTENSIONS),
-    capture_output=True,
-    text=True,
-)
-files = sorted(
-    {
-        f
-        for f in diff_result.stdout.splitlines() + untracked_result.stdout.splitlines()
-        if f
-    }
-)
-if not files:
-    sys.exit(0)
-
-update = subprocess.run(
-    [ast_grep, "scan", "--update-all", "-c", str(sgconfig), "--"] + files,
-    capture_output=True,
-    text=True,
-)
-if update.returncode != 0:
-    print(
-        json.dumps(
-            {
-                "decision": "block",
-                "reason": f"ast-grep --update-all failed:\n\n{update.stderr.strip() or update.stdout.strip()}",
-            }
-        )
-    )
-    sys.exit(0)
 
 scan = subprocess.run(
-    [ast_grep, "scan", "--color=never", "-c", str(sgconfig), "--"] + files,
+    [ast_grep, "scan", "--color=never", "-c", str(sgconfig), "--", file_path],
     capture_output=True,
     text=True,
 )
 report = scan.stdout.strip() or scan.stderr.strip()
-if report:
+if not report:
+    sys.exit(0)
+
+matches = list(SEVERITY_RE.finditer(report))
+if not matches:
     print(
         json.dumps(
             {
@@ -79,4 +55,25 @@ if report:
             }
         )
     )
+    sys.exit(0)
+
+errors = []
+warnings = []
+for i, m in enumerate(matches):
+    start = m.start()
+    end = matches[i + 1].start() if i + 1 < len(matches) else len(report)
+    block = report[start:end].rstrip()
+    if m.group(1) == "error":
+        errors.append(block)
+    else:
+        warnings.append(block)
+
+if errors:
+    reason = "ast-grep errors:\n\n" + "\n\n".join(errors)
+    if warnings:
+        reason += "\n\nast-grep warnings (advisory):\n\n" + "\n\n".join(warnings)
+    print(json.dumps({"decision": "block", "reason": reason}))
+elif warnings:
+    print("ast-grep warnings:\n\n" + "\n\n".join(warnings), file=sys.stderr)
+
 sys.exit(0)
