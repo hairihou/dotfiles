@@ -1,0 +1,27 @@
+id: prefer-arrow-function-decl-ts
+language: TypeScript
+severity: warning
+message: "Prefer arrow function (`const fn = () => {}`) over `function` declaration. Exception: TypeScript overload implementations require `function` syntax."
+rule:
+  kind: function_declaration
+---
+id: prefer-arrow-function-expr-ts
+language: TypeScript
+severity: warning
+message: "Prefer arrow function (`() => {}`) over `function` expression."
+rule:
+  kind: function_expression
+---
+id: prefer-arrow-function-decl-tsx
+language: Tsx
+severity: warning
+message: "Prefer arrow function (`const fn = () => {}`) over `function` declaration. Exception: TypeScript overload implementations require `function` syntax."
+rule:
+  kind: function_declaration
+---
+id: prefer-arrow-function-expr-tsx
+language: Tsx
+severity: warning
+message: "Prefer arrow function (`() => {}`) over `function` expression."
+rule:
+  kind: function_expression
