@@ -19,6 +19,7 @@
     "git-firefly": true,
     "kotlin": true,
     "lua": true,
+    "oxc": true,
     "toml": true,
     "vue": true,
   },
