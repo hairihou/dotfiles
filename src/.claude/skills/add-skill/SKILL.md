@@ -53,7 +53,7 @@ of the skills directory.
 ## Boundaries
 
 - Locally authored skills: `src/.claude/skills/<name>/`, deployed by `linkup`. Out of scope.
-- Updates: invoke the `external-repo` skill manually to re-sync the ghq clone. Do not edit files under
-  the symlink target — that mutates the ghq clone.
+- Updates: `git -C "$(ghq list --full-path --exact <host>/<owner>/<repo>)" pull` to re-sync the upstream
+  clone. Do not edit files under the symlink target — that mutates the ghq clone.
 - Removal: `rm "$CLAUDE_CONFIG_DIR/skills/<skill-name>"`. The ghq clone stays
   for other consumers; delete it manually if no longer needed.
