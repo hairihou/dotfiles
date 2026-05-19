@@ -1,5 +1,5 @@
 [tools]
-ast-grep = "0.42.2"
+ast-grep = "0.42.3"
 aube = "1.15.0"
 carapace = "1.6.6"
 claude-code = "2.1.144"
