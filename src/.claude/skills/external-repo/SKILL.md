@@ -1,6 +1,6 @@
 ---
 name: external-repo
-description: Fetch an external Git repository to a local ghq path for direct Read/Grep access. Use when investigating implementation details, internals, or source-level behavior across multiple files of a third-party repo. Not for one-off documentation lookups (WebFetch), or work inside the user's own repo.
+description: Fetch a third-party Git repo to a local ghq path for direct Read/Grep access. Use whenever you need someone else's repo source on disk to inspect it. Not for one-off doc/raw-file lookups (WebFetch) or work inside the user's own repo.
 allowed-tools: Bash, Glob, Grep, Read
 ---
 
