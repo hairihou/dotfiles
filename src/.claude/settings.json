@@ -31,6 +31,9 @@
     ],
     "ask": ["Bash(git push *)"]
   },
+  "skillOverrides": {
+    "claude-api:webapp-testing": "user-invocable-only"
+  },
   "hooks": {
     "PermissionRequest": [
       {
@@ -103,6 +106,7 @@
     "jdtls-lsp@claude-plugins-official": true,
     "kotlin-lsp@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
+    "modern-web-guidance@googlechrome": true,
     "pyright-lsp@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true,
@@ -121,15 +125,18 @@
         "repo": "mukul975/Anthropic-Cybersecurity-Skills"
       }
     },
+    "googlechrome": {
+      "source": {
+        "source": "github",
+        "repo": "GoogleChrome/modern-web-guidance"
+      }
+    },
     "openai-codex": {
       "source": {
         "source": "github",
         "repo": "openai/codex-plugin-cc"
       }
     }
-  },
-  "skillOverrides": {
-    "claude-api:webapp-testing": "user-invocable-only"
   },
   "language": "japanese",
   "skipAutoPermissionPrompt": true
