@@ -27,9 +27,3 @@ swiftlint = "0.63.2"
 uv = "0.11.15"
 xh = "0.25.3"
 zellij = "0.44.3"
-
-[settings]
-lockfile = true
-npm.package_manager = "aube"
-
-[env]
