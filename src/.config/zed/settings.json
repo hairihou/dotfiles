@@ -9,6 +9,7 @@
 {
   "auto_install_extensions": {
     "angular": true,
+    "dockerfile": true,
     "git-firefly": true,
     "kotlin": true,
     "lua": true,
