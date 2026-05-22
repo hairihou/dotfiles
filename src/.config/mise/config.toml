@@ -2,7 +2,7 @@
 ast-grep = "0.42.3"
 aube = "1.15.0"
 carapace = "1.6.6"
-claude-code = "2.1.148"
+claude-code = "2.1.149"
 codex = "0.128.0"
 fzf = "0.72.0"
 gh = "2.92.0"
