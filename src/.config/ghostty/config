@@ -1,0 +1,31 @@
+background = #101828
+cursor-color = #f9fafb
+cursor-text = #101828
+font-family = UDEV Gothic 35NFLG
+font-feature = -calt, -clig, -liga
+font-size = 12
+foreground = #f3f4f6
+keybind = alt+down=unbind
+keybind = alt+left=unbind
+keybind = alt+right=unbind
+keybind = alt+up=unbind
+keybind = shift+enter=csi:13;2u
+macos-option-as-alt = true
+palette = 0=#ffffff
+palette = 1=#ff637e
+palette = 2=#00d492
+palette = 3=#ffb900
+palette = 4=#2b7fff
+palette = 5=#c27aff
+palette = 6=#00d3f3
+palette = 7=#cad5e2
+palette = 8=#90a1b9
+palette = 9=#ffa1ad
+palette = 10=#5ee9b5
+palette = 11=#ffd230
+palette = 12=#51a2ff
+palette = 13=#dab2ff
+palette = 14=#53eafd
+palette = 15=#ffffff
+selection-background = #364153
+selection-foreground = #f3f4f6
