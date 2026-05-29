@@ -1,0 +1,116 @@
+themes {
+    zephyr-dark {
+        text_unselected {
+            base 209 213 220         // gray-300
+            background 16 24 40      // gray-900
+            emphasis_0 81 162 255    // blue-400
+            emphasis_1 0 212 146     // emerald-400
+            emphasis_2 255 185 0     // amber-400
+            emphasis_3 255 99 126    // rose-400
+        }
+        text_selected {
+            base 249 250 251         // gray-50
+            background 54 65 83      // gray-700
+            emphasis_0 81 162 255    // blue-400
+            emphasis_1 0 212 146     // emerald-400
+            emphasis_2 255 185 0     // amber-400
+            emphasis_3 255 99 126    // rose-400
+        }
+        ribbon_unselected {
+            base 153 161 175         // gray-400
+            background 30 41 57      // gray-800
+            emphasis_0 81 162 255    // blue-400
+            emphasis_1 0 212 146     // emerald-400
+            emphasis_2 255 185 0     // amber-400
+            emphasis_3 255 99 126    // rose-400
+        }
+        ribbon_selected {
+            base 249 250 251         // gray-50
+            background 54 65 83      // gray-700
+            emphasis_0 81 162 255    // blue-400
+            emphasis_1 0 212 146     // emerald-400
+            emphasis_2 255 185 0     // amber-400
+            emphasis_3 255 99 126    // rose-400
+        }
+        table_title {
+            base 209 213 220         // gray-300
+            background 16 24 40      // gray-900
+            emphasis_0 81 162 255    // blue-400
+            emphasis_1 0 212 146     // emerald-400
+            emphasis_2 255 185 0     // amber-400
+            emphasis_3 255 99 126    // rose-400
+        }
+        table_cell_unselected {
+            base 209 213 220         // gray-300
+            background 16 24 40      // gray-900
+            emphasis_0 81 162 255    // blue-400
+            emphasis_1 0 212 146     // emerald-400
+            emphasis_2 255 185 0     // amber-400
+            emphasis_3 255 99 126    // rose-400
+        }
+        table_cell_selected {
+            base 249 250 251         // gray-50
+            background 54 65 83      // gray-700
+            emphasis_0 81 162 255    // blue-400
+            emphasis_1 0 212 146     // emerald-400
+            emphasis_2 255 185 0     // amber-400
+            emphasis_3 255 99 126    // rose-400
+        }
+        list_unselected {
+            base 209 213 220         // gray-300
+            background 16 24 40      // gray-900
+            emphasis_0 81 162 255    // blue-400
+            emphasis_1 0 212 146     // emerald-400
+            emphasis_2 255 185 0     // amber-400
+            emphasis_3 255 99 126    // rose-400
+        }
+        list_selected {
+            base 249 250 251         // gray-50
+            background 54 65 83      // gray-700
+            emphasis_0 81 162 255    // blue-400
+            emphasis_1 0 212 146     // emerald-400
+            emphasis_2 255 185 0     // amber-400
+            emphasis_3 255 99 126    // rose-400
+        }
+        frame_unselected {
+            base 106 114 130         // gray-500
+            background 16 24 40      // gray-900
+            emphasis_0 81 162 255    // blue-400
+            emphasis_1 0 212 146     // emerald-400
+            emphasis_2 255 185 0     // amber-400
+            emphasis_3 255 99 126    // rose-400
+        }
+        frame_selected {
+            base 81 162 255          // blue-400
+            background 16 24 40      // gray-900
+            emphasis_0 81 162 255    // blue-400
+            emphasis_1 0 212 146     // emerald-400
+            emphasis_2 255 185 0     // amber-400
+            emphasis_3 255 99 126    // rose-400
+        }
+        frame_highlight {
+            base 0 211 243           // cyan-400
+            background 16 24 40      // gray-900
+            emphasis_0 81 162 255    // blue-400
+            emphasis_1 0 212 146     // emerald-400
+            emphasis_2 255 185 0     // amber-400
+            emphasis_3 255 99 126    // rose-400
+        }
+        exit_code_success {
+            base 0 212 146           // emerald-400
+            background 16 24 40      // gray-900
+            emphasis_0 81 162 255    // blue-400
+            emphasis_1 0 212 146     // emerald-400
+            emphasis_2 255 185 0     // amber-400
+            emphasis_3 255 99 126    // rose-400
+        }
+        exit_code_error {
+            base 255 100 103         // red-400
+            background 16 24 40      // gray-900
+            emphasis_0 81 162 255    // blue-400
+            emphasis_1 0 212 146     // emerald-400
+            emphasis_2 255 185 0     // amber-400
+            emphasis_3 255 99 126    // rose-400
+        }
+    }
+}
