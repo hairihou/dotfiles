@@ -102,17 +102,17 @@ fzf-history() {
 zle -N fzf-history
 bindkey '^r' fzf-history
 
-fzf-zellij() {
+fzf-tmux-attach() {
   TRAPINT() { :; }
-  local session=$(zellij list-sessions -ns 2>/dev/null | fzf --layout=reverse)
+  local session=$(tmux list-sessions -F '#{session_name}' 2>/dev/null | fzf --layout=reverse)
   if [[ -n "$session" ]]; then
-    BUFFER="zellij attach ${(q)session}"
+    BUFFER="tmux attach -t ${(q)session}"
     zle accept-line
   fi
   zle reset-prompt
 }
-zle -N fzf-zellij
-bindkey '^\]^\]' fzf-zellij
+zle -N fzf-tmux-attach
+bindkey '^\]^\]' fzf-tmux-attach
 
 eval "$(mise activate zsh)"
 
