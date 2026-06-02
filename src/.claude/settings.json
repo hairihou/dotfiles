@@ -10,7 +10,6 @@
     "pr": ""
   },
   "permissions": {
-    "ask": ["Bash(git push *)"],
     "deny": [
       "Bash(brew *)",
       "Bash(pip *)",
@@ -29,7 +28,8 @@
       "Write(**/.zshrc.local)",
       "Edit(**/node_modules/**)",
       "Write(**/node_modules/**)"
-    ]
+    ],
+    "ask": ["Bash(git push *)"]
   },
   "skillOverrides": {
     "claude-api:webapp-testing": "user-invocable-only"
@@ -101,6 +101,7 @@
     "claude-api@anthropic-agent-skills": true,
     "claude-md-management@claude-plugins-official": true,
     "codex@openai-codex": true,
+    "cosense-cli@cosense-cli": true,
     "frontend-design@claude-plugins-official": true,
     "hookify@claude-plugins-official": true,
     "jdtls-lsp@claude-plugins-official": true,
@@ -124,6 +125,12 @@
       "source": {
         "source": "github",
         "repo": "mukul975/Anthropic-Cybersecurity-Skills"
+      }
+    },
+    "cosense-cli": {
+      "source": {
+        "source": "github",
+        "repo": "helpfeel/cosense-cli"
       }
     },
     "googlechrome": {

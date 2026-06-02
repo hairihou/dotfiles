@@ -66,8 +66,8 @@ _update_prompt() {
     [[ "${line[1]}" != " " && "${line[1]}" != "?" ]] && staged="%F{10}+%f"
     [[ "${line[2]}" != " " && "${line[1]}" != "?" ]] && unstaged="%F{11}*%f"
   done
-  [[ "$header" == *"behind "* ]] && arrows+="%F{9}⇣%f"
-  [[ "$header" == *"ahead "* ]] && arrows+="%F{14}⇡%f"
+  [[ "$header" == *"behind "* ]] && arrows+="%F{9}"$'\u21e3'"%f"
+  [[ "$header" == *"ahead "* ]] && arrows+="%F{14}"$'\u21e1'"%f"
   prompt_git="%F{5}${branch}%f${staged}${unstaged}${arrows:+ ${arrows}}"
 }
 add-zsh-hook precmd _update_prompt
