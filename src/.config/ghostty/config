@@ -1,5 +1,4 @@
 background = #101828
-background-opacity = 0.5
 cursor-color = #f9fafb
 cursor-text = #101828
 font-family = UDEV Gothic 35NFLG
@@ -8,7 +7,6 @@ font-size = 12
 foreground = #f3f4f6
 keybind = alt+left=unbind
 keybind = alt+right=unbind
-keybind = cmd+shift+o=toggle_background_opacity
 macos-non-native-fullscreen = true
 macos-option-as-alt = true
 palette = 0=#ffffff
