@@ -9,7 +9,7 @@ allowed-tools: Bash, Glob, Grep, Read
 ## When to Use
 
 - Reading non-trivial implementation in a third-party repo (multiple files, cross-file search)
-- User intent like "react の useSyncExternalStore どう実装されてる？", or a pasted repo URL with intent to inspect contents
+- User intent like "how is useSyncExternalStore implemented in react?", or a pasted repo URL with intent to inspect contents
 
 ## When Not to Use
 
