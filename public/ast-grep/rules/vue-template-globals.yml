@@ -1,6 +1,8 @@
 id: vue-template-globals-text
 language: Html
 severity: error
+metadata:
+  scope: file
 message: "Vue template uses an Options API global inside {{ }}; bind it from <script setup> instead"
 rule:
   kind: text
@@ -9,6 +11,8 @@ rule:
 id: vue-template-globals-attr
 language: Html
 severity: error
+metadata:
+  scope: file
 message: "Vue template uses an Options API global in a directive/binding value; bind it from <script setup> instead"
 rule:
   kind: quoted_attribute_value

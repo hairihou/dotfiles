@@ -11,25 +11,7 @@ constraints:
   STMT:
     not:
       kind: statement_block
-rewriters:
-  - id: to-eqeqeq
-    rule:
-      pattern: $A == $B
-    fix: $A === $B
-  - id: to-neqeqeq
-    rule:
-      pattern: $A != $B
-    fix: $A !== $B
-transform:
-  FC:
-    rewrite:
-      rewriters: [to-eqeqeq, to-neqeqeq]
-      source: $COND
-  FS:
-    rewrite:
-      rewriters: [to-eqeqeq, to-neqeqeq]
-      source: $STMT
-fix: "if ($FC) { $FS }"
+fix: "if ($COND) { $STMT }"
 ---
 id: curly-if-tsx
 language: Tsx
@@ -44,22 +26,4 @@ constraints:
   STMT:
     not:
       kind: statement_block
-rewriters:
-  - id: to-eqeqeq
-    rule:
-      pattern: $A == $B
-    fix: $A === $B
-  - id: to-neqeqeq
-    rule:
-      pattern: $A != $B
-    fix: $A !== $B
-transform:
-  FC:
-    rewrite:
-      rewriters: [to-eqeqeq, to-neqeqeq]
-      source: $COND
-  FS:
-    rewrite:
-      rewriters: [to-eqeqeq, to-neqeqeq]
-      source: $STMT
-fix: "if ($FC) { $FS }"
+fix: "if ($COND) { $STMT }"

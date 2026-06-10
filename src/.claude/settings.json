@@ -28,7 +28,9 @@
       "Edit(**/node_modules/**)",
       "Write(**/node_modules/**)"
     ],
-    "ask": ["Bash(git push *)"]
+    "ask": [
+      "Bash(git push *)"
+    ]
   },
   "model": "claude-fable-5[1m]",
   "skillOverrides": {
