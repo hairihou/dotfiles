@@ -32,7 +32,6 @@
       "Bash(git push *)"
     ]
   },
-  "model": "claude-fable-5[1m]",
   "skillOverrides": {
     "claude-api:webapp-testing": "user-invocable-only"
   },
