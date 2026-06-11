@@ -7,8 +7,8 @@ import sys
 
 BRAILLE = "⠀⡀⣀⣤⣶⣿"
 GREEN, YELLOW, RED = "\033[92m", "\033[93m", "\033[91m"
-GRAY, RESET = "\033[90m", "\033[0m"
-SEP = f" {GRAY}|{RESET} "
+RESET = "\033[0m"
+SEP = " | "
 
 
 def gauge(pct: int, warning: int, critical: int) -> str:
@@ -46,15 +46,15 @@ line = model
 if ctx_size >= 1_000_000:
     line += " (1M)"
 if effort:
-    line += f" {effort}"
-line += f"{SEP}{GRAY}ctx{RESET} {gauge(ctx_pct, 70, 90)}"
+    line += f" - {effort}"
+line += f"{SEP}context {gauge(ctx_pct, 70, 90)}"
 if rate_5h_pct >= 0:
-    line += f"{SEP}{GRAY}5h{RESET} {gauge(rate_5h_pct, 60, 80)}"
+    line += f"{SEP}5h {gauge(rate_5h_pct, 60, 80)}"
 else:
-    line += f"{SEP}{GRAY}5h {BRAILLE[0]}{BRAILLE[0]}--%{RESET}"
+    line += f"{SEP}5h {BRAILLE[0]}{BRAILLE[0]}--%"
 if rate_7d_pct >= 0:
-    line += f"{SEP}{GRAY}7d{RESET} {gauge(rate_7d_pct, 50, 70)}"
+    line += f"{SEP}7d {gauge(rate_7d_pct, 50, 70)}"
 else:
-    line += f"{SEP}{GRAY}7d {BRAILLE[0]}{BRAILLE[0]}--%{RESET}"
+    line += f"{SEP}7d {BRAILLE[0]}{BRAILLE[0]}--%"
 
 print(line)
