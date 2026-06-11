@@ -1,9 +1,12 @@
+[settings]
+minimum_release_age_excludes = ["claude-code", "codex"]
+
 [tools]
 ast-grep = "0.43.0"
 aube = "1.18.2"
 carapace = "1.7.0"
-claude-code = "2.1.172"
-codex = "0.128.0"
+claude-code = "2.1.173"
+codex = "0.139.0"
 fzf = "0.73.1"
 gh = "2.93.0"
 ghq = "1.10.1"
