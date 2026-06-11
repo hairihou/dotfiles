@@ -1,12 +1,12 @@
 [tools]
 ast-grep = "0.43.0"
+aube = "1.18.2"
 carapace = "1.7.0"
 claude-code = "2.1.172"
 codex = "0.128.0"
 fzf = "0.73.1"
 gh = "2.93.0"
 ghq = "1.10.1"
-"github:jdx/aube" = "1.18.2"
 "github:microsoft/apm" = "0.18.0"
 go = "1.26.4"
 neovim = "0.12.2"
