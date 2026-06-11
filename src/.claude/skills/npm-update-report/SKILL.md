@@ -16,7 +16,7 @@ allowed-tools: Bash, Grep, Read, WebSearch
 
 | Step | Action           | Details                                                                                        |
 | ---- | ---------------- | ---------------------------------------------------------------------------------------------- |
-| 1    | Detect PM        | Identify PM from lockfile (see command table below)                                            |
+| 1    | Detect PM        | Identify PM from lockfile (see lockfile table below)                                           |
 | 2    | Check outdated   | List packages with available updates                                                           |
 | 3    | Update packages  | Update according to strategy below                                                             |
 | 4    | Classify changes | Extract diff from `package.json`, classify as major/minor/patch                                |
@@ -28,7 +28,13 @@ allowed-tools: Bash, Grep, Read, WebSearch
 
 ## Package Manager Detection
 
-Detect PM from lockfile per CLAUDE.md rules. If no lockfile found, stop and inform user.
+| Lockfile            | PM   |
+| ------------------- | ---- |
+| `package-lock.json` | npm  |
+| `pnpm-lock.yaml`    | pnpm |
+| `yarn.lock`         | yarn |
+
+If no lockfile found, stop and inform user.
 
 **Monorepo workspace commands:** `pnpm --filter {pkg}`, `npm -w {pkg}`, `yarn workspace {pkg}`
 
