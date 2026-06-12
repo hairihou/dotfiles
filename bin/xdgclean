@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly XDG_DIRS=(
+readonly CLEAN_DIRS=(
   "${XDG_CONFIG_HOME:-$HOME/.config}"
   "${XDG_DATA_HOME:-$HOME/.local/share}"
   "${XDG_STATE_HOME:-$HOME/.local/state}"
   "${XDG_CACHE_HOME:-$HOME/.cache}"
+  "${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
 )
 
 dry_run=false
@@ -23,7 +24,7 @@ esac
 
 count=0
 
-for dir in "${XDG_DIRS[@]}"; do
+for dir in "${CLEAN_DIRS[@]}"; do
   [ -d "$dir" ] || continue
   while IFS= read -r link; do
     if "$dry_run"; then
@@ -38,7 +39,7 @@ done
 
 while true; do
   found=0
-  for dir in "${XDG_DIRS[@]}"; do
+  for dir in "${CLEAN_DIRS[@]}"; do
     [[ -d "$dir" ]] || continue
     while IFS= read -r empty; do
       if "$dry_run"; then
@@ -51,7 +52,9 @@ while true; do
       found=$((found + 1))
     done < <(find "$dir" -not -path '*/.git/*' -not -name '.git' -type d -empty 2>/dev/null | sort -r)
   done
-  [[ $found -gt 0 ]] || break
+  if "$dry_run" || [[ $found -eq 0 ]]; then
+    break
+  fi
 done
 
 if [[ $count -eq 0 ]]; then
