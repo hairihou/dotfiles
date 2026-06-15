@@ -1,43 +1,5 @@
-[branch]
-	sort = -committerdate
-[column]
-	ui = auto
-[commit]
-	verbose = true
-[core]
-	fsmonitor = true
-	untrackedCache = true
-[credential "https://github.com"]
-	helper =
-	helper = !gh auth git-credential
-[credential "https://gist.github.com"]
-	helper =
-	helper = !gh auth git-credential
-[diff]
-	algorithm = histogram
-	colorMoved = plain
-	mnemonicPrefix = true
-[fetch]
-	all = true
-	prune = true
-	pruneTags = true
-[help]
-	autocorrect = prompt
-[init]
-	defaultBranch = main
-[merge]
-	conflictstyle = zdiff3
-[push]
-	autoSetupRemote = true
-	followTags = true
-[rerere]
-	enabled = true
-[status]
-	branch = true
-	compareBranches = @{upstream} @{push}
-	short = true
-[tag]
-	sort = version:refname
+[include]
+	path = ~/dotfiles/src/.gitconfig
 [user]
 	email = 38448411+hairihou@users.noreply.github.com
 	name = Yusuke Mizuno

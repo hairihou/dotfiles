@@ -5,6 +5,14 @@
 
 ## Setup
 
+Install [mise](https://mise.jdx.dev) first:
+
+```sh
+curl https://mise.run | sh
+```
+
+Then run the installer:
+
 ```sh
 curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh | bash
 ```
@@ -18,24 +26,22 @@ Available globally after setup:
 - `brewsync [--dump | --prune]` - Homebrew package synchronizer
 - `brewup [--all]` - Homebrew batch update utility
 - `dprune` - Remove `.DS_Store` files and empty directories
-- `linkup [--dry-run]` - Symlink manager (re-apply or preview changes)
-- `macos-defaults` - macOS system defaults configuration
 - `xdgclean [--dry-run]` - Remove broken symlinks and empty directories from XDG base directories and `~/.claude`
 - `zhistprune` - Remove `.zsh_history` entries older than 90 days
 
-### Configuration Files (`/src`)
+### Owner / Work
 
-Files are symlinked into `$HOME`. Edit them in `src/` — `$HOME` targets are overwritten by `linkup`.
+`install.sh` symlinks the Brewfile and gitconfig per machine, chosen by git email: owner machines get the `.owner` variants, work machines get the base files. The base `.gitconfig` reads the git identity (`[user]`) from `~/.gitconfig.local`; `.gitconfig.owner` includes the base and bakes in the owner identity.
 
-| Source                 | Target                      |
-| ---------------------- | --------------------------- |
-| `src/.claude/**/*`     | `~/.claude/**/*`            |
-| `src/.config/**/*`     | `~/.config/**/*`            |
-| `src/.Brewfile`        | `~/.Brewfile`               |
-| `src/.npmrc`           | `~/.npmrc`                  |
-| `src/.zshrc`           | `~/.zshrc`                  |
-| `src/.Brewfile.owner`  | `~/.Brewfile` (owner only)  |
-| `src/.gitconfig.owner` | `~/.gitconfig` (owner only) |
+### Syncing
+
+Re-apply after editing `src/` (or re-run `install.sh`):
+
+```sh
+mise dotfiles apply                    # re-create symlinks
+mise dotfiles status                   # show drift between src/ and $HOME
+mise bootstrap macos-defaults apply    # write macOS defaults (log out to fully apply)
+```
 
 ## Philosophy
 
@@ -48,4 +54,7 @@ Principles guiding tool selection and environment management in this repository:
 
 ## Machine-Local Configuration
 
-`~/.zshrc.local` is sourced at the end of `.zshrc` for machine-specific environment variables. This file is not managed by this repository.
+Machine-specific values live in `*.local` files, which are git-ignored. Keep them in `src/`; `install.sh` symlinks each present `src/*.local` into `$HOME`, and the content is never committed.
+
+- `~/.zshrc.local` — sourced at the end of `.zshrc` for environment variables
+- `~/.gitconfig.local` — included by `.gitconfig` to provide the git identity (`[user]`)

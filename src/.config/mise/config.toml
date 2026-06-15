@@ -1,4 +1,39 @@
+[bootstrap.macos.defaults.NSGlobalDomain]
+ApplePressAndHoldEnabled = false
+AppleShowAllExtensions = true
+"com.apple.sound.uiaudio.enabled" = 0
+"com.apple.trackpad.scaling" = 3.0
+InitialKeyRepeat = 15
+KeyRepeat = 2
+NSAutoFillHeuristicControllerEnabled = false
+
+[bootstrap.macos.defaults."com.apple.AppleMultitouchTrackpad"]
+ActuationStrength = 0
+
+[bootstrap.macos.defaults."com.apple.dock"]
+autohide = true
+magnification = false
+orientation = "left"
+"show-recents" = false
+tilesize = 48
+
+[bootstrap.macos.defaults."com.apple.finder"]
+FXRemoveOldTrashItems = true
+
+[bootstrap.macos.defaults."com.apple.HIToolbox"]
+AppleFnUsageType = 0
+
+[bootstrap.macos.defaults."com.apple.screencapture"]
+name = "ss"
+
+[dotfiles]
+"~/.claude/**" = { source = "~/dotfiles/src/.claude/**", mode = "symlink-each" }
+"~/.config/**" = { source = "~/dotfiles/src/.config/**", mode = "symlink-each" }
+"~/.npmrc" = { source = "~/dotfiles/src/.npmrc" }
+"~/.zshrc" = { source = "~/dotfiles/src/.zshrc" }
+
 [settings]
+experimental = true
 minimum_release_age_excludes = ["claude-code", "codex"]
 
 [tools]
