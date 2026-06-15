@@ -31,11 +31,13 @@ setopt SHARE_HISTORY
 
 fpath=("$HOME/.zsh/completions" $fpath)
 autoload -U compinit
-if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+zcd=(~/.zcompdump(N.mh+24))
+if (( $#zcd )); then
   compinit
 else
   compinit -C
 fi
+unset zcd
 LISTMAX=0
 
 autoload -U add-zsh-hook
@@ -72,10 +74,6 @@ _update_prompt() {
 }
 add-zsh-hook precmd _update_prompt
 PROMPT=$'%F{12}${prompt_path}%f${prompt_git:+\u0020${prompt_git}}\u0020%F{8}\u276f%f\u0020'
-
-continue-line() { LBUFFER+=$'\\\n\u0020\u0020' }
-zle -N continue-line
-bindkey '\e[13;2u' continue-line
 
 fzf-ghq() {
   TRAPINT() { :; }
