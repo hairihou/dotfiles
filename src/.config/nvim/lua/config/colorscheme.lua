@@ -1,7 +1,7 @@
 local theme = {
   amber400 = "#ffb900",
   blue400 = "#51a2ff",
-  cyan400 = "#00d3f3",
+  cyan500 = "#00b8db",
   emerald400 = "#00d492",
   fuchsia300 = "#f4a8ff",
   gray50 = "#f9fafb",
@@ -18,6 +18,7 @@ local theme = {
   red400 = "#ff6467",
   sky300 = "#74d4ff",
   teal300 = "#46ecd5",
+  teal500 = "#00bba7",
   white = "#ffffff",
 }
 local hl = function(name, opts)
@@ -53,11 +54,11 @@ hl("WinSeparator", { fg = theme.gray800 })
 -- mini.icons
 hl("MiniIconsAzure", { fg = theme.blue400 })
 hl("MiniIconsBlue", { fg = theme.blue400 })
-hl("MiniIconsCyan", { fg = theme.cyan400 })
-hl("MiniIconsGreen", { fg = theme.teal300 })
-hl("MiniIconsGrey", { link = "Normal" })
+hl("MiniIconsCyan", { fg = theme.cyan500 })
+hl("MiniIconsGreen", { fg = theme.teal500 })
+hl("MiniIconsGrey", { fg = theme.gray300 })
 hl("MiniIconsOrange", { fg = theme.amber400 })
-hl("MiniIconsPurple", { fg = theme.fuchsia300 })
+hl("MiniIconsPurple", { fg = theme.purple400 })
 hl("MiniIconsRed", { fg = theme.red400 })
 hl("MiniIconsYellow", { fg = theme.amber400 })
 -- oil git status
