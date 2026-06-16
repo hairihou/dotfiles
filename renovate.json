@@ -10,5 +10,5 @@
     "automerge": false
   },
   "platformAutomerge": false,
-  "schedule": ["after 7am and before 8am"]
+  "schedule": ["before 8am"]
 }
