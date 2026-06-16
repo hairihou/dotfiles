@@ -1,6 +1,6 @@
 ---
 name: socratic
-description: Interview the user one question at a time to turn a fuzzy requirement or plan into a precise, implementation-ready design, keeping the user in the lead. Use before implementation when requirements are underspecified, or when the user wants a plan challenged decision-by-decision.
+description: Interview the user one question at a time, each with a recommended answer, to turn a half-formed requirement or plan into an implementation-ready design while the user keeps every decision. Use before implementation when the goal is clear but the decisions that shape it are not, or when the user wants their own plan pressure-tested decision-by-decision instead of handed a finished one. Not for one-shot critique, parallel pro/con analysis, or producing a plan to rubber-stamp.
 argument-hint: <requirement or plan to interrogate>
 allowed-tools: Glob, Grep, Read
 ---
@@ -9,7 +9,7 @@ allowed-tools: Glob, Grep, Read
 
 Interrogate a requirement or plan until you and the user share an implementation-ready understanding. The user stays in the lead — this is the inverse of plan mode: never present a finished plan for rubber-stamping.
 
-Target: $ARGUMENTS
+Target: $ARGUMENTS — if empty, interrogate the requirement or plan under discussion in the current conversation.
 
 - Ask one question at a time; wait for the answer before the next. Batching hands the design back as homework.
 - Give each question a recommended answer with a one-line reason. The user takes it, refines it, or rejects it.

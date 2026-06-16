@@ -1,3 +1,9 @@
+vim.diagnostic.config({
+  jump = { float = true },
+  severity_sort = true,
+  virtual_lines = { current_line = true },
+  virtual_text = { current_line = false },
+})
 vim.lsp.config("*", {
   root_markers = { ".git" },
 })

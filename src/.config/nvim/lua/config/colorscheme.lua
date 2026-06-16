@@ -2,18 +2,23 @@ local theme = {
   amber400 = "#ffb900",
   blue400 = "#51a2ff",
   cyan400 = "#00d3f3",
+  emerald400 = "#00d492",
   fuchsia300 = "#f4a8ff",
   gray50 = "#f9fafb",
+  gray100 = "#f3f4f6",
   gray300 = "#d1d5dc",
   gray500 = "#6a7282",
   gray700 = "#364153",
   gray800 = "#1e2939",
   gray950 = "#030712",
   indigo300 = "#a3b3ff",
+  indigo400 = "#7c86ff",
   pink400 = "#fb64b6",
+  purple400 = "#c27aff",
   red400 = "#ff6467",
   sky300 = "#74d4ff",
   teal300 = "#46ecd5",
+  white = "#ffffff",
 }
 local hl = function(name, opts)
   vim.api.nvim_set_hl(0, name, opts)
@@ -22,6 +27,8 @@ end
 hl("Comment", { fg = theme.gray500, italic = true })
 hl("Constant", { fg = theme.pink400 })
 hl("Delimiter", { fg = theme.gray500 })
+hl("Function", { fg = theme.teal300 })
+hl("Identifier", { fg = theme.white })
 hl("Special", { fg = theme.fuchsia300 })
 hl("Statement", { fg = theme.indigo300 })
 hl("String", { fg = theme.sky300 })
@@ -30,6 +37,7 @@ hl("Type", { fg = theme.teal300 })
 hl("CursorColumn", { bg = theme.gray800 })
 hl("CursorLine", { bg = theme.gray800 })
 hl("CursorLineNr", { bold = true })
+hl("Directory", { fg = theme.gray100 })
 hl("FloatBorder", { fg = theme.gray700 })
 hl("IncSearch", { fg = theme.gray800, bg = theme.amber400 })
 hl("LineNr", { fg = theme.gray500 })
@@ -52,6 +60,12 @@ hl("MiniIconsOrange", { fg = theme.amber400 })
 hl("MiniIconsPurple", { fg = theme.fuchsia300 })
 hl("MiniIconsRed", { fg = theme.red400 })
 hl("MiniIconsYellow", { fg = theme.amber400 })
+-- oil git status
+hl("OilGitConflict", { fg = theme.amber400 })
+hl("OilGitCreated", { fg = theme.emerald400 })
+hl("OilGitDeleted", { fg = theme.indigo400 })
+hl("OilGitModified", { fg = theme.blue400 })
+hl("OilGitRenamed", { fg = theme.purple400 })
 -- render-markdown
 hl("RenderMarkdownH", { fg = theme.blue400, bold = true })
 hl("RenderMarkdownHBg", { bg = theme.gray950 })
