@@ -34,7 +34,7 @@ name = "ss"
 
 [settings]
 experimental = true
-minimum_release_age_excludes = ["claude-code", "codex"]
+minimum_release_age_excludes = ["claude-code", "codex", "opencode"]
 
 [tools]
 ast-grep = "0.43.0"
