@@ -35,24 +35,19 @@ Resolve linked issue numbers in this order; use the first that yields a number:
 
 If multiple distinct issues are detected, list each on its own `closes #N` line.
 
-## PR Body Templates
+## PR Body
 
-Standard:
+Header, then body, in this order:
 
-```markdown
-## Summary
-
-<description>
-```
-
-With issue linking:
+- Header — when an issue is detected, one `closes #N` line per issue followed by a `---` separator. Mandatory whenever an issue exists.
+- Body — the repo's PR template (any of GitHub's conventional locations) filled in verbatim if one exists, else the fallback below.
 
 ```markdown
 closes #<number>
 
 ---
 
-## Summary
+## Summary  ← replace this block with the filled-in repo template when one exists
 
 <description>
 ```

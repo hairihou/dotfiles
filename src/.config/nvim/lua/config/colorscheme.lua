@@ -1,7 +1,6 @@
 local theme = {
   amber400 = "#ffb900",
   blue400 = "#51a2ff",
-  cyan500 = "#00b8db",
   emerald400 = "#00d492",
   fuchsia300 = "#f4a8ff",
   gray50 = "#f9fafb",
@@ -15,10 +14,8 @@ local theme = {
   indigo400 = "#7c86ff",
   pink400 = "#fb64b6",
   purple400 = "#c27aff",
-  red400 = "#ff6467",
   sky300 = "#74d4ff",
   teal300 = "#46ecd5",
-  teal500 = "#00bba7",
   white = "#ffffff",
 }
 local hl = function(name, opts)
@@ -52,15 +49,19 @@ hl("Visual", { bg = theme.gray700 })
 hl("WinBar", { bg = "NONE" })
 hl("WinSeparator", { fg = theme.gray800 })
 -- mini.icons
-hl("MiniIconsAzure", { fg = theme.blue400 })
-hl("MiniIconsBlue", { fg = theme.blue400 })
-hl("MiniIconsCyan", { fg = theme.cyan500 })
-hl("MiniIconsGreen", { fg = theme.teal500 })
-hl("MiniIconsGrey", { fg = theme.gray300 })
-hl("MiniIconsOrange", { fg = theme.amber400 })
-hl("MiniIconsPurple", { fg = theme.purple400 })
-hl("MiniIconsRed", { fg = theme.red400 })
-hl("MiniIconsYellow", { fg = theme.amber400 })
+for _, name in ipairs({
+  "MiniIconsAzure",
+  "MiniIconsBlue",
+  "MiniIconsCyan",
+  "MiniIconsGreen",
+  "MiniIconsGrey",
+  "MiniIconsOrange",
+  "MiniIconsPurple",
+  "MiniIconsRed",
+  "MiniIconsYellow",
+}) do
+  hl(name, { fg = theme.gray500 })
+end
 -- oil git status
 hl("OilGitConflict", { fg = theme.amber400 })
 hl("OilGitCreated", { fg = theme.emerald400 })
