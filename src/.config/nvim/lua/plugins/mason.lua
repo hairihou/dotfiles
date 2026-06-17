@@ -8,7 +8,6 @@ return {
     dependencies = { "mason-org/mason.nvim" },
     opts = {
       ensure_installed = {
-        "basedpyright",
         "gopls",
         "lua_ls",
         "ts_ls",

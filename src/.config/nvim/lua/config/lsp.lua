@@ -7,6 +7,7 @@ vim.diagnostic.config({
 vim.lsp.config("*", {
   root_markers = { ".git" },
 })
+vim.lsp.enable("ty")
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("my.lsp", {}),
   callback = function(ev)
