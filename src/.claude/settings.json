@@ -140,5 +140,10 @@
     }
   },
   "language": "japanese",
-  "skipAutoPermissionPrompt": true
+  "skipAutoPermissionPrompt": true,
+  "voice": {
+    "enabled": true,
+    "mode": "hold"
+  },
+  "voiceEnabled": true
 }
