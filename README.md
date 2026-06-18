@@ -38,9 +38,9 @@ Available globally after setup:
 Re-apply after editing `src/` (or re-run `install.sh`):
 
 ```sh
+mise bootstrap macos-defaults apply    # write macOS defaults (log out to fully apply)
 mise dotfiles apply                    # re-create symlinks
 mise dotfiles status                   # show drift between src/ and $HOME
-mise bootstrap macos-defaults apply    # write macOS defaults (log out to fully apply)
 ```
 
 ## Philosophy
