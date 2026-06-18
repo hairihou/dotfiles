@@ -10,6 +10,7 @@ return {
   },
   lazy = false,
   opts = {
+    indent = { enabled = true },
     picker = { enabled = true },
   },
   priority = 1000,
