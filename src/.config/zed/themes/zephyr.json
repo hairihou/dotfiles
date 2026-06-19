@@ -46,9 +46,9 @@
         "element.hover": "#45556c80",
         "element.selected": "#45556c",
         "elevated_surface.background": "#314158",
-        "error": "#ff6467",
-        "error.background": "#ff646740",
-        "error.border": "#ff6467",
+        "error": "#ff637e",
+        "error.background": "#ff637e40",
+        "error.border": "#ff637e",
         "ghost_element.active": "#e2e8f033",
         "ghost_element.background": "#00000000",
         "ghost_element.disabled": "#62748e",
@@ -104,13 +104,13 @@
         "terminal.ansi.bright_cyan": "#53eafd",
         "terminal.ansi.bright_green": "#5ee9b5",
         "terminal.ansi.bright_magenta": "#dab2ff",
-        "terminal.ansi.bright_red": "#ff6467",
+        "terminal.ansi.bright_red": "#ff637e",
         "terminal.ansi.bright_white": "#ffffff",
         "terminal.ansi.bright_yellow": "#ffd230",
         "terminal.ansi.cyan": "#00d3f3",
         "terminal.ansi.green": "#00d492",
         "terminal.ansi.magenta": "#c27aff",
-        "terminal.ansi.red": "#ff6467",
+        "terminal.ansi.red": "#ff637e",
         "terminal.ansi.white": "#cad5e2",
         "terminal.ansi.yellow": "#ffb900",
         "terminal.background": "#1d293d",
@@ -248,7 +248,7 @@
             "color": "#ffffff"
           },
           "variable.special": {
-            "color": "#ff6467"
+            "color": "#ff637e"
           },
           "variant": {
             "color": "#96f7e4"
@@ -552,9 +552,9 @@
         "element.hover": "#36415380",
         "element.selected": "#4a5565",
         "elevated_surface.background": "#1e2939",
-        "error": "#ff6467",
-        "error.background": "#ff646740",
-        "error.border": "#ff6467",
+        "error": "#ff637e",
+        "error.background": "#ff637e40",
+        "error.border": "#ff637e",
         "ghost_element.active": "#e5e7eb33",
         "ghost_element.background": "#00000000",
         "ghost_element.disabled": "#6a7282",
@@ -610,13 +610,13 @@
         "terminal.ansi.bright_cyan": "#53eafd",
         "terminal.ansi.bright_green": "#5ee9b5",
         "terminal.ansi.bright_magenta": "#dab2ff",
-        "terminal.ansi.bright_red": "#ff6467",
+        "terminal.ansi.bright_red": "#ff637e",
         "terminal.ansi.bright_white": "#ffffff",
         "terminal.ansi.bright_yellow": "#ffd230",
         "terminal.ansi.cyan": "#00d3f3",
         "terminal.ansi.green": "#00d492",
         "terminal.ansi.magenta": "#c27aff",
-        "terminal.ansi.red": "#ff6467",
+        "terminal.ansi.red": "#ff637e",
         "terminal.ansi.white": "#cad5e2",
         "terminal.ansi.yellow": "#ffb900",
         "terminal.background": "#101828",
@@ -754,7 +754,7 @@
             "color": "#ffffff"
           },
           "variable.special": {
-            "color": "#ff6467"
+            "color": "#ff637e"
           },
           "variant": {
             "color": "#46ecd5"
