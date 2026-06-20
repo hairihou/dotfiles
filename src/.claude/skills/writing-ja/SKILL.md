@@ -1,6 +1,6 @@
 ---
 name: writing-ja
-description: Revise Japanese internal technical writing — planning docs, design proposals, meeting material, issue/PR descriptions aimed at developers — so it reads accurate and plain: deflate overstatement, drop insider jargon and hollow phrasing, tighten repetition. Use when drafting or revising such prose. Not for English, reference, or CLI text.
+description: Revise Japanese developer-facing technical writing — planning/design docs, issue/PR comments and bodies — to read plain and accurate: cut overstatement, coined jargon, and filler. Use when writing or editing such Japanese prose, including small edits to already-drafted or posted text. Not for English, reference docs, or CLI text.
 argument-hint: "[file-path]"
 allowed-tools: Edit, Read, Write
 ---
@@ -10,6 +10,13 @@ allowed-tools: Edit, Read, Write
 > 判定基準（誇張・気取り・ぼやけ）が日本語のニュアンスに依存するため、本文は日本語で書く。
 
 技術文書（方針・計画、設計提案、会議資料、issue/PR）を、読み手の開発者が正確に、素直に読める形へ直す。
+
+## Process
+
+1. Don't Overstate → Use the Reader's Words → Tight and Concrete → Headings → No Filler の順に、直す箇所を拾う。
+2. 元の意味と構成（見出し、コードブロック、図表）を保ったまま、本文だけ書き換える。
+3. 対象がファイルなら Edit（部分推敲）か Write（全文書き換え）で直し、直した箇所を報告する。チャットに貼られたテキストが対象なら、推敲結果をそのまま出す。
+4. 投稿・確定の前に通す。改稿のたびに通し直す。1語・1句・見出しの小さな直しほど誇張や造語が再混入しやすい。
 
 ## Don't Overstate
 
@@ -21,6 +28,7 @@ allowed-tools: Edit, Read, Write
 - 検出・保証・解決を「必ずできる」と書かない。条件を添える（「〜しやすい」「〜が成り立つときに限る」）。
 - 区別が要るものを同じ語でひとくくりにしない。原因が複数あるものを一つに決めつけない。
 - 因果を主張するなら、なぜそうなるかを一言添える。
+- 下げすぎない。確証のあることを不要にヘッジしない（「〜かもしれない」を付けすぎない）。誇張を削る過程で事実より弱めない。
 
 ## Use the Reader's Words
 
@@ -63,9 +71,3 @@ allowed-tools: Edit, Read, Write
 - 「重要なのは〜だ」「〜に他ならない」のような、主張を予告するだけの前置きを置かない。主張を直接書く。
 - 短い決め台詞を独立させて緊張を作る書き方を、繰り返し使わない。
 - 「AではなくBだ」という対句を多用しない。
-
-## Process
-
-1. Don't Overstate → Use the Reader's Words → Tight and Concrete → Headings → No Filler の順に、直す箇所を拾う。
-2. 元の意味と構成（見出し、コードブロック、図表）を保ったまま、本文だけ書き換える。
-3. 対象がファイルなら Edit（部分推敲）か Write（全文書き換え）で直し、直した箇所を報告する。チャットに貼られたテキストが対象なら、推敲結果をそのまま出す。
