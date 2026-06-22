@@ -47,7 +47,7 @@ closes #<number>
 
 ---
 
-## Summary  ← replace this block with the filled-in repo template when one exists
+## Summary ← replace this block with the filled-in repo template when one exists
 
 <description>
 ```

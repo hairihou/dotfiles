@@ -41,11 +41,11 @@ Use when output depends on a combination of 2+ conditions.
 - One test per column; mark impossible columns explicitly
 - For short-circuit guards, mark unreachable downstream cells as `-` so impossible combinations are distinguishable from missed ones
 
-| Condition       | C1 | C2  | C3  | C4  |
-| --------------- | -- | --- | --- | --- |
-| logged in       | Y  | Y   | N   | N   |
-| has permission  | Y  | N   | Y   | N   |
-| → expected      | OK | 403 | 401 | 401 |
+| Condition      | C1  | C2  | C3  | C4  |
+| -------------- | --- | --- | --- | --- |
+| logged in      | Y   | Y   | N   | N   |
+| has permission | Y   | N   | Y   | N   |
+| → expected     | OK  | 403 | 401 | 401 |
 
 ### State Transition
 
