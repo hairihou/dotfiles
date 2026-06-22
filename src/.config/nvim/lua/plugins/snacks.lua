@@ -10,8 +10,12 @@ return {
   },
   lazy = false,
   opts = {
-    indent = { enabled = true },
-    picker = { enabled = true },
+    indent = {},
+    picker = {
+      sources = {
+        files = { hidden = true },
+      },
+    },
   },
   priority = 1000,
 }
