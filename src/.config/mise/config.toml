@@ -37,7 +37,7 @@ experimental = true
 minimum_release_age_excludes = ["claude-code", "codex", "opencode"]
 
 [tools]
-ast-grep = "0.43.0"
+ast-grep = "0.44.0"
 aube = "1.23.0"
 carapace = "1.7.1"
 claude-code = "2.1.185"
