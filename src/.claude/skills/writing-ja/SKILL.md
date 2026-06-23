@@ -1,6 +1,6 @@
 ---
 name: writing-ja
-description: Revise Japanese developer-facing technical writing — planning/design docs, issue/PR comments and bodies — to read plain and accurate: cut overstatement, coined jargon, and filler. Use when writing or editing such Japanese prose, including small edits to already-drafted or posted text. Not for English, reference docs, or CLI text.
+description: Revise Japanese developer-facing technical writing — planning/design docs, issue/PR comments and bodies — to read plain and accurate: cut overstatement, coined jargon, filler, and loose paragraph structure. Use when writing or editing such Japanese prose, including small edits to already-drafted or posted text. Not for English, reference docs, or CLI text.
 argument-hint: "[file-path]"
 allowed-tools: Edit, Read, Write
 ---
@@ -28,7 +28,7 @@ allowed-tools: Edit, Read, Write
 - 検出・保証・解決を「必ずできる」と書かない。条件を添える（「〜しやすい」「〜が成り立つときに限る」）。
 - 区別が要るものを同じ語でひとくくりにしない。原因が複数あるものを一つに決めつけない。
 - 因果を主張するなら、なぜそうなるかを一言添える。
-- 下げすぎない。確証のあることを不要にぼかさない（「〜かもしれない」を付けすぎない）。誇張を削る過程で事実より弱めない。
+- 下げすぎない。確証のあることを不要にぼかさない（「〜かもしれない」を付けすぎない）。
 
 ## Use the Reader's Words
 
@@ -56,18 +56,31 @@ allowed-tools: Edit, Read, Write
 - 抽象的な言い方は、丸括弧で言い換えを添えて、その場で何を指すか定める。読者に前を読み返させない。
 - 抽象的な施策や主張には、具体例を一つ以上添えて、何を指すか伝わるようにする。
 
-## Headings
-
-見出しは、その節の中身が分かる素直な句にする。
-
-- 気取った言い回しをやめ、中身を指す自然な語にする。
-- 一つの見出しに二要素（種別と主題など）を詰め込まない。
-- 結論を言い切る「セリフ」にしない。見出しでオチを見せない。
-
 ## No Filler
 
 中身を足さず、書けているように見せるだけの言い回しを外す。
 
-- 「重要なのは〜だ」「〜に他ならない」のような、主張を予告するだけの前置きを置かない。主張を直接書く。
+- 「重要なのは〜だ」「要するに〜」のような、主張を予告・総括するだけの前置きを置かない。主張を直接書く。
 - 短い決め台詞を独立させて印象づける書き方を、繰り返し使わない。
 - 「AではなくBだ」という対句を多用しない。
+- 中身を伴わない動詞・形容詞・強調語を使わない。何をどうしたのかを具体に書くか、削る。
+  - 動詞: 深掘りする → 何を調べるかを書く、言語化する → 何を書くかを書く、正面から扱う → 中身を書くか削る
+  - 形容詞: 鍵となる、根本的な → 中身を書くか削る
+  - 強調: 非常に、極めて → 削る（程度が要るなら具体値を書く）
+- 「さらに」「また」「加えて」を接続のために続けて並べない。
+
+## One Topic per Paragraph
+
+段落は一つのトピックに絞り、論証を一方向に進める。
+
+- 一段落に複数のトピックを詰めない。話題が変わるなら段落を分ける。
+- 段落の最初の文で要点が分かるようにする。先頭の文だけで筋を追える順に置く。
+- 論証を前後に往復させない。前提から結論へ一度で進める。
+
+## Headings
+
+見出しは、その節の中身が分かる素直な言い回しにする。
+
+- 気取った言い回しをやめ、中身を指す自然な語にする。
+- 一つの見出しに二要素（種別と主題など）を詰め込まない。
+- 結論を言い切る「セリフ」にしない。見出しでオチを見せない。
