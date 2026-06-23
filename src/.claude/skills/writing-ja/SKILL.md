@@ -1,7 +1,7 @@
 ---
 name: writing-ja
-description: "Revise Japanese developer-facing technical writing — planning/design docs, issue/PR comments and bodies — to read plain and accurate: cut overstatement, coined jargon, filler, and loose paragraph structure. Use when writing or editing such Japanese prose, including small edits to already-drafted or posted text. Not for English, reference docs, or CLI text."
-argument-hint: "[file-path]"
+description: 'Revise Japanese developer-facing technical writing — planning/design docs, issue/PR comments and bodies — to read plain and accurate: cut overstatement, coined jargon, filler, and loose paragraph structure. Use when writing or editing such Japanese prose, including small edits to already-drafted or posted text. Not for English, reference docs, or CLI text.'
+argument-hint: '[file-path]'
 allowed-tools: Edit, Read, Write
 ---
 
