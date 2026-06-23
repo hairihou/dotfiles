@@ -14,6 +14,7 @@ local theme = {
   indigo400 = "#7c86ff",
   pink400 = "#fb64b6",
   purple400 = "#c27aff",
+  rose400 = "#ff637e",
   sky300 = "#74d4ff",
   teal300 = "#46ecd5",
   white = "#ffffff",
@@ -48,6 +49,19 @@ hl("StatusLine", { bg = "NONE" })
 hl("Visual", { bg = theme.gray700 })
 hl("WinBar", { bg = "NONE" })
 hl("WinSeparator", { fg = theme.gray800 })
+-- diagnostics
+hl("DiagnosticError", { fg = theme.rose400 })
+hl("DiagnosticWarn", { fg = theme.amber400 })
+hl("DiagnosticInfo", { fg = theme.blue400 })
+hl("DiagnosticHint", { fg = theme.gray500 })
+hl("DiagnosticUnderlineError", { undercurl = true, sp = theme.rose400 })
+hl("DiagnosticUnderlineWarn", { undercurl = true, sp = theme.amber400 })
+hl("DiagnosticUnderlineInfo", { undercurl = true, sp = theme.blue400 })
+hl("DiagnosticUnderlineHint", { undercurl = true, sp = theme.gray500 })
+-- mini.diff
+hl("MiniDiffSignAdd", { fg = theme.emerald400 })
+hl("MiniDiffSignChange", { fg = theme.blue400 })
+hl("MiniDiffSignDelete", { fg = theme.indigo400 })
 -- mini.icons
 for _, name in ipairs({
   "MiniIconsAzure",
