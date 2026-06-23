@@ -26,6 +26,7 @@
 
 - Underspecified requirements/scope: ask before implementing — do not proceed on silent assumptions for non-trivial commitments
 - Tests-first for behavior changes (new logic, bug fixes, behavior modifications): write the failing test before implementation. Skip for non-behavioral changes: config, docs, simple refactors (rename/format/comment removal)
+- `.scratch/` is git-ignored globally (core.excludesFile); use it freely for throwaway notes and working files without verifying ignore status or asking
 
 ## Communication Style
 
