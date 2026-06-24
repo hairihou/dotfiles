@@ -33,7 +33,6 @@ hl("Statement", { fg = theme.indigo300 })
 hl("String", { fg = theme.sky300 })
 hl("Type", { fg = theme.teal300 })
 -- ui
-hl("CursorColumn", { bg = theme.gray800 })
 hl("CursorLine", { bg = theme.gray800 })
 hl("CursorLineNr", { bold = true })
 hl("Directory", { fg = theme.gray100 })

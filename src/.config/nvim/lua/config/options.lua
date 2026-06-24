@@ -4,7 +4,6 @@ local opt = vim.opt
 opt.breakindent = true
 opt.clipboard = "unnamedplus"
 opt.completeopt = { "menu", "menuone", "noselect", "popup" }
-opt.cursorcolumn = true
 opt.cursorline = true
 opt.expandtab = true
 opt.ignorecase = true

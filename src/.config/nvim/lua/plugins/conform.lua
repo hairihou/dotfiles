@@ -26,6 +26,7 @@ return {
       graphql = web,
       html = web,
       javascript = web,
+      javascriptreact = web,
       json = web,
       jsonc = web,
       markdown = web,
