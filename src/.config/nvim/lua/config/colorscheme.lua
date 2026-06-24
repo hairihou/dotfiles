@@ -76,12 +76,6 @@ for _, name in ipairs({
 }) do
   hl(name, { fg = theme.gray500 })
 end
--- oil git status
-hl("OilGitConflict", { fg = theme.amber400 })
-hl("OilGitCreated", { fg = theme.emerald400 })
-hl("OilGitDeleted", { fg = theme.indigo400 })
-hl("OilGitModified", { fg = theme.blue400 })
-hl("OilGitRenamed", { fg = theme.purple400 })
 -- render-markdown
 hl("RenderMarkdownH", { fg = theme.blue400, bold = true })
 hl("RenderMarkdownHBg", { bg = theme.gray950 })

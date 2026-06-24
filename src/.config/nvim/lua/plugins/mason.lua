@@ -10,6 +10,7 @@ return {
       ensure_installed = {
         "gopls",
         "lua_ls",
+        "oxlint",
         "ts_ls",
         "vue_ls",
       },
