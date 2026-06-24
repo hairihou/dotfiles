@@ -8,10 +8,18 @@ import re
 import sys
 import tempfile
 import time
+from dataclasses import dataclass
 
 DAYS = 90
 SECONDS_PER_DAY = 24 * 60 * 60
 HEADER_RE = re.compile(rb"^: (\d+):\d+;")
+
+
+@dataclass
+class Entry:
+    ts: int
+    raw: bytes
+    body: bytes
 
 histfile = pathlib.Path(
     os.environ.get("HISTFILE") or pathlib.Path.home() / ".zsh_history"
@@ -22,8 +30,8 @@ if not histfile.is_file():
 
 cutoff = time.time() - DAYS * SECONDS_PER_DAY
 
-entries = []
-current = None
+entries: list[Entry] = []
+current: Entry | None = None
 with histfile.open("rb") as f:
     for line in f:
         m = HEADER_RE.match(line)
@@ -31,23 +39,23 @@ with histfile.open("rb") as f:
             if current is not None:
                 entries.append(current)
             _, _, body = line.partition(b";")
-            current = {"ts": int(m.group(1)), "raw": line, "body": body}
+            current = Entry(ts=int(m.group(1)), raw=line, body=body)
         elif current is not None:
-            current["raw"] += line
-            current["body"] += line
+            current.raw += line
+            current.body += line
     if current is not None:
         entries.append(current)
 
-entries = [e for e in entries if e["ts"] >= cutoff]
+entries = [e for e in entries if e.ts >= cutoff]
 
 last_idx = {}
 for i, e in enumerate(entries):
-    last_idx[e["body"]] = i
+    last_idx[e.body] = i
 keep = set(last_idx.values())
 entries = [e for i, e in enumerate(entries) if i in keep]
 
 fd, tmp_path = tempfile.mkstemp(prefix=histfile.name + ".", dir=histfile.parent)
 with os.fdopen(fd, "wb") as out:
     for e in entries:
-        out.write(e["raw"])
+        out.write(e.raw)
 os.replace(tmp_path, histfile)
