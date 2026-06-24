@@ -5,7 +5,7 @@ description: >-
   illustrations, sprites, placeholder art. Use when the user explicitly asks to
   create or edit an image, since Claude Code cannot generate images itself.
   Consumes Codex usage.
-argument-hint: '<prompt> [-o <output path>] [-i <source image>] [--size <WxH>]'
+argument-hint: <prompt> [-o <output path>] [-i <source image>] [--size <WxH>]
 allowed-tools: Bash
 ---
 

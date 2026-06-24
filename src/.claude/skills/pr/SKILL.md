@@ -1,7 +1,7 @@
 ---
 name: pr
 description: You MUST invoke this BEFORE running `gh pr create` or `gh pr edit`, and any time the user expresses intent to ship branch work upstream — explicit ("create PR") or implicit ("push this", "ship it", or you yourself proposing to push after completing work). DO NOT USE for leaving inline review comments on an existing PR.
-argument-hint: [base-branch]
+argument-hint: '[base-branch]'
 allowed-tools: Bash, Read
 ---
 

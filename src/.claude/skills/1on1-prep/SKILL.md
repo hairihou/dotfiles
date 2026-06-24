@@ -1,7 +1,7 @@
 ---
 name: 1on1-prep
 description: Prepare for 1on1 meetings using a Psychological Safety x Responsibility framework. Use when preparing for a 1on1, noticing behavioral changes, or planning a difficult conversation with a report.
-argument-hint: "[member-name]"
+argument-hint: '[member-name]'
 disable-model-invocation: true
 allowed-tools: AskUserQuestion, Glob, Grep, Read
 ---
