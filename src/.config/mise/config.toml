@@ -38,7 +38,7 @@ minimum_release_age_excludes = ["claude-code", "codex", "opencode"]
 
 [tools]
 ast-grep = "0.44.0"
-aube = "1.24.0"
+aube = "1.25.0"
 carapace = "1.7.1"
 claude-code = "2.1.191"
 codex = "0.142.0"
@@ -57,7 +57,7 @@ node = "24.18.0"
 "npm:agent-browser" = "0.29.1"
 "npm:ccusage" = "20.0.14"
 ollama = "0.30.10"
-opencode = "1.17.10"
+opencode = "1.17.11"
 "pipx:git+https://github.com/NousResearch/hermes-agent.git" = "v2026.6.19"
 "pipx:git+https://github.com/github/spec-kit.git" = "v0.11.6"
 pnpm = "11.9.0"
