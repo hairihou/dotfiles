@@ -1,63 +1,32 @@
 ---
 name: devils-advocate
-description: Run parallel advocate/critic analysis on a topic to surface tensions and decision factors. Use when evaluating a decision, challenging an approach, or weighing pros and cons of architecture/technology choices.
+description: Hold both the supporting and the opposing view on something the user has stated — the case for and the case against, argued in parallel — to surface tensions, risks, and decision factors. Use when the user wants a stated idea, decision, or approach examined from both angles at once.
 argument-hint: <topic or decision to evaluate>
 allowed-tools: Agent, Glob, Grep, Read
 ---
 
 # Devil's Advocate
 
-Parallel advocate/critic analysis that surfaces tensions and decision factors for a given topic.
-
-Topic: $ARGUMENTS
+Surface the tensions in $ARGUMENTS by arguing both sides independently, then synthesizing.
 
 ## 1. Gather Context
 
-Search the codebase for code, documentation, and configuration related to the topic (Glob/Grep to locate, Read up to 5 key files). Identify:
+Glob/Grep to locate related code, docs, and config; Read up to 5 key files. Note the current state, constraints, affected systems, and existing patterns.
 
-- Current state and constraints
-- Stakeholders and affected systems
-- Prior art or existing patterns in the codebase
+## 2. Run Both Agents in Parallel
 
-## 2. Run Parallel Sub-agents
-
-Use the Agent tool to launch **both agents simultaneously in a single message** (two Agent tool calls in parallel). Each agent receives the gathered context but cannot see the other's output.
-
-For each agent, read the prompt template from `${CLAUDE_SKILL_DIR}/agents/` and substitute `{{topic}}` and `{{context}}` with actual values.
-
-| Agent    | Prompt file                              |
-| -------- | ---------------------------------------- |
-| Advocate | `${CLAUDE_SKILL_DIR}/agents/advocate.md` |
-| Critic   | `${CLAUDE_SKILL_DIR}/agents/critic.md`   |
+Launch the advocate and critic as two Agent calls in a single message — each gets the gathered context but is blind to the other's output, so neither side anchors to the other. Read each prompt from `${CLAUDE_SKILL_DIR}/agents/advocate.md` and `critic.md`, substituting `{{topic}}` and `{{context}}`.
 
 ## 3. Synthesize
 
-After both agents return, combine their outputs into the following format. Do not editorialize — present both sides faithfully, then identify where they conflict.
+Present both outputs faithfully — no editorializing — then where they conflict:
 
-### Output Format
-
-```markdown
-## Advocate
-
-[Advocate agent output — arguments in favor]
-
-## Critic
-
-[Critic agent output — arguments against, risks, alternatives]
-
-## Key Tensions
-
-| Advocate claims | Critic claims |
-| --------------- | ------------- |
-| [Position A]    | [Counter A]   |
-
-## Decision Factors
-
-[What information or validation would resolve each tension — actionable next steps]
-```
+- **Advocate** / **Critic**: each side's argument as returned
+- **Key Tensions**: a table pairing each claim against its counter
+- **Decision Factors**: what information or validation would resolve each tension — the actionable part
 
 ## Common Mistakes
 
-- Topic too broad (e.g., "frontend strategy" → narrow to "adopting React Server Components for the dashboard")
-- Editorializing in synthesis — present both agents' outputs faithfully before identifying tensions
-- Ignoring Decision Factors — the actionable next steps are the most valuable part, not just the debate itself
+- Topic too broad — narrow "frontend strategy" to "adopting React Server Components for the dashboard"
+- Editorializing before both sides are presented faithfully
+- Treating the debate as the output — the Decision Factors are

@@ -1,6 +1,6 @@
 ---
 name: socratic
-description: Interview the user one question at a time, each with a recommended answer where one is defensible, to turn a half-formed requirement or undecided approach into an implementation-ready design while the user keeps every decision. Use when unsettled decisions remain and the user signals they want to think a plan through together rather than have it built outright; also when they want their own plan pressure-tested decision-by-decision. Not for plain build requests, one-shot critique, parallel pro/con analysis, or rubber-stamping a finished plan.
+description: Interview the user one question at a time to turn a half-formed idea into a plan they own. Use when the user muses a tentative idea of their own ("maybe I should X", "I'm thinking of X") rather than asking for a verdict — develop it by questioning, not by recommending; also for pressure-testing a plan decision-by-decision. Not for explicit requests for a recommendation, plain build requests, or rubber-stamping a finished plan.
 argument-hint: <requirement or plan to interrogate>
 allowed-tools: Glob, Grep, Read
 ---
@@ -11,7 +11,7 @@ Interrogate a requirement or plan until its shaping decisions are settled. The u
 
 Target: $ARGUMENTS — if empty, the requirement under discussion.
 
-- One question at a time; wait for the reply — batching hands the design back as homework. Recommend an answer only where a defensible default exists, with the reason behind it; for a genuine judgment call, lay out the trade-off instead of a pick.
+- One question at a time; wait for the reply — batching hands the design back as homework. Draw the design out of the user rather than supplying it: probe the assumption under their idea, ask for a definition where a term is vague, follow each answer to its implications, and surface contradictions when answers collide. Don't recommend an answer; for a genuine judgment call, lay out the trade-off and let the user pick.
 - If the codebase settles a question, investigate and report instead of asking.
 - Go depth-first: settle each decision before the ones depending on it. Park questions needing a prototype or real data — name them and move on.
 

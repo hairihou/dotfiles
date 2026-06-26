@@ -13,6 +13,7 @@ Enumerate cases via established QA techniques before writing test code. Without 
 2. Enumerate concrete cases under each, as a flat list or table (not prose)
 3. Generate one test per case; name the test after the case, not the function under test
 4. Re-read the enumeration; any case without a matching test is a gap
+5. Tie each case to the code that justifies it — a branch, transition, type, or constraint. If no such code can be located, do not invent the case; mark it `needs source verification` so unverified cases stay distinct from confirmed ones
 
 Skip enumeration when no input partition, transition, or condition combination is worth naming — typically trivial accessors and identity-like wrappers. Boundary-sensitive pure functions (clamp, normalize, parse-with-range) still warrant BVA even if syntactically single-branch.
 
