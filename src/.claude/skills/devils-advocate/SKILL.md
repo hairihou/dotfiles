@@ -29,4 +29,4 @@ Present both outputs faithfully — no editorializing — then where they confli
 
 - Topic too broad — narrow "frontend strategy" to "adopting React Server Components for the dashboard"
 - Editorializing before both sides are presented faithfully
-- Treating the debate as the output — the Decision Factors are
+- Treating the debate as the output — Decision Factors are the deliverable
