@@ -11,6 +11,8 @@
     "angular": true,
     "dockerfile": true,
     "git-firefly": true,
+    "html": true,
+    "kotlin": true,
     "lua": true,
     "oxc": true,
     "toml": true,
