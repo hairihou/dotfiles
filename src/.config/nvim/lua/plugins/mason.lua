@@ -11,7 +11,7 @@ return {
         "gopls",
         "lua_ls",
         "oxlint",
-        "ts_ls",
+        "vtsls",
         "vue_ls",
       },
     },
