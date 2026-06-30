@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-readonly CLEAN_DIRS=(
+readonly XDG_DIRS=(
   "${XDG_CONFIG_HOME:-$HOME/.config}"
   "${XDG_DATA_HOME:-$HOME/.local/share}"
   "${XDG_STATE_HOME:-$HOME/.local/state}"
@@ -24,22 +24,31 @@ esac
 
 count=0
 
-for dir in "${CLEAN_DIRS[@]}"; do
+remove_link() {
+  local link="$1"
+  if "$dry_run"; then
+    echo "[remove] $link -> $(readlink "$link")"
+  else
+    rm "$link"
+    echo "Removed: $link"
+  fi
+  count=$((count + 1))
+}
+
+while IFS= read -r link; do
+  remove_link "$link"
+done < <(find "$HOME" -maxdepth 1 -type l ! -exec test -e {} \; -print 2>/dev/null)
+
+for dir in "${XDG_DIRS[@]}"; do
   [ -d "$dir" ] || continue
   while IFS= read -r link; do
-    if "$dry_run"; then
-      echo "[remove] $link -> $(readlink "$link")"
-    else
-      rm "$link"
-      echo "Removed: $link"
-    fi
-    count=$((count + 1))
+    remove_link "$link"
   done < <(find "$dir" -not -path '*/.git/*' -type l ! -exec test -e {} \; -print 2>/dev/null)
 done
 
 while true; do
   found=0
-  for dir in "${CLEAN_DIRS[@]}"; do
+  for dir in "${XDG_DIRS[@]}"; do
     [[ -d "$dir" ]] || continue
     while IFS= read -r empty; do
       if "$dry_run"; then
