@@ -40,8 +40,8 @@ minimum_release_age_excludes = ["claude-code", "codex", "opencode"]
 [tools]
 ast-grep = "0.44.0"
 aube = "1.25.1"
-carapace = "1.7.2"
-claude-code = "2.1.197"
+carapace = "1.7.3"
+claude-code = "2.1.198"
 codex = "0.142.5"
 fzf = "0.73.1"
 gh = "2.95.0"
