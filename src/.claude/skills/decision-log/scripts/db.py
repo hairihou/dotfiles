@@ -5,6 +5,7 @@
 """Decision log database operations.
 
 Usage:
+  ./db.py delete <id>
   ./db.py detail <id>
   ./db.py init
   ./db.py insert <date> <repository> <topic> <chosen> <alternatives> <reasoning>
@@ -112,6 +113,23 @@ def _migrate(conn):
         if col not in existing:
             conn.execute(f"ALTER TABLE decisions ADD COLUMN {col} {typedef}")
     conn.commit()
+
+
+def delete(conn, args):
+    row = conn.execute(
+        "SELECT id FROM decisions WHERE id = ?", (args.id,)
+    ).fetchone()
+    if not row:
+        print(f"Error: decision #{args.id} not found.")
+        return
+    detail(conn, args)
+    conn.execute(
+        "UPDATE decisions SET status = 'accepted', superseded_by = NULL WHERE superseded_by = ?",
+        (args.id,),
+    )
+    conn.execute("DELETE FROM decisions WHERE id = ?", (args.id,))
+    conn.commit()
+    print(f"Deleted decision #{args.id}.")
 
 
 def detail(conn, args):
@@ -283,6 +301,10 @@ def _add_insert_args(parser):
 def main():
     parser = argparse.ArgumentParser(description="Decision log database operations")
     sub = parser.add_subparsers(dest="command", required=True)
+    p_delete = sub.add_parser(
+        "delete", help="Delete a single decision record permanently"
+    )
+    p_delete.add_argument("id", type=int, help="Decision ID")
     p_detail = sub.add_parser("detail", help="Show full detail for a decision")
     p_detail.add_argument("id", type=int, help="Decision ID")
     sub.add_parser("init", help="Initialize the database")
@@ -310,6 +332,7 @@ def main():
     conn = get_connection()
     try:
         {
+            "delete": lambda: delete(conn, args),
             "detail": lambda: detail(conn, args),
             "init": lambda: init_db(conn),
             "insert": lambda: insert(conn, args),

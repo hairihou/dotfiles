@@ -1,7 +1,7 @@
 ---
 name: decision-log
 description: Record design/architecture/tooling decisions with alternatives, reasoning, and outcomes for retrospective review. Use when discussing trade-offs, comparing alternatives, finalizing a decision, recalling past decisions, or asking "why did we choose X?"
-argument-hint: '[search|supersede <id>]'
+argument-hint: '[search|supersede <id>|delete <id>]'
 allowed-tools: AskUserQuestion, Bash
 ---
 
@@ -70,6 +70,22 @@ Use when argument starts with "supersede". Never edit an accepted decision — s
 
 4. The script marks the old decision as `superseded` and links it to the new one.
 
+## Mode: Delete
+
+Use when argument starts with "delete". Only for records that should never have existed: mis-recorded entries (trivial, duplicate, wrong repo) or sensitive content that must not persist. A decision that changed is not a mistake — use Supersede.
+
+### Steps
+
+1. Find the target via search; show `detail <id>` output to the user
+2. **Confirm**: Use AskUserQuestion presenting the full record to be permanently deleted
+3. **Delete**:
+
+   ```sh
+   python ${CLAUDE_SKILL_DIR}/scripts/db.py delete <id>
+   ```
+
+The command accepts a single ID only — bulk deletion (date range, repo) is intentionally unsupported; decline such requests and suggest per-record review. If the deleted record had superseded another, the predecessor is restored to `accepted`.
+
 ## Mode: Search
 
 Use when argument contains "search".
@@ -92,6 +108,7 @@ Use when argument contains "search".
 - **reevaluate_when**: The specific condition that should trigger revisiting this decision (e.g., "team grows past 5 people", "latency exceeds 200ms", "library reaches v2.0")
 - **outcome**: Update later via search mode when results are known
 - **supersede**: When a decision changes, never modify the original — use supersede mode to preserve history
+- **delete**: Only for records that should never have existed — a changed decision is superseded, not deleted
 - Escape single quotes in shell arguments: `'it'\''s'`
 
 ## Common Mistakes
