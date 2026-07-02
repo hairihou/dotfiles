@@ -24,9 +24,6 @@
   "file_types": {
     "tailwindcss": ["*.css"],
   },
-  "git_panel": {
-    "dock": "left",
-  },
   "languages": {
     "Python": {
       "format_on_save": "on",
@@ -40,9 +37,6 @@
         "!pyright",
         "...",
       ],
-    },
-    "TypeScript": {
-      "language_servers": ["!eslint", "..."],
     },
   },
   "lsp": {
@@ -69,7 +63,6 @@
   "relative_line_numbers": "enabled",
   "tab_size": 2,
   "terminal": {
-    "dock": "right",
     "option_as_meta": true,
   },
   "theme": "Vesper",
