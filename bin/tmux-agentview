@@ -13,7 +13,9 @@ if "TMUX" not in os.environ:
 AGENTS = ("claude", "codex", "opencode")
 RESET = "\033[0m"
 SECONDARY = "\033[2m"
+SUCCESS = "\033[32m"
 WARNING = "\033[33m"
+STATE_ORDER = (WARNING, SUCCESS, SECONDARY)
 
 panes = subprocess.run(
     [
@@ -21,7 +23,10 @@ panes = subprocess.run(
         "list-panes",
         "-a",
         "-F",
-        "#{pane_id}\t#{session_name}\t#{pane_current_command}\t#{pane_title}",
+        "#{pane_id}\t#{session_name}\t#{pane_current_command}"
+        "\t#{&&:#{&&:#{window_active},#{session_attached}},"
+        "#{||:#{==:#{window_zoomed_flag},0},#{pane_active}}}"
+        "\t#{@agentview_seen}\t#{pane_title}",
     ],
     capture_output=True,
     text=True,
@@ -30,20 +35,33 @@ panes = subprocess.run(
 
 rows = []
 for line in panes.splitlines():
-    pane_id, session, command, title = line.split("\t", 3)
+    pane_id, session, command, visible, seen, title = line.split("\t", 5)
     agent = next((a for a in AGENTS if command.startswith(a)), None)
     if agent is None:
         continue
     running = "⠀" <= title[:1] <= "⣿"
+    color = SUCCESS if running else SECONDARY
     summary = ""
     if agent == "claude":
-        summary = title[1:].lstrip() if running or title[:1] == "✳" else title
+        if running or title[:1] == "✳":
+            summary = title[1:].lstrip()
+        else:
+            summary = title
+        if title[:1] == "✳" and summary != "Claude Code":
+            color = WARNING
     elif agent == "codex":
         summary = title[1:].lstrip() if running else title
+        if not running and "Action Required" in title:
+            color = WARNING
+            summary = title.split(" | ", 1)[1] if " | " in title else title
     elif agent == "opencode":
         prefix = "OC | "
         summary = title[len(prefix) :] if title.startswith(prefix) else ""
-    rows.append((pane_id, session, agent, summary, WARNING if running else SECONDARY))
+    if color == WARNING and (visible == "1" or title == seen):
+        color = SECONDARY
+    rows.append((pane_id, session, agent, summary, color))
+
+rows.sort(key=lambda r: STATE_ORDER.index(r[4]))
 
 if not rows:
     print("No agent panes")
