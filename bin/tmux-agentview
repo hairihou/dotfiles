@@ -38,6 +38,9 @@ for line in panes.splitlines():
     summary = ""
     if agent == "claude":
         summary = title[1:].lstrip() if running or title[:1] == "✳" else title
+    elif agent == "opencode":
+        prefix = "OC | "
+        summary = title[len(prefix) :] if title.startswith(prefix) else ""
     rows.append((pane_id, session, agent, summary, WARNING if running else SECONDARY))
 
 if not rows:
