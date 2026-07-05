@@ -102,7 +102,9 @@ bindkey '^r' fzf-history
 
 fzf-tmux-attach() {
   TRAPINT() { :; }
-  local session=$(tmux list-sessions -F '#{session_name}' 2>/dev/null | fzf --layout=reverse)
+  local fmt="#{session_name}	"$'\e[38;5;8m'"#{pane_current_path}"$'\e[m'
+  local selected=$(tmux list-sessions -F "$fmt" 2>/dev/null | fzf --layout=reverse --ansi --tabstop=16)
+  local session="${selected%%	*}"
   if [[ -n "$session" ]]; then
     BUFFER="tmux attach -t ${(q)session}"
     zle accept-line
