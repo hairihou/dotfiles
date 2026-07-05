@@ -27,6 +27,3 @@ palette = 14=#53eafd
 palette = 15=#ffffff
 selection-background = #364153
 selection-foreground = #f3f4f6
-window-height = 48
-window-save-state = always
-window-width = 196
