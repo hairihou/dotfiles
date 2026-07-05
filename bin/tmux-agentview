@@ -38,6 +38,8 @@ for line in panes.splitlines():
     summary = ""
     if agent == "claude":
         summary = title[1:].lstrip() if running or title[:1] == "✳" else title
+    elif agent == "codex":
+        summary = title[1:].lstrip() if running else title
     elif agent == "opencode":
         prefix = "OC | "
         summary = title[len(prefix) :] if title.startswith(prefix) else ""
