@@ -2,10 +2,14 @@
 # /// script
 # requires-python = ">=3.14"
 # ///
+import json
 import os
+import re
+import sqlite3
 import subprocess
 import sys
 import time
+from pathlib import Path
 
 if "TMUX" not in os.environ:
     sys.exit("Error: Not inside a tmux session")
@@ -16,6 +20,121 @@ SECONDARY = "\033[2m"
 SUCCESS = "\033[32m"
 WARNING = "\033[33m"
 STATE_ORDER = (WARNING, SUCCESS, SECONDARY)
+TAIL_BYTES = 262144
+
+
+def tail_entries(path):
+    with open(path, "rb") as f:
+        f.seek(0, os.SEEK_END)
+        f.seek(max(0, f.tell() - TAIL_BYTES))
+        chunk = f.read()
+    for line in reversed(chunk.splitlines()):
+        try:
+            yield json.loads(line)
+        except json.JSONDecodeError:
+            continue
+
+
+def load_claude_sessions():
+    sessions = {}
+    for path in (Path.home() / ".claude" / "sessions").glob("*.json"):
+        try:
+            data = json.loads(path.read_text())
+        except (OSError, json.JSONDecodeError):
+            continue
+        if "pid" in data:
+            sessions[data["pid"]] = data
+    return sessions
+
+
+def claude_session(pane_pid, sessions):
+    stack = [int(pane_pid)]
+    while stack:
+        pid = stack.pop()
+        if pid in sessions:
+            return sessions[pid]
+        children = subprocess.run(
+            ["pgrep", "-P", str(pid)], capture_output=True, text=True
+        ).stdout.split()
+        stack.extend(int(c) for c in children)
+    return None
+
+
+def model_from_transcript(path):
+    if not path.exists():
+        return ""
+    for entry in tail_entries(path):
+        message = entry.get("message")
+        if isinstance(message, dict) and message.get("model"):
+            return message["model"]
+    return ""
+
+
+def claude_model(session, cwd):
+    if session:
+        transcript = (
+            Path.home() / ".claude" / "projects"
+            / re.sub(r"[^A-Za-z0-9-]", "-", session["cwd"])
+            / f"{session['sessionId']}.jsonl"
+        )
+        model = model_from_transcript(transcript)
+        if model:
+            return model
+    project = Path.home() / ".claude" / "projects" / re.sub(r"[^A-Za-z0-9-]", "-", cwd)
+    files = sorted(project.glob("*.jsonl"), key=lambda p: p.stat().st_mtime, reverse=True)
+    for path in files[:5]:
+        model = model_from_transcript(path)
+        if model:
+            return model
+    return ""
+
+
+def codex_model(cwd):
+    sessions = Path.home() / ".codex" / "sessions"
+    files = sorted(sessions.glob("*/*/*/*.jsonl"), key=lambda p: p.stat().st_mtime, reverse=True)
+    for path in files[:20]:
+        with open(path, encoding="utf-8") as f:
+            try:
+                meta = json.loads(f.readline())
+            except json.JSONDecodeError:
+                continue
+        if (meta.get("payload") or {}).get("cwd") != cwd:
+            continue
+        for entry in tail_entries(path):
+            model = (entry.get("payload") or {}).get("model")
+            if model:
+                return model
+        return ""
+    return ""
+
+
+def opencode_model(cwd):
+    db = Path.home() / ".local" / "share" / "opencode" / "opencode.db"
+    try:
+        with sqlite3.connect(f"file:{db}?mode=ro", uri=True) as con:
+            row = con.execute(
+                "SELECT json_extract(model, '$.id') FROM session"
+                " WHERE directory = ? AND parent_id IS NULL"
+                " ORDER BY time_updated DESC LIMIT 1",
+                (cwd,),
+            ).fetchone()
+    except sqlite3.Error:
+        return ""
+    return (row and row[0]) or ""
+
+
+MODEL_LOOKUPS = {"codex": codex_model, "opencode": opencode_model}
+
+
+def has_open_prompt(pane_id):
+    screen = subprocess.run(
+        ["tmux", "capture-pane", "-p", "-t", pane_id],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
+    return re.search(r"^\s*❯ \d+\.", screen, re.MULTILINE) is not None
+
 
 panes = subprocess.run(
     [
@@ -23,7 +142,7 @@ panes = subprocess.run(
         "list-panes",
         "-a",
         "-F",
-        "#{pane_id}\t#{session_name}\t#{pane_current_command}"
+        "#{pane_id}\t#{pane_pid}\t#{session_name}\t#{pane_current_command}\t#{pane_current_path}"
         "\t#{&&:#{&&:#{window_active},#{session_attached}},"
         "#{||:#{==:#{window_zoomed_flag},0},#{pane_active}}}"
         "\t#{@agentview_seen}\t#{pane_title}",
@@ -33,9 +152,10 @@ panes = subprocess.run(
     check=True,
 ).stdout
 
+claude_sessions = load_claude_sessions()
 rows = []
 for line in panes.splitlines():
-    pane_id, session, command, visible, seen, title = line.split("\t", 5)
+    pane_id, pane_pid, session, command, path, visible, seen, title = line.split("\t", 7)
     agent = next((a for a in AGENTS if command.startswith(a)), None)
     if agent is None:
         continue
@@ -59,9 +179,16 @@ for line in panes.splitlines():
         summary = title[len(prefix) :] if title.startswith(prefix) else ""
     if color == WARNING and (visible == "1" or title == seen):
         color = SECONDARY
-    rows.append((pane_id, session, agent, summary, color))
+    if agent == "claude" and not running and color != WARNING and has_open_prompt(pane_id):
+        color = WARNING
+    if agent == "claude":
+        model = claude_model(claude_session(pane_pid, claude_sessions), path)
+    else:
+        model = MODEL_LOOKUPS[agent](path)
+    model = model.removeprefix(f"{agent}-")
+    rows.append((pane_id, session, agent, model, summary, color))
 
-rows.sort(key=lambda r: STATE_ORDER.index(r[4]))
+rows.sort(key=lambda r: STATE_ORDER.index(r[5]))
 
 if not rows:
     print("No agent panes")
@@ -70,11 +197,15 @@ if not rows:
 
 session_width = max(len(r[1]) for r in rows)
 agent_width = max(len(r[2]) for r in rows)
-entries = [
-    f"{pane_id}\t{color}●{RESET} {session:<{session_width}}  "
-    f"{SECONDARY}{agent:<{agent_width}}{f' - {summary}' if summary else ''}{RESET}"
-    for pane_id, session, agent, summary, color in rows
-]
+model_width = max(len(r[3]) for r in rows)
+entries = []
+for pane_id, session, agent, model, summary, color in rows:
+    label = f"{agent:<{agent_width}}"
+    if model_width:
+        label += f" {model:<{model_width}}"
+    if summary:
+        label += f" - {summary}"
+    entries.append(f"{pane_id}\t{color}●{RESET} {session:<{session_width}}  {SECONDARY}{label}{RESET}")
 
 fzf = subprocess.run(
     [
