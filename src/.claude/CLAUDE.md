@@ -18,7 +18,7 @@
 
 ## Code Style
 
-- Comments: default to none; warranted only for hidden constraints (undocumented API quirk, required call ordering, external bug workaround) — design rationale belongs in PR description / commit message / decision log, not source files
+- Comments: default to none; warranted only for hidden constraints (undocumented API quirk, required call ordering, external bug workaround) — state the constraint, never what the code does. Design rationale goes in PR / commit / decision log, not source
 - Ordering (code, documentation): semantic hierarchy (main rule → exceptions/modifiers → details) first; alphabetical only as tiebreaker among same-level peers
   - Example: required fields → optional fields; public API → internal helpers; core behavior → edge cases
 
