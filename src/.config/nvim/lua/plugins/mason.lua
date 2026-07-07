@@ -8,6 +8,7 @@ return {
     dependencies = { "mason-org/mason.nvim" },
     opts = {
       ensure_installed = {
+        "angularls",
         "gopls",
         "lua_ls",
         "oxlint",

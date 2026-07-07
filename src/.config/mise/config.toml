@@ -27,8 +27,8 @@ AppleFnUsageType = 0
 name = "ss"
 
 [dotfiles]
-"~/.claude/**" = { source = "~/dotfiles/src/.claude/**", mode = "symlink-each" }
-"~/.config/**" = { source = "~/dotfiles/src/.config/**", mode = "symlink-each" }
+"~/.claude" = { source = "~/dotfiles/src/.claude", mode = "symlink-each" }
+"~/.config" = { source = "~/dotfiles/src/.config", mode = "symlink-each" }
 "~/.npmrc" = { source = "~/dotfiles/src/.npmrc" }
 "~/.zshrc" = { source = "~/dotfiles/src/.zshrc" }
 

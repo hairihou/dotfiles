@@ -40,14 +40,6 @@ Extend theme:
 }
 ```
 
-## Dark Mode
-
-Light mode first, then `dark:` variants:
-
-```html
-<div class="bg-white dark:bg-black"></div>
-```
-
 ## Gradients
 
 ```html
@@ -62,18 +54,6 @@ Light mode first, then `dark:` variants:
 
 <!-- Conic -->
 <div class="bg-conic from-red-500 via-yellow-500 to-red-500"></div>
-```
-
-## Responsive
-
-Only add breakpoint variants when values change:
-
-```html
-<!-- Bad: redundant -->
-<div class="px-4 md:px-4 lg:px-8"></div>
-
-<!-- Good -->
-<div class="px-4 lg:px-8"></div>
 ```
 
 ## Spacing

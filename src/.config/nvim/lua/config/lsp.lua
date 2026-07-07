@@ -7,7 +7,7 @@ vim.diagnostic.config({
 vim.lsp.config("*", {
   root_markers = { ".git" },
 })
-vim.lsp.enable({ "gopls", "lua_ls", "oxlint", "ty", "vtsls", "vue_ls" })
+vim.lsp.enable({ "angularls", "gopls", "lua_ls", "oxlint", "ty", "vtsls", "vue_ls" })
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("my.lsp", {}),
   callback = function(ev)

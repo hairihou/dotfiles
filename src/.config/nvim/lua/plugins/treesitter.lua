@@ -5,7 +5,7 @@ return {
   lazy = false,
   config = function()
     local ensure = {
-      "bash", "css", "diff", "git_config", "gitcommit", "go", "gomod", "graphql",
+      "angular", "bash", "css", "diff", "git_config", "gitcommit", "go", "gomod", "graphql",
       "html", "json", "lua", "luadoc", "markdown", "markdown_inline",
       "python", "query", "toml", "tsx", "typescript", "vim", "vimdoc", "vue", "yaml",
     }
