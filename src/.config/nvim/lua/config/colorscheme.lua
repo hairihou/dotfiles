@@ -60,7 +60,7 @@ hl("DiagnosticUnderlineHint", { undercurl = true, sp = theme.gray500 })
 -- mini.diff
 hl("MiniDiffSignAdd", { fg = theme.emerald400 })
 hl("MiniDiffSignChange", { fg = theme.blue400 })
-hl("MiniDiffSignDelete", { fg = theme.indigo400 })
+hl("MiniDiffSignDelete", { fg = theme.rose400 })
 -- mini.icons
 for _, name in ipairs({
   "MiniIconsAzure",

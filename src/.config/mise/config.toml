@@ -37,12 +37,16 @@ experimental = true
 github.use_git_credentials = true
 minimum_release_age_excludes = ["claude-code", "codex", "opencode"]
 
+[tasks.tmux-path]
+description = "Sync tmux server PATH after mise bumps"
+run = 'tmux set-environment -g PATH "$PATH"'
+
 [tools]
 ast-grep = "0.44.1"
-aube = "1.25.2"
+aube = "1.26.0"
 carapace = "1.7.3"
 claude-code = "2.1.203"
-codex = "0.142.5"
+codex = "latest"
 fzf = "0.74.0"
 gh = "2.96.0"
 ghq = "1.10.1"
