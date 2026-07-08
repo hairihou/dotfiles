@@ -25,8 +25,8 @@
 ## Workflow
 
 - Underspecified requirements/scope: ask before implementing — do not proceed on silent assumptions for non-trivial commitments
-- Tests-first for behavior changes (new logic, bug fixes, behavior modifications): write the failing test before implementation. Skip for non-behavioral changes: config, docs, simple refactors (rename/format/comment removal)
 - `.scratch/` is git-ignored globally (core.excludesFile); use it freely for throwaway notes and working files without verifying ignore status or asking
+  - Machine-local guarantee — never reference `.scratch/` in portable artifacts (skills, rules, repository CLAUDE.md, scripts)
 
 ## Communication Style
 
@@ -36,6 +36,6 @@
 ## Git Conventions
 
 - Type vocabulary (shared across Issue / Branch / Commit): Conventional Commits (build, chore, ci, docs, feat, fix, perf, refactor, style, test)
-- Issue / Commit: `<type>(<subject>): <description>` (e.g., `fix(api): 429 responses on batch endpoint`, `feat(auth): add OAuth2 support`)
+- Issue / Commit: `<type>(<scope>): <description>` (e.g., `fix(api): 429 responses on batch endpoint`, `feat(auth): add OAuth2 support`)
 - Branch: `[#<number>_]<type>/<description>` — issue number prefix when an issue exists, omit otherwise (e.g., `#42_feat/add-login`, `fix/cert-expiry`)
 - Commit message: use plain text descriptions instead of `@` prefixed tags (`@link`, `@see`, `@todo`, `@param`) — they trigger unwanted mentions on GitHub

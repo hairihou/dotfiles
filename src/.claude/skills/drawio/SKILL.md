@@ -31,7 +31,7 @@ Check the user's request for a format preference. Examples:
 - `/drawio svg: ER diagram` → `er-diagram.drawio.svg`
 - `/drawio pdf architecture overview` → `architecture-overview.drawio.pdf`
 
-If no format is mentioned, just write the `.drawio` file and open it in draw.io. The user can always ask to export later.
+If no format is mentioned, just write the `.drawio` file. The user can always ask to export later.
 
 ### Supported export formats
 
@@ -203,7 +203,7 @@ Load `references/xml-reference.md` (relative to this skill file) ONLY when the d
 - Dark mode color tuning, tags, metadata, or multi-page diagrams
 - Custom edge routing beyond the default ELK router
 
-For all other cases, the templates above plus the Critical rules cover what you need. Loading the full reference (485 lines) for a simple diagram wastes context.
+For all other cases, the templates above plus the Critical rules cover what you need. Loading the full reference for a simple diagram wastes context.
 
 ## Troubleshooting
 

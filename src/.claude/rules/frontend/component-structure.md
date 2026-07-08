@@ -48,7 +48,7 @@ const handleSubmit = () => { ... }
 - Effects auto-track signal dependencies
 - Use `untracked()` to read signals without tracking
 - Cleanup via `onCleanup` callback inside effect
-- Avoid writing to signals inside effects (use `allowSignalWrites` only when necessary)
+- Avoid writing to signals inside effects — derive state with `computed` or `linkedSignal` instead
 
 ---
 

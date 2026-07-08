@@ -11,7 +11,7 @@ allowed-tools: Bash
 
 # imagegen
 
-Generate or edit an image via Codex's built-in image generation. Claude Code cannot generate images itself; this delegates the generation to `codex exec` and places the result at a target path.
+Generate or edit an image via Codex's built-in image generation, placing the result at a target path.
 
 Runtime: `${CLAUDE_SKILL_DIR}/scripts/imagegen.py` — it runs Codex, finds the generated PNG, and copies it to the output path. Do not reimplement this inline.
 
