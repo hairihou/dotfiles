@@ -103,7 +103,6 @@
     "claude-api@anthropic-agent-skills": true,
     "claude-md-management@claude-plugins-official": true,
     "codex@openai-codex": true,
-    "cosense-cli@cosense-cli": true,
     "figma@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "kotlin-lsp@claude-plugins-official": true,
@@ -122,12 +121,6 @@
         "repo": "anthropics/skills"
       }
     },
-    "cosense-cli": {
-      "source": {
-        "source": "github",
-        "repo": "helpfeel/cosense-cli"
-      }
-    },
     "googlechrome": {
       "source": {
         "source": "github",
@@ -142,6 +135,7 @@
     }
   },
   "language": "japanese",
+  "advisorModel": "fable",
   "voice": {
     "enabled": true,
     "mode": "hold"
