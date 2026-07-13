@@ -57,9 +57,6 @@
       },
     },
   },
-  "project_panel": {
-    "dock": "left",
-  },
   "relative_line_numbers": "enabled",
   "tab_size": 2,
   "terminal": {
