@@ -1,21 +1,19 @@
 ---
-name: test-design-perspectives
+name: test-perspectives
 description: Use when writing or expanding tests for code with branching conditions, state transitions, input boundaries, or operational failure modes.
 ---
 
-# Test Design Perspectives
+# Test Perspectives
 
-Enumerate cases via established QA techniques before writing test code. Without this step, AI-written tests skew to happy paths and miss boundaries, condition combinations, illegal transitions, and operational failures.
+Enumerate cases via established QA techniques before writing test code; without this step, AI-written tests skew to happy paths and miss boundaries, condition combinations, illegal transitions, and operational failures.
 
 ## Workflow
 
 1. Pick the applicable techniques below — most code needs two or three, not all six
-2. Enumerate concrete cases under each, as a flat list or table (not prose)
-3. Generate one test per case; name the test after the case, not the function under test
-4. Re-read the enumeration; any case without a matching test is a gap
-5. Tie each case to the code that justifies it — a branch, transition, type, or constraint. If no such code can be located, do not invent the case; mark it `needs source verification` so unverified cases stay distinct from confirmed ones
-
-Skip enumeration when no input partition, transition, or condition combination is worth naming — typically trivial accessors and identity-like wrappers. Boundary-sensitive pure functions (clamp, normalize, parse-with-range) still warrant BVA even if syntactically single-branch.
+2. Enumerate concrete cases under one `## Test perspectives` heading, one subsection per applied technique, each a flat list or table (not prose)
+3. Tie each case to the code that justifies it — a branch, transition, type, or constraint. If no such code can be located, do not invent the case; mark it `needs source verification`
+4. Generate one test per case; name the test after the case, not the function under test
+5. Re-read the enumeration; any case without a matching test is a gap
 
 ## Techniques
 
@@ -67,8 +65,6 @@ Failure patterns from production experience, not from the spec.
 - Clock skew, leap second, year boundary
 - Network partial failure (request sent, response lost)
 
-Extend per project as incidents occur.
-
 ### Checklist by Surface Type
 
 - **HTTP endpoint:** auth required, auth missing, auth wrong scope, malformed body, oversized body, unsupported content-type, idempotency, rate limit
@@ -77,13 +73,9 @@ Extend per project as incidents occur.
 - **Database write:** unique constraint, foreign key, transaction rollback, concurrent update conflict
 - **External API call:** timeout, 4xx, 5xx, malformed response, schema drift
 
-## Output Format
-
-Emit the enumeration before any test code, under one `## Test perspectives` heading with one subsection per applied technique. Each subsection is a list or table — no prose. Then generate the tests.
-
 ## When Not to Use
 
-- Pure utility functions with no branches
+- No input partition, transition, or condition combination worth naming — typically trivial accessors and identity-like wrappers. Boundary-sensitive pure functions (clamp, normalize, parse-with-range) still warrant BVA even if syntactically single-branch
 - Snapshot or golden-file tests asserting against a recorded baseline
 - Property-based tests where the property covers the partition
 - Hot fixes where the reproduction case is the only required test

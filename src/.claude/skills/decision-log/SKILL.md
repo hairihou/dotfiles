@@ -107,8 +107,6 @@ Use when argument contains "search".
 - **consequences**: What happens as a result of this decision — operational impact, trade-offs accepted, follow-up work required. Distinct from reasoning (why) — consequences describe what follows (then what)
 - **reevaluate_when**: The specific condition that should trigger revisiting this decision (e.g., "team grows past 5 people", "latency exceeds 200ms", "library reaches v2.0")
 - **outcome**: Update later via search mode when results are known
-- **supersede**: When a decision changes, never modify the original — use supersede mode to preserve history
-- **delete**: Only for records that should never have existed — a changed decision is superseded, not deleted
 - Escape single quotes in shell arguments: `'it'\''s'`
 
 ## Common Mistakes
