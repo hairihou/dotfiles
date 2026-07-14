@@ -116,6 +116,10 @@ bindkey '^\]^\]' fzf-tmux-attach
 
 eval "$(mise activate zsh)"
 
+if [[ -n "$GHOSTTY_RESOURCES_DIR" ]]; then
+  source "$GHOSTTY_RESOURCES_DIR/shell-integration/zsh/ghostty-integration"
+fi
+
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 zstyle ':completion:*' format $'\e[2mCompleting %d\e[m'
 zstyle ':completion:*' menu select
