@@ -4,10 +4,6 @@
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
     "DISABLE_AUTOUPDATER": "1"
   },
-  "attribution": {
-    "commit": "",
-    "pr": ""
-  },
   "permissions": {
     "deny": [
       "Bash(brew *)",
@@ -31,10 +27,6 @@
     "ask": [
       "Bash(git push *)"
     ]
-  },
-  "model": "claude-fable-5[1m]",
-  "skillOverrides": {
-    "claude-api:webapp-testing": "user-invocable-only"
   },
   "hooks": {
     "PermissionRequest": [
@@ -95,10 +87,6 @@
       }
     ]
   },
-  "statusLine": {
-    "type": "command",
-    "command": "claude-statusline"
-  },
   "enabledPlugins": {
     "claude-api@anthropic-agent-skills": true,
     "claude-md-management@claude-plugins-official": true,
@@ -134,8 +122,20 @@
       }
     }
   },
-  "language": "japanese",
+  "statusLine": {
+    "type": "command",
+    "command": "claude-statusline"
+  },
+  "skillOverrides": {
+    "claude-api:webapp-testing": "user-invocable-only"
+  },
   "advisorModel": "fable",
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "model": "claude-fable-5[1m]",
+  "language": "japanese",
   "voice": {
     "enabled": true,
     "mode": "hold"
