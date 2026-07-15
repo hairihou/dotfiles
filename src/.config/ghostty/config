@@ -1,8 +1,7 @@
 background = #101828
 cursor-color = #f9fafb
 cursor-text = #101828
-font-family = UDEV Gothic 35NFLG
-font-feature = -calt, -clig, -liga
+font-family = UDEV Gothic 35NF
 font-size = 12
 foreground = #f3f4f6
 keybind = alt+left=unbind
