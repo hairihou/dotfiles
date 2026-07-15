@@ -1,5 +1,5 @@
 ---
-paths: "**/*.{component.ts,css,html,tsx,vue}"
+paths: ["**/*.{component.ts,css,html,tsx,vue}"]
 ---
 
 # Accessibility

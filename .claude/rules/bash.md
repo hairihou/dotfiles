@@ -1,5 +1,5 @@
 ---
-paths: "{bin/*,install.sh}"
+paths: ["bin/*", "install.sh"]
 ---
 
 # Bash Rules

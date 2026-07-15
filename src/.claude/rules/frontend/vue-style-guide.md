@@ -1,5 +1,5 @@
 ---
-paths: "**/*.vue"
+paths: ["**/*.vue"]
 ---
 
 # Vue Style Guide
