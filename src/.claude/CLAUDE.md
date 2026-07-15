@@ -37,5 +37,6 @@
 
 - Type vocabulary (shared across Issue / Branch / Commit): Conventional Commits (build, chore, ci, docs, feat, fix, perf, refactor, style, test)
 - Issue / Commit: `<type>(<scope>): <description>` (e.g., `fix(api): 429 responses on batch endpoint`, `feat(auth): add OAuth2 support`)
+- Issue: `--assignee @me` only when the issue will be worked on immediately; leave backlog/idea issues unassigned
 - Branch: `[#<number>_]<type>/<description>` — issue number prefix when an issue exists, omit otherwise (e.g., `#42_feat/add-login`, `fix/cert-expiry`)
 - Commit message: use plain text descriptions instead of `@` prefixed tags (`@link`, `@see`, `@todo`, `@param`) — they trigger unwanted mentions on GitHub
