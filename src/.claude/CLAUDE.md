@@ -39,4 +39,5 @@
 - Issue / Commit: `<type>(<scope>): <description>` (e.g., `fix(api): 429 responses on batch endpoint`, `feat(auth): add OAuth2 support`)
 - Issue: `--assignee @me` only when the issue will be worked on immediately; leave backlog/idea issues unassigned
 - Branch: `[#<number>_]<type>/<description>` — issue number prefix when an issue exists, omit otherwise (e.g., `#42_feat/add-login`, `fix/cert-expiry`)
-- Commit message: use plain text descriptions instead of `@` prefixed tags (`@link`, `@see`, `@todo`, `@param`) — they trigger unwanted mentions on GitHub
+- GitHub-rendered text (commit message, PR / issue body, review comments): no `@`-prefixed words (`@name`, doc tags like `@todo`, npm scopes like `@scope/pkg`) — GitHub renders them as mentions and notifies unrelated users/orgs; write the bare name instead
+  - **Exception:** deliberate mentions of a specific user/team
