@@ -116,9 +116,7 @@ def _migrate(conn):
 
 
 def delete(conn, args):
-    row = conn.execute(
-        "SELECT id FROM decisions WHERE id = ?", (args.id,)
-    ).fetchone()
+    row = conn.execute("SELECT id FROM decisions WHERE id = ?", (args.id,)).fetchone()
     if not row:
         print(f"Error: decision #{args.id} not found.")
         return
@@ -137,7 +135,7 @@ def detail(conn, args):
     if not row:
         print("No results.")
         return
-    for col, val in zip(ALL_COLUMNS, row):
+    for col, val in zip(ALL_COLUMNS, row, strict=False):
         if val is not None and val != "":
             print(f"{col}: {val}")
 
