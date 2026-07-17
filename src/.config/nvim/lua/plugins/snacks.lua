@@ -11,11 +11,7 @@ return {
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
     { "<leader>fs", function() Snacks.picker.lsp_symbols() end, desc = "Symbols" },
     { "<leader>fw", function() Snacks.picker.grep_word() end, mode = { "n", "x" }, desc = "Grep Word" },
-    { "<leader>gB", function() Snacks.git.blame_line() end, desc = "Git Blame Line" },
-    { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
-    { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
-    { "<leader>go", function() Snacks.gitbrowse() end, mode = { "n", "x" }, desc = "Git Browse" },
-    { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
+    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
   },
   lazy = false,
   opts = {

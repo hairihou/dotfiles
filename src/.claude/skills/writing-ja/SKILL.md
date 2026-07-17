@@ -1,6 +1,6 @@
 ---
 name: writing-ja
-description: 'Revise Japanese developer-facing technical writing — planning/design docs, meeting materials, issue/PR comments and bodies — to read plain and accurate: cut overstatement, coined jargon, filler, and loose paragraph structure. Use when writing or editing such Japanese prose, including small edits to already-drafted or posted text. Not for English, reference docs, or CLI text.'
+description: 'Revise Japanese developer-facing technical writing — planning/design docs, meeting materials, issue/PR text — to read plain and accurate: cut overstatement, coined jargon, and filler; fix loose paragraphs and notation (spacing around half-width alphanumerics). Use when writing or editing such Japanese prose, including small edits to already-drafted or posted text. Not for English, reference docs, or CLI text.'
 argument-hint: '[file-path]'
 allowed-tools: Edit, Read, Write
 ---
@@ -13,10 +13,10 @@ allowed-tools: Edit, Read, Write
 
 ## Process
 
-1. 対象を定める。引数にファイルパスがあれば Read で読み、なければチャットに貼られたテキストを対象にする。
+1. 対象を定める。引数にファイルパスがあれば `Read` で読み、なければチャットに貼られたテキストを対象にする。
 2. 各節の原則を上から順に当てて、直す箇所を拾う。
 3. 元の意味と構成（見出し、コードブロック、図表）を保ったまま、本文だけ書き換える。
-4. ファイルなら Edit / Write で直して変更箇所を報告する。チャットのテキストなら、推敲結果をそのまま出す。
+4. ファイルなら `Edit` / `Write` で直して変更箇所を報告する。チャットのテキストなら、推敲結果をそのまま出す。
 5. 投稿・確定の前に通し、改稿のたびに通し直す。1語・1句の小さな直しほど誇張や造語が再混入しやすい。
 
 ## Don't Overstate
@@ -33,7 +33,7 @@ allowed-tools: Edit, Read, Write
 
 ## Use the Reader's Words
 
-読者がそのまま受け取れる語を使う。判定の順: (1) 読者に通じる定訳や定着した語があればそれを使う、(2) なければ初見で意味が通る素直な語・句に言い換える。技術用語の判定は**言い回し全体を一つの単位**として行う——定型句や複合語（source of truth、baseline）を単語や形態素に分解して部品ごとに訳すと、各部品の訳が正しいためにそれらしく見える存在しない語ができる（真実源・基線）。分解せず、用語全体の定訳を探し、なければ英語のまま書く。カタカナ語は語の一覧で機械的に決めず、どれだけ定着しているかと、周囲の表記（同じ文書・コード・API・分野での表記）との一貫性で、残すか英語にするかを決める。
+読者がそのまま受け取れる語を使う。判定の順: (1) 読者に通じる定訳や定着した語があればそれを使う、(2) なければ初見で意味が通る素直な語・句に言い換える。技術用語の判定は**言い回し全体を一つの単位**として行う。定型句や複合語（source of truth、baseline）を単語や形態素に分解して部品ごとに訳すと、各部品の訳が正しいためにそれらしく見える存在しない語ができる（真実源・基線）。分解せず、用語全体の定訳を探し、なければ英語のまま書く。カタカナ語は語の一覧で機械的に決めず、どれだけ定着しているかと、周囲の表記（同じ文書・コード・API・分野での表記）との一貫性で、残すか英語にするかを決める。
 
 | 型                                                                       | NG → OK                                                        |
 | ------------------------------------------------------------------------ | -------------------------------------------------------------- |
@@ -75,10 +75,18 @@ allowed-tools: Edit, Read, Write
 
 段落は一つのトピックに絞る。先頭の文だけで筋を追える順に置き、前提から結論へ一度で進める（論証を前後に往復させない）。
 
+## One Point per Sentence
+
+一文には一つのことだけを入れる。読点で節をつないで伸びた複文は文を切り、関係は接続詞か語順で示す。主語と述語を近づけ、間に挟まった修飾・条件は前後の文へ出す。
+
 ## Headings
 
 見出しは節の中身を指す素直な言い回しにする。二要素（種別と主題など）を詰め込まない。結論を言い切る「セリフ」にしない。
 
+## Spacing
+
+和文と半角英数字の間に半角スペースを入れない（「APIで取得」「v2へ移行」）。数詞+助数詞も詰める（「1つ」「3件」）。例外は二つ: インラインコードの前後は既存文書がスペースを置いていればそれに合わせる。issue/PR番号参照の直後に和文が続く場合はautolinkが切れないようスペースを挟む（「#12 を修正」）。文書全体が空け表記で統一されたリポジトリでは、その表記に合わせる。
+
 ## Maintenance
 
-表は型の一覧であって、直した語の記録ではない。取りこぼしをこのスキルへ反映するときは、まず既存の行の型に収まるかを確かめ、収まるなら反映しない（例は型ごとに1〜2個で足りる。増やすと表が単語リストへ退化し、表にある語しか拾わなくなる）。既存のどの型でも説明できないときだけ、行を一つ足す。説明文は追記しない。原則で説明できない取りこぼしが出たときに限り、原則の文を書き換える（追記ではなく置換）。セルに収めるために語を圧縮して造語を作らない。セルの文言にも本文と同じ基準を適用する。
+表は型の一覧であって、直した語の記録ではない。取りこぼしをこのスキルへ反映するときは、まず既存の行の型に収まるかを確かめ、収まるなら反映しない（例は型ごとに1〜2個で足りる。増やすと表が単語リストへ退化し、表にある語しか拾わなくなる）。既存のどの型でも説明できないときだけ、行を一つ足す。説明文は追記しない。原則で説明できない取りこぼしが出たときに限り、原則の文を書き換える（追記ではなく置換）。表を持たない節（One Topic per Paragraph、One Point per Sentence、Headings、Spacing）はこの原則文の書き換えだけで反映し、例を並べる表を新設しない。セルに収めるために語を圧縮して造語を作らない。セルの文言にも本文と同じ基準を適用する。
