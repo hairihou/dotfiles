@@ -26,7 +26,6 @@ const handleSubmit = () => { ... }
 ## Reactive Primitives
 
 - Declare in consistent order (predictable execution)
-- Never declare inside conditionals or loops
 - One side effect (useEffect / watch / effect) = one responsibility
 
 ## Spacing
@@ -45,9 +44,6 @@ const handleSubmit = () => { ... }
 
 ### Effect Guidelines
 
-- Effects auto-track signal dependencies
-- Use `untracked()` to read signals without tracking
-- Cleanup via `onCleanup` callback inside effect
 - Avoid writing to signals inside effects — derive state with `computed` or `linkedSignal` instead
 
 ---
@@ -60,10 +56,8 @@ props → external hooks → `useQuery`/`useMutation` → feature blocks → com
 
 ### useEffect Guidelines
 
-- Specify all dependencies used inside the effect
 - Avoid object/array literals in dependency array (use useMemo or extract outside)
 - Prefer multiple small effects over one large effect
-- Cleanup function: cancel subscriptions, timers, and pending requests
 
 ---
 
@@ -71,9 +65,7 @@ props → external hooks → `useQuery`/`useMutation` → feature blocks → com
 
 ### Composables
 
-- Return reactive refs (not raw values) for reactivity preservation
 - Accept refs as parameters when reactivity is needed (`MaybeRef<T>`)
-- Keep composables focused on single responsibility
 
 ### Declaration Order
 
@@ -81,7 +73,5 @@ imports → props/emits → external composables → `useQuery`/`useMutation` �
 
 ### Watch Guidelines
 
-- `watch`: specific reactive sources, lazy by default
-- `watchEffect`: auto-track dependencies, runs immediately
 - Prefer `watch` with explicit sources over `watchEffect` for clarity
 - Always handle cleanup via `onCleanup` parameter

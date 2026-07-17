@@ -25,12 +25,6 @@ onSuccess: (newUser) => {
 };
 ```
 
-### Why
-
-- Mutation response already contains the data needed
-- Extra network request is wasteful
-- Maintains unidirectional data flow: Server → Cache → UI
-
 ### When `invalidateQueries` is Acceptable
 
 - Derived/aggregated data affected
