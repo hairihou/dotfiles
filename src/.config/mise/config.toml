@@ -42,7 +42,7 @@ run = 'tmux set-environment -g PATH "$PATH"'
 
 [tools]
 ast-grep = "0.44.1"
-aube = "1.28.0"
+aube = "1.29.0"
 carapace = "1.7.3"
 claude-code = "2.1.212"
 codex = "0.144.5"
