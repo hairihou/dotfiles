@@ -2,16 +2,9 @@
 
 > [!IMPORTANT]
 > This dotfiles repository is designed for macOS only.
+> Install [mise](https://mise.jdx.dev) first.
 
 ## Setup
-
-Install [mise](https://mise.jdx.dev) first:
-
-```sh
-curl https://mise.run | sh
-```
-
-Then run the installer:
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh | bash
