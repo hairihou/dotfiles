@@ -2,6 +2,7 @@
 
 > [!IMPORTANT]
 > This dotfiles repository is designed for macOS only.
+>
 > Install [mise](https://mise.jdx.dev) first.
 
 ## Setup
@@ -21,18 +22,18 @@ Available globally after setup:
 - `xdgclean [--dry-run]` - Remove broken symlinks (`$HOME` top level, XDG base directories, `~/.claude`) and empty directories (XDG base directories, `~/.claude`)
 - `zhistprune` - Remove `.zsh_history` entries older than 90 days
 
-### Owner / Work
+### Owner Variants
 
-`install.sh` symlinks the Brewfile and gitconfig per machine, chosen by git email: owner machines get the `.owner` variants, work machines get the base files. The base `.gitconfig` reads the git identity (`[user]`) from `~/.gitconfig.local`; `.gitconfig.owner` includes the base and bakes in the owner identity.
+`install.sh` symlinks the Brewfile and gitconfig per machine, chosen by git email: owner machines get the `.owner` variants, other machines get the base files. The base `.gitconfig` reads the git identity (`[user]`) from `~/.gitconfig.local`; `.gitconfig.owner` includes the base and bakes in the owner identity.
 
 ### Syncing
 
 Re-apply after editing `src/` (or re-run `install.sh`):
 
 ```sh
-mise bootstrap macos-defaults apply    # write macOS defaults (log out to fully apply)
 mise dotfiles apply                    # re-create symlinks
 mise dotfiles status                   # show drift between src/ and $HOME
+mise bootstrap macos-defaults apply    # write macOS defaults (log out to fully apply)
 ```
 
 ## Philosophy
