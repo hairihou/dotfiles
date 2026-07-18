@@ -128,7 +128,7 @@ panes = subprocess.run(
         "list-panes",
         "-a",
         "-F",
-        "#{pane_id}\t#{pane_pid}\t#{session_name}\t#{pane_current_command}\t#{pane_current_path}",
+        "#{pane_id}\t#{pane_pid}\t#{session_name}\t#{pane_current_command}\t#{pane_current_path}\t#{pane_title}",
     ],
     capture_output=True,
     text=True,
@@ -145,14 +145,15 @@ for line in subprocess.run(
 
 rows = []
 for line in panes.splitlines():
-    pane_id, pane_pid, session, command, path = line.split("\t", 4)
+    pane_id, pane_pid, session, command, path, title = line.split("\t", 5)
+    title = re.sub(r"^[✳⠀-⣿]\s*", "", title)
     agent = next((a for a in AGENTS if command.startswith(a)), None)
     if agent is None:
         continue
     if agent == "claude":
         info = claude_agent(pane_pid, children, claude_agents) or {}
         color = CLAUDE_COLORS.get(info.get("status"), SECONDARY)
-        summary = info.get("name", "")
+        summary = title or info.get("name", "")
         model = claude_model(info)
     elif agent == "codex":
         model, busy = codex_state(path)
