@@ -61,23 +61,6 @@ def claude_agent(pane_pid, children, agents):
     return None
 
 
-def claude_model(info):
-    if not info:
-        return ""
-    transcript = (
-        Path.home() / ".claude" / "projects"
-        / re.sub(r"[^A-Za-z0-9-]", "-", info["cwd"])
-        / f"{info['sessionId']}.jsonl"
-    )
-    if not transcript.exists():
-        return ""
-    for entry in tail_entries(transcript):
-        message = entry.get("message")
-        if isinstance(message, dict) and message.get("model"):
-            return message["model"]
-    return ""
-
-
 def codex_state(cwd):
     sessions = Path.home() / ".codex" / "sessions"
     files = sorted(sessions.glob("*/*/*/*.jsonl"), key=lambda p: p.stat().st_mtime, reverse=True)
@@ -89,18 +72,12 @@ def codex_state(cwd):
                 continue
         if (meta.get("payload") or {}).get("cwd") != cwd:
             continue
-        model = ""
-        state = ""
         for entry in tail_entries(path):
             payload = entry.get("payload") or {}
-            if not model and payload.get("model"):
-                model = payload["model"]
-            if not state and payload.get("type") in ("task_started", "task_complete", "turn_aborted"):
-                state = payload["type"]
-            if model and state:
-                break
-        return model, state == "task_started"
-    return "", False
+            if payload.get("type") in ("task_started", "task_complete", "turn_aborted"):
+                return payload["type"] == "task_started"
+        return False
+    return False
 
 
 def opencode_state(cwd):
@@ -108,18 +85,18 @@ def opencode_state(cwd):
     try:
         with sqlite3.connect(f"file:{db}?mode=ro", uri=True) as con:
             row = con.execute(
-                "SELECT json_extract(model, '$.id'), title, time_updated FROM session"
+                "SELECT title, time_updated FROM session"
                 " WHERE directory = ? AND parent_id IS NULL"
                 " ORDER BY time_updated DESC LIMIT 1",
                 (cwd,),
             ).fetchone()
     except sqlite3.Error:
-        return "", "", False
+        return "", False
     if not row:
-        return "", "", False
-    model, title, updated = row
+        return "", False
+    title, updated = row
     busy = time.time() * 1000 - (updated or 0) < OPENCODE_BUSY_MS
-    return model or "", title or "", busy
+    return title or "", busy
 
 
 panes = subprocess.run(
@@ -154,42 +131,37 @@ for line in panes.splitlines():
         info = claude_agent(pane_pid, children, claude_agents) or {}
         color = CLAUDE_COLORS.get(info.get("status"), SECONDARY)
         summary = title or info.get("name", "")
-        model = claude_model(info)
     elif agent == "codex":
-        model, busy = codex_state(path)
-        color = SUCCESS if busy else SECONDARY
+        color = SUCCESS if codex_state(path) else SECONDARY
         summary = ""
     else:
-        model, summary, busy = opencode_state(path)
+        summary, busy = opencode_state(path)
         color = SUCCESS if busy else SECONDARY
-    model = model.removeprefix(f"{agent}-")
-    rows.append((pane_id, session, agent, model, summary, color))
+    rows.append((pane_id, session, agent, summary, color))
 
-rows.sort(key=lambda r: STATE_ORDER.index(r[5]))
+rows.sort(key=lambda r: STATE_ORDER.index(r[4]))
 
 if not rows:
     print("No agent panes")
     time.sleep(1)
     sys.exit(0)
 
-session_width = max(len(r[1]) for r in rows)
-agent_width = max(len(r[2]) for r in rows)
-model_width = max(len(r[3]) for r in rows)
 entries = []
-for pane_id, session, agent, model, summary, color in rows:
-    label = f"{agent:<{agent_width}}"
-    if model_width:
-        label += f" {model:<{model_width}}"
+for pane_id, session, agent, summary, color in rows:
+    label = agent
     if summary:
         label += f" - {summary}"
-    entries.append(f"{pane_id}\t{color}●{RESET} {session:<{session_width}}  {SECONDARY}{label}{RESET}")
+    entries.append(f"{pane_id}\t{color}●{RESET} {session}\n  {SECONDARY}{label}{RESET}")
 
 fzf = subprocess.run(
     [
         "fzf",
         "--ansi",
         "--reverse",
-        "--no-sort",
+        "--read0",
+        "--no-input",
+        "--bind",
+        "j:down,k:up,q:abort",
         "--highlight-line",
         "--color",
         "bg+:#1e2939",
@@ -200,7 +172,7 @@ fzf = subprocess.run(
         "--with-nth",
         "2",
     ],
-    input="\n".join(entries),
+    input="\0".join(entries),
     capture_output=True,
     text=True,
 )
@@ -208,4 +180,5 @@ if fzf.returncode != 0:
     sys.exit(0)
 
 target = fzf.stdout.split("\t", 1)[0]
-subprocess.run(["tmux", "switch-client", "-t", target], check=True)
+subprocess.run(["tmux", "select-window", "-t", target], check=True)
+subprocess.run(["tmux", "select-pane", "-t", target], check=True)
