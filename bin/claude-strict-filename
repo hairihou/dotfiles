@@ -4,6 +4,7 @@
 # ///
 import json
 import os
+import re
 import sys
 
 
@@ -45,3 +46,13 @@ try:
     basename.encode("ascii")
 except UnicodeEncodeError:
     deny(f"non-ASCII filename blocked by policy: {basename!r}")
+
+if os.path.exists(path):
+    sys.exit(0)
+
+stem = basename.lstrip(".").partition(".")[0]
+if re.fullmatch(r"[a-z0-9]+(?:[A-Z][A-Za-z0-9]*)+", stem):
+    deny(
+        f"lowerCamelCase filename blocked by policy: {basename!r} "
+        "(use kebab-case or snake_case; PascalCase only for component files)"
+    )

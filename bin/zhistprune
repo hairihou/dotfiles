@@ -21,6 +21,7 @@ class Entry:
     raw: bytes
     body: bytes
 
+
 histfile = pathlib.Path(
     os.environ.get("HISTFILE") or pathlib.Path.home() / ".zsh_history"
 )
