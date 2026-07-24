@@ -1,21 +1,7 @@
-#!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.14"
 # ///
-"""Decision log database operations.
-
-Usage:
-  ./db.py delete <id>
-  ./db.py detail <id>
-  ./db.py init
-  ./db.py insert <date> <repository> <topic> <chosen> <alternatives> <reasoning>
-         [--consequences CONS] [--confidence LEVEL] [--reevaluate-when COND]
-  ./db.py search [--from DATE] [--match KEYWORD] [--repo REPO] [--status STATUS] [--to DATE]
-  ./db.py summary [--limit N]
-  ./db.py supersede <id> <date> <repository> <topic> <chosen> <alternatives> <reasoning>
-         [--consequences CONS] [--confidence LEVEL] [--reevaluate-when COND]
-  ./db.py update-outcome <id> <outcome>
-"""
+"""Decision log database operations."""
 
 import argparse
 import os

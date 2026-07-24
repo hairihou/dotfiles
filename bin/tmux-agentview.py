@@ -47,7 +47,7 @@ def load_claude_agents():
             check=True,
         ).stdout
         return {a["pid"]: a for a in json.loads(out) if "pid" in a}
-    except (OSError, subprocess.SubprocessError, json.JSONDecodeError):
+    except OSError, subprocess.SubprocessError, json.JSONDecodeError:
         return {}
 
 
@@ -177,6 +177,7 @@ fzf = subprocess.run(
     input="\0".join(entries),
     capture_output=True,
     text=True,
+    check=False,
 )
 if fzf.returncode != 0:
     sys.exit(0)

@@ -37,7 +37,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "claude-notify permission-request"
+            "command": "claude-notify.py permission-request"
           }
         ]
       }
@@ -48,11 +48,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "claude-eof"
+            "command": "claude-eof.py"
           },
           {
             "type": "command",
-            "command": "claude-lint"
+            "command": "claude-lint.py"
           }
         ]
       }
@@ -63,7 +63,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "claude-notify ask-user-question"
+            "command": "claude-notify.py ask-user-question"
           }
         ]
       },
@@ -72,7 +72,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "claude-strict-filename"
+            "command": "claude-strict-filename.py"
           }
         ]
       }
@@ -83,7 +83,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "claude-notify stop"
+            "command": "claude-notify.py stop"
           }
         ]
       }
@@ -91,7 +91,7 @@
   },
   "statusLine": {
     "type": "command",
-    "command": "claude-statusline"
+    "command": "claude-statusline.py"
   },
   "enabledPlugins": {
     "claude-api@anthropic-agent-skills": true,
@@ -133,5 +133,6 @@
   "voice": {
     "enabled": true,
     "mode": "hold"
-  }
+  },
+  "skipWorkflowUsageWarning": true
 }

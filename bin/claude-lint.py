@@ -17,7 +17,7 @@ stdin_data = {}
 if not sys.stdin.isatty():
     try:
         stdin_data = json.loads(sys.stdin.read())
-    except (json.JSONDecodeError, ValueError):
+    except json.JSONDecodeError, ValueError:
         pass
 
 file_path = stdin_data.get("tool_input", {}).get("file_path", "")
@@ -48,17 +48,21 @@ def scan() -> tuple[list | None, str]:
         ],
         capture_output=True,
         text=True,
+        check=False,
     )
     try:
         return json.loads(result.stdout), result.stderr.strip()
-    except (json.JSONDecodeError, ValueError):
+    except json.JSONDecodeError, ValueError:
         return None, (result.stdout.strip() or result.stderr.strip())
 
 
 def changed_line_ranges() -> list[tuple[int, int]] | None:
     git = ["git", "-C", str(target.parent)]
     inside = subprocess.run(
-        [*git, "rev-parse", "--is-inside-work-tree"], capture_output=True, text=True
+        [*git, "rev-parse", "--is-inside-work-tree"],
+        capture_output=True,
+        text=True,
+        check=False,
     )
     if inside.stdout.strip() != "true":
         return None
@@ -66,6 +70,7 @@ def changed_line_ranges() -> list[tuple[int, int]] | None:
         [*git, "ls-files", "--error-unmatch", "--", str(target)],
         capture_output=True,
         text=True,
+        check=False,
     )
     if tracked.returncode != 0:
         return [(1, sys.maxsize)]
@@ -73,6 +78,7 @@ def changed_line_ranges() -> list[tuple[int, int]] | None:
         [*git, "diff", "-U0", "HEAD", "--", str(target)],
         capture_output=True,
         text=True,
+        check=False,
     )
     if diff.returncode != 0:
         return [(1, sys.maxsize)]

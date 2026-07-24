@@ -13,8 +13,8 @@ Persistent decision record with alternatives and reasoning. Enables retrospectiv
 
 - Date: !`date "+%Y%m%d"`
 - Repository: !`git rev-parse --show-toplevel` (use basename only, e.g., `dotfiles` not the full path)
-- DB: !`python ${CLAUDE_SKILL_DIR}/scripts/db.py init`
-- Summary: !`python ${CLAUDE_SKILL_DIR}/scripts/db.py summary`
+- DB: !`uv run --script ${CLAUDE_SKILL_DIR}/scripts/db.py init`
+- Summary: !`uv run --script ${CLAUDE_SKILL_DIR}/scripts/db.py summary`
 
 Script: `${CLAUDE_SKILL_DIR}/scripts/db.py`
 
@@ -47,7 +47,7 @@ Use when no argument is provided or argument is not "search".
 4. **Insert**:
 
    ```sh
-   python ${CLAUDE_SKILL_DIR}/scripts/db.py insert '<date>' '<repo>' '<topic>' '<chosen>' '<alternatives>' '<reasoning>' --consequences '<consequences>' --confidence <level> --reevaluate-when '<condition>'
+   uv run --script ${CLAUDE_SKILL_DIR}/scripts/db.py insert '<date>' '<repo>' '<topic>' '<chosen>' '<alternatives>' '<reasoning>' --consequences '<consequences>' --confidence <level> --reevaluate-when '<condition>'
    ```
 
    Omit `--consequences`, `--confidence`, or `--reevaluate-when` if not applicable.
@@ -65,7 +65,7 @@ Use when argument starts with "supersede". Never edit an accepted decision — s
 3. **Insert**:
 
    ```sh
-   python ${CLAUDE_SKILL_DIR}/scripts/db.py supersede <old-id> '<date>' '<repo>' '<topic>' '<chosen>' '<alternatives>' '<reasoning>' --consequences '<consequences>' --confidence <level> --reevaluate-when '<condition>'
+   uv run --script ${CLAUDE_SKILL_DIR}/scripts/db.py supersede <old-id> '<date>' '<repo>' '<topic>' '<chosen>' '<alternatives>' '<reasoning>' --consequences '<consequences>' --confidence <level> --reevaluate-when '<condition>'
    ```
 
 4. The script marks the old decision as `superseded` and links it to the new one.
@@ -81,7 +81,7 @@ Use when argument starts with "delete". Only for records that should never have 
 3. **Delete**:
 
    ```sh
-   python ${CLAUDE_SKILL_DIR}/scripts/db.py delete <id>
+   uv run --script ${CLAUDE_SKILL_DIR}/scripts/db.py delete <id>
    ```
 
 The command accepts a single ID only — bulk deletion (date range, repo) is intentionally unsupported; decline such requests and suggest per-record review. If the deleted record had superseded another, the predecessor is restored to `accepted`.
@@ -96,7 +96,7 @@ Use when argument contains "search".
 2. **Build and run query**: Use only these documented flags — do not invent others (e.g., no `--head`, `--limit`, `--recent`). For "recent decisions", pass `--from <YYYYMMDD>` with a date cutoff.
    - `search` filters: `--repo`, `--match`, `--from`, `--to`, `--status`
    - Other subcommands: `detail <id>`, `update-outcome <id> '<outcome>'`
-   - If unsure, run `python ${CLAUDE_SKILL_DIR}/scripts/db.py search --help` first
+   - If unsure, run `uv run --script ${CLAUDE_SKILL_DIR}/scripts/db.py search --help` first
 3. **Format**: Present results in a readable format
 
 ## Guidelines

@@ -38,7 +38,7 @@ try:
     rate_5h_pct = int(raw_5h) if raw_5h is not None else -1
     raw_7d = data.get("rate_limits", {}).get("seven_day", {}).get("used_percentage")
     rate_7d_pct = int(raw_7d) if raw_7d is not None else -1
-except Exception:
+except Exception:  # noqa: BLE001
     print("claude")
     sys.exit()
 

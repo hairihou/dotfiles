@@ -28,7 +28,7 @@ if sys.stdin.isatty():
 
 try:
     payload = json.load(sys.stdin)
-except (json.JSONDecodeError, ValueError):
+except json.JSONDecodeError, ValueError:
     sys.exit(0)
 
 if payload.get("tool_name") != "Write":

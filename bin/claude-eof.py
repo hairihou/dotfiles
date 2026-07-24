@@ -12,7 +12,7 @@ if sys.stdin.isatty():
 
 try:
     payload = json.load(sys.stdin)
-except (json.JSONDecodeError, ValueError):
+except json.JSONDecodeError, ValueError:
     sys.exit(0)
 
 file = (payload.get("tool_input") or {}).get("file_path", "")
