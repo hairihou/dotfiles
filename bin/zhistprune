@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly DAYS=90
+readonly SECONDS_PER_DAY=86400
+
+histfile="${HISTFILE:-$HOME/.zsh_history}"
+[[ -f $histfile ]] || exit 0
+
+cutoff=$(($(date +%s) - DAYS * SECONDS_PER_DAY))
+
+tmpfile="$(mktemp "$histfile.XXXXXX")"
+trap 'rm -f "$tmpfile"' EXIT
+
+LC_ALL=C awk -v cutoff="$cutoff" '
+function save() {
+  n++
+  ent_ts[n] = ts
+  ent_raw[n] = raw
+  ent_body[n] = body
+}
+/^: [0-9]+:[0-9]+;/ {
+  if (open) save()
+  open = 1
+  match($0, /^: [0-9]+/)
+  ts = substr($0, RSTART + 2, RLENGTH - 2)
+  body = substr($0, index($0, ";") + 1)
+  raw = $0
+  next
+}
+open {
+  raw = raw "\n" $0
+  body = body "\n" $0
+}
+END {
+  if (open) save()
+  for (i = 1; i <= n; i++) {
+    if (ent_ts[i] + 0 < cutoff) continue
+    kept++
+    keep_raw[kept] = ent_raw[i]
+    keep_body[kept] = ent_body[i]
+    newest[ent_body[i]] = kept
+  }
+  for (i = 1; i <= kept; i++) {
+    if (newest[keep_body[i]] == i) print keep_raw[i]
+  }
+}
+' "$histfile" >"$tmpfile"
+
+mv "$tmpfile" "$histfile"
+trap - EXIT
