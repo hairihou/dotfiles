@@ -10,47 +10,12 @@ paths: ["**/*.component.ts", "**/*.{css,html,tsx,vue}"]
 - CSS variable references use parentheses: `bg-(--brand)`, not `bg-[--brand]`
 - Default border color is `currentColor`, not `gray-200` — always specify color explicitly
 - Variant stacking reads left-to-right: `*:first:pt-0`, not `first:*:pt-0`
+- Gradients are `bg-linear-*` / `bg-radial` / `bg-conic`, not `bg-gradient-to-*`
 
 ## Avoid
 
 - `@apply` — use CSS variables or components
 - Arbitrary values — prefer design scale (`ml-4` not `ml-[16px]`)
-
-## CSS Variables
-
-Access theme values:
-
-```css
-.custom {
-  background: var(--color-blue-500);
-  padding: var(--spacing-4);
-  margin: calc(100vh - --spacing(16));
-}
-```
-
-Extend theme:
-
-```css
-@theme {
-  --color-brand: oklch(0.7 0.15 200);
-}
-```
-
-## Gradients
-
-```html
-<!-- Linear -->
-<div class="bg-linear-to-r from-blue-500 to-purple-500"></div>
-
-<!-- Custom angle -->
-<div class="bg-linear-45 from-blue-500 to-purple-500"></div>
-
-<!-- Radial -->
-<div class="bg-radial from-white to-black"></div>
-
-<!-- Conic -->
-<div class="bg-conic from-red-500 via-yellow-500 to-red-500"></div>
-```
 
 ## Spacing
 
