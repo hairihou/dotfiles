@@ -25,11 +25,11 @@ const data = ref<Data | null>(null);
 
 // Good: discriminated union
 type State =
-  | { status: "idle" }
-  | { status: "loading" }
-  | { status: "error"; error: Error }
-  | { status: "ok"; data: Data };
-const state = ref<State>({ status: "idle" });
+  | { type: "idle" }
+  | { type: "loading" }
+  | { type: "error"; error: Error }
+  | { type: "ok"; data: Data };
+const state = ref<State>({ type: "idle" });
 ```
 
 ## Composable
@@ -40,12 +40,12 @@ const state = ref<State>({ status: "idle" });
 
 ```typescript
 // Bad: hidden dependency
-function useTodoNav() {
+const useTodoNav = () => {
   const router = useRouter();
-}
+};
 // Good: explicit inputs
-function useTodoNav(
+const useTodoNav = (
   currentId: Readonly<Ref<string>>,
   onSelectTodo: (id: string) => void,
-) { ... }
+) => { ... };
 ```

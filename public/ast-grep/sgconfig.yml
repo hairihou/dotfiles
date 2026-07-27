@@ -1,10 +1,5 @@
 languageGlobs:
   html:
     - "*.vue"
-languageInjections:
-  - hostLanguage: html
-    rule:
-      pattern: <script $$$ATTRS>$CONTENT</script>
-    injected: typescript
 ruleDirs:
   - rules
