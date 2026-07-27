@@ -1,6 +1,7 @@
 ---
 name: cross-browser
 description: Use when verifying page rendering or behavior in Safari (WebKit), Firefox, or across multiple browser engines. agent-browser is Chromium-only via CDP; these checks require playwright-cli. Not for Chromium-only verification — use agent-browser there.
+allowed-tools: Bash
 ---
 
 # Cross-Browser
