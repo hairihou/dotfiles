@@ -2,7 +2,7 @@
 paths: ["**/*.{ts,tsx,vue}"]
 ---
 
-# Data Fetching
+# Query Cache
 
 ## Avoid Unnecessary Refetch (CRUD List Operations)
 
@@ -52,7 +52,7 @@ onSuccess: (newUser) => {
 
 REST APIs must return mutated data:
 
-```
+```text
 POST   /users     → { id, name, ... }  // created resource
 PUT    /users/:id → { id, name, ... }  // updated resource
 DELETE /users/:id → 204 No Content     // id from request

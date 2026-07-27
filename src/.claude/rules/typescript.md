@@ -2,7 +2,7 @@
 paths: ["**/*.{ts,tsx,vue}"]
 ---
 
-# TypeScript Rules
+# TypeScript
 
 Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow project linter config when present; these rules supplement it.
 

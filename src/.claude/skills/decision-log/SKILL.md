@@ -20,7 +20,7 @@ Script: `${CLAUDE_SKILL_DIR}/scripts/db.py`
 
 ## Mode: Record (default)
 
-Use when no argument is provided or argument is not "search".
+Use when `$ARGUMENTS` is empty, or starts with none of `search`, `supersede`, `delete`.
 
 ### Steps
 
@@ -56,7 +56,7 @@ Use when no argument is provided or argument is not "search".
 
 ## Mode: Supersede
 
-Use when argument starts with "supersede". Never edit an accepted decision — supersede it instead.
+Use when `$ARGUMENTS` starts with `supersede`. Never edit an accepted decision — supersede it instead.
 
 ### Steps
 
@@ -72,7 +72,7 @@ Use when argument starts with "supersede". Never edit an accepted decision — s
 
 ## Mode: Delete
 
-Use when argument starts with "delete". Only for records that should never have existed: mis-recorded entries (trivial, duplicate, wrong repo) or sensitive content that must not persist. A decision that changed is not a mistake — use Supersede.
+Use when `$ARGUMENTS` starts with `delete`. Only for records that should never have existed: mis-recorded entries (trivial, duplicate, wrong repo) or sensitive content that must not persist. A decision that changed is not a mistake — use Supersede.
 
 ### Steps
 
@@ -88,7 +88,7 @@ The command accepts a single ID only — bulk deletion (date range, repo) is int
 
 ## Mode: Search
 
-Use when argument contains "search".
+Use when `$ARGUMENTS` starts with `search`.
 
 ### Steps
 

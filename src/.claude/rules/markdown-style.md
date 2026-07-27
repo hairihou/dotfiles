@@ -41,7 +41,7 @@ Install the CLI, then run the init command. The config file is created automatic
   - **Exception:** a file whose content is embedded inside another document, which supplies the H1
 - Title Case for headings (`# Markdown Style`, `## Configuration Files`)
 - Preserve canonical case for brand or product names — do not force Title Case (`npm`, `ESLint`, `ZAP`, `iOS`, `macOS`, `Draw.io`)
-- For `SKILL.md` H1: omit category suffixes (`Skill`, `Tool`, `Security Scan`) — the `name` frontmatter and directory already convey the kind
+- Omit category suffixes from an H1 (`Skill`, `Tool`, `Rules`, `Security Scan`) — the filename, directory, and `name` frontmatter already convey the kind
 
 ## Language
 

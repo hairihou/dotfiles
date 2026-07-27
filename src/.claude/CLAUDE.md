@@ -14,7 +14,7 @@
 
 - Code review: assess impact scope and articulate why a change is safe — never default to "no issues found"
 - Code review: separate surface fix (symptom) from root fix (cause); tag each proposed fix as `[surface]` or `[root]`
-- Design decisions (architecture, technology selection, large-scale refactoring): compare at least 2 named alternatives with explicit pros/cons (advocate/critic), identify the biggest risk before committing
+- Design decisions (architecture, technology selection, large-scale refactoring): compare at least 2 named alternatives with explicit pros/cons, identify the biggest risk before committing
 
 ## Code Style
 

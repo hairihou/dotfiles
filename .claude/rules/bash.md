@@ -2,7 +2,7 @@
 paths: ["bin/*", "install.sh"]
 ---
 
-# Bash Rules
+# Bash
 
 Scope: `bin/*` (bash subset; Python scripts via `uv run --script` shebang are out of scope) and `install.sh`.
 

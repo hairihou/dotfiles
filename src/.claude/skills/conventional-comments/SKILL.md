@@ -1,7 +1,7 @@
 ---
 name: conventional-comments
 description: Format code review comments using Conventional Comments labels and decorations. Use when reviewing a PR diff and leaving inline feedback. Not for opening a PR, not for standalone code critique.
-allowed-tools: Bash, Read
+allowed-tools: Bash
 ---
 
 # Conventional Comments
@@ -35,7 +35,7 @@ Follow conventionalcomments.org spec: `<label> [decorations]: <subject>`. Local 
 
 ## Example (combining local conventions)
 
-```
+```text
 issue(security)!: User input embedded directly in SQL.
 
 Use prepared statements to prevent SQL injection.

@@ -5,9 +5,9 @@ readonly XDG_DIRS=(
   "${XDG_CONFIG_HOME:-$HOME/.config}"
   "${XDG_DATA_HOME:-$HOME/.local/share}"
   "${XDG_STATE_HOME:-$HOME/.local/state}"
-  "${XDG_CACHE_HOME:-$HOME/.cache}"
   "${CLAUDE_CONFIG_DIR:-$HOME/.claude}"
 )
+readonly BOUNDARIES=("$HOME" "${XDG_DIRS[@]}")
 
 dry_run=false
 
@@ -23,6 +23,39 @@ case "${1:-}" in
 esac
 
 count=0
+doomed=()
+parents=()
+
+is_boundary() {
+  local item
+  for item in "${BOUNDARIES[@]}"; do
+    if [[ "$item" == "$1" ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+is_doomed() {
+  local item
+  ((${#doomed[@]} > 0)) || return 1
+  for item in "${doomed[@]}"; do
+    if [[ "$item" == "$1" ]]; then
+      return 0
+    fi
+  done
+  return 1
+}
+
+vacated() {
+  local entry
+  for entry in "$1"/* "$1"/.[!.]* "$1"/..?*; do
+    if [[ -e "$entry" || -L "$entry" ]]; then
+      is_doomed "$entry" || return 1
+    fi
+  done
+  return 0
+}
 
 remove_link() {
   local link="$1"
@@ -32,39 +65,45 @@ remove_link() {
     rm "$link"
     echo "Removed: $link"
   fi
+  doomed+=("$link")
+  parents+=("$(dirname "$link")")
   count=$((count + 1))
 }
 
+prune_upward() {
+  local dir="$1"
+  while ! is_boundary "$dir"; do
+    if is_doomed "$dir" || ! vacated "$dir"; then
+      return 0
+    fi
+    if "$dry_run"; then
+      echo "[rmdir] $dir"
+    else
+      rmdir "$dir" 2>/dev/null || return 0
+      echo "Removed: $dir"
+    fi
+    doomed+=("$dir")
+    count=$((count + 1))
+    dir="$(dirname "$dir")"
+  done
+}
+
 while IFS= read -r link; do
-  remove_link "$link"
-done < <(find "$HOME" -maxdepth 1 -type l ! -exec test -e {} \; -print 2>/dev/null)
+  [ -e "$link" ] || remove_link "$link"
+done < <(find "$HOME" -maxdepth 1 -type l -print 2>/dev/null)
 
 for dir in "${XDG_DIRS[@]}"; do
   [ -d "$dir" ] || continue
   while IFS= read -r link; do
-    remove_link "$link"
-  done < <(find "$dir" -not -path '*/.git/*' -type l ! -exec test -e {} \; -print 2>/dev/null)
+    [ -e "$link" ] || remove_link "$link"
+  done < <(find "$dir" -not -path '*/.git/*' -type l -print 2>/dev/null)
 done
 
-while true; do
-  found=0
-  for dir in "${XDG_DIRS[@]}"; do
-    [[ -d "$dir" ]] || continue
-    while IFS= read -r empty; do
-      if "$dry_run"; then
-        echo "[rmdir] $empty"
-      else
-        rmdir "$empty"
-        echo "Removed: $empty"
-      fi
-      count=$((count + 1))
-      found=$((found + 1))
-    done < <(find "$dir" -not -path '*/.git/*' -not -name '.git' -type d -empty 2>/dev/null | sort -r)
-  done
-  if "$dry_run" || [[ $found -eq 0 ]]; then
-    break
-  fi
-done
+if ((${#parents[@]} > 0)); then
+  while IFS= read -r parent; do
+    prune_upward "$parent"
+  done < <(printf '%s\n' "${parents[@]}" | sort -ru)
+fi
 
 if [[ $count -eq 0 ]]; then
   echo 'Nothing to clean'

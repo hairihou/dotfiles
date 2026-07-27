@@ -2,7 +2,7 @@
 name: refutation
 description: Verify a finished artifact by dispatching an independent skeptic that never saw it being made, tasked with refuting it, grounding every factual claim in a primary source, and reporting findings with severity and confidence. Use when a deliverable (document, plan, analysis, code change, decision) should be challenged rather than polished, above all one produced in the current session. Not for wording, style, or "does this look OK" passes.
 argument-hint: <artifact path or description>
-allowed-tools: Agent, Glob, Grep, Read, WebFetch, WebSearch
+allowed-tools: Agent, WebFetch, WebSearch
 ---
 
 # Refutation

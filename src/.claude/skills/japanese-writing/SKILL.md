@@ -2,7 +2,7 @@
 name: japanese-writing
 description: 'Revise Japanese developer-facing technical writing — planning/design docs, meeting materials, issue/PR text — to read plain and accurate: cut overstatement, coined jargon, and filler; fix loose paragraphs and notation (spacing around half-width alphanumerics). Use when writing or editing such Japanese prose, including small edits to already-drafted or posted text. Not for English, reference docs, or CLI text.'
 argument-hint: '[file-path]'
-allowed-tools: Edit, Read, Write
+allowed-tools: Edit, Write
 ---
 
 # Japanese Writing
@@ -13,7 +13,7 @@ allowed-tools: Edit, Read, Write
 
 ## Process
 
-1. 対象を定める。引数にファイルパスがあれば `Read` で読み、なければチャットに貼られたテキストを対象にする。
+1. 対象を定める。`$ARGUMENTS` にファイルパスがあれば `Read` で読み、なければチャットに貼られたテキストを対象にする。
 2. 各節の原則を上から順に当てて、直す箇所を拾う。
 3. 元の意味と構成（見出し、コードブロック、図表）を保ったまま、本文だけ書き換える。
 4. ファイルなら `Edit` / `Write` で直して変更箇所を報告する。チャットのテキストなら、推敲結果をそのまま出す。

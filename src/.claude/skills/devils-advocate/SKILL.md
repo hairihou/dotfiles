@@ -2,7 +2,7 @@
 name: devils-advocate
 description: Hold both the supporting and the opposing view on something the user has stated — the case for and the case against, argued in parallel — to surface tensions, risks, and decision factors. Use when the user wants a stated idea, decision, or approach examined from both angles at once.
 argument-hint: <topic or decision to evaluate>
-allowed-tools: Agent, Glob, Grep, Read
+allowed-tools: Agent
 ---
 
 # Devil's Advocate
