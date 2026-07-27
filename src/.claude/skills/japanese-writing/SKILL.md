@@ -1,5 +1,5 @@
 ---
-name: writing-ja
+name: japanese-writing
 description: 'Revise Japanese developer-facing technical writing — planning/design docs, meeting materials, issue/PR text — to read plain and accurate: cut overstatement, coined jargon, and filler; fix loose paragraphs and notation (spacing around half-width alphanumerics). Use when writing or editing such Japanese prose, including small edits to already-drafted or posted text. Not for English, reference docs, or CLI text.'
 argument-hint: '[file-path]'
 allowed-tools: Edit, Read, Write

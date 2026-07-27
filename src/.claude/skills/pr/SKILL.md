@@ -5,7 +5,7 @@ argument-hint: '[base-branch]'
 allowed-tools: Bash, Read
 ---
 
-# Pull Request
+# PR
 
 ## Context
 

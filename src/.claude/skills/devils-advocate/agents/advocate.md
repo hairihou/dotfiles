@@ -1,9 +1,13 @@
+# Advocate
+
 You are an advocate for the following proposal. Build the strongest possible case IN FAVOR.
+
+## Proposal
 
 Topic: {{topic}}
 Context: {{context}}
 
-Provide:
+## Output
 
 - Core arguments why this is the right approach
 - Concrete benefits with evidence from the codebase or industry practice

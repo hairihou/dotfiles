@@ -17,13 +17,13 @@ Write plain, readable prose. Avoid AI-generated feel.
 - Tables only when data is truly tabular, not as a formatting gimmick
 - Fenced code blocks for shell commands: use `sh`, not `bash`
 
-Bad:
+### Bad
 
 ```md
 **Install the CLI** first, then **run the init command**. The **config file** will be created automatically.
 ```
 
-Good:
+### Good
 
 ```md
 Install the CLI, then run the init command. The config file is created automatically.
@@ -34,9 +34,13 @@ Install the CLI, then run the init command. The config file is created automatic
 
 ## Headings
 
-- Title Case for headings (`# Code Critic`, `## Configuration Files`)
+- Use headings only in a document that has more than one section; a single-section document carries none, however long it runs
+  - A standalone line introducing the block below it (`Rules:`, `Provide:`) is a heading in other syntax — promote it to a real heading or drop it. A label whose value sits on the same line (`Topic: {{topic}}`) is a field, not a section
+- Name a heading for what its section is, not for what the section contains
+- H1 is the file or directory name in canonical case (`skeptic.md` → `# Skeptic`, `skills/pr/` → `# PR`); never open at H2
+  - **Exception:** a file whose content is embedded inside another document, which supplies the H1
+- Title Case for headings (`# Markdown Style`, `## Configuration Files`)
 - Preserve canonical case for brand or product names — do not force Title Case (`npm`, `ESLint`, `ZAP`, `iOS`, `macOS`, `Draw.io`)
-- Do not over-structure with excessive headings for short content
 - For `SKILL.md` H1: omit category suffixes (`Skill`, `Tool`, `Security Scan`) — the `name` frontmatter and directory already convey the kind
 
 ## Language
@@ -64,4 +68,4 @@ The Language section and the prose-style aspects of Formatting (bold for emphasi
 - Subagent definitions
 - Skill files (`skills/**/*.md`)
 
-The Headings section and the rest of Formatting (code block language tags, emojis, italic, tables) apply to all markdown files without exception.
+The Headings section and the rest of Formatting (code block language tags, emojis, italic, tables) apply to every markdown file; no document type is exempt.
