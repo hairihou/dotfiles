@@ -4,12 +4,8 @@ paths: ["**/*.{component.ts,css,html,tsx,vue}"]
 
 # Tailwind CSS v4
 
-## v4 Architecture (LLMs often get wrong)
+## Syntax Deltas from v3
 
-- `tailwind.config.js` does not exist — all configuration lives in CSS
-- Entry point is `@import "tailwindcss"`, not `@tailwind base/components/utilities`
-- Custom utilities use `@utility`, not `@layer utilities { ... }` or `@layer components { ... }`
-- Custom variants use `@custom-variant`, not plugin API
 - Important modifier is trailing: `flex!`, not `!flex`
 - CSS variable references use parentheses: `bg-(--brand)`, not `bg-[--brand]`
 - Default border color is `currentColor`, not `gray-200` — always specify color explicitly

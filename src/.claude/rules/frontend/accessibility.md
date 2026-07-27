@@ -39,7 +39,3 @@ Model defaults reliably violate the rules below. Judge contrast on the final ren
 
 - Do not share one token between a decorative divider/background and a UI component border/indicator — only the latter carries the 3:1 floor
 - A decorative border that cannot reach 3:1 should be removed, not kept faint
-
-## Handled By Defaults
-
-Current models already satisfy these; re-check only on regression: native semantics (`<button>` for actions, `<a>` for navigation, never `<div>`/`<span>` controls), native form controls over `contenteditable`, an `<input type="file">` alongside any drop area, retained focus indicators (no bare `outline: none`), and link underlines kept on hover.

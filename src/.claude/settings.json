@@ -8,6 +8,7 @@
     "commit": "",
     "pr": ""
   },
+  "plansDirectory": ".claude/plans",
   "permissions": {
     "deny": [
       "Bash(brew *)",
@@ -26,9 +27,6 @@
     "ask": [
       "Bash(git push *)"
     ]
-  },
-  "skillOverrides": {
-    "claude-api:webapp-testing": "user-invocable-only"
   },
   "hooks": {
     "PermissionRequest": [

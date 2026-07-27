@@ -25,7 +25,7 @@
 ## Workflow
 
 - Underspecified requirements/scope: ask before implementing — do not proceed on silent assumptions for non-trivial commitments
-- `.scratch/` is git-ignored globally (core.excludesFile); use it freely for throwaway notes and working files without verifying ignore status or asking
+- `.scratch/` is git-ignored globally; use it freely for throwaway notes and working files without verifying ignore status or asking
   - Machine-local guarantee — never reference `.scratch/` in portable artifacts (skills, rules, repository CLAUDE.md, scripts)
 
 ## Communication Style

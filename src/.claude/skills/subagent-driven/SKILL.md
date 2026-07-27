@@ -5,7 +5,7 @@ description: Execute planned, multi-step implementation work by orchestrating su
 
 # Subagent-Driven
 
-The main conversation acts as orchestrator: it owns the task list, curates per-task context, and accepts or rejects results. Reading source trees and writing code happen in subagent contexts, so the main context stays small enough to survive the whole plan without compaction.
+The main conversation acts as orchestrator: it owns the task list, curates per-task context, and accepts or rejects results. Reading source trees and writing code happen in subagent contexts, so the main context holds the plan and the results, not the file contents behind them.
 
 ## Orchestrator Discipline
 
