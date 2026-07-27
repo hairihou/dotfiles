@@ -2,6 +2,7 @@
 name: review-prep
 description: Prepare a human reviewer to review someone else's pull request — machine-check verbalizable perspectives with subagents, then hand over a self-contained HTML briefing separating what is safe to skim from what needs the human's design judgment. Strictly read-only against GitHub. Use when the user will themselves review someone else's PR — assigned as reviewer, or asking where to start reading before passing judgment. Not for fully automated review that ends with AI findings, and not for responding to feedback on the user's own PR.
 argument-hint: "PR number or URL"
+allowed-tools: Agent, Bash, Read, Write
 ---
 
 # Review Prep
