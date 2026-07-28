@@ -1,0 +1,1 @@
+trustPolicyExclude = ["@hono/node-server@1.19.15"]
