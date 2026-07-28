@@ -6,12 +6,13 @@ local theme = {
   gray50 = "#f9fafb",
   gray100 = "#f3f4f6",
   gray300 = "#d1d5dc",
-  gray500 = "#6a7282",
+  gray400 = "#99a1af",
   gray700 = "#364153",
   gray800 = "#1e2939",
   gray950 = "#030712",
   indigo300 = "#a3b3ff",
   indigo400 = "#7c86ff",
+  pink300 = "#fda5d5",
   pink400 = "#fb64b6",
   purple400 = "#c27aff",
   rose400 = "#ff637e",
@@ -23,14 +24,15 @@ local hl = function(name, opts)
   vim.api.nvim_set_hl(0, name, opts)
 end
 -- syntax
-hl("Comment", { fg = theme.gray500, italic = true })
+hl("Comment", { fg = theme.gray400, italic = true })
 hl("Constant", { fg = theme.pink400 })
-hl("Delimiter", { fg = theme.gray500 })
+hl("Delimiter", { fg = theme.gray400 })
 hl("Function", { fg = theme.teal300 })
 hl("Identifier", { fg = theme.white })
 hl("Special", { fg = theme.fuchsia300 })
 hl("Statement", { fg = theme.indigo300 })
 hl("String", { fg = theme.sky300 })
+hl("Tag", { fg = theme.pink300 })
 hl("Type", { fg = theme.teal300 })
 -- ui
 hl("CursorLine", { bg = theme.gray800 })
@@ -38,7 +40,7 @@ hl("CursorLineNr", { bold = true })
 hl("Directory", { fg = theme.gray100 })
 hl("FloatBorder", { fg = theme.gray700 })
 hl("IncSearch", { fg = theme.gray800, bg = theme.amber400 })
-hl("LineNr", { fg = theme.gray500 })
+hl("LineNr", { fg = theme.gray400 })
 hl("Normal", { bg = "NONE" })
 hl("NormalFloat", { link = "Normal" })
 hl("PmenuBorder", { fg = theme.gray700 })
@@ -52,11 +54,11 @@ hl("WinSeparator", { fg = theme.gray800 })
 hl("DiagnosticError", { fg = theme.rose400 })
 hl("DiagnosticWarn", { fg = theme.amber400 })
 hl("DiagnosticInfo", { fg = theme.blue400 })
-hl("DiagnosticHint", { fg = theme.gray500 })
+hl("DiagnosticHint", { fg = theme.gray400 })
 hl("DiagnosticUnderlineError", { undercurl = true, sp = theme.rose400 })
 hl("DiagnosticUnderlineWarn", { undercurl = true, sp = theme.amber400 })
 hl("DiagnosticUnderlineInfo", { undercurl = true, sp = theme.blue400 })
-hl("DiagnosticUnderlineHint", { undercurl = true, sp = theme.gray500 })
+hl("DiagnosticUnderlineHint", { undercurl = true, sp = theme.gray400 })
 -- mini.diff
 hl("MiniDiffSignAdd", { fg = theme.emerald400 })
 hl("MiniDiffSignChange", { fg = theme.blue400 })
@@ -73,7 +75,7 @@ for _, name in ipairs({
   "MiniIconsRed",
   "MiniIconsYellow",
 }) do
-  hl(name, { fg = theme.gray500 })
+  hl(name, { fg = theme.gray400 })
 end
 -- render-markdown
 hl("RenderMarkdownH", { fg = theme.blue400, bold = true })
@@ -83,5 +85,7 @@ hl("RenderMarkdownCodeInline", { fg = theme.sky300, bg = theme.gray800 })
 -- treesitter
 hl("@markup.raw", { fg = theme.gray300 })
 hl("@markup.raw.block", { fg = theme.gray300 })
-hl("@punctuation.bracket", { fg = theme.gray500 })
+hl("@punctuation.bracket", { fg = theme.gray400 })
+hl("@tag.attribute", { fg = theme.gray300 })
+hl("@tag.delimiter", { fg = theme.gray400 })
 hl("@type.builtin", { italic = true })

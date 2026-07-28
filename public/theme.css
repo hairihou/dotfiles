@@ -252,17 +252,17 @@
 }
 
 :root {
-  --syntax-comment: var(--color-gray-500);
-  --syntax-punctuation: var(--color-gray-500);
+  --syntax-comment: var(--color-gray-400);
+  --syntax-punctuation: var(--color-gray-400);
   --syntax-constant: var(--color-pink-400);
   --syntax-entity-name: var(--color-teal-300);
   --syntax-entity-name-function: var(--color-teal-300);
   --syntax-keyword: var(--color-indigo-300);
-  --syntax-keyword-operator-assignment: var(--color-gray-500);
+  --syntax-keyword-operator-assignment: var(--color-gray-400);
   --syntax-string: var(--color-sky-300);
   --syntax-support: var(--color-white);
   --syntax-variable: var(--color-white);
-  --syntax-tag: var(--color-pink-400);
+  --syntax-tag: var(--color-pink-300);
   --syntax-attribute: var(--color-gray-300);
   --syntax-import-keyword: var(--color-indigo-300);
   --syntax-import-string: var(--color-fuchsia-300);
@@ -271,7 +271,7 @@
   --editor-foreground: var(--color-gray-50);
   --foreground: var(--color-gray-50);
   --focus-border: var(--color-sky-500);
-  --editor-line-number-foreground: var(--color-gray-500);
+  --editor-line-number-foreground: var(--color-gray-400);
   --editor-line-number-active-foreground: var(--color-gray-100);
   --terminal-foreground: var(--color-gray-100);
   --error-foreground: var(--color-rose-400);
@@ -284,16 +284,16 @@
   --git-decoration-modified-resource-foreground: var(--color-blue-400);
   --git-decoration-added-resource-foreground: var(--color-emerald-400);
   --git-decoration-deleted-resource-foreground: var(--color-indigo-400);
-  --terminal-ansi-black: var(--color-white);
+  --terminal-ansi-black: var(--color-gray-800);
   --terminal-ansi-red: var(--color-rose-400);
   --terminal-ansi-green: var(--color-emerald-400);
   --terminal-ansi-yellow: var(--color-amber-400);
-  --terminal-ansi-blue: var(--color-blue-500);
+  --terminal-ansi-blue: var(--color-blue-400);
   --terminal-ansi-magenta: var(--color-purple-400);
   --terminal-ansi-cyan: var(--color-cyan-400);
-  --terminal-ansi-white: var(--color-slate-300);
-  --terminal-ansi-bright-black: var(--color-slate-400);
-  --terminal-ansi-bright-blue: var(--color-blue-400);
+  --terminal-ansi-white: var(--color-gray-300);
+  --terminal-ansi-bright-black: var(--color-gray-400);
+  --terminal-ansi-bright-blue: var(--color-blue-300);
   --terminal-ansi-bright-cyan: var(--color-cyan-300);
   --terminal-ansi-bright-green: var(--color-emerald-300);
   --terminal-ansi-bright-magenta: var(--color-purple-300);
