@@ -35,7 +35,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "claude-notify.py permission-request"
+            "command": "claude-notify.py",
+            "args": ["permission-request"]
           }
         ]
       }
@@ -46,11 +47,13 @@
         "hooks": [
           {
             "type": "command",
-            "command": "claude-eof.py"
+            "command": "claude-eof.py",
+            "args": []
           },
           {
             "type": "command",
-            "command": "claude-lint.py"
+            "command": "claude-lint.py",
+            "args": []
           }
         ]
       }
@@ -61,7 +64,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "claude-notify.py ask-user-question"
+            "command": "claude-notify.py",
+            "args": ["ask-user-question"]
           }
         ]
       },
@@ -70,7 +74,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "claude-strict-filename.py"
+            "command": "claude-strict-filename.py",
+            "args": []
           }
         ]
       }
@@ -81,7 +86,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "claude-notify.py stop"
+            "command": "claude-notify.py",
+            "args": ["stop"]
           }
         ]
       }
