@@ -115,6 +115,7 @@ zle -N fzf-tmux-attach
 bindkey '^\]^\]' fzf-tmux-attach
 
 eval "$(mise activate zsh)"
+eval "$(zoxide init zsh)"
 
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
 zstyle ':completion:*' format $'\e[2mCompleting %d\e[m'
