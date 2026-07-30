@@ -1,11 +1,11 @@
 ---
-name: review-prep
+name: kento
 description: Prepare a human reviewer to review someone else's pull request — machine-check verbalizable perspectives with subagents, then hand over a self-contained HTML briefing separating what is safe to skim from what needs the human's design judgment. Strictly read-only against GitHub. Use when the user will themselves review someone else's PR — assigned as reviewer, or asking where to start reading before passing judgment. Not for fully automated review that ends with AI findings, and not for responding to feedback on the user's own PR.
 argument-hint: '[PR number or URL]'
 allowed-tools: Agent, Bash, Write
 ---
 
-# Review Prep
+# Kento
 
 Target PR: $ARGUMENTS — if empty, the PR under discussion; if none, ask. Never resolve from the current branch: that is the user's own PR, which this skill does not cover.
 
@@ -67,7 +67,7 @@ Sections, in this fixed order (stable placement is what makes the tool fast to u
 7. Findings (high confidence) — by severity; omit the section if none.
 8. Comment drafts — paste-ready, explicitly marked as not posted. Default to intent-seeking phrasing ("what was the intent behind …"); assert only high-confidence findings. Whether and how to post is the human's call.
 
-Render as one self-contained HTML page (inline CSS, mobile-readable), save outside the repo as `/tmp/$(date +%F)-review-prep-pr<N>.html`, open it, and print a terminal summary: TL;DR, any high-confidence findings, and the file path. HTML-escape every value originating from the PR or repo (title, body, branch/author names, paths, finding text) — a malicious PR could otherwise inject script into the local file. If no browser is available or the user asks, print the full briefing to the terminal in the same section order.
+Render as one self-contained HTML page (inline CSS, mobile-readable), save outside the repo as `/tmp/$(date +%F)-pr<N>.html`, open it, and print a terminal summary: TL;DR, any high-confidence findings, and the file path. HTML-escape every value originating from the PR or repo (title, body, branch/author names, paths, finding text) — a malicious PR could otherwise inject script into the local file. If no browser is available or the user asks, print the full briefing to the terminal in the same section order.
 
 ## After the Review
 
