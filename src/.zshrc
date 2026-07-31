@@ -6,9 +6,7 @@ export LANG='en_US.UTF-8'
 export LSCOLORS='exGxFxDxcxDxDxhbadacec'
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
-export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
-export PATH="$ANDROID_HOME/platform-tools:$PATH"
-export PATH="$JAVA_HOME/bin:$PATH"
+export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools
 export PATH="$HOME/dotfiles/bin:$PATH"
 
 HISTFILE="$HOME/.zsh_history"
