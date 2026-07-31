@@ -1,5 +1,4 @@
 brew "mise"
-cask "android-studio"
 cask "azookey"
 cask "firefox"
 cask "font-udev-gothic-nf"
