@@ -1,7 +1,6 @@
 typeset -U PATH
 export CLICOLOR=1
 export EDITOR='nvim'
-export HOMEBREW_FORBIDDEN_FORMULAE='claude node npm pip pip3 python python3'
 export LANG='en_US.UTF-8'
 export LSCOLORS='exGxFxDxcxDxDxhbadacec'
 
