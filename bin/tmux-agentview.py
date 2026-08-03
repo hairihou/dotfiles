@@ -17,6 +17,15 @@ SECONDARY = "\033[2m"
 SUCCESS = "\033[32m"
 STATE_ORDER = (SUCCESS, SECONDARY)
 
+
+def repo_name(path):
+    p = Path(path)
+    for d in (p, *p.parents):
+        if (d / ".git").exists():
+            return d.name
+    return p.name
+
+
 panes = subprocess.run(
     [
         "tmux",
@@ -37,7 +46,7 @@ for line in panes.splitlines():
         continue
     color = SUCCESS if re.match(r"[⠀-⣿]", title) else SECONDARY
     summary = re.sub(r"^[✳⠀-⣿]\s*", "", title)
-    rows.append((pane_id, window, Path(path).name, summary, color))
+    rows.append((pane_id, window, repo_name(path), summary, color))
 
 rows.sort(key=lambda r: STATE_ORDER.index(r[4]))
 
