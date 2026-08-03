@@ -36,7 +36,9 @@
           {
             "type": "command",
             "command": "claude-notify.py",
-            "args": ["permission-request"]
+            "args": [
+              "permission-request"
+            ]
           }
         ]
       }
@@ -65,7 +67,9 @@
           {
             "type": "command",
             "command": "claude-notify.py",
-            "args": ["ask-user-question"]
+            "args": [
+              "ask-user-question"
+            ]
           }
         ]
       },
@@ -87,7 +91,9 @@
           {
             "type": "command",
             "command": "claude-notify.py",
-            "args": ["stop"]
+            "args": [
+              "stop"
+            ]
           }
         ]
       }
@@ -133,7 +139,6 @@
     }
   },
   "language": "japanese",
-  "advisorModel": "fable",
   "plansDirectory": ".claude/plans",
   "voice": {
     "enabled": true,
