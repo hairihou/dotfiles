@@ -98,20 +98,6 @@ fzf-history() {
 zle -N fzf-history
 bindkey '^r' fzf-history
 
-fzf-tmux-attach() {
-  TRAPINT() { :; }
-  local fmt="#{session_name}	"$'\e[38;5;8m'"#{pane_current_path}"$'\e[m'
-  local selected=$(tmux list-sessions -F "$fmt" 2>/dev/null | fzf --layout=reverse --ansi --tabstop=16)
-  local session="${selected%%	*}"
-  if [[ -n "$session" ]]; then
-    BUFFER="tmux attach -t ${(q)session}"
-    zle accept-line
-  fi
-  zle reset-prompt
-}
-zle -N fzf-tmux-attach
-bindkey '^\]^\]' fzf-tmux-attach
-
 eval "$(mise activate zsh)"
 eval "$(zoxide init zsh)"
 
