@@ -63,12 +63,12 @@ _update_prompt() {
   for line in ${(f)output}; do
     [[ "$line" == "##"* ]] && continue
     [[ -n "$staged" && -n "$unstaged" ]] && break
-    [[ "${line[1]}" != " " && "${line[1]}" != "?" ]] && staged="+"
-    [[ "${line[2]}" != " " && "${line[1]}" != "?" ]] && unstaged="*"
+    [[ "${line[1]}" != " " && "${line[1]}" != "?" ]] && staged="%F{10}+%f"
+    [[ "${line[2]}" != " " && "${line[1]}" != "?" ]] && unstaged="%F{11}*%f"
   done
-  [[ "$header" == *"behind "* ]] && arrows+="⇣"
-  [[ "$header" == *"ahead "* ]] && arrows+="⇡"
-  prompt_git="%F{7}${branch}%F{11}${staged}${unstaged}${arrows:+ ${arrows}}%f"
+  [[ "$header" == *"behind "* ]] && arrows+="%F{9}⇣%f"
+  [[ "$header" == *"ahead "* ]] && arrows+="%F{14}⇡%f"
+  prompt_git="%F{5}${branch}%f${staged}${unstaged}${arrows:+ ${arrows}}"
 }
 add-zsh-hook precmd _update_prompt
 PROMPT='%F{12}${prompt_path}%f${prompt_git:+ ${prompt_git}} %F{8}❯%f '
