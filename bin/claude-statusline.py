@@ -23,7 +23,8 @@ def gauge(pct: int, warning: int, critical: int) -> str:
         hi, lo = BRAILLE[5], BRAILLE[level - 5]
     else:
         hi, lo = BRAILLE[level], BRAILLE[0]
-    return f"{color}{hi}{lo}{pct}%{RESET}"
+    gap = "" if lo == BRAILLE[0] else " "
+    return f"{color}{hi}{lo}{gap}{pct}%{RESET}"
 
 
 try:
@@ -51,10 +52,10 @@ line += f"{SEP}context {gauge(ctx_pct, 70, 90)}"
 if rate_5h_pct >= 0:
     line += f"{SEP}5h {gauge(rate_5h_pct, 60, 80)}"
 else:
-    line += f"{SEP}5h {BRAILLE[0]}{BRAILLE[0]}--%"
+    line += f"{SEP}5h --%"
 if rate_7d_pct >= 0:
     line += f"{SEP}7d {gauge(rate_7d_pct, 50, 70)}"
 else:
-    line += f"{SEP}7d {BRAILLE[0]}{BRAILLE[0]}--%"
+    line += f"{SEP}7d --%"
 
 print(line)
