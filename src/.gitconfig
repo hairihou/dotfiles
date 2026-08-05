@@ -36,7 +36,6 @@
 	enabled = true
 [status]
 	branch = true
-	compareBranches = @{upstream} @{push}
 	short = true
 [tag]
 	sort = version:refname
