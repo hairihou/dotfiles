@@ -13,12 +13,13 @@ allowed-tools: Bash
 - Git status: !`git status -b --porcelain`
 - Default / compare / ahead / WIP: !`D=$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name' 2>/dev/null); B=$D; [ -n "$D" ] && git rev-parse --verify -q "origin/$D" >/dev/null && B="origin/$D"; printf 'default: %s\ncompare: %s\nahead: %s\nwip:\n' "${D:-unknown}" "${B:-unknown}" "$([ -n "$B" ] && git rev-list --count "$B..HEAD" 2>/dev/null || echo unknown)"; [ -n "$B" ] && git log --oneline "$B..HEAD" 2>/dev/null | grep -Ei '^[a-f0-9]+ (wip|fixup!|squash!)' || echo '  none'`
 
-`default` or `compare` reading `unknown` means detection failed — say so instead of guessing a branch name.
-
 ## Skip gate
 
+- If `default`, `compare`, or `ahead` is `unknown`, stop — detection failed and the rules below read from it. Never guess a branch name or substitute another ref
 - If `ahead` is `0`, stop and tell the user there is nothing to ship
+- If `Current branch` is `default`, stop — the PR needs a branch of its own
 - If `wip` is not `none`, stop and tell the user to clean history (`git rebase -i`) before opening a PR — do not auto-rebase
+- If `Git status` lists any uncommitted change, name the files and ask whether to proceed
 
 ## Title
 
@@ -52,8 +53,9 @@ The Summary must state _what changed in the codebase_ and _why_, not _what the a
 
 ## Steps
 
-1. If open PR exists (`gh pr view`) → `gh pr edit --title ... --body ...`
-2. Otherwise → `gh pr create --draft --title ... --body ... --base <base> --assignee @me`
+1. Push the branch: `git push -u origin HEAD` when `Git status` shows no upstream, `git push` when it shows `[ahead N]`. `gh pr create` can only prompt for this, which fails without a TTY, and `gh pr edit` never checks — unpushed commits would be missing from the PR
+2. If open PR exists (`gh pr view`) → `gh pr edit --title ... --body ...`
+3. Otherwise → `gh pr create --draft --title ... --body ... --base <base> --assignee @me`
    - Resolve `<base>`: `$ARGUMENTS` when `git rev-parse --verify -q "$ARGUMENTS"` succeeds, else `$ARGUMENTS` when `git rev-parse --verify -q "origin/$ARGUMENTS"` succeeds, else `default` from Context
    - Never pass `compare` or any other `origin/`-prefixed ref; `--base` accepts only a branch name
    - Always create as draft; the author marks ready for review manually
