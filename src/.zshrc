@@ -26,7 +26,6 @@ setopt PROMPT_SUBST
 setopt PUSHD_IGNORE_DUPS
 setopt SHARE_HISTORY
 
-fpath=("$HOME/.zsh/completions" $fpath)
 autoload -U compinit
 zcd=(~/.zcompdump(N.mh+24))
 if (( $#zcd )); then
