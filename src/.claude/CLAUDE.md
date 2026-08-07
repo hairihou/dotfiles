@@ -1,7 +1,5 @@
 # CLAUDE.md
 
-> Existing-codebase conventions take precedence over any rule below.
-
 ## Design Principles
 
 - Boundaries (file / module / abstraction / alias / re-export):
@@ -21,11 +19,6 @@
 - Comments: default to none; warranted only for hidden constraints (undocumented API quirk, required call ordering, external bug workaround) — state the constraint, never what the code does. Design rationale goes in PR / commit / decision log, not source
 - Ordering (code, documentation): semantic hierarchy (main rule → exceptions/modifiers → details) first; alphabetical only as tiebreaker among same-level peers
   - Example: required fields → optional fields; public API → internal helpers; core behavior → edge cases
-
-## Workflow
-
-- `.scratch/` is git-ignored globally; use it freely for throwaway notes and working files without verifying ignore status or asking
-  - Machine-local guarantee — never reference `.scratch/` in portable artifacts (skills, rules, repository CLAUDE.md, scripts)
 
 ## Communication Style
 
