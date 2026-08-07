@@ -11,33 +11,33 @@ allowed-tools: Bash
 
 - Current branch: !`git rev-parse --abbrev-ref HEAD`
 - Git status: !`git status -b --porcelain`
-- Default / compare / ahead / WIP: !`D=$(gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name' 2>/dev/null); B=$D; [ -n "$D" ] && git rev-parse --verify -q "origin/$D" >/dev/null && B="origin/$D"; printf 'default: %s\ncompare: %s\nahead: %s\nwip:\n' "${D:-unknown}" "${B:-unknown}" "$([ -n "$B" ] && git rev-list --count "$B..HEAD" 2>/dev/null || echo unknown)"; [ -n "$B" ] && git log --oneline "$B..HEAD" 2>/dev/null | grep -Ei '^[a-f0-9]+ (wip|fixup!|squash!)' || echo '  none'`
+- Default branch: !`gh repo view --json defaultBranchRef --jq .defaultBranchRef.name`
+- Compare ref: !`git rev-parse --abbrev-ref origin/HEAD`
+- Commits ahead: !`git log --oneline origin/HEAD..HEAD`
 
-## Skip gate
+## Skip Gate
 
-- If `default`, `compare`, or `ahead` is `unknown`, stop — detection failed and the rules below read from it. Never guess a branch name or substitute another ref
-- If `ahead` is `0`, stop and tell the user there is nothing to ship
-- If `Current branch` is `default`, stop — the PR needs a branch of its own
-- If `wip` is not `none`, stop and tell the user to clean history (`git rebase -i`) before opening a PR — do not auto-rebase
-- If `Git status` lists any uncommitted change, name the files and ask whether to proceed
+Stop and tell the user, without working around it, when:
+
+- `Default branch` or `Compare ref` is empty or errored — never guess a branch name or substitute another ref
+- `Compare ref` is not `origin/<Default branch>` — they need `git remote set-head origin --auto`
+- `Commits ahead` is empty — nothing to ship
+- `Current branch` is `Default branch` — a PR needs a branch of its own
+- a subject in `Commits ahead` starts with `wip`, `fixup!`, or `squash!` — they need `git rebase -i`; do not auto-rebase
+
+If `Git status` lists an uncommitted change, name the files and ask whether to proceed.
 
 ## Title
 
 Follow `.gitmessage` / `CONTRIBUTING.md` when the repo has one, else Conventional Commits.
 
-## Issue link detection
+## Issue Link
 
-Resolve linked issue numbers in this order; use the first that yields a number:
+First hit wins: branch prefix `#<number>_...`, else `closes #N` / `fixes #N` / `refs #N` (case-insensitive) in commit bodies ahead of `Compare ref`, else omit the line. One `closes #N` line per distinct issue.
 
-1. Branch prefix: `#<number>_...`
-2. Commit message body: any `closes #N` / `fixes #N` / `refs #N` (case-insensitive) across commits ahead of `compare`
-3. None — omit the link line
+## Body
 
-If multiple distinct issues are detected, list each on its own `closes #N` line.
-
-## PR Body
-
-Fill in the repo's PR template (any of GitHub's conventional locations) verbatim when one exists, else use the fallback below. Whenever an issue is detected, the `closes #N` header precedes it.
+Fill the repo's PR template (any of GitHub's conventional locations) verbatim when one exists, else use the fallback below. A detected issue link goes above whichever is used.
 
 ```markdown
 closes #<number>
@@ -49,13 +49,11 @@ closes #<number>
 <description>
 ```
 
-The Summary must state _what changed in the codebase_ and _why_, not _what the author did_. Reject bare verbs without object ("updated files", "refactored") and process narration ("spent time investigating").
+The Summary states what changed in the codebase and why, not what the author did. Reject bare verbs without object ("updated files", "refactored") and process narration ("spent time investigating").
 
 ## Steps
 
-1. Push the branch: `git push -u origin HEAD` when `Git status` shows no upstream, `git push` when it shows `[ahead N]`. `gh pr create` can only prompt for this, which fails without a TTY, and `gh pr edit` never checks — unpushed commits would be missing from the PR
-2. If open PR exists (`gh pr view`) → `gh pr edit --title ... --body ...`
-3. Otherwise → `gh pr create --draft --title ... --body ... --base <base> --assignee @me`
-   - Resolve `<base>`: `$ARGUMENTS` when `git rev-parse --verify -q "$ARGUMENTS"` succeeds, else `$ARGUMENTS` when `git rev-parse --verify -q "origin/$ARGUMENTS"` succeeds, else `default` from Context
-   - Never pass `compare` or any other `origin/`-prefixed ref; `--base` accepts only a branch name
-   - Always create as draft; the author marks ready for review manually
+1. Push: `git push -u origin HEAD` when `Git status` shows no upstream, else `git push`. `gh pr create` only prompts for this (fails without a TTY) and `gh pr edit` never checks, so unpushed commits would be missing from the PR
+2. Open PR exists (`gh pr view`) → `gh pr edit --title ... --body ...`
+3. Otherwise → `gh pr create --draft --title ... --body ... --base <base> --assignee @me`. Always draft; the author marks ready for review
+   - `<base>`: `$ARGUMENTS` when `git rev-parse --verify -q "$ARGUMENTS"` or `git rev-parse --verify -q "origin/$ARGUMENTS"` succeeds, else `Default branch`. Never an `origin/`-prefixed ref — `--base` takes a branch name
