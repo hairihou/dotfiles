@@ -252,6 +252,30 @@
 }
 
 :root {
+  --bg: var(--color-gray-900);
+  --bg-elevated: var(--color-gray-800);
+  --bg-selected: var(--color-gray-700);
+  --fg: var(--color-gray-100);
+  --fg-muted: var(--color-gray-400);
+  --cursor: var(--color-gray-50);
+  --border-contour: var(--color-gray-500);
+  --border-divider: var(--color-gray-800);
+  --accent-focus: var(--color-sky-300);
+  --accent-emphasis: var(--color-blue-300);
+  --accent-surface: var(--color-sky-500);
+  --state-error: var(--color-rose-400);
+  --state-warning: var(--color-amber-400);
+  --state-success: var(--color-emerald-400);
+  --state-info: var(--color-blue-400);
+  --vcs-added: var(--color-emerald-400);
+  --vcs-modified: var(--color-blue-400);
+  --vcs-deleted: var(--color-rose-400);
+  --vcs-deleted-resource: var(--color-indigo-400);
+  --vcs-branch: var(--color-purple-400);
+  --vcs-staged: var(--color-emerald-400);
+  --vcs-unstaged: var(--color-amber-400);
+  --vcs-ahead: var(--color-cyan-400);
+  --vcs-behind: var(--color-rose-400);
   --syntax-comment: var(--color-gray-400);
   --syntax-punctuation: var(--color-gray-400);
   --syntax-constant: var(--color-pink-400);
@@ -267,23 +291,6 @@
   --syntax-import-keyword: var(--color-indigo-300);
   --syntax-import-string: var(--color-fuchsia-300);
   --syntax-constant-character-escape: var(--color-gray-300);
-  --editor-background: var(--color-gray-900);
-  --editor-foreground: var(--color-gray-50);
-  --foreground: var(--color-gray-50);
-  --focus-border: var(--color-sky-500);
-  --editor-line-number-foreground: var(--color-gray-400);
-  --editor-line-number-active-foreground: var(--color-gray-100);
-  --terminal-foreground: var(--color-gray-100);
-  --error-foreground: var(--color-rose-400);
-  --editor-error-foreground: var(--color-rose-400);
-  --editor-warning-foreground: var(--color-amber-400);
-  --editor-info-foreground: var(--color-blue-400);
-  --editor-gutter-modified-background: var(--color-blue-400);
-  --editor-gutter-added-background: var(--color-emerald-400);
-  --editor-gutter-deleted-background: var(--color-rose-400);
-  --git-decoration-modified-resource-foreground: var(--color-blue-400);
-  --git-decoration-added-resource-foreground: var(--color-emerald-400);
-  --git-decoration-deleted-resource-foreground: var(--color-indigo-400);
   --terminal-ansi-black: var(--color-gray-800);
   --terminal-ansi-red: var(--color-rose-400);
   --terminal-ansi-green: var(--color-emerald-400);
