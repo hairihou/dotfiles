@@ -3,10 +3,10 @@ local theme = {
   blue400 = "#51a2ff",
   emerald400 = "#00d492",
   fuchsia300 = "#f4a8ff",
-  gray50 = "#f9fafb",
   gray100 = "#f3f4f6",
   gray300 = "#d1d5dc",
   gray400 = "#99a1af",
+  gray500 = "#6a7282",
   gray700 = "#364153",
   gray800 = "#1e2939",
   gray950 = "#030712",
@@ -38,18 +38,18 @@ hl("Type", { fg = theme.teal300 })
 hl("CursorLine", { bg = theme.gray800 })
 hl("CursorLineNr", { bold = true })
 hl("Directory", { fg = theme.gray100 })
-hl("FloatBorder", { fg = theme.gray700 })
+hl("FloatBorder", { fg = theme.gray500 })
 hl("IncSearch", { fg = theme.gray800, bg = theme.amber400 })
 hl("LineNr", { fg = theme.gray400 })
 hl("Normal", { bg = "NONE" })
 hl("NormalFloat", { link = "Normal" })
-hl("PmenuBorder", { fg = theme.gray700 })
-hl("PmenuSel", { fg = theme.gray50, bg = theme.gray700 })
+hl("PmenuBorder", { fg = theme.gray500 })
+hl("PmenuSel", { fg = theme.gray100, bg = theme.gray700 })
 hl("Search", { fg = theme.gray800, bg = theme.amber400 })
 hl("StatusLine", { bg = "NONE" })
 hl("Visual", { bg = theme.gray700 })
 hl("WinBar", { bg = "NONE" })
-hl("WinSeparator", { fg = theme.gray800 })
+hl("WinSeparator", { fg = theme.gray500 })
 -- diagnostics
 hl("DiagnosticError", { fg = theme.rose400 })
 hl("DiagnosticWarn", { fg = theme.amber400 })

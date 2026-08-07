@@ -90,7 +90,7 @@ fzf = subprocess.run(
         f"start:pos({pos + 1})",
         "--highlight-line",
         "--color",
-        "bg+:#1e2939",
+        "bg+:0",
         "--pointer",
         "",
         "--delimiter",

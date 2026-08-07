@@ -6,7 +6,7 @@ import json
 import sys
 
 BRAILLE = "⠀⡀⣀⣤⣶⣿"
-GREEN, YELLOW, RED = "\033[92m", "\033[93m", "\033[91m"
+GREEN, YELLOW, RED = "\033[32m", "\033[33m", "\033[31m"
 RESET = "\033[0m"
 SEP = " | "
 
