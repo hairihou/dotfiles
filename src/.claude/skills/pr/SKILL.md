@@ -22,6 +22,7 @@ Stop and tell the user, without working around it, when:
 - `Default branch` or `Compare ref` is empty or errored — never guess a branch name or substitute another ref
 - `Compare ref` is not `origin/<Default branch>` — they need `git remote set-head origin --auto`
 - `Commits ahead` is empty — nothing to ship
+- `Current branch` is not the branch holding the work the user asked to ship — every probe above runs in the session's working directory, so a branch checked out in another worktree never surfaces here; name the mismatch and stop rather than shipping whatever this directory happens to be on
 - `Current branch` is `Default branch` — a PR needs a branch of its own
 - a subject in `Commits ahead` starts with `wip`, `fixup!`, or `squash!` — they need `git rebase -i`; do not auto-rebase
 
