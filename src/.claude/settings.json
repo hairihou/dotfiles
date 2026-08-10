@@ -137,6 +137,7 @@
     }
   },
   "language": "japanese",
+  "advisorModel": "fable",
   "plansDirectory": ".claude/plans",
   "voice": {
     "enabled": true,
