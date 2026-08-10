@@ -1,6 +1,6 @@
 ---
 name: refutation
-description: Verify a finished artifact by dispatching an independent skeptic that never saw it being made, tasked with refuting it, grounding every factual claim in a primary source, and reporting findings with severity and confidence. Use when a deliverable (document, plan, analysis, code change, decision) should be challenged rather than polished, above all one produced in the current session. Not for wording, style, or "does this look OK" passes.
+description: Verify a finished artifact by dispatching an independent skeptic that never saw it being made, tasked with refuting it, grounding every factual claim in a primary source, and reporting findings with severity and confidence. Invoke before handing over any deliverable that has no automatic falsifier — documents, rules, guidelines, skills, plans, analyses, decisions — above all one produced in the current session. Code already covered by tests, typecheck, or lint has a falsifier; use it there only for claims those checks do not exercise. Not for wording, style, or "does this look OK" passes.
 argument-hint: <artifact path or description>
 allowed-tools: Agent, WebFetch, WebSearch
 ---
@@ -17,6 +17,8 @@ Identify what is under test and reduce it to what a stranger could read on its o
 
 Pass nothing about how it came to be. No session history, no author intent, no "X was chosen because Y", no summary of your own. A summary carries the author's framing, which is the thing being tested.
 
+When the artifact changes an existing system, the scope is not the change. Name the system it belongs to and say the skeptic may read all of it. A change can be internally consistent and still contradict a third file that carries the same concept, and that flaw is invisible inside the diff.
+
 ## 2. Dispatch the Skeptic
 
 One Agent call. Read the prompt from `${CLAUDE_SKILL_DIR}/agents/skeptic.md` and substitute `{{artifact}}`.
@@ -31,5 +33,7 @@ Where a finding is Low confidence, keep the skeptic's note on what would settle 
 
 - Running the skeptic in the current context instead of a subagent, which yields self-review under another name
 - Handing the skeptic a summary, or the rationale behind the artifact
+- Scoping the skeptic to the diff, leaving the sibling files that carry the same concept unexamined
+- Skipping the run because the artifact looks correct, which is the condition the skill exists for
 - Fixing findings before the user has seen them
 - Passing through a factual claim that cites no source consulted
