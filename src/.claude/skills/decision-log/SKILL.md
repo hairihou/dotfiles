@@ -1,11 +1,11 @@
 ---
-name: kifu
+name: decision-log
 description: Record design/architecture/tooling decisions with alternatives, reasoning, and outcomes for retrospective review. Use when discussing trade-offs, comparing alternatives, finalizing a decision, recalling past decisions, or asking "why did we choose X?"
 argument-hint: '[search|supersede <id>|delete <id>]'
 allowed-tools: Bash
 ---
 
-# Kifu
+# Decision Log
 
 Persistent decision record with alternatives and reasoning. Enables retrospective review of past choices and their outcomes.
 

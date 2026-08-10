@@ -1,9 +1,9 @@
 ---
-name: yomi
+name: test-perspectives
 description: Use when writing or expanding tests for code with branching conditions, state transitions, input boundaries, or operational failure modes.
 ---
 
-# Yomi
+# Test Perspectives
 
 Enumerate cases via established QA techniques before writing test code; without this step, AI-written tests skew to happy paths and miss boundaries, condition combinations, illegal transitions, and operational failures.
 
