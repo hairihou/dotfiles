@@ -31,9 +31,5 @@ Where a finding is Low confidence, keep the skeptic's note on what would settle 
 
 ## Common Mistakes
 
-- Running the skeptic in the current context instead of a subagent, which yields self-review under another name
-- Handing the skeptic a summary, or the rationale behind the artifact
-- Scoping the skeptic to the diff, leaving the sibling files that carry the same concept unexamined
 - Skipping the run because the artifact looks correct, which is the condition the skill exists for
-- Fixing findings before the user has seen them
 - Passing through a factual claim that cites no source consulted
