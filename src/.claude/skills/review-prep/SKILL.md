@@ -1,6 +1,6 @@
 ---
 name: review-prep
-description: Prepare a human reviewer to review someone else's pull request — machine-check verbalizable perspectives with subagents, then hand over a self-contained HTML briefing separating what is safe to skim from what needs the human's design judgment. Strictly read-only against GitHub. Use when the user will themselves review someone else's PR — assigned as reviewer, or asking where to start reading before passing judgment. Not for fully automated review that ends with AI findings, and not for responding to feedback on the user's own PR.
+description: Prepare a human reviewer to review someone else's pull request — machine-check verbalizable perspectives with subagents, then hand over a self-contained HTML briefing separating what is safe to skim from what needs the human's design judgment. Strictly read-only against GitHub. Use when the user will themselves review someone else's PR — assigned as reviewer, asking where to start reading before passing judgment, or merely stating they have to review a PR (a bare URL or number with no explicit ask). Not for fully automated review that ends with AI findings, and not for responding to feedback on the user's own PR.
 argument-hint: '[PR number or URL]'
 allowed-tools: Agent, Bash, Write
 ---
@@ -9,13 +9,11 @@ allowed-tools: Agent, Bash, Write
 
 Target PR: $ARGUMENTS — if empty, the PR under discussion; if none, ask. Never resolve from the current branch: that is the user's own PR, which this skill does not cover.
 
-This skill does not replace review; it splits the work the way it should be split. Perspectives that have been verbalized get applied by AI with mechanical consistency; the human spends their limited attention on judgment — design choices, trade-offs, and product intent no checklist covers.
-
 ## Principles
 
 - Strictly read-only against GitHub: no comments, reviews, or labels. Comment drafts live only in the local briefing.
 - Reviewer subagents get a clean brief: the diff, the acceptance criteria (from the linked issue, if any), and one perspective. Never pass existing review comments into them — that creates confirmation bias. Dedup against existing comments afterwards, in the main agent.
-- If the project maintains a verbalized review-perspective file (accumulated checklists, missed-finding notes), pass it to the reviewers as the canonical perspective set instead of inventing one; never fork a second copy.
+- Bound every reviewer brief: judge from the diff, the supplied context, and the repo as checked out. No building test environments, installing packages, starting servers, or cloning upstream to reproduce a claim — what cannot be judged that way is reported at `confidence: low` instead of investigated. The read-only rule applies to them too.
 
 ## Workflow
 
@@ -36,13 +34,15 @@ Parallel read-only subagents, conclusions only: one for existing patterns and co
 
 ### 3. Machine-Check Layer
 
-Parallel review-only subagents, one per perspective, each with a clean brief — separate lenses catch what a single merged reviewer misses:
+Parallel review-only subagents, one per perspective, each with a clean brief:
 
 - spec: does the change satisfy the acceptance criteria and follow existing patterns.
 - risk: bugs, type mismatches, runtime errors, security, accessibility, performance.
 - completeness (only for user-facing feature changes): facets the issue never spelled out but the product obviously needs — empty/error/loading states, i18n.
 
 Output contract for every reviewer: tag each finding `confidence: high` (provable from the diff and the perspective) or `low` (depends on runtime conditions, unclear reproduction, or spec interpretation).
+
+Spawn them so their results return to the main agent in the same turn — not as named or backgrounded agents whose output arrives out of band. If a perspective does not come back, do not substitute a main-agent pass: by that point the main agent has read the existing comments, so the result is no longer bias-isolated. Mark the perspective as not applied in the briefing instead.
 
 ### 4. Judgment-Area Extraction
 
@@ -56,19 +56,15 @@ Then the main agent builds a spec cross-check: each acceptance criterion mapped 
 
 ### 5. Output the Briefing
 
-Sections, in this fixed order (stable placement is what makes the tool fast to use):
+Sections, in this fixed order:
 
-1. TL;DR — purpose / size / CI status / risk feel with a one-line reason / estimated review time.
-2. Reading order — decided by dependency direction, not line count (new types → consumers → tests); quarantine mechanical changes (rename fallout, generated files) as skimmable. Keeping the human from close-reading these is the single biggest time saver.
+1. TL;DR — purpose / scope / CI status / risk feel with a one-line reason / estimated review time.
+2. Reading order — decided by dependency direction, not line count (new types → consumers → tests); quarantine mechanical changes (rename fallout, generated files) as skimmable.
 3. Review-lens guide — design map, per-spot lens, spec cross-check from step 4.
 4. Machine-checked, safe to skim — perspectives that came back clean at high confidence. Always list which perspectives were applied: "no findings" is not "verified", and a property no perspective covered must not appear here.
-5. Needs human judgment — the step-4 judgment areas. Keep this section even when empty ("none — mechanical change only" is itself a time saver).
+5. Needs human judgment — the step-4 judgment areas. Keep this section even when empty ("none — mechanical change only").
 6. Verify — low-confidence findings for the human to confirm or dismiss.
 7. Findings (high confidence) — by severity; omit the section if none.
-8. Comment drafts — paste-ready, explicitly marked as not posted. Default to intent-seeking phrasing ("what was the intent behind …"); assert only high-confidence findings. Whether and how to post is the human's call.
+8. Comment drafts — paste-ready, explicitly marked as not posted. Default to intent-seeking phrasing ("what was the intent behind …"); assert only high-confidence findings.
 
 Render as one self-contained HTML page (inline CSS, mobile-readable), save outside the repo as `/tmp/$(date +%F)-pr<N>.html`, open it, and print a terminal summary: TL;DR, any high-confidence findings, and the file path. HTML-escape every value originating from the PR or repo (title, body, branch/author names, paths, finding text) — a malicious PR could otherwise inject script into the local file. If no browser is available or the user asks, print the full briefing to the terminal in the same section order.
-
-## After the Review
-
-When the user signals they finished, ask once: did you catch anything the machine-check layer missed? If yes, offer to verbalize it into the project's review-perspective file so it lands in the machine-checked section next time. Offer once; don't push.
