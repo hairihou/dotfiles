@@ -23,9 +23,6 @@
       "Edit(**/.zshrc.local)",
       "Read(**/.zshrc.local)",
       "Edit(**/node_modules/**)"
-    ],
-    "ask": [
-      "Bash(git push *)"
     ]
   },
   "hooks": {
