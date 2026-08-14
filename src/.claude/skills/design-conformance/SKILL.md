@@ -7,8 +7,6 @@ description: Make new UI look like it belongs in the product that already exists
 
 A screen is judged next to its neighbors, not on its own. The work is to find what the codebase has already decided and compose inside it.
 
-The design system here means whatever the codebase treats as its source of design decisions: a token file, a theme object, the dependency those are pulled from, or, failing all of that, the screens already shipped.
-
 ## Read Before Writing
 
 Three reads, then state what they returned:
@@ -43,16 +41,6 @@ Conformance does not outrank a floor that applies on its own. Where matching the
 ## Reviewing Instead of Writing
 
 The same three reads, run against the diff rather than your own output. A finding is a value or a component the system already answers for, answered differently here. Report where the system's answer lives, not only that one exists.
-
-## Before Calling It Done
-
-Each of these should be answerable with yes, against the files:
-
-- Can you name where each color, spacing, and type value came from?
-- Does every value you used belong to the system, rather than being introduced by this screen?
-- Did you confirm that nothing you built already exists in the system?
-- Held next to the screen you read, can you give a reason for every difference?
-- Did every gap you worked around get reported?
 
 ## Maintenance
 
