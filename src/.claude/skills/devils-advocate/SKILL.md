@@ -1,31 +1,29 @@
 ---
 name: devils-advocate
-description: Hold both the supporting and the opposing view on something the user has stated — the case for and the case against, argued in parallel — to surface tensions, risks, and decision factors. Use when the user wants a stated idea, decision, or approach examined from both angles at once.
+description: Examine a direction the user has already settled on from both sides at once, each side argued by an independent agent that sees neither the other nor the assessment forming in this conversation. Use before answering someone who presents a course as decided and asks whether to proceed — whether the answer taking shape is agreement or rejection, and above all when the course is the user's own and agreeing would cost nothing — to surface what it rests on and what would settle it. Not for an option still being floated, where no course has been chosen yet. Reports whichever side holds, including when only one does.
 argument-hint: <topic or decision to evaluate>
+allowed-tools: Agent
 ---
 
 # Devil's Advocate
 
-Surface the tensions in $ARGUMENTS by arguing both sides independently, then synthesizing.
+Agreement reached inside this conversation is worth little: the reasoning that led here also shapes what now looks convincing. Both examinations therefore run as separate agents that receive the proposal and the evidence, never this conversation's leaning. Independence is the mechanism, so it is not optional.
 
-## 1. Gather Context
+Whether to run is not decided by your own read of the proposal. An answer that already feels settled, in either direction, is the assessment under test — not a reason to skip.
 
-Glob/Grep to locate related code, docs, and config; Read up to 5 key files. Note the current state, constraints, affected systems, and existing patterns.
+## 1. Frame
 
-## 2. Run Both Agents in Parallel
+Narrow $ARGUMENTS to one decidable proposition — "adopting React Server Components for the dashboard", not "frontend strategy". Then gather only what makes claims checkable: the files, config, and constraints against which a claim would be verified. Do not settle on a view while gathering, and do not carry one into the next step.
 
-Launch the advocate and critic as two Agent calls in a single message — each gets the gathered context but is blind to the other's output, so neither side anchors to the other. Read each prompt from `${CLAUDE_SKILL_DIR}/agents/advocate.md` and `critic.md`, substituting `{{topic}}` and `{{context}}`.
+## 2. Dispatch
 
-## 3. Synthesize
+Launch both agents in a single message so neither anchors on the other, reading their prompts from `${CLAUDE_SKILL_DIR}/agents/advocate.md` and `critic.md` with `{{topic}}` and `{{context}}` substituted. What goes into `{{context}}` is the evidence, not any conclusion drawn from it, and both receive the same evidence — an asymmetry produced by feeding one side less is manufactured rather than found.
 
-Present both outputs faithfully — no editorializing — then where they conflict:
+## 3. Report
 
-- **Advocate** / **Critic**: each side's argument as returned
-- **Key Tensions**: a table pairing each claim against its counter
-- **Decision Factors**: what information or validation would resolve each tension — the actionable part
+Present each side as it was returned, without editorializing, then:
 
-## Common Mistakes
+- **Key Tensions** — each claim paired against the counter that meets it
+- **Decision Factors** — what would resolve each tension: a measurement, a document to read, a trial to run. This is the deliverable; the debate itself is not
 
-- Topic too broad — narrow "frontend strategy" to "adopting React Server Components for the dashboard"
-- Editorializing before both sides are presented faithfully
-- Treating the debate as the output — Decision Factors are the deliverable
+When a side does not hold up, say so and stop pairing. Balance manufactured out of a one-sided result hides the answer that was already there. When both hold, the disagreement is real, and the factors are what break it.
