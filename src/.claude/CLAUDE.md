@@ -14,10 +14,6 @@
 - Code review: separate surface fix (symptom) from root fix (cause); tag each proposed fix as `[surface]` or `[root]`
 - Design decisions (architecture, technology selection, large-scale refactoring): compare at least 2 named alternatives with explicit pros/cons, identify the biggest risk before committing
 
-## Delegation
-
-- Split a one-off task that surfaces mid-session into a subagent when only its outcome is needed and the work itself is not
-
 ## Code Style
 
 - Comments: default to none; warranted only for hidden constraints (undocumented API quirk, required call ordering, external bug workaround) — state the constraint, never what the code does. Design rationale goes in PR / commit / decision log, not source
