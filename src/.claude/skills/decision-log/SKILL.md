@@ -1,13 +1,13 @@
 ---
 name: decision-log
-description: Record design/architecture/tooling decisions with alternatives, reasoning, and outcomes for retrospective review. Use when discussing trade-offs, comparing alternatives, finalizing a decision, recalling past decisions, or asking "why did we choose X?"
+description: Persist a decision that has just been settled — the alternatives rejected, the reasoning, the consequences accepted, and the condition for revisiting it — into one database shared by every repository, and retrieve past ones from any of them. Use at the moment a design, architecture, or tooling choice stops being weighed and becomes what will be done, and whenever the alternatives or rationale behind an earlier choice are asked for, including a choice settled while working somewhere else. Not for choices without meaningful trade-offs.
 argument-hint: '[search|supersede <id>|delete <id>]'
 allowed-tools: Bash
 ---
 
 # Decision Log
 
-Persistent decision record with alternatives and reasoning. Enables retrospective review of past choices and their outcomes.
+One record shared across every repository. `repository` is a column, not a partition: search spans all repos unless `--repo` narrows it, so a decision made here stays reachable from anywhere else.
 
 ## Context
 
@@ -16,103 +16,52 @@ Persistent decision record with alternatives and reasoning. Enables retrospectiv
 - DB: !`uv run --script ${CLAUDE_SKILL_DIR}/scripts/db.py init`
 - Summary: !`uv run --script ${CLAUDE_SKILL_DIR}/scripts/db.py summary`
 
-Script: `${CLAUDE_SKILL_DIR}/scripts/db.py`
+Script: `${CLAUDE_SKILL_DIR}/scripts/db.py` — pass single-quoted arguments, escaping inner quotes as `'it'\''s'`.
 
 ## Mode: Record (default)
 
-Use when `$ARGUMENTS` is empty, or starts with none of `search`, `supersede`, `delete`.
+When `$ARGUMENTS` starts with none of `search`, `supersede`, `delete`.
 
-### Steps
-
-1. **Analyze**: Review conversation for the most recent decision where alternatives were considered
-2. **Extract**: Identify topic, chosen approach, alternatives, reasoning, consequences, confidence, and reevaluation trigger
-3. **Confirm**: Use AskUserQuestion to present the decision and get approval. Format the question as:
-
-   ```text
-   Decision Record
-   - Date: <date>
-   - Repository: <repo-basename>
-   - Topic: <short-label>
-   - Chosen: <approach>
-   - Alternatives: <other options considered>
-   - Reasoning: <why this was chosen>
-   - Consequences: <expected impact — what happens as a result>
-   - Confidence: <high|medium|low>
-   - Reevaluate when: <condition that should trigger revisiting this decision>
-   ```
-
-   Suggested responses: ["OK", "Revise"]
-   If the user wants changes, revise and re-confirm.
-
-4. **Insert**:
+1. Find the most recent decision in the conversation where alternatives were actually weighed, and extract every field below. A record without its rejected alternatives loses most of its value — that is the part nothing else preserves
+2. Present the extracted record via AskUserQuestion (`["OK", "Revise"]`), revising and re-confirming until approved
+3. Insert:
 
    ```sh
    uv run --script ${CLAUDE_SKILL_DIR}/scripts/db.py insert '<date>' '<repo>' '<topic>' '<chosen>' '<alternatives>' '<reasoning>' --consequences '<consequences>' --confidence <level> --reevaluate-when '<condition>'
    ```
 
-   Omit `--consequences`, `--confidence`, or `--reevaluate-when` if not applicable.
+   Omit the optional flags that do not apply.
 
-5. The script prints the inserted record.
+### Fields
+
+Write `chosen`, `alternatives`, and `reasoning` in plain English, concise but complete.
+
+- **topic**: kebab-case label, not a sentence (`database-selection`, not `We decided to use PostgreSQL`)
+- **reasoning** is why this won; **consequences** is what follows from it — operational impact, trade-offs accepted, follow-up work required
+- **confidence**: `high` = clear winner after research, `medium` = alternatives were close, `low` = best guess under uncertainty or time pressure. Do not default to `high`
+- **reevaluate_when**: the specific condition that should trigger revisiting (e.g. "latency exceeds 200ms", "library reaches v2.0")
+- **outcome**: left empty at insert; fill in later with `update-outcome <id> '<outcome>'` once results are known
 
 ## Mode: Supersede
 
-Use when `$ARGUMENTS` starts with `supersede`. Never edit an accepted decision — supersede it instead.
+When `$ARGUMENTS` starts with `supersede`. An accepted decision is never edited — supersede it, which marks the old record and links it to the new one.
 
-### Steps
+Locate the target with search (`detail <id>` for full context), then follow the Record flow, additionally showing which decision is being superseded and why.
 
-1. Find the decision to supersede via search (`detail <id>` for full context)
-2. Follow the same Extract → Confirm flow as Record mode, but also show which decision is being superseded and why
-3. **Insert**:
-
-   ```sh
-   uv run --script ${CLAUDE_SKILL_DIR}/scripts/db.py supersede <old-id> '<date>' '<repo>' '<topic>' '<chosen>' '<alternatives>' '<reasoning>' --consequences '<consequences>' --confidence <level> --reevaluate-when '<condition>'
-   ```
-
-4. The script marks the old decision as `superseded` and links it to the new one.
+```sh
+uv run --script ${CLAUDE_SKILL_DIR}/scripts/db.py supersede <old-id> '<date>' '<repo>' '<topic>' '<chosen>' '<alternatives>' '<reasoning>' --consequences '<consequences>' --confidence <level> --reevaluate-when '<condition>'
+```
 
 ## Mode: Delete
 
-Use when `$ARGUMENTS` starts with `delete`. Only for records that should never have existed: mis-recorded entries (trivial, duplicate, wrong repo) or sensitive content that must not persist. A decision that changed is not a mistake — use Supersede.
+When `$ARGUMENTS` starts with `delete`. Only for records that should never have existed: mis-recorded entries (trivial, duplicate, wrong repo) or sensitive content that must not persist. A decision that changed is not a mistake — supersede it instead.
 
-### Steps
-
-1. Find the target via search; show `detail <id>` output to the user
-2. **Confirm**: Use AskUserQuestion presenting the full record to be permanently deleted
-3. **Delete**:
-
-   ```sh
-   uv run --script ${CLAUDE_SKILL_DIR}/scripts/db.py delete <id>
-   ```
-
-The command accepts a single ID only — bulk deletion (date range, repo) is intentionally unsupported; decline such requests and suggest per-record review. If the deleted record had superseded another, the predecessor is restored to `accepted`.
+Show `detail <id>` and confirm via AskUserQuestion before running `db.py delete <id>`. A single ID only: bulk deletion by date range or repo is intentionally unsupported, so decline such requests and offer per-record review. Deleting a record that had superseded another restores the predecessor to `accepted`.
 
 ## Mode: Search
 
-Use when `$ARGUMENTS` starts with `search`.
+When `$ARGUMENTS` starts with `search`. Infer what is being looked for from conversation context, then query with the documented flags only — inventing others (`--head`, `--limit`, `--recent`) fails. For "recent decisions", pass `--from <YYYYMMDD>`.
 
-### Steps
-
-1. **Parse intent**: Understand what the user is looking for from conversation context
-2. **Build and run query**: Use only these documented flags — do not invent others (e.g., no `--head`, `--limit`, `--recent`). For "recent decisions", pass `--from <YYYYMMDD>` with a date cutoff.
-   - `search` filters: `--repo`, `--match`, `--from`, `--to`, `--status`
-   - Other subcommands: `detail <id>`, `update-outcome <id> '<outcome>'`
-   - If unsure, run `uv run --script ${CLAUDE_SKILL_DIR}/scripts/db.py search --help` first
-3. **Format**: Present results in a readable format
-
-## Guidelines
-
-- **chosen/alternatives/reasoning**: Write in plain English, concise but complete
-- **topic**: Use kebab-case short labels (e.g., `db-architecture`, `cache-strategy`, `skill-trigger-method`)
-- **confidence**: `high` = well-researched with clear winner, `medium` = reasonable choice but alternatives are close, `low` = best guess under uncertainty or time pressure
-- **consequences**: What happens as a result of this decision — operational impact, trade-offs accepted, follow-up work required. Distinct from reasoning (why) — consequences describe what follows (then what)
-- **reevaluate_when**: The specific condition that should trigger revisiting this decision (e.g., "team grows past 5 people", "latency exceeds 200ms", "library reaches v2.0")
-- **outcome**: Update later via search mode when results are known
-- Escape single quotes in shell arguments: `'it'\''s'`
-
-## Common Mistakes
-
-- Writing a sentence as topic instead of a kebab-case label (e.g., `We decided to use PostgreSQL` → `database-selection`)
-- Recording only the chosen approach without alternatives — the value is in knowing what was rejected and why
-- Recording trivial decisions (variable naming, minor formatting) — only record decisions where alternatives had meaningful trade-offs
-- Confusing reasoning with consequences: reasoning = "Redis is faster for our access pattern" / consequences = "adds operational dependency on Redis, need monitoring"
-- Setting confidence to high by default — be honest about uncertainty
+- `search` filters: `--repo`, `--match`, `--from`, `--to`, `--status`
+- Other subcommands: `detail <id>`, `update-outcome <id> '<outcome>'`
+- When unsure, run `db.py search --help` first
