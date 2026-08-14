@@ -5,7 +5,7 @@ description: Make new UI look like it belongs in the product that already exists
 
 # Design Conformance
 
-A screen is judged next to its neighbors, not on its own. The work is to find what the codebase has already decided and compose inside it — the interesting choices were made before you arrived.
+A screen is judged next to its neighbors, not on its own. The work is to find what the codebase has already decided and compose inside it.
 
 The design system here means whatever the codebase treats as its source of design decisions: a token file, a theme object, the dependency those are pulled from, or, failing all of that, the screens already shipped.
 
@@ -17,13 +17,13 @@ Three reads, then state what they returned:
 2. The nearest existing screen of the same kind as the one you are about to build
 3. The components already available for the parts you are about to build, including those a design-system dependency provides
 
-State the result as a plain sentence naming the files: where the tokens are defined, which screen you read, which components you will reuse. Name them; a statement that names nothing has not been earned.
+State the result as a plain sentence naming the files: where the tokens are defined, which screen you read, which components you will reuse.
 
 ## Which Case Applies
 
-**Declared.** Follow the declaration. Read it far enough to learn which parts are generated and must not be hand-edited.
+**Declared.** Follow the declaration. Read it far enough to learn which parts are generated and must not be hand-edited. Where the screen you read departs from the declaration, the declaration wins and the departure is a gap to report, not a precedent to copy.
 
-**Nothing declared, but screens exist.** This is the common case. Derive the conventions the existing screens already follow — the spacing values that recur, the colors that recur, the way a page is put together — then say what you derived before using it. A single screen is a precedent rather than a rule: follow it, and say it was the only sample you had, instead of generalizing from it.
+**Nothing declared, but screens exist.** This is the common case. Entering it requires the same naming as the reads: say where you looked for a declaration and what you looked for, so that finding none is distinguishable from missing it. Then derive the conventions the existing screens already follow — the spacing values that recur, the colors that recur, the way a page is put together — then say what you derived before using it. A single screen is a precedent rather than a rule: follow it, and say it was the only sample you had, instead of generalizing from it.
 
 **No UI at all.** Say that there is nothing to conform to, and stop. Do not design your way out of it.
 
@@ -46,7 +46,7 @@ The same three reads, run against the diff rather than your own output. A findin
 
 ## Before Calling It Done
 
-Each of these should be answerable with yes:
+Each of these should be answerable with yes, against the files:
 
 - Can you name where each color, spacing, and type value came from?
 - Does every value you used belong to the system, rather than being introduced by this screen?
