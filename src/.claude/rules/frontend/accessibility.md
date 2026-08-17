@@ -34,6 +34,9 @@ Model defaults reliably violate the rules below. Judge contrast on the final ren
 - No `opacity` or alpha to de-emphasize text or borders — it lowers effective contrast; use a solid color that meets the ratio
 - No auto-dismissing toast or snackbar — render the result inline, or give a persistent close control the user dismisses
 - No autoplay, auto-scroll, or carousel without an always-available stop control
+- No hand-authored focus ring, and no `outline: none` / `outline: 0` to suppress the UA one — the UA ring (`outline-style: auto`) adapts to background, dark mode, and forced-colors; a fixed replacement adapts to neither of the first two, and a `box-shadow`-only ring is dropped in forced-colors. The 3:1 floor above then becomes yours to hold. Adjusting `outline-offset` is not suppression, and a rounded `overflow: hidden` container clipping the ring's outer band is acceptable — restructuring to avoid it is not
+  - For a custom checkbox / radio / switch, style the native control itself with `appearance: none` rather than hiding it behind a proxy element; only where the control must stay visually hidden, carry the ring on the proxy via `:has(:focus-visible)`
+  - Only where the UA ring itself measures below 3:1 against the actual background (Safari draws a single accent-color ring, ~2.1:1 on most backgrounds), author a two-tone `outline` plus `box-shadow` ring, with the `outline` carrying the contrast in forced-colors
 
 ## CSS Variables
 
