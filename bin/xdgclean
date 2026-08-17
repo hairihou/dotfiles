@@ -9,6 +9,12 @@ readonly XDG_DIRS=(
 )
 readonly BOUNDARIES=("$HOME" "${XDG_DIRS[@]}")
 
+readonly DOTFILES_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+readonly MANAGED_ROOTS=(
+  "${CLAUDE_CONFIG_DIR:-$HOME/.claude}|$DOTFILES_ROOT/src/.claude"
+  "${XDG_CONFIG_HOME:-$HOME/.config}|$DOTFILES_ROOT/src/.config"
+)
+
 dry_run=false
 
 usage() {
@@ -88,6 +94,20 @@ prune_upward() {
   done
 }
 
+prune_orphans() {
+  local dest_root="$1" src_root="$2" entry rel parent_rel parent_src
+  [ -d "$dest_root" ] && [ -d "$src_root" ] || return 0
+  while IFS= read -r entry; do
+    rel="${entry#"$dest_root"/}"
+    [ -e "$src_root/$rel" ] && continue
+    parent_rel="$(dirname "$rel")"
+    parent_src="$src_root"
+    [ "$parent_rel" = "." ] || parent_src="$src_root/$parent_rel"
+    [ -d "$parent_src" ] || continue
+    prune_upward "$entry"
+  done < <(find "$dest_root" -mindepth 1 -type d -empty -not -path '*/.git/*' -print 2>/dev/null | sort -r)
+}
+
 while IFS= read -r link; do
   [ -e "$link" ] || remove_link "$link"
 done < <(find "$HOME" -maxdepth 1 -type l -print 2>/dev/null)
@@ -104,6 +124,10 @@ if ((${#parents[@]} > 0)); then
     prune_upward "$parent"
   done < <(printf '%s\n' "${parents[@]}" | sort -ru)
 fi
+
+for pair in "${MANAGED_ROOTS[@]}"; do
+  prune_orphans "${pair%%|*}" "${pair#*|}"
+done
 
 if [[ $count -eq 0 ]]; then
   echo 'Nothing to clean'
