@@ -14,14 +14,13 @@
       "Bash(brew *)",
       "Bash(pip *)",
       "Bash(pip3 *)",
-      "Edit(**/.env)",
+      "Read(~/.aws/**)",
+      "Read(~/.config/gh/hosts.yml)",
+      "Read(~/.ssh/**)",
       "Read(**/.env)",
-      "Edit(**/.env.*)",
       "Read(**/.env.*)",
-      "Edit(**/.ssh/**)",
-      "Read(**/.ssh/**)",
-      "Edit(**/.zshrc.local)",
       "Read(**/.zshrc.local)",
+      "Read(~/.zshrc.local)",
       "Edit(**/node_modules/**)"
     ]
   },
