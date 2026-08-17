@@ -5,7 +5,7 @@ requires-python = ">=3.14.7"
 
 [dependency-groups]
 dev = [
-  "prek>=0.4.13",
+  "prek>=0.4.14",
   "ruff>=0.16.3",
   "ty>=0.0.72",
 ]
