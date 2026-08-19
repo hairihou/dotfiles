@@ -6,8 +6,8 @@
 	verbose = true
 [core]
 	fsmonitor = true
-	untrackedCache = true
 	pager = hunk pager
+	untrackedCache = true
 [credential "https://github.com"]
 	helper =
 	helper = !gh auth git-credential
