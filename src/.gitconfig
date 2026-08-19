@@ -7,6 +7,7 @@
 [core]
 	fsmonitor = true
 	untrackedCache = true
+	pager = hunk pager
 [credential "https://github.com"]
 	helper =
 	helper = !gh auth git-credential

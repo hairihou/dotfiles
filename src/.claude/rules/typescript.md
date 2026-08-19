@@ -34,6 +34,7 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 - Bare `if (value)` for nullish checks → use `value !== undefined` or `value !== null`; boolean types allow truthy checks; `if (name)` on `string` allowed only when excluding empty string is intentional
 - `!!value` → allowed only for coercing union with multiple falsy values (`string | null | undefined` → `boolean`)
 - `Number(input)` → `parseFloat(input)` or `parseInt(input, 10)`
+- `function` declaration → arrow function assigned to `const`, unless hoisting is required
 
 ## Naming Conventions
 
