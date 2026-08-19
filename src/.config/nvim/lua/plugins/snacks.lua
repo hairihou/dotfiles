@@ -11,7 +11,6 @@ return {
     { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
     { "<leader>fs", function() Snacks.picker.lsp_symbols() end, desc = "Symbols" },
     { "<leader>fw", function() Snacks.picker.grep_word() end, mode = { "n", "x" }, desc = "Grep Word" },
-    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
   },
   lazy = false,
   opts = {

@@ -6,7 +6,6 @@ return {
   config = function()
     require("nvim-treesitter-textobjects").setup({
       select = { lookahead = true },
-      move = { set_jumps = true },
     })
     local select = require("nvim-treesitter-textobjects.select")
     local objects = {

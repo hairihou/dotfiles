@@ -1,9 +1,6 @@
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 local opt = vim.opt
 opt.breakindent = true
 opt.clipboard = "unnamedplus"
-opt.completeopt = { "menu", "menuone", "noselect", "popup" }
 opt.cursorline = true
 opt.expandtab = true
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
