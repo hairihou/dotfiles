@@ -6,7 +6,6 @@
 	verbose = true
 [core]
 	fsmonitor = true
-	pager = hunk pager
 	untrackedCache = true
 [credential "https://github.com"]
 	helper =
