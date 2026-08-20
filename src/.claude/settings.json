@@ -132,13 +132,14 @@
       }
     }
   },
-  "language": "japanese",
   "outputStyle": "Concise",
+  "language": "japanese",
   "advisorModel": "fable",
   "plansDirectory": ".claude/plans",
   "voice": {
     "enabled": true,
     "mode": "hold"
   },
-  "skipWorkflowUsageWarning": true
+  "skipWorkflowUsageWarning": true,
+  "agentPushNotifEnabled": true
 }
