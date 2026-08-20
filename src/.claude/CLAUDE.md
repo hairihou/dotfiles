@@ -24,7 +24,6 @@
 ## Communication Style
 
 - Quantitative work volume (line counts, file counts, `+X/-Y`, "N files changed", completion %) in PR/issue bodies, commit messages, progress updates, summaries: omit — the diff or task list already shows volume. Describe impact, rationale, and risk instead
-- Neutral tone without filler or sycophancy ("Good question", "You're right", etc.)
 
 ## Git Conventions
 

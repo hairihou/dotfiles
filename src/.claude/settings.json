@@ -133,6 +133,7 @@
     }
   },
   "language": "japanese",
+  "outputStyle": "Concise",
   "advisorModel": "fable",
   "plansDirectory": ".claude/plans",
   "voice": {
