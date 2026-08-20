@@ -25,31 +25,22 @@ Pick items relevant to the current state.
 
 ### Consistency
 
-- [ ] Config key ordering per project conventions (alphabetical within same level)
-- [ ] Git config: deprecated options or missing recommended settings
-- [ ] Keybinding conflicts or gaps across tools
 - [ ] Value alignment across configs that share settings (themes, paths, env vars)
-
-### Hygiene
-
-- [ ] Commented-out code that should be removed or restored
-- [ ] File ordering per project conventions
-- [ ] TODO/FIXME/HACK comments
-- [ ] Unnecessary blank lines or inconsistent formatting
+- [ ] Keybinding conflicts or gaps across tools
 
 ### Pruning
 
-- [ ] Dead or broken symlinks — `find . -xtype l -not -path '*/node_modules/*'`
-- [ ] Package lists: detect duplicates or entries no longer needed — `sort <list> | uniq -d`
-- [ ] Scripts that duplicate existing tools or each other — diff with `diff -q <a> <b>` after a name-based shortlist
-- [ ] Unused aliases, functions, or config blocks — `grep -rL '<name>' <consumer-dirs>` to confirm no callsite
-- [ ] Version manager tools no longer used — cross-reference declared tools with shell history / git log of their config files
+- [ ] Dead or broken symlinks
+- [ ] Package lists: duplicates, or entries no longer needed
+- [ ] Scripts that duplicate an existing tool or each other
+- [ ] Aliases, functions, or config blocks with no callsite left
+- [ ] Version manager tools no longer used
 
 ### Upgrades
 
 - [ ] Config format changes from tool updates (breaking changes in new versions)
 - [ ] Package lists: renamed or deprecated packages
-- [ ] Tool versions: flag significantly outdated entries
+- [ ] Tool versions significantly outdated
 
 ## Output Format
 
@@ -61,14 +52,10 @@ Report findings as a numbered list. Each item must include:
 
 ## Guidelines
 
-- **Read every file individually.** Bulk reading causes misreads.
-- Read before suggesting. Never propose changes to files you have not read.
+- Never propose a change to a file you have not read.
 - Scope changes narrowly. A bonsai session should produce a small, reviewable diff.
-- Explain the "why" for each change, not just the "what".
 
 ## Common Mistakes
 
 - **Proposing to delete config consumed by CI** — a config block with no local consumer may still be read by `.github/workflows/*.yml`, Renovate, or pre-commit. Grep CI files before flagging as dead
-- **Removing TODO/FIXME without owner check** — these often encode known constraints. Run `git log -S '<TODO text>'` to find the author and original commit before suggesting removal
-- **Ordering churn for its own sake** — re-sorting a 200-line config produces a noisy diff that drowns the actual fixes. Skip ordering items unless the user opted into them
 - **Touching machine-local files** — `.env.local`, `*.local.*`, gitignored files belong to the user's machine, not the repo. Out of scope

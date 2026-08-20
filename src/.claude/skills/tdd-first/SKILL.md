@@ -9,12 +9,13 @@ A test written before the code records the requirement; a test written after ten
 
 ## Cycle
 
-1. Write the narrowest test that captures the next behavior, run it, and inspect the failure: the assertion itself must be what fails. A crash in setup, an unresolved import, or a typo means the cycle has not started yet
-2. Make it pass with just enough production code — anything the test does not force stays out until a later cycle forces it
-3. With the suite green, improve structure freely, introducing no new behavior while doing so
+1. Write the narrowest test for the next behavior and run it before any production code exists
+2. Write just enough production code to pass it
+3. Restructure with the suite green, adding no behavior
 
 ## Signals Worth Stopping For
 
+- The failure is not the assertion — a crash in setup, an unresolved import, or a typo. The cycle has not started: fix the test and run it again before writing production code
 - A brand-new test goes green on its first run: it captures nothing new — rework the test, not the plan
 - You are tempted to adjust a failing test until it passes: legitimate only when the test itself encodes the requirement wrongly, and say so before touching it
 

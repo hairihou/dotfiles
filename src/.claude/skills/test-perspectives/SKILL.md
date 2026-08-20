@@ -1,6 +1,6 @@
 ---
 name: test-perspectives
-description: Use when writing or expanding tests for code with branching conditions, state transitions, input boundaries, or operational failure modes.
+description: Enumerate cases with established QA techniques before any test code is written. Invoke at the point a spec or test file is about to be created, or cases added to an existing suite for behavior it must guarantee but does not yet cover.
 ---
 
 # Test Perspectives

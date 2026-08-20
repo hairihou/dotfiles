@@ -9,7 +9,7 @@ allowed-tools: Agent, WebFetch, WebSearch
 
 Verify $ARGUMENTS by refutation, not review.
 
-A reviewer who holds the creation context cannot find the flaw the context conceals. Independence is the mechanism, so it is not optional: the skeptic runs as a subagent, or the run is worthless.
+A reviewer who holds the creation context cannot find the flaw the context conceals. Independence is the mechanism, so it is not optional: the skeptic runs as a subagent, or the run is worthless. Looking correct is the condition this skill exists for, not a reason to skip.
 
 ## 1. Isolate the Artifact
 
@@ -25,11 +25,6 @@ One Agent call. Read the prompt from `${CLAUDE_SKILL_DIR}/agents/skeptic.md` and
 
 ## 3. Present, Do Not Decide
 
-Report the findings ordered by severity, each with its evidence and confidence as returned. Do not accept, dismiss, merge, or act on any of them, and do not edit the artifact. Adoption, partial adoption, and rejection are the user's call, and the findings are material for that call.
+Report the findings ordered by severity, each with its evidence and confidence as returned. A finding that names no source consulted is relayed as unsourced. Do not accept, dismiss, merge, or act on any of them, and do not edit the artifact. Adoption, partial adoption, and rejection are the user's call, and the findings are material for that call.
 
 Where a finding is Low confidence, keep the skeptic's note on what would settle it. That is the next action if the user wants one.
-
-## Common Mistakes
-
-- Skipping the run because the artifact looks correct, which is the condition the skill exists for
-- Passing through a factual claim that cites no source consulted
