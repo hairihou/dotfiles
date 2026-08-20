@@ -141,5 +141,6 @@
     "mode": "hold"
   },
   "skipWorkflowUsageWarning": true,
+  "remoteControlAtStartup": false,
   "agentPushNotifEnabled": true
 }
