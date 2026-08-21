@@ -55,7 +55,7 @@ closes #<number>
 <description>
 ```
 
-The Summary states what changed in the codebase and why, not what the author did. Reject bare verbs without object ("updated files", "refactored") and process narration ("spent time investigating").
+The Summary states what changed in the codebase and why, not what the author did. When an issue is linked and nothing surfaced while implementing that it does not already say, drop the section and the `---` and ship the link alone. Reject bare verbs without object ("updated files", "refactored") and process narration ("spent time investigating").
 
 ## Steps
 
