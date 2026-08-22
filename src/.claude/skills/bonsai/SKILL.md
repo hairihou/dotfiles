@@ -33,7 +33,7 @@ Pick items relevant to the current state.
 - [ ] Dead or broken symlinks
 - [ ] Package lists: duplicates, or entries no longer needed
 - [ ] Scripts that duplicate an existing tool or each other
-- [ ] Aliases, functions, or config blocks with no callsite left
+- [ ] Aliases, functions, or config blocks with no call site left
 - [ ] Version manager tools no longer used
 
 ### Upgrades
