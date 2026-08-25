@@ -93,6 +93,20 @@
           }
         ]
       }
+    ],
+    "StopFailure": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "claude-notify.py",
+            "args": [
+              "stop-failure"
+            ]
+          }
+        ]
+      }
     ]
   },
   "statusLine": {
@@ -137,10 +151,8 @@
   "advisorModel": "fable",
   "plansDirectory": ".claude/plans",
   "voice": {
-    "enabled": true,
-    "mode": "hold"
+    "enabled": true
   },
   "skipWorkflowUsageWarning": true,
-  "remoteControlAtStartup": false,
   "agentPushNotifEnabled": true
 }
