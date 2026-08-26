@@ -1,6 +1,6 @@
 ---
 name: japanese-writing
-description: 'Make Japanese developer-facing prose read plain and accurate: cut overstatement, coined jargon, filler, and blame aimed at people; fix loose paragraphs and notation (spacing around half-width alphanumerics). Invoke BEFORE writing or updating a Japanese issue/PR body (`gh issue|pr create|edit`), planning/design doc, meeting material, or team chat post, even when the text falls out of a larger task. Not for English, reference docs, or CLI text.'
+description: 'Make Japanese developer-facing prose read plain and accurate. Invoke BEFORE writing or updating a Japanese issue/PR body (`gh issue|pr create|edit`), planning/design doc, meeting material, or team chat post, even when the text falls out of a larger task. Not for English, reference docs, or CLI text.'
 argument-hint: '[file-path]'
 allowed-tools: Edit, Write
 ---

@@ -6,16 +6,6 @@ allowed-tools: Bash
 
 # External Repo
 
-## When to Use
-
-- Reading non-trivial implementation in a third-party repo (multiple files, cross-file search)
-- User intent like "how is useSyncExternalStore implemented in react?", or a pasted repo URL with intent to inspect contents
-
-## When Not to Use
-
-- Single doc page or known raw file URL → `WebFetch`
-- Work inside the user's own working repo
-
 ## Flow
 
 Default target: latest of the default branch, unless the user specifies a ref. Local clones live at `$(ghq root)/<host>/<owner>/<name>`.

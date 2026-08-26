@@ -43,13 +43,6 @@ Edit the doc to remove the unclear points — one theme per iteration; unrelated
 
 Re-run with a new subagent — never reuse one, it has already learned the prior text. Stop when two consecutive iterations produce zero new unclear points and accuracy improvement falls below ~5% relative.
 
-## Anti-Patterns
-
-- Re-reading your own draft and deciding it is clear — your head supplies the missing context.
-- Editing the requirements checklist after seeing a run.
-- Reusing a subagent across iterations — the eval degrades into reading comprehension of the previous version.
-- Accumulating notes for a recurring failure class instead of relocating the existing fix.
-
 ## Final Report
 
 - Doc under test and iterations run, with per-iteration pass/accuracy.

@@ -21,8 +21,6 @@ Inspect config files in the **current repository** and report maintenance opport
 
 ## Checklist
 
-Pick items relevant to the current state.
-
 ### Consistency
 
 - [ ] Value alignment across configs that share settings (themes, paths, env vars)
