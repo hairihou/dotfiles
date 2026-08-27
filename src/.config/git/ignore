@@ -1,4 +1,6 @@
+**/__pycache__
 **/.claude/plans
 **/.claude/settings.local.json
+**/.DS_Store
 **/.scratch
 **/mise.*local.toml
