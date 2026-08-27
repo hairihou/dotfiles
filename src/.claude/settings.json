@@ -116,7 +116,6 @@
   "enabledPlugins": {
     "claude-api@anthropic-agent-skills": true,
     "claude-md-management@claude-plugins-official": true,
-    "codex@openai-codex": true,
     "figma@claude-plugins-official": true,
     "frontend-design@claude-plugins-official": true,
     "modern-web-guidance@googlechrome": true,
@@ -137,12 +136,6 @@
       "source": {
         "source": "github",
         "repo": "GoogleChrome/modern-web-guidance"
-      }
-    },
-    "openai-codex": {
-      "source": {
-        "source": "github",
-        "repo": "openai/codex-plugin-cc"
       }
     }
   },
