@@ -42,10 +42,6 @@ const handleSubmit = () => { ... }
 
 `input()`/`output()` → `inject` → feature blocks → lifecycle
 
-### Effect Guidelines
-
-- Avoid writing to signals inside effects — derive state with `computed` or `linkedSignal` instead
-
 ---
 
 ## React
@@ -53,11 +49,6 @@ const handleSubmit = () => { ... }
 ### Declaration Order
 
 props → external hooks → `useQuery`/`useMutation` → feature blocks → component-level `useEffect` → early returns → JSX
-
-### useEffect Guidelines
-
-- Avoid object/array literals in dependency array (use useMemo or extract outside)
-- Prefer multiple small effects over one large effect
 
 ---
 
