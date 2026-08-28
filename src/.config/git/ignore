@@ -2,5 +2,5 @@
 **/.claude/plans
 **/.claude/settings.local.json
 **/.DS_Store
-**/.scratch
 **/mise.*local.toml
+**/node_modules
