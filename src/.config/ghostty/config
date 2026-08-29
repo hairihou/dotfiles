@@ -1,4 +1,5 @@
 background = #101828
+confirm-close-surface = false
 cursor-color = #f9fafb
 cursor-text = #101828
 font-family = UDEV Gothic 35NF
