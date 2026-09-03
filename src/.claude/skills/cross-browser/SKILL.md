@@ -1,21 +1,13 @@
 ---
 name: cross-browser
-description: Use when verifying page rendering or behavior in Safari (WebKit), Firefox, or across multiple browser engines. agent-browser is Chromium-only via CDP; these checks require playwright-cli. Not for Chromium-only verification — use agent-browser there.
-allowed-tools: Bash
+description: Use when verifying page rendering or behavior in a non-Chromium engine — Safari/WebKit (desktop or iPhone) or Firefox — or comparing engines side by side. Not for Chromium; agent-browser covers that.
 ---
 
 # Cross-Browser
 
-agent-browser drives Chrome/Chromium over CDP and cannot launch other engines. For WebKit (closest proxy for Safari) or Firefox, use playwright-cli:
+agent-browser drives Chromium. Every other engine goes to the playwright-cli skill: `--browser=webkit | firefox` on `open`, `--device "iphone 15"` (or `--mobile`) for a phone-sized WebKit, and named sessions (`-s=`) to compare engines side by side.
 
-```sh
-playwright-cli open --browser=webkit https://example.com
-playwright-cli snapshot
-playwright-cli screenshot
-playwright-cli close
-```
-
-- `--browser=webkit | firefox | chrome | msedge`
-- Browser binaries download on demand; if launch fails, run `playwright install webkit` (or `firefox`)
-- Compare engines side by side with named sessions: `playwright-cli -s=wk open --browser=webkit <url>` / `playwright-cli -s=ff open --browser=firefox <url>`, then `-s=<name>` on every subsequent command
-- WebKit is the Safari engine but not Safari itself — macOS-specific chrome (form controls, scrollbars, font rendering) can still differ; flag findings as WebKit-level, not Safari-confirmed
+- Engine binaries are separate downloads and WebKit is usually absent; playwright-cli has no install subcommand and `playwright` is not on PATH, so run `npx playwright install webkit` when launch fails
+- Engine differences do not surface in the a11y snapshot (chromium and firefox can be byte-identical on the same page); compare `screenshot` output or computed styles instead
+- WebKit is the Safari engine but not Safari itself, and `--device` only emulates a phone — platform chrome (form controls, scrollbars, font rendering) still differs; flag findings as WebKit-level, not Safari-confirmed
+- Neither CLI has a documented path to real Safari: agent-browser's `-p ios` provider ships no setup docs and needs an iOS device, and macOS `safaridriver` has no driver here
