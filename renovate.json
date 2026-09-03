@@ -8,7 +8,6 @@
   "major": {
     "automerge": false
   },
-  "platformAutomerge": false,
   "schedule": [
     "before 8:00 every weekday",
     "after 12:00 every weekday",
