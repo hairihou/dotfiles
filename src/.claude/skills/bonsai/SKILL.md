@@ -6,11 +6,11 @@ allowed-tools: Bash, Edit
 
 # Bonsai
 
-Inspect config files in the **current repository** and report maintenance opportunities. Each run, pick one or more items from the checklist below — do not try to do everything at once.
+Inspect config files in the **current repository** and report maintenance opportunities. Each run, pick one or more items from the checklist below.
 
 **Scope:** the current working directory (repository) only. Do not inspect home directory dotfiles, shell setup, or global tool configs unless the user explicitly asks.
 
-**Finding budget:** stop at 5 findings per session. A grooming session is valuable only when each item gets discussed; a 30-finding wall guarantees nothing gets fixed.
+**Finding budget:** report only what the session can actually discuss and turn into a small, reviewable diff. A grooming session is valuable only when each item gets discussed; a wall of findings guarantees nothing gets fixed.
 
 ## Workflow
 
@@ -51,7 +51,6 @@ Report findings as a numbered list. Each item must include:
 ## Guidelines
 
 - Never propose a change to a file you have not read.
-- Scope changes narrowly. A bonsai session should produce a small, reviewable diff.
 
 ## Common Mistakes
 

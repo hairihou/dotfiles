@@ -4,7 +4,7 @@ paths: ["**/*.md"]
 
 # Markdown Style
 
-Write plain, readable prose. Avoid AI-generated feel.
+Write plain, readable prose.
 
 ## Formatting
 

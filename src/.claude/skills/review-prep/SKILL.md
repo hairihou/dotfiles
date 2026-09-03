@@ -48,7 +48,7 @@ Spawn them so their results return to the main agent in the same turn — not as
 
 One more read-only subagent, orthogonal to step 3 — not another bug hunt:
 
-1. Design map: responsibilities, dependency direction, and data flow of the changed modules, in 5 lines or fewer.
+1. Design map: responsibilities, dependency direction, and data flow of the changed modules, short enough to read before opening the diff.
 2. Judgment areas: the places where the author chose something — a new abstraction, a deliberate deviation from an existing pattern, an error-handling behavior, a performance/readability trade. One line each on what was chosen and what it was traded against. Do not evaluate whether the choice is good — that is the human's job.
 3. Per-spot lens: for each major changed file, one line on how to read it (e.g. "trace the authorization boundary", "walk the error paths only", "compare against the existing X pattern"). One lens per spot — a spot needing three lenses has outgrown lens-guided reading and belongs in the judgment section.
 

@@ -1,6 +1,6 @@
 ---
 name: pr
-description: You MUST invoke this BEFORE running `gh pr create` or `gh pr edit`, and before any push that lands commits a PR does or will cover — a branch's first push, or a follow-up onto a branch whose PR already exists — whether the user asks ("create PR", "push this", "ship it") or you propose it after finishing work. DO NOT USE for leaving inline review comments on an existing PR.
+description: Open a draft GitHub pull request for the branch, or update the title and body of the one that already exists. You MUST invoke this BEFORE running `gh pr create` or `gh pr edit`, and before any push that lands commits a PR does or will cover, whether the user asks or you propose it after finishing work. DO NOT USE for leaving inline review comments on an existing PR.
 argument-hint: '[base-branch]'
 allowed-tools: Bash
 ---
