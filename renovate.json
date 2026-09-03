@@ -5,7 +5,6 @@
   "assignees": ["hairihou"],
   "automerge": true,
   "draftPR": false,
-  "ignoreTests": true,
   "major": {
     "automerge": false
   },
