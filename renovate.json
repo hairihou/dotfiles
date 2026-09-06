@@ -7,8 +7,5 @@
   "major": {
     "automerge": false
   },
-  "schedule": [
-    "before 8:00",
-    "after 10:00"
-  ]
+  "schedule": ["before 8:00", "after 10:00"]
 }
