@@ -1,6 +1,6 @@
 ---
 name: cross-browser
-description: Use when verifying page rendering or behavior in a non-Chromium engine — Safari/WebKit (desktop or iPhone) or Firefox — or comparing engines side by side. Not for Chromium; agent-browser covers that.
+description: Use when verifying page rendering or behavior in a non-Chromium engine — Safari/WebKit (desktop or iPhone) or Firefox — or comparing engines side by side; agent-browser covers Chromium.
 ---
 
 # Cross-Browser

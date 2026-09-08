@@ -1,6 +1,6 @@
 ---
 name: devils-advocate
-description: Examine a direction the user has already settled on from both sides at once, each side argued by an independent agent that sees neither the other nor the assessment forming in this conversation. Use before answering someone who presents a course as decided and asks whether to proceed — whether the answer taking shape is agreement or rejection, and above all when the course is the user's own and agreeing would cost nothing — to surface what it rests on and what would settle it. Not for an option still being floated, where no course has been chosen yet. Reports whichever side holds, including when only one does.
+description: Examine a direction the user has already settled on from both sides at once, each side argued by an independent agent that sees neither the other nor the assessment forming in this conversation. Use before answering someone who presents a course as decided and asks whether to proceed — whether the answer taking shape is agreement or rejection, and above all when the course is the user's own and agreeing would cost nothing — to surface what it rests on and what would settle it. Reports whichever side holds, including when only one does.
 argument-hint: <topic or decision to evaluate>
 allowed-tools: Agent
 ---

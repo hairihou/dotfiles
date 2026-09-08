@@ -1,6 +1,6 @@
 ---
 name: design-conformance
-description: Make new UI look like it belongs in the product that already exists: read the design tokens and components the codebase declares, or where nothing is declared, the conventions its existing screens already follow, and compose within them instead of introducing a fresh aesthetic. Use when adding to or revising a surface that ships beside other screens, and when reviewing UI just written for values invented outside the system. Not for greenfield work where a distinctive, one-off look is the point, not when the brief asks for a new look rather than a consistent one, and not for a codebase that has no UI yet.
+description: Make new UI look like it belongs in the product that already exists: read the design tokens and components the codebase declares, or where nothing is declared, the conventions its existing screens already follow, and compose within them instead of introducing a fresh aesthetic. Use when adding to or revising a surface that ships beside other screens, and when reviewing UI just written for values invented outside the system. Not when the brief asks for a new look rather than a consistent one.
 ---
 
 # Design Conformance

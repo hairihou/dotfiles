@@ -8,7 +8,7 @@
 ## Reasoning
 
 - Code review — never default to "no issues found":
-  - assess impact scope; name what the change's safety depends on and tag its evidence `[asserted]` → `[cited]` (`file:line`) → `[reasoned]` (failure path unreachable) → `[executed]` (ran the code) → `[observed]` (reproduced in the running system) — anything below `[executed]` is reported as unconfirmed
+  - assess impact scope; name what the change's safety depends on and tag its evidence as `[cited]` (`file:line`), `[reasoned]` (failure path unreachable), or `[executed]` (ran the code) — report anything below `[executed]` as unconfirmed
   - separate surface fix (symptom) from root fix (cause); tag each proposed fix as `[surface]` or `[root]`
 - Design decisions (architecture, technology selection, large-scale refactoring): compare at least 2 named alternatives with explicit pros/cons, identify the biggest risk before committing
 
