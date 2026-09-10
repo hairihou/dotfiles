@@ -18,20 +18,20 @@ allowed-tools: Bash
 
 ## Skip Gate
 
-Every probe above ran in the session's working directory, so each one describes `Current branch`. The branch holding the work the user asked to ship is `<branch>` throughout this document. When it is not `Current branch`, re-derive these before reading further and use the re-derived values everywhere below: its checkout path from `Worktrees`, `Commits ahead` from `git log --oneline origin/HEAD..<branch>`, and `Git status` from `git -C <path> status -b --porcelain` — status is the one probe a branch name cannot stand in for.
+Every probe above ran in the session's working directory, so each one describes `Current branch`. The branch holding the work the user asked to ship is `<branch>` throughout this document. When it is not `Current branch`, re-derive these before reading further and use the re-derived values everywhere below: its checkout path from `Worktrees`, `Commits ahead` from `git log --oneline origin/HEAD..<branch>`, and `Git status` from `git -C <path> status -b --porcelain`. Status is the one probe a branch name cannot stand in for.
 
 Stop and tell the user, without working around it, when:
 
-- `Default branch` or `Compare ref` is empty or errored — never guess a branch name or substitute another ref
-- `Compare ref` is not `origin/<Default branch>` — they need `git remote set-head origin --auto`
-- neither `Worktrees` nor `git branch --list <branch>` reports it — name the mismatch and stop rather than shipping whatever this directory happens to be on
-- `Commits ahead` is empty — nothing to ship
-- `<branch>` is `Default branch` — a PR needs a branch of its own
-- a subject in `Commits ahead` starts with `wip`, `fixup!`, or `squash!` — they need `git rebase -i`; do not auto-rebase
+- `Default branch` or `Compare ref` is empty or errored: never guess a branch name or substitute another ref
+- `Compare ref` is not `origin/<Default branch>`: they need `git remote set-head origin --auto`
+- neither `Worktrees` nor `git branch --list <branch>` reports it: name the mismatch and stop rather than shipping whatever this directory happens to be on
+- `Commits ahead` is empty: nothing to ship
+- `<branch>` is `Default branch`: a PR needs a branch of its own
+- a subject in `Commits ahead` starts with `wip`, `fixup!`, or `squash!`: they need `git rebase -i`; do not auto-rebase
 
 If `Git status` lists an uncommitted change, name the files and ask whether to proceed.
 
-Editing a PR the user named by number or URL ships nothing — skip this gate and step 1, and pass that number where step 2 takes `<branch>`.
+Editing a PR the user named by number or URL ships nothing, so skip this gate and step 1, and pass that number where step 2 takes `<branch>`.
 
 ## Title
 
@@ -62,5 +62,5 @@ The Summary states what changed in the codebase and why, not what the author did
 1. Push by name: `git push -u origin <branch>`. `gh pr create` only prompts for this (fails without a TTY) and `gh pr edit` never checks, so unpushed commits would be missing from the PR
 2. Open PR exists (`gh pr view <branch>`) → `gh pr edit <branch> --title ... --body ...`
 3. Otherwise → `gh pr create --draft --title ... --body ... --base <base> --head <branch> --assignee @me`. Always draft; the author marks ready for review
-   - `<base>`: `$ARGUMENTS` when `git rev-parse --verify -q "$ARGUMENTS"` or `git rev-parse --verify -q "origin/$ARGUMENTS"` succeeds, else `Default branch`. Never an `origin/`-prefixed ref — `--base` takes a branch name
+   - `<base>`: `$ARGUMENTS` when `git rev-parse --verify -q "$ARGUMENTS"` or `git rev-parse --verify -q "origin/$ARGUMENTS"` succeeds, else `Default branch`. Never an `origin/`-prefixed ref, since `--base` takes a branch name
    - `--head <branch>`: always explicit. Left out, `gh pr create` infers head from the session's working directory

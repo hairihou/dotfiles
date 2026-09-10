@@ -8,14 +8,14 @@ paths: ["**/*.component.ts", "**/*.{css,html,tsx,vue}"]
 
 - Important modifier is trailing: `flex!`, not `!flex`
 - CSS variable references use parentheses: `bg-(--brand)`, not `bg-[--brand]`
-- Default border color is `currentColor`, not `gray-200` — always specify color explicitly
+- Default border color is `currentColor`, not `gray-200`. Always specify color explicitly
 - Variant stacking reads left-to-right: `*:first:pt-0`, not `first:*:pt-0`
 - Gradients are `bg-linear-*` / `bg-radial` / `bg-conic`, not `bg-gradient-to-*`
 
 ## Avoid
 
-- `@apply` — use CSS variables or components
-- Arbitrary values — prefer design scale (`ml-4` not `ml-[16px]`)
+- `@apply`: use CSS variables or components
+- Arbitrary values: prefer design scale (`ml-4` not `ml-[16px]`)
 
 ## Spacing
 

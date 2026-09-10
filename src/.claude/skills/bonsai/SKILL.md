@@ -14,7 +14,7 @@ Inspect config files in the **current repository** and report maintenance opport
 
 ## Workflow
 
-1. Detect the project's primary language(s) via Glob (`package.json` → JS/TS, `pyproject.toml` → Python, `Cargo.toml` → Rust, `go.mod` → Go). Use this to scope the checklist — a JS-style "dead export" check on a Rust repo is wasted work.
+1. Detect the project's primary language(s) via Glob (`package.json` → JS/TS, `pyproject.toml` → Python, `Cargo.toml` → Rust, `go.mod` → Go). Use this to scope the checklist. A JS-style "dead export" check on a Rust repo is wasted work.
 2. Explore the repository structure with Glob and Read. Skip checklist items that have no matching files.
 3. Report findings using the output format below. **Do not edit files.**
 4. If the user explicitly asks to apply changes, edit only the approved items. Do not auto-commit.
@@ -44,15 +44,11 @@ Inspect config files in the **current repository** and report maintenance opport
 
 Report findings as a numbered list. Each item must include:
 
-1. **File** — path relative to repository root
-2. **Finding** — what was found and why it matters
-3. **Proposed change** — the specific edit, or "remove" / "no action needed"
-
-## Guidelines
-
-- Never propose a change to a file you have not read.
+1. **File:** path relative to repository root
+2. **Finding:** what was found and why it matters
+3. **Proposed change:** the specific edit, or "remove" / "no action needed"
 
 ## Common Mistakes
 
-- **Proposing to delete config consumed by CI** — a config block with no local consumer may still be read by `.github/workflows/*.yml`, Renovate, or pre-commit. Grep CI files before flagging as dead
-- **Touching machine-local files** — `.env.local`, `*.local.*`, gitignored files belong to the user's machine, not the repo. Out of scope
+- **Proposing to delete config consumed by CI:** a config block with no local consumer may still be read by `.github/workflows/*.yml`, Renovate, or pre-commit. Grep CI files before flagging as dead
+- **Touching machine-local files:** `.env.local`, `*.local.*`, gitignored files belong to the user's machine, not the repo. Out of scope

@@ -40,14 +40,14 @@ mise bootstrap macos-defaults apply    # write macOS defaults (log out to fully 
 
 Principles guiding tool selection and environment management in this repository:
 
-- **Detect, don't assume** — detect host environment at runtime, never hardcode a product
-- **Explicit over implicit** — modify shared global state via deliberate commands, not in-place edits
-- **Isolation by default** — run third-party packages in ephemeral environments
-- **Registry first, upstream as source of truth** — curated registry for tools it covers, otherwise direct upstream
+- **Detect, don't assume:** detect host environment at runtime, never hardcode a product
+- **Explicit over implicit:** modify shared global state via deliberate commands, not in-place edits
+- **Isolation by default:** run third-party packages in ephemeral environments
+- **Registry first, upstream as source of truth:** curated registry for tools it covers, otherwise direct upstream
 
 ## Machine-Local Configuration
 
 Machine-specific values live in `*.local` files, which are git-ignored. Keep them in `src/`; `install.sh` symlinks each present `src/*.local` into `$HOME`, and the content is never committed.
 
-- `~/.zshrc.local` — sourced at the end of `.zshrc` for environment variables
-- `~/.gitconfig.local` — included by `.gitconfig` to provide the git identity (`[user]`)
+- `~/.zshrc.local`: sourced at the end of `.zshrc` for environment variables
+- `~/.gitconfig.local`: included by `.gitconfig` to provide the git identity (`[user]`)

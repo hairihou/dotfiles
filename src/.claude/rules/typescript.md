@@ -11,7 +11,7 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 - Re-export-only `index.ts` (barrel): do not create new ones
   - Exception: package public entrypoint (file referenced by `package.json#exports`/`main`/`module`)
 - Path aliases (`@/...`, `~/...`): do not introduce new ones; in projects where aliases are already configured, write new imports as relative paths
-- Util / shared file extraction: only after a second concrete consumer exists — do not pre-extract
+- Util / shared file extraction: only after a second concrete consumer exists. Do not pre-extract
 
 ## Test Files
 
@@ -29,7 +29,7 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 - Type alias referenced once → inline the expression at its use site
 - Type restating an existing declaration → derive it: `NonNullable<IconProps['fontSize']>`, `Omit<IconProps, 'viewBox'>`
 - Object-shape `type` alias (`type X = { ... }`) → declare with `interface`
-  - Exception: the shape must stay assignable to an index-signature type (`Record<string, unknown>`) — interfaces have no implicit index signature
+  - Exception: the shape must stay assignable to an index-signature type (`Record<string, unknown>`). Interfaces have no implicit index signature
 - `!` (non-null assertion) → use type guards or restructure
   - Exception: test code where the value is guaranteed by setup
 - Fire-and-forget promises → always `await` or return; if intentionally discarding, use `void someAsyncFn()`

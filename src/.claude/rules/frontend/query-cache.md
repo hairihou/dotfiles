@@ -6,7 +6,7 @@ paths: ["**/*.{ts,tsx,vue}"]
 
 ## Avoid Unnecessary Refetch (CRUD List Operations)
 
-Do NOT use `invalidateQueries` / `refetch` when mutation response contains complete data. Use `setQueryData` to update cache directly.
+Do not use `invalidateQueries` / `refetch` when the mutation response contains complete data. Use `setQueryData` to update the cache directly.
 
 ```typescript
 // Bad: unnecessary network request after mutation

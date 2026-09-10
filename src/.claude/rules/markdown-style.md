@@ -9,9 +9,11 @@ Write plain, readable prose.
 ## Formatting
 
 - Use `**bold**` only as a label at the start of a list item (`- **Key:** value`) or table cell
-  - Do not use bold for emphasis inside prose — rewrite the sentence so the important part carries itself
+  - Do not use bold for emphasis inside prose. Rewrite the sentence so the important part carries itself
   - Do not bold evaluative words ("important", "note", "warning", "point"); state the consequence in plain text instead
 - Use `*italic*` only for the first mention of a term being defined, or for titles of works
+- No em dash (`—`). Split the sentence, or use a comma, colon, or parentheses
+  - **Exception:** naming the character itself, in a rule about it
 - No emojis
 - Prefer flowing prose over bullet lists when the content is sequential or narrative
 - Tables only when data is truly tabular, not as a formatting gimmick
@@ -35,13 +37,13 @@ Install the CLI, then run the init command. The config file is created automatic
 ## Headings
 
 - Use headings only in a document that has more than one section; a single-section document carries none, however long it runs
-  - A standalone line introducing the block below it (`Rules:`, `Provide:`) is a heading in other syntax — promote it to a real heading or drop it. A label whose value sits on the same line (`Topic: {{topic}}`) is a field, not a section
+  - A standalone line introducing the block below it (`Rules:`, `Provide:`) is a heading in other syntax. Promote it to a real heading or drop it. A label whose value sits on the same line (`Topic: {{topic}}`) is a field, not a section
 - Name a heading for what its section is, not for what the section contains
 - H1 is the file or directory name in canonical case (`skeptic.md` → `# Skeptic`, `skills/pr/` → `# PR`); never open at H2
   - **Exception:** a file whose content is embedded inside another document, which supplies the H1
 - Title Case for headings (`# Markdown Style`, `## Configuration Files`)
-- Preserve canonical case for brand or product names — do not force Title Case (`npm`, `ESLint`, `ZAP`, `iOS`, `macOS`, `Draw.io`)
-- Omit category suffixes from an H1 (`Skill`, `Tool`, `Rules`, `Security Scan`) — the filename, directory, and `name` frontmatter already convey the kind
+- Preserve canonical case for brand or product names. Do not force Title Case (`npm`, `ESLint`, `ZAP`, `iOS`, `macOS`, `Draw.io`)
+- Omit category suffixes from an H1 (`Skill`, `Tool`, `Rules`, `Security Scan`). The filename, directory, and `name` frontmatter already convey the kind
 
 ## Language
 
@@ -55,7 +57,7 @@ Every sentence must carry information the reader did not already have. Apply the
   - Bad: "This may cause issues in some cases."
   - Good: "This fails when the input contains non-ASCII characters."
 - **Do not restate.** If you already said it, do not say it again in different words. No summary paragraphs that add nothing new.
-- **Skip preamble.** Avoid patterns like "Here is an overview of X:" followed by a bullet list — start with the content itself.
+- **Skip preamble.** Avoid patterns like "Here is an overview of X:" followed by a bullet list. Start with the content itself.
 - **One point, one sentence.** If a point fits in one sentence, do not stretch it.
 - **Use standard English terms.** When the English form is the established technical term, use it as-is instead of translating (e.g., Bundler, Container, Runtime).
 
@@ -68,4 +70,4 @@ The Language section and the prose-style aspects of Formatting (bold for emphasi
 - Subagent definitions
 - Skill files (`skills/**/*.md`)
 
-The Headings section and the rest of Formatting (code block language tags, emojis, italic, tables) apply to every markdown file; no document type is exempt.
+The Headings section and the rest of Formatting (code block language tags, em dashes, emojis, italic, tables) apply to every markdown file; no document type is exempt.

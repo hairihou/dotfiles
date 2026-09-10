@@ -1,6 +1,6 @@
 ---
 name: refutation
-description: Verify a finished artifact by dispatching an independent skeptic that never saw it being made, tasked with refuting it, grounding every factual claim in a primary source, and reporting findings with severity and confidence. Invoke before handing over any deliverable that has no automatic falsifier — documents, rules, guidelines, skills, plans, analyses, decisions — above all one produced in the current session. Code already covered by tests, typecheck, or lint has a falsifier; use it there only for claims those checks do not exercise. Not for wording, style, or "does this look OK" passes.
+description: Verify a finished artifact by dispatching an independent skeptic that never saw it being made, tasked with refuting it, grounding every factual claim in a primary source, and reporting findings with severity and confidence. Invoke before handing over any deliverable that has no automatic falsifier (documents, rules, guidelines, skills, plans, analyses, decisions), above all one produced in the current session. Code already covered by tests, typecheck, or lint has a falsifier; use it there only for claims those checks do not exercise. Not for wording, style, or "does this look OK" passes.
 argument-hint: <artifact path or description>
 allowed-tools: Agent, WebFetch, WebSearch
 ---

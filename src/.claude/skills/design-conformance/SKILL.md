@@ -21,7 +21,7 @@ State the result as a plain sentence naming the files: where the tokens are defi
 
 **Declared.** Follow the declaration. Read it far enough to learn which parts are generated and must not be hand-edited. Where the screen you read departs from the declaration, the declaration wins and the departure is a gap to report, not a precedent to copy.
 
-**Nothing declared, but screens exist.** This is the common case. Entering it requires the same naming as the reads: say where you looked for a declaration and what you looked for, so that finding none is distinguishable from missing it. Then derive the conventions the existing screens already follow — the spacing values that recur, the colors that recur, the way a page is put together — then say what you derived before using it. A single screen is a precedent rather than a rule: follow it, and say it was the only sample you had, instead of generalizing from it.
+**Nothing declared, but screens exist.** This is the common case. Entering it requires the same naming as the reads: say where you looked for a declaration and what you looked for, so that finding none is distinguishable from missing it. Then derive the conventions the existing screens already follow (the spacing values that recur, the colors that recur, the way a page is put together), then say what you derived before using it. A single screen is a precedent rather than a rule: follow it, and say it was the only sample you had, instead of generalizing from it.
 
 **No UI at all.** Say that there is nothing to conform to, and stop. Do not design your way out of it.
 
@@ -44,4 +44,4 @@ The same three reads, run against the diff rather than your own output. A findin
 
 ## Maintenance
 
-This skill is a procedure, not a catalogue of bad output. Do not add a list of patterns to avoid: a list catches only what is on it, and the patterns worth listing turn over faster than the list does. When something slips through, ask whether a step here would have caught it, not whether a step covers the topic; only when no step would have caught it, rewrite that step — replace the sentence rather than appending to it.
+This skill is a procedure, not a catalogue of bad output. Do not add a list of patterns to avoid: a list catches only what is on it, and the patterns worth listing turn over faster than the list does. When something slips through, ask whether a step here would have caught it, not whether a step covers the topic; only when no step would have caught it, rewrite that step, replacing the sentence rather than appending to it.
