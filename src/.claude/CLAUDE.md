@@ -17,7 +17,7 @@
 - Comments: default to none. Never restate the code or what the signature declares (parameter names, types, return values); warranted only for hidden constraints (undocumented API quirk, required call ordering, external bug workaround) — state the constraint. Design rationale goes in PR / commit / decision log, not source
   - Referenced issue / PR / doc: full URL, never a bare issue number
 - Ordering (code, documentation): semantic hierarchy (main rule → exceptions/modifiers → details) first; alphabetical only as tiebreaker among same-level peers
-  - Example: public API → internal helpers; core behavior → edge cases
+  - Example: core behavior → edge cases
 
 ## Communication Style
 
