@@ -2,5 +2,6 @@
 **/.claude/plans
 **/.claude/settings.local.json
 **/.DS_Store
+**/.playwright-cli
 **/mise.*local.toml
 **/node_modules

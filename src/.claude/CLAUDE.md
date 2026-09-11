@@ -4,6 +4,8 @@
 
 - Boundaries (file / module / abstraction / alias / re-export): add one only when a consumer can be named at a concrete existing path; speculative consumers ("future code that might import this") do not count. Otherwise prefer inline / direct import / relative import
   - **Exception:** package public entrypoint (the file/symbol designated by the language's packaging convention as the external API surface)
+- Dependency selection (library / CLI tool / GitHub Action / plugin): check the latest release date before proposing, never from recall; reject anything over a year old. A project that stopped shipping releases will not ship the fix you need
+  - **Exception:** no maintained alternative and not reasonably self-written. State the staleness when proposing it
 
 ## Reasoning
 
