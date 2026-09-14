@@ -1,4 +1,4 @@
-local web = { "oxfmt", "prettier", stop_after_first = true }
+local web = { "oxfmt" }
 return {
   "stevearc/conform.nvim",
   cmd = { "ConformInfo" },
