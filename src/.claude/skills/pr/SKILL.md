@@ -1,6 +1,6 @@
 ---
 name: pr
-description: Open a draft GitHub pull request for the branch, or update the title and body of the one that already exists. You MUST invoke this BEFORE running `gh pr create` or `gh pr edit`, and before any push that lands commits a PR does or will cover, whether the user asks or you propose it after finishing work. DO NOT USE for leaving inline review comments on an existing PR.
+description: Open a draft GitHub pull request for the branch with the description left for the author, or update the title of the one that already exists. You MUST invoke this BEFORE running `gh pr create` or `gh pr edit`, and before any push that lands commits a PR does or will cover, whether the user asks or you propose it after finishing work. DO NOT USE for leaving inline review comments on an existing PR.
 argument-hint: '[base-branch]'
 allowed-tools: Bash
 ---
@@ -43,24 +43,22 @@ First hit wins: branch prefix `#<number>_...`, else `closes #N` / `fixes #N` / `
 
 ## Body
 
-Fill the repo's PR template (any of GitHub's conventional locations) verbatim when one exists, else use the fallback below. A detected issue link goes above whichever is used.
+Never write the description, not even a draft. The author writes it before marking ready; an agent-written one hands the reviewer a restated diff instead of the author's context.
 
 ```markdown
 closes #<number>
 
 ---
 
-## Summary
-
-<description>
+<body>
 ```
 
-The Summary states what changed in the codebase and why, not what the author did. When an issue is linked and nothing surfaced while implementing that it does not already say, drop the section and the `---` and ship the link alone. Reject bare verbs without object ("updated files", "refactored") and process narration ("spent time investigating").
+`<body>` is the repo's PR template (any of GitHub's conventional locations) verbatim and unfilled, else empty. Without an issue link, drop that line and the `---`; an empty body is still passed as `--body ""`.
 
 ## Steps
 
 1. Push by name: `git push -u origin <branch>`. `gh pr create` only prompts for this (fails without a TTY) and `gh pr edit` never checks, so unpushed commits would be missing from the PR
-2. Open PR exists (`gh pr view <branch>`) → `gh pr edit <branch> --title ... --body ...`
+2. Open PR exists (`gh pr view <branch> --json body`) → `gh pr edit <branch> --title ...`. Pass `--body` only to prepend an issue link the body lacks, keeping the author's text unchanged
 3. Otherwise → `gh pr create --draft --title ... --body ... --base <base> --head <branch> --assignee @me`. Always draft; the author marks ready for review
    - `<base>`: `$ARGUMENTS` when `git rev-parse --verify -q "$ARGUMENTS"` or `git rev-parse --verify -q "origin/$ARGUMENTS"` succeeds, else `Default branch`. Never an `origin/`-prefixed ref, since `--base` takes a branch name
    - `--head <branch>`: always explicit. Left out, `gh pr create` infers head from the session's working directory
