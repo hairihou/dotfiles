@@ -30,6 +30,8 @@ SCOPES = [
     "https://www.googleapis.com/auth/presentations",
     "https://www.googleapis.com/auth/spreadsheets",
 ]
+RELOGIN = "Ask the user to run /google-workspace login."
+TIMEOUT = (10, 60)
 SPILL_THRESHOLD = 20_000
 SPILL_HEAD = 1_000
 
@@ -57,12 +59,10 @@ def login() -> None:
 
 def load() -> Credentials:
     if not TOKEN.is_file():
-        fail("Not logged in. Ask the user to run /google-workspace login.")
+        fail(f"Not logged in. {RELOGIN}")
     creds = Credentials.from_authorized_user_file(str(TOKEN))
     if not creds.has_scopes(SCOPES):
-        fail(
-            "Token lacks required scopes. Ask the user to run /google-workspace login."
-        )
+        fail(f"Token lacks required scopes. {RELOGIN}")
     if not creds.valid:
         creds.refresh(Request())
         save(creds)
@@ -78,6 +78,7 @@ def request(method: str, url: str, output: Path | None) -> None:
         url,
         data=body,
         headers={"Content-Type": "application/json"} if body else None,
+        timeout=TIMEOUT,
     )
     text = response.content.decode()
     if not response.ok:
@@ -85,6 +86,7 @@ def request(method: str, url: str, output: Path | None) -> None:
         fail(text)
     if output:
         output.write_text(text)
+        print(f"Saved {len(text)} chars to {output}")
         return
     piped = stat.S_ISFIFO(os.fstat(sys.stdout.fileno()).st_mode)
     if piped or len(text) <= SPILL_THRESHOLD:
