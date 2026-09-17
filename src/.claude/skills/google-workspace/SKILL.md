@@ -53,6 +53,6 @@ Before guessing a request shape, read the Discovery document through the script,
 
 ## Pitfalls
 
-- Sheet names follow the account locale, so never assume `Sheet1`. Read titles with `?fields=sheets.properties(title)`, and URL-encode the range with `jq -rn --arg r "<title>!A1:B2" '$r|@uri'`
+- Do not assume a sheet title such as `Sheet1`; read the actual titles with `?fields=sheets.properties(title)` and URL-encode the range
 - Slides object IDs you assign must be 5 to 50 characters
 - Forms `create` accepts only `info.title` and `info.documentTitle`; the Drive file name comes from `documentTitle`. Add items with `batchUpdate`
