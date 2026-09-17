@@ -41,8 +41,10 @@ def fail(message: str) -> None:
 
 def save(creds: Credentials) -> None:
     CONFIG_DIR.mkdir(parents=True, exist_ok=True)
-    TOKEN.touch(mode=0o600, exist_ok=True)
-    TOKEN.write_text(creds.to_json())
+    tmp = TOKEN.with_suffix(f".{os.getpid()}.tmp")
+    tmp.touch(mode=0o600)
+    tmp.write_text(creds.to_json())
+    tmp.replace(TOKEN)
 
 
 def login() -> None:

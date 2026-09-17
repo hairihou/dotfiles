@@ -9,7 +9,7 @@ allowed-tools: Bash
 
 ## Mode: Login
 
-When `$ARGUMENTS` is `login`: run `${CLAUDE_SKILL_DIR}/scripts/api.py login` with a 300000 ms timeout. It opens the browser and waits for the user to approve access; tell the user to complete it there. Report the result and stop.
+When `$ARGUMENTS` is `login`: run `${CLAUDE_SKILL_DIR}/scripts/api.py login` with the longest Bash timeout. It opens the browser and waits for the user to approve access; tell the user to complete it there. Report the result and stop.
 
 ## Mode: Request (default)
 
@@ -24,8 +24,10 @@ JSON
 
 - Single-quote the URL, since `fields` masks contain parentheses. The request body is read from stdin
 - Non-2xx: exit code 1, the API error JSON on stderr. Read the error message before retrying
-- Unpiped output over 20,000 characters is saved to a temp file; only its path and head are printed, so query that file with `jq`. Piped output (`| jq`) is never cut. To save a response, use `-o <file>`, not `>`
+- Large unpiped output is saved to a temp file; only its path and head are printed, so query that file with `jq`. Piped output (`| jq`) is never cut. To save a response, use `-o <file>`, not `>`
 - `Not logged in` or `Token lacks required scopes`: stop and ask the user to run `/google-workspace login`
+
+The API calls are fast; the slow part is each separate Bash tool call, which costs a full model turn. Put independent calls in one Bash command (chain them, or run reads in parallel with `&` and `wait`), and prefer batch endpoints: one `batchUpdate` with many requests, Sheets `values:batchGet` / `values:batchUpdate` for several ranges.
 
 Confirm with the user before any POST, PATCH, PUT, or DELETE they have not already asked for. `batchUpdate` is atomic: one invalid request fails the whole batch.
 
@@ -41,7 +43,7 @@ Confirm with the user before any POST, PATCH, PUT, or DELETE they have not alrea
 
 The file ID is the URL segment after `/d/`. For Forms, use the edit ID, not the `/forms/d/e/<ID>/viewform` responder ID. Add `supportsAllDrives=true` to Drive calls (and `includeItemsFromAllDrives=true` to searches) so shared drives work.
 
-Before guessing a request shape, read the Discovery document, e.g. `xh 'https://docs.googleapis.com/$discovery/rest?version=v1' | jq '.schemas.InsertTextRequest'` (Drive: `https://www.googleapis.com/discovery/v1/apis/drive/v3/rest`).
+Before guessing a request shape, read the Discovery document through the script, e.g. `api.py GET 'https://docs.googleapis.com/$discovery/rest?version=v1' | jq '.schemas.InsertTextRequest'` (Sheets is `version=v4`; Drive is `https://www.googleapis.com/discovery/v1/apis/drive/v3/rest`).
 
 ## Keeping Responses Small
 
@@ -51,6 +53,6 @@ Before guessing a request shape, read the Discovery document, e.g. `xh 'https://
 
 ## Pitfalls
 
-- The first sheet's name follows the account locale (`シート1`, not `Sheet1`). Read titles with `?fields=sheets.properties(title)`, and URL-encode the range (`シート1!A1:B2` → `%E3%82%B7%E3%83%BC%E3%83%881%21A1%3AB2`)
+- Sheet names follow the account locale, so never assume `Sheet1`. Read titles with `?fields=sheets.properties(title)`, and URL-encode the range with `jq -rn --arg r "<title>!A1:B2" '$r|@uri'`
 - Slides object IDs you assign must be 5 to 50 characters
 - Forms `create` accepts only `info.title` and `info.documentTitle`; the Drive file name comes from `documentTitle`. Add items with `batchUpdate`
