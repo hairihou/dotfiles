@@ -6,9 +6,10 @@ import json
 import os
 import re
 import sys
+from typing import NoReturn
 
 
-def deny(reason: str) -> None:
+def deny(reason: str) -> NoReturn:
     print(
         json.dumps(
             {

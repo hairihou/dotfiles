@@ -10,10 +10,12 @@
 
 import argparse
 import os
+import re
 import stat
 import sys
 import tempfile
 from pathlib import Path
+from typing import NoReturn
 
 from google.auth.transport.requests import AuthorizedSession, Request
 from google.oauth2.credentials import Credentials
@@ -23,8 +25,10 @@ CONFIG_DIR = Path.home() / ".config" / "google-workspace"
 CLIENT_SECRET = CONFIG_DIR / "client_secret.json"
 TOKEN = CONFIG_DIR / "token.json"
 SCOPES = [
+    "https://www.googleapis.com/auth/calendar",
     "https://www.googleapis.com/auth/documents",
     "https://www.googleapis.com/auth/drive",
+    "https://www.googleapis.com/auth/gmail.modify",
     "https://www.googleapis.com/auth/forms.body",
     "https://www.googleapis.com/auth/forms.responses.readonly",
     "https://www.googleapis.com/auth/presentations",
@@ -34,9 +38,10 @@ RELOGIN = "Ask the user to run /google-workspace login."
 TIMEOUT = (10, 60)
 SPILL_THRESHOLD = 20_000
 SPILL_HEAD = 1_000
+ERROR_HEAD = 600
 
 
-def fail(message: str) -> None:
+def fail(message: str) -> NoReturn:
     print(message, file=sys.stderr)
     sys.exit(1)
 
@@ -83,7 +88,10 @@ def request(method: str, url: str, output: Path | None) -> None:
     text = response.content.decode()
     if not response.ok:
         print(f"HTTP {response.status_code} {method} {url}", file=sys.stderr)
-        fail(text)
+        if "html" in response.headers.get("Content-Type", ""):
+            title = re.search(r"<title>(.*?)</title>", text, re.DOTALL)
+            fail(title.group(1) if title else "(HTML error page)")
+        fail(text if len(text) <= ERROR_HEAD else text[:ERROR_HEAD] + " ...[truncated]")
     if output:
         output.write_text(text)
         print(f"Saved {len(text)} chars to {output}")
