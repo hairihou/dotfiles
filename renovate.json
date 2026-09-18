@@ -7,5 +7,12 @@
   "major": {
     "automerge": false
   },
-  "schedule": ["before 8:00", "after 12:00"]
+  "schedule": ["before 8:00", "after 12:00"],
+  "packageRules": [
+    {
+      "matchManagers": ["mise"],
+      "matchDepNames": ["tmux"],
+      "versioning": "loose"
+    }
+  ]
 }
