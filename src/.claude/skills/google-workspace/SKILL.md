@@ -34,14 +34,14 @@ Confirm with the user before any POST, PATCH, PUT, or DELETE they have not alrea
 
 ## APIs
 
-| API | Base URL |
-|---|---|
-| Docs | `https://docs.googleapis.com/v1/documents` |
-| Sheets | `https://sheets.googleapis.com/v4/spreadsheets` |
-| Slides | `https://slides.googleapis.com/v1/presentations` |
-| Forms | `https://forms.googleapis.com/v1/forms` |
-| Drive | `https://www.googleapis.com/drive/v3/files` |
-| Gmail | `https://gmail.googleapis.com/gmail/v1/users/me` |
+| API      | Base URL                                                   |
+| -------- | ---------------------------------------------------------- |
+| Docs     | `https://docs.googleapis.com/v1/documents`                 |
+| Sheets   | `https://sheets.googleapis.com/v4/spreadsheets`            |
+| Slides   | `https://slides.googleapis.com/v1/presentations`           |
+| Forms    | `https://forms.googleapis.com/v1/forms`                    |
+| Drive    | `https://www.googleapis.com/drive/v3/files`                |
+| Gmail    | `https://gmail.googleapis.com/gmail/v1/users/me`           |
 | Calendar | `https://www.googleapis.com/calendar/v3/calendars/primary` |
 
 The file ID is the URL segment after `/d/`. For Forms, use the edit ID, not the `/forms/d/e/<ID>/viewform` responder ID. Add `supportsAllDrives=true` to Drive calls (and `includeItemsFromAllDrives=true` to searches) so shared drives work.
