@@ -17,7 +17,7 @@ Narrow $ARGUMENTS to one decidable proposition: "adopting React Server Component
 
 ## 2. Dispatch
 
-Launch both agents in a single message so neither anchors on the other, reading their prompts from `${CLAUDE_SKILL_DIR}/agents/advocate.md` and `critic.md` with `{{topic}}` and `{{context}}` substituted. What goes into `{{context}}` is the evidence, not any conclusion drawn from it, and both receive the same evidence. An asymmetry produced by feeding one side less is manufactured rather than found.
+Launch both agents, reading their prompts from `${CLAUDE_SKILL_DIR}/agents/advocate.md` and `critic.md` with `{{topic}}` and `{{context}}` substituted. What goes into `{{context}}` is the evidence, not any conclusion drawn from it, and both receive the same evidence. An asymmetry produced by feeding one side less is manufactured rather than found.
 
 ## 3. Report
 

@@ -14,10 +14,9 @@ Inspect config files in the **current repository** and report maintenance opport
 
 ## Workflow
 
-1. Detect the project's primary language(s) via Glob (`package.json` → JS/TS, `pyproject.toml` → Python, `Cargo.toml` → Rust, `go.mod` → Go). Use this to scope the checklist. A JS-style "dead export" check on a Rust repo is wasted work.
-2. Explore the repository structure with Glob and Read. Skip checklist items that have no matching files.
-3. Report findings using the output format below. **Do not edit files.**
-4. If the user explicitly asks to apply changes, edit only the approved items. Do not auto-commit.
+1. Scope the checklist to the languages and files the repository actually has (`package.json` → JS/TS, `pyproject.toml` → Python, `Cargo.toml` → Rust, `go.mod` → Go). A JS-style "dead export" check on a Rust repo is wasted work, and an item with no matching files is skipped.
+2. Report findings using the output format below. **Do not edit files.**
+3. If the user explicitly asks to apply changes, edit only the approved items.
 
 ## Checklist
 

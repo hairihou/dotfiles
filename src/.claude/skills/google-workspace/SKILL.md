@@ -1,6 +1,6 @@
 ---
 name: google-workspace
-description: Work with the user's Google Workspace through the REST APIs: read and edit Docs, Sheets, Slides, and Forms, find, export, or copy files in Drive, search and send Gmail, and read or schedule Calendar events. Use when the user shares a google.com URL or a file ID, or asks to read, create, or update a document, spreadsheet, presentation, form, mail, or event.
+description: Work with the user's Google Workspace through the REST APIs: read and edit Docs, Sheets, Slides, and Forms, find, export, or copy files in Drive, and read or schedule Calendar events. Use when the user shares a google.com URL or a file ID, or asks to read, create, or update a document, spreadsheet, presentation, form, or event.
 argument-hint: '[login]'
 allowed-tools: Bash
 ---
@@ -28,9 +28,9 @@ JSON
 - Large unpiped output is saved to a temp file; only its path and head are printed, so query that file with `jq`. Piped output (`| jq`) is never cut. To save a response, use `-o <file>`, not `>`
 - `Not logged in` or `Token lacks required scopes`: stop and ask the user to run `/google-workspace login`
 
-The API calls are fast; the slow part is each separate Bash tool call, which costs a full model turn. Put independent calls in one Bash command (chain them, or run reads in parallel with `&` and `wait`), and prefer batch endpoints: one `batchUpdate` with many requests, Sheets `values:batchGet` / `values:batchUpdate` for several ranges.
+Prefer batch endpoints: one `batchUpdate` with many requests, Sheets `values:batchGet` / `values:batchUpdate` for several ranges.
 
-Confirm with the user before any POST, PATCH, PUT, or DELETE they have not already asked for. `batchUpdate` is atomic: one invalid request fails the whole batch, and its reply carries the new object IDs; Forms also returns the updated form with `"includeFormInResponse": true`, which saves a verification GET.
+`batchUpdate` is atomic: one invalid request fails the whole batch, and its reply carries the new object IDs; Forms also returns the updated form with `"includeFormInResponse": true`, which saves a verification GET.
 
 ## APIs
 
@@ -41,7 +41,6 @@ Confirm with the user before any POST, PATCH, PUT, or DELETE they have not alrea
 | Slides   | `https://slides.googleapis.com/v1/presentations`           |
 | Forms    | `https://forms.googleapis.com/v1/forms`                    |
 | Drive    | `https://www.googleapis.com/drive/v3/files`                |
-| Gmail    | `https://gmail.googleapis.com/gmail/v1/users/me`           |
 | Calendar | `https://www.googleapis.com/calendar/v3/calendars/primary` |
 
 The file ID is the URL segment after `/d/`. For Forms, use the edit ID, not the `/forms/d/e/<ID>/viewform` responder ID. Add `supportsAllDrives=true` to Drive calls (and `includeItemsFromAllDrives=true` to searches) so shared drives work.
@@ -60,5 +59,4 @@ Before guessing a request shape, read the Discovery document through the script,
 - Appending a row with `values/<range>:append?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS` inherits the column's existing number format; send dates and numbers as bare values, not strings, to match the rows already there. A plain `values` read returns formatted strings, so check the stored types with `includeGridData` first
 - Slides object IDs you assign must be 5 to 50 characters
 - Forms `create` accepts only `info.title` and `info.documentTitle`; the Drive file name comes from `documentTitle`. Add items with `batchUpdate`
-- Gmail `messages.list` returns IDs only; fetch each one with `messages/<id>?format=metadata&metadataHeaders=From&metadataHeaders=Subject&metadataHeaders=Date`, and `format=full` only when the body is needed. `messages.send` takes a base64url-encoded RFC 2822 message in `raw`
 - Calendar events live under a calendar ID: `calendars/primary/events?timeMin=<RFC3339>&timeMax=<RFC3339>&singleEvents=true&orderBy=startTime` expands recurring events. Every timestamp needs an offset (`2026-09-20T10:00:00+09:00`) or an explicit `timeZone`

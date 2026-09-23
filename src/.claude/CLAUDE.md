@@ -12,7 +12,6 @@
 - Code review (never default to "no issues found"):
   - assess impact scope; name what the change's safety depends on and tag its evidence as `[cited]` (`file:line`), `[reasoned]` (failure path unreachable), or `[executed]` (ran the code). Report anything below `[executed]` as unconfirmed
   - separate surface fix (symptom) from root fix (cause); tag each proposed fix as `[surface]` or `[root]`
-- Design decisions (architecture, technology selection, large-scale refactoring): compare at least 2 named alternatives with explicit pros/cons, identify the biggest risk before committing
 
 ## Code Style
 
@@ -31,5 +30,3 @@
 - Issue / Commit: `<type>(<scope>): <description>` (e.g., `fix(api): 429 responses on batch endpoint`)
 - Issue: `--assignee @me` only when the issue will be worked on immediately; leave backlog/idea issues unassigned
 - Branch: `[#<number>_]<type>/<description>`. Issue number prefix when an issue exists, omit otherwise (e.g., `#42_feat/add-login`, `fix/cert-expiry`)
-- GitHub-rendered text (commit message, PR / issue body, review comments): no `@`-prefixed words (`@name`, doc tags like `@todo`, npm scopes like `@scope/pkg`). GitHub renders them as mentions and notifies unrelated users/orgs; write the bare name instead
-  - **Exception:** deliberate mentions of a specific user/team
