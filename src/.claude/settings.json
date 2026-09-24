@@ -124,6 +124,7 @@
     "rust-analyzer-lsp@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true,
     "slack@claude-plugins-official": true,
+    "typesafe@typesafe-ai": true,
     "typescript-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
@@ -137,6 +138,12 @@
       "source": {
         "source": "github",
         "repo": "GoogleChrome/modern-web-guidance"
+      }
+    },
+    "typesafe-ai": {
+      "source": {
+        "source": "github",
+        "repo": "typesafe-ai/skills"
       }
     }
   },

@@ -11,6 +11,7 @@
     "angular": true,
     "astro": true,
     "dockerfile": true,
+    "emmet": true,
     "git-firefly": true,
     "kotlin": true,
     "lua": true,
