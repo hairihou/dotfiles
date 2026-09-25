@@ -2,7 +2,7 @@
 name: japanese-writing
 description: 'Make Japanese developer-facing prose read plain and accurate. Invoke BEFORE writing or updating a Japanese issue/PR body (`gh issue|pr create|edit`), planning/design doc, meeting material, or team chat post, even when the text falls out of a larger task. Not for English, reference docs, or CLI text.'
 argument-hint: '[file-path]'
-allowed-tools: Edit, Write
+allowed-tools: Edit, Read, Write
 ---
 
 # Japanese Writing
@@ -104,7 +104,7 @@ allowed-tools: Edit, Write
 
 ## Spacing
 
-日本語と半角英数字の間に半角スペースを入れない（「APIで取得」「v2へ移行」）。数字と助数詞の間も詰める（「1つ」「3件」）。ただし、次の二つは例外とする。置き場所（既存の文書、リポジトリ）でスペースを空ける書き方が使われていれば、それに合わせる（インラインコードの前後だけ空ける書き方も含む）。issue/PR番号のすぐ後に日本語が続くときは、番号が自動でリンクになるようにスペースを入れる（「#12 を修正」）。
+日本語と半角英数字の間に半角スペースを入れない（「APIで取得」「v2へ移行」）。数字と助数詞の間も詰める（「1つ」「3件」）。ただし、次の二つは例外とする。置き場所（既存の文書、リポジトリ）でスペースを空ける書き方が使われていれば、それに合わせる。issue/PR番号のすぐ後に日本語が続くときは、番号が自動でリンクになるようにスペースを入れる（「#12 を修正」）。
 
 ## Maintenance
 
