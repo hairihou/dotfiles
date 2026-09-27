@@ -4,13 +4,10 @@ paths: ["**/*.md"]
 
 # Markdown Style
 
-Write plain, readable prose.
-
 ## Formatting
 
 - Use `**bold**` only as a label at the start of a list item (`- **Key:** value`) or table cell
   - Do not use bold for emphasis inside prose. Rewrite the sentence so the important part carries itself
-  - Do not bold evaluative words ("important", "note", "warning", "point"); state the consequence in plain text instead
 - Use `*italic*` only for the first mention of a term being defined, or for titles of works
 - No em dash (`—`). Split the sentence, or use a comma, colon, or parentheses
   - **Exception:** naming the character itself, in a rule about it
@@ -18,21 +15,6 @@ Write plain, readable prose.
 - Prefer flowing prose over bullet lists when the content is sequential or narrative
 - Tables only when data is truly tabular, not as a formatting gimmick
 - Fenced code blocks for shell commands: use `sh`, not `bash`
-
-### Bad
-
-```md
-**Install the CLI** first, then **run the init command**. The **config file** will be created automatically.
-```
-
-### Good
-
-```md
-Install the CLI, then run the init command. The config file is created automatically.
-
-- **Speed:** fast startup
-- **Safety:** no destructive ops
-```
 
 ## Headings
 
@@ -58,7 +40,6 @@ Every sentence must carry information the reader did not already have. Apply the
   - Good: "This fails when the input contains non-ASCII characters."
 - **Do not restate.** If you already said it, do not say it again in different words. No summary paragraphs that add nothing new.
 - **Skip preamble.** Avoid patterns like "Here is an overview of X:" followed by a bullet list. Start with the content itself.
-- **One point, one sentence.** If a point fits in one sentence, do not stretch it.
 - **Use standard English terms.** When the English form is the established technical term, use it as-is instead of translating (e.g., Bundler, Container, Runtime).
 
 ## Exceptions

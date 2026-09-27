@@ -11,7 +11,6 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 - Re-export-only `index.ts` (barrel): do not create new ones
   - Exception: package public entrypoint (file referenced by `package.json#exports`/`main`/`module`)
 - Path aliases (`@/...`, `~/...`): do not introduce new ones; in projects where aliases are already configured, write new imports as relative paths
-- Util / shared file extraction: only after a second concrete consumer exists. Do not pre-extract
 
 ## Test Files
 

@@ -6,7 +6,7 @@ paths: ["bin/*", "install.sh"]
 
 Scope: `bin/*` (bash subset; Python scripts via `uv run --script` shebang are out of scope) and `install.sh`.
 
-File header:
+## File Header
 
 ```sh
 #!/usr/bin/env bash

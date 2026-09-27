@@ -9,7 +9,7 @@
 
 ## Reasoning
 
-- Code review (never default to "no issues found"):
+- Code review: a "no issues found" verdict holds only when every safety dependency below carries an evidence tag
   - assess impact scope; name what the change's safety depends on and tag its evidence as `[cited]` (`file:line`), `[reasoned]` (failure path unreachable), or `[executed]` (ran the code). Report anything below `[executed]` as unconfirmed
   - separate surface fix (symptom) from root fix (cause); tag each proposed fix as `[surface]` or `[root]`
 
