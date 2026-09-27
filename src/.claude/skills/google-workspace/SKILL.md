@@ -25,7 +25,9 @@ JSON
 - Single-quote the URL, since `fields` masks contain parentheses. The request body is read from stdin
 - Non-2xx: exit code 1, the API error JSON on stderr. Read the error message before retrying
 - Empty collections are omitted from a response, not returned as `[]`, so guard `jq` iteration (`.items // [] | .[]`)
-- Large unpiped output is saved to a temp file; only its path and head are printed, so query that file with `jq`. Piped output (`| jq`) is never cut. To save a response, use `-o <file>`, not `>`
+- Large unpiped output is saved to a temp file; only its path and head are printed, so query that file with `jq`. Piped output (`| jq`) is never cut. To save a response, use `-o <file>`, not `>`; a binary response (PDF, xlsx, image) is refused unless `-o` is given
+- `--all` on a list `GET` follows `nextPageToken` and returns one object with the list fields concatenated; `nextPageToken` is added to a `fields` mask automatically
+- `--upload <file>` sends a file to an `https://www.googleapis.com/upload/...` URL. With `uploadType=multipart`, pass the metadata JSON on stdin; with `uploadType=media` (content only), redirect stdin from `/dev/null`
 - `Not logged in` or `Token lacks required scopes`: stop and ask the user to run `/google-workspace login`
 
 Prefer batch endpoints: one `batchUpdate` with many requests, Sheets `values:batchGet` / `values:batchUpdate` for several ranges.
