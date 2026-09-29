@@ -32,7 +32,7 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 - `!` (non-null assertion) → use type guards or restructure
   - Exception: test code where the value is guaranteed by setup
 - Fire-and-forget promises → always `await` or return; if intentionally discarding, use `void someAsyncFn()`
-- Bare `if (value)` for nullish checks → use `value !== undefined` or `value !== null`; boolean types allow truthy checks; `if (name)` on `string` allowed only when excluding empty string is intentional
+- Bare `if (value)` for nullish checks → use `value !== undefined` or `value !== null`; boolean types, and unions whose non-`false` members are always truthy (`'sm' | 'md' | false`), allow truthy checks; `if (name)` on `string` allowed only when excluding empty string is intentional
 - `!!value` → allowed only for coercing union with multiple falsy values (`string | null | undefined` → `boolean`)
 - Wrapper-function conversion (`String(x)` / `Number(x)` / `Boolean(x)`) → `x.toString()`, `parseInt(x, 10)` / `parseFloat(x)`, explicit comparison
   - Rationale: wrappers convert anything silently (`String(null)` → `"null"`, `Number('')` → `0`); method calls and parsers fail on unintended input
