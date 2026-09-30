@@ -1,4 +1,3 @@
-brew "git"
 brew "mise"
 cask "azookey"
 cask "firefox"
