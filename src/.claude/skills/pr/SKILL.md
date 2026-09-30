@@ -1,7 +1,7 @@
 ---
 name: pr
 description: Open a draft GitHub pull request for the branch with the description left for the author, or update the title of the one that already exists. Invoke this before running `gh pr create` or `gh pr edit`, and before any push that lands commits a PR does or will cover, whether the user asks or you propose it after finishing work. Not for leaving inline review comments on an existing PR.
-argument-hint: '[base-branch]'
+argument-hint: "[base-branch]"
 allowed-tools: Bash
 ---
 

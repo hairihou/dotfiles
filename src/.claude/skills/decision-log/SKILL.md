@@ -1,7 +1,7 @@
 ---
 name: decision-log
 description: Persist a decision that has just been settled (the alternatives rejected, the reasoning, the consequences accepted, and the condition for revisiting it) into one database shared by every repository, and retrieve past ones from any of them. Use at the moment a design, architecture, or tooling choice stops being weighed and becomes what will be done, and whenever the alternatives or rationale behind an earlier choice are asked for, including a choice settled while working somewhere else. Not for choices without meaningful trade-offs.
-argument-hint: '[search|supersede <id>|delete <id>]'
+argument-hint: "[search|supersede <id>|delete <id>]"
 allowed-tools: Bash
 ---
 
