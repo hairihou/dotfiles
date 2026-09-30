@@ -1,0 +1,10 @@
+amends "package://github.com/jdx/hk/releases/download/v2.4.0/hk@2.4.0#/Config.pkl"
+import "package://github.com/jdx/hk/releases/download/v2.4.0/hk@2.4.0#/Builtins.pkl"
+
+exclude = "src/.config/nvim/lazy-lock.json"
+
+steps {
+  ["oxfmt"] = Builtins.oxfmt
+  ["ruff"] = Builtins.ruff
+  ["ruff_format"] = Builtins.ruff_format
+}
