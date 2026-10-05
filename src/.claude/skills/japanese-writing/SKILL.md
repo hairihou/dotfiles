@@ -1,6 +1,6 @@
 ---
 name: japanese-writing
-description: "Make Japanese developer-facing prose read plain and accurate. Invoke before writing or updating a Japanese issue/PR body (`gh issue|pr create|edit`), planning/design doc, meeting material, or team chat post, even when the text falls out of a larger task. Not for English, reference docs, or CLI text."
+description: "Make Japanese developer-facing prose read plain and accurate. Invoke before writing or updating a Japanese issue/PR body (`gh issue|pr create|edit`), planning/design doc, ADR, product docs page (`.md`/`.mdx`), README, meeting material, or team chat post, even when the text falls out of a larger task. Not for English or CLI text."
 argument-hint: "[file-path]"
 allowed-tools: Edit, Read, Write
 ---
@@ -9,7 +9,7 @@ allowed-tools: Edit, Read, Write
 
 > 誇張、気取り、あいまいさ、非難を見分けるには日本語の語感が要るので、本文は日本語で書く。
 
-開発者向けの日本語の文書（方針や計画、設計提案、会議資料、issue/PR、チーム向けの投稿）を、事実どおりで、誰が何をどうするかが一読でわかる文に直す。どこを直すかは各節の原則で決める。表の例は型を示すための見本で、すべてを挙げたものではない。
+開発者向けの日本語の文書（方針や計画、設計提案、ADR、製品のドキュメントやREADME、会議資料、issue/PR、チーム向けの投稿）を、事実どおりで、誰が何をどうするかが一読でわかる文に直す。どこを直すかは各節の原則で決める。表の例は型を示すための見本で、すべてを挙げたものではない。
 
 ## Process
 
@@ -48,7 +48,7 @@ allowed-tools: Edit, Read, Write
 | 英語をそのままカタカナにする（「コンポーネント」「トークン」など定着した語は除く）                                           | アナトミー → Anatomy、トランジション → transition         |
 | 漢字を並べた造語（「最適化」「正規化」など定着した言葉は除く）                                                               | 完成文字列 → そのまま表示できる文字列、活性化 → 有効化    |
 | 気取った言い方                                                                                                               | 踏み込んで → 取り組む、Go/No-go判断 → 判定                |
-| 比喩をそのまま使う（英語から直訳した比喩も、自分で持ち込んだ比喩も。「手を焼く」など書き言葉で長く使われてきた慣用句は除く） | 床 → 3:1以上、穴 → 対応していない箇所                     |
+| 比喩をそのまま使う（英語から直訳した比喩も、自分で持ち込んだ比喩も。「手を焼く」など書き言葉で長く使われてきた慣用句は除く） | 床 → 3:1以上、写す (map) → 割り当てる                     |
 | 間の言葉を省いて縮めたせいで、主語や目的語が入れ替わる                                                                       | 本文全体を消費する → 本文全体がコンテキストに入る         |
 
 ## Tight and Concrete
@@ -65,12 +65,12 @@ allowed-tools: Edit, Read, Write
 
 ## No Filler
 
-内容を足さずに文を印象的に見せるだけの言い回しは、歯切れよく言い切っていても削る。
+内容を足さずに文を印象的に見せるだけの言い回しは、歯切れよく言い切っていても削る。否定の文（〜しない、〜する必要はない）は、消すと読者が誤った操作をしやすくなるときだけ残す。
 
 | 直す対象                                                                                                     | 直し方                                                                                                                                             |
 | ------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 主張の前後に付ける予告、否定、留保（前に「結論から言うと」「〜と思われがちだが」、後に「〜ではありません」） | 主張から書き始め、主張で終える。範囲や条件が要るなら主張の文の中で書く。「重要なのは」のように重みを示す前置きは、削らずに述語へ移す（〜が重要だ） |
-| 決め台詞だけの短い段落、「AではなくB」という対句の多用                                                       | ふつうの文に戻す。読者が誤解しやすい点を正すための否定は残す                                                                                       |
+| 決め台詞だけの短い段落、「AではなくB」という対句の多用                                                       | ふつうの文に戻す                                                                                                                                   |
 | 中身のない動詞や形容詞（深掘りする、向き合う、鍵となる）                                                     | 何をどうするかを書くか、削る                                                                                                                       |
 | 強調の言葉（非常に、極めて）                                                                                 | 削る。程度を示すなら具体的な数値を書く                                                                                                             |
 | 「さらに」「また」「加えて」の連続                                                                           | 接続詞を使わずに並べる                                                                                                                             |
