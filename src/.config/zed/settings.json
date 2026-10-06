@@ -17,45 +17,53 @@
     "lua": true,
     "oxc": true,
     "toml": true,
-    "vue": true
+    "vue": true,
   },
   "buffer_font_family": "UDEV Gothic 35NF",
   "buffer_font_size": 12,
   "cli_default_open_behavior": "existing_window",
   "file_types": {
-    "tailwindcss": ["*.css"]
+    "tailwindcss": ["*.css"],
   },
   "languages": {
     "Python": {
       "format_on_save": "on",
       "formatter": [{ "language_server": { "name": "ruff" } }],
-      "language_servers": ["ruff", "ty", "!basedpyright", "!pylsp", "!pyrefly", "!pyright", "..."]
-    }
+      "language_servers": [
+        "ruff",
+        "ty",
+        "!basedpyright",
+        "!pylsp",
+        "!pyrefly",
+        "!pyright",
+        "...",
+      ],
+    },
   },
   "lsp": {
     "tailwindcss-language-server": {
       "settings": {
         "includeLanguages": {
-          "vue": "html"
+          "vue": "html",
         },
         "tailwindCSS": {
           "experimental": {
             "classRegex": [
               ["\"([^\"]*)\"", "\"([^\"]*)\""],
               ["'([^']*)'", "'([^']*)'"],
-              ["`([^`]*)`", "`([^`]*)`"]
-            ]
-          }
-        }
-      }
-    }
+              ["`([^`]*)`", "`([^`]*)`"],
+            ],
+          },
+        },
+      },
+    },
   },
   "relative_line_numbers": "enabled",
   "tab_size": 2,
   "terminal": {
-    "option_as_meta": true
+    "option_as_meta": true,
   },
   "theme": "Nocturne",
   "ui_font_size": 14,
-  "use_system_window_tabs": true
+  "use_system_window_tabs": true,
 }

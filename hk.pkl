@@ -1,8 +1,6 @@
 amends "package://github.com/jdx/hk/releases/download/v2.5.0/hk@2.5.0#/Config.pkl"
 import "package://github.com/jdx/hk/releases/download/v2.5.0/hk@2.5.0#/Builtins.pkl"
 
-exclude = "src/.config/nvim/lazy-lock.json"
-
 steps {
   ["oxfmt"] = Builtins.oxfmt
   ["ruff"] = Builtins.ruff

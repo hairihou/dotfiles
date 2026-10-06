@@ -1,0 +1,7 @@
+{
+  "ignorePatterns": [
+    "src/.config/nvim/lazy-lock.json",
+    "src/.config/zed/keymap.json",
+    "src/.config/zed/settings.json"
+  ]
+}
