@@ -21,7 +21,7 @@ ActuationStrength = 0
 FXRemoveOldTrashItems = true
 
 [bootstrap.macos.defaults."com.apple.HIToolbox"]
-AppleFnUsageType = 0
+AppleFnUsageType = 2
 
 [bootstrap.macos.defaults."com.apple.screencapture"]
 name = "ss"
