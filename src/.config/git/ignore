@@ -5,7 +5,6 @@
 **/.env
 **/.env.local
 **/.env.*.local
-**/.playwright-cli
 **/fnox.local.toml
 **/.fnox.local.toml
 **/mise.local.toml
@@ -13,3 +12,4 @@
 **/mise.*.local.toml
 **/.mise.*.local.toml
 **/node_modules
+**/.playwright-cli
