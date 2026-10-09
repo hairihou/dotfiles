@@ -20,8 +20,6 @@
       "Read(~/.ssh/**)",
       "Read(**/.env)",
       "Read(**/.env.*)",
-      "Read(**/.zshrc.local)",
-      "Read(~/.zshrc.local)",
       "Edit(**/node_modules/**)"
     ]
   },
