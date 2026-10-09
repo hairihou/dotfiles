@@ -1,6 +1,7 @@
 typeset -U PATH
 export CLICOLOR=1
 export EDITOR='nvim'
+export FNOX_SHELL_OUTPUT='none'
 export LANG='en_US.UTF-8'
 export LSCOLORS='exGxFxDxcxDxDxhbadacec'
 
