@@ -97,6 +97,7 @@ zle -N fzf-history
 bindkey '^r' fzf-history
 
 eval "$(mise activate zsh)"
+eval "$(fnox activate zsh)"
 eval "$(zoxide init zsh)"
 
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
