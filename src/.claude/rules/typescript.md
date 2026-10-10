@@ -11,6 +11,9 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 - Re-export-only `index.ts` (barrel): do not create new ones
   - Exception: package public entrypoint (file referenced by `package.json#exports`/`main`/`module`)
 - Path aliases (`@/...`, `~/...`): do not introduce new ones; in projects where aliases are already configured, write new imports as relative paths
+- `export default` → named exports only
+  - Exception: files whose default export a framework or tool reads (`vite.config.ts`, route/page modules, Storybook meta)
+- Class with only static members → export module-level functions and constants
 
 ## Test Files
 
@@ -29,6 +32,9 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 - Type restating an existing declaration → derive it: `NonNullable<IconProps['fontSize']>`, `Omit<IconProps, 'viewBox'>`
 - Object-shape `type` alias (`type X = { ... }`) → declare with `interface`
   - Exception: the shape must stay assignable to an index-signature type (`Record<string, unknown>`). Interfaces have no implicit index signature
+- Optional parameter or property written as `x: T | undefined` → `x?: T`
+  - Exception: callers must pass the key explicitly
+- Type annotation the initializer already determines (`const n: number = 1`) → omit
 - `!` (non-null assertion) → use type guards or restructure
   - Exception: test code where the value is guaranteed by setup
 - Fire-and-forget promises → always `await` or return; if intentionally discarding, use `void someAsyncFn()`
@@ -36,7 +42,6 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 - `!!value` → allowed only for coercing union with multiple falsy values (`string | null | undefined` → `boolean`)
 - Wrapper-function conversion (`String(x)` / `Number(x)` / `Boolean(x)`) → `x.toString()`, `parseInt(x, 10)` / `parseFloat(x)`, explicit comparison
   - Rationale: wrappers convert anything silently (`String(null)` → `"null"`, `Number('')` → `0`); method calls and parsers fail on unintended input
-- `function` declaration → arrow function assigned to `const`, unless hoisting is required
 
 ## Naming Conventions
 

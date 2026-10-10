@@ -1,0 +1,33 @@
+id: no-throw-literal-ts
+language: TypeScript
+severity: error
+message: "Throw an `Error` instance (`new Error(...)`), not a literal."
+rule:
+  kind: throw_statement
+  has:
+    any:
+      - kind: array
+      - kind: "false"
+      - kind: "null"
+      - kind: number
+      - kind: object
+      - kind: string
+      - kind: template_string
+      - kind: "true"
+---
+id: no-throw-literal-tsx
+language: Tsx
+severity: error
+message: "Throw an `Error` instance (`new Error(...)`), not a literal."
+rule:
+  kind: throw_statement
+  has:
+    any:
+      - kind: array
+      - kind: "false"
+      - kind: "null"
+      - kind: number
+      - kind: object
+      - kind: string
+      - kind: template_string
+      - kind: "true"

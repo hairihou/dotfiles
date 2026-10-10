@@ -1,0 +1,13 @@
+id: no-export-let-ts
+language: TypeScript
+severity: error
+message: "Do not export mutable bindings; export `const` or a getter function."
+rule:
+  pattern: export let $$$DECL
+---
+id: no-export-let-tsx
+language: Tsx
+severity: error
+message: "Do not export mutable bindings; export `const` or a getter function."
+rule:
+  pattern: export let $$$DECL

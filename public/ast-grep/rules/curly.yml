@@ -1,5 +1,7 @@
 id: curly-if-ts
 language: TypeScript
+severity: warning
+message: "Wrap the `if` body in braces."
 rule:
   all:
     - pattern: if ($COND) $STMT
@@ -15,6 +17,8 @@ fix: "if ($COND) { $STMT }"
 ---
 id: curly-if-tsx
 language: Tsx
+severity: warning
+message: "Wrap the `if` body in braces."
 rule:
   all:
     - pattern: if ($COND) $STMT

@@ -1,0 +1,29 @@
+id: no-namespace-ts
+language: TypeScript
+severity: error
+ignores:
+  - "**/*.d.ts"
+message: "Use ES module exports instead of `namespace` / `module`."
+rule:
+  any:
+    - kind: internal_module
+    - kind: module
+  not:
+    inside:
+      kind: ambient_declaration
+      stopBy: end
+---
+id: no-namespace-tsx
+language: Tsx
+severity: error
+ignores:
+  - "**/*.d.ts"
+message: "Use ES module exports instead of `namespace` / `module`."
+rule:
+  any:
+    - kind: internal_module
+    - kind: module
+  not:
+    inside:
+      kind: ambient_declaration
+      stopBy: end
