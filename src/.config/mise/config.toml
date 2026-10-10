@@ -46,7 +46,7 @@ age = "1.3.2"
 ast-grep = "0.45.3"
 aube = "2.7.0"
 carapace = "1.8.0"
-claude-code = "2.1.296"
+claude-code = { version = "latest", auto_update = true }
 fnox = "1.39.0"
 fzf = "0.74.4"
 gh = "2.102.0"
