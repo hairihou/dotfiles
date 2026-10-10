@@ -1,0 +1,91 @@
+id: pascal-case-reserved-ts
+language: TypeScript
+severity: warning
+message: "UpperCamelCase is reserved for an `as const` object followed directly by a same-named type; name this in camelCase."
+rule:
+  all:
+    - kind: variable_declarator
+    - has:
+        field: name
+        regex: "^[A-Z][A-Za-z0-9]*[a-z][A-Za-z0-9]*$"
+        pattern: $NAME
+    - not:
+        has:
+          field: value
+          any:
+            - kind: arrow_function
+            - kind: call_expression
+            - kind: class
+            - kind: function_expression
+    - not:
+        all:
+          - has:
+              field: value
+              regex: "as const"
+          - inside:
+              kind: lexical_declaration
+              any:
+                - precedes:
+                    any:
+                      - kind: type_alias_declaration
+                        has: { field: name, pattern: $NAME }
+                      - kind: export_statement
+                        has:
+                          kind: type_alias_declaration
+                          has: { field: name, pattern: $NAME }
+                - inside:
+                    kind: export_statement
+                    precedes:
+                      any:
+                        - kind: type_alias_declaration
+                          has: { field: name, pattern: $NAME }
+                        - kind: export_statement
+                          has:
+                            kind: type_alias_declaration
+                            has: { field: name, pattern: $NAME }
+---
+id: pascal-case-reserved-tsx
+language: Tsx
+severity: warning
+message: "UpperCamelCase is reserved for an `as const` object followed directly by a same-named type; name this in camelCase."
+rule:
+  all:
+    - kind: variable_declarator
+    - has:
+        field: name
+        regex: "^[A-Z][A-Za-z0-9]*[a-z][A-Za-z0-9]*$"
+        pattern: $NAME
+    - not:
+        has:
+          field: value
+          any:
+            - kind: arrow_function
+            - kind: call_expression
+            - kind: class
+            - kind: function_expression
+    - not:
+        all:
+          - has:
+              field: value
+              regex: "as const"
+          - inside:
+              kind: lexical_declaration
+              any:
+                - precedes:
+                    any:
+                      - kind: type_alias_declaration
+                        has: { field: name, pattern: $NAME }
+                      - kind: export_statement
+                        has:
+                          kind: type_alias_declaration
+                          has: { field: name, pattern: $NAME }
+                - inside:
+                    kind: export_statement
+                    precedes:
+                      any:
+                        - kind: type_alias_declaration
+                          has: { field: name, pattern: $NAME }
+                        - kind: export_statement
+                          has:
+                            kind: type_alias_declaration
+                            has: { field: name, pattern: $NAME }

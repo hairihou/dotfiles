@@ -45,7 +45,7 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 
 ## Naming Conventions
 
-- `as const` objects: `PascalCase` (keys also `PascalCase`); derive union type alongside
+- `as const` objects: `PascalCase` (keys also `PascalCase`); declare the same-named union type on the next line, with no blank line between
 - Discriminated union discriminant: `type`
 - `SCREAMING_CASE`: reserved for environment variables only
 
