@@ -1,14 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "advisorModel": "fable",
+  "language": "japanese",
+  "outputStyle": "Concise",
   "env": {
     "CLAUDE_CODE_DISABLE_FEEDBACK_SURVEY": "1",
     "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CLAUDE_CODE_SCROLL_SPEED": "1",
     "DISABLE_AUTOUPDATER": "1"
-  },
-  "attribution": {
-    "commit": "",
-    "pr": "",
-    "sessionUrl": false
   },
   "permissions": {
     "deny": [
@@ -104,6 +103,20 @@
     "type": "command",
     "command": "claude-statusline.py"
   },
+  "tui": "fullscreen",
+  "voice": {
+    "enabled": true
+  },
+  "agentPushNotifEnabled": true,
+  "preferredNotifChannel": "ghostty",
+  "remoteControlAtStartup": false,
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "plansDirectory": ".claude/plans",
+  "skipWorkflowUsageWarning": true,
   "enabledPlugins": {
     "claude-api@anthropic-agent-skills": true,
     "claude-md-management@claude-plugins-official": true,
@@ -136,15 +149,5 @@
         "repo": "typesafe-ai/skills"
       }
     }
-  },
-  "outputStyle": "Concise",
-  "language": "japanese",
-  "advisorModel": "fable",
-  "plansDirectory": ".claude/plans",
-  "voice": {
-    "enabled": true
-  },
-  "skipWorkflowUsageWarning": true,
-  "remoteControlAtStartup": false,
-  "agentPushNotifEnabled": true
+  }
 }
