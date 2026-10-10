@@ -9,7 +9,6 @@ Target WCAG 2.2 AA with margin, not at the threshold. A number given here overri
 ## Philosophy
 
 - The goal is to benefit as many people as possible, not to clear the bar minimally or to exploit its exemptions
-- The author does not get to decide what is "decorative". Every viewer has an equal right to perceive what is on screen, so every visible element meets the contrast floor regardless of whether it reads as text or decoration
 - WCAG exemptions were written against 2008-era browser, assistive-tech, and bandwidth limits. Do not cite an exemption to justify a lower bar today
 
 ## Enforced Deltas
@@ -20,7 +19,7 @@ Judge contrast on the final rendered result in both light and dark themes, accou
 
 - Body text against its background: at least 7:1
 - Secondary / annotation text: at least 4.5:1, and lower contrast than body. Express priority through contrast, not font size. Defaults ship ~3:1 muted grays, which fail even bare AA
-- Non-text (borders, dividers, icons, UI component edges, focus rings): at least 3:1. Defaults ship ~1.2–1.6 hairlines, invisible to low-vision users
+- Non-text (UI component borders and edges, dividers that bound an operable region, icons, focus rings): at least 3:1. Defaults ship ~1.2–1.6 hairlines, invisible to low-vision users. A decorative divider between pieces of content is exempt
 - Text over an accent or colored fill must also clear its text threshold
 
 ### Font Size
@@ -41,4 +40,3 @@ Judge contrast on the final rendered result in both light and dark themes, accou
 ## CSS Variables
 
 - Do not share one token between a decorative divider/background and a UI component border/indicator. Only the latter carries the 3:1 floor
-- A decorative border that cannot reach 3:1 should be removed, not kept faint
