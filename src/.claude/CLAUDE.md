@@ -15,7 +15,7 @@
 
 ## Code Style
 
-- Comments: only for hidden constraints (undocumented API quirk, required call ordering, external bug workaround), stating the constraint. Never restate the code or signature; design rationale goes in PR / commit / decision log
+- Comments: only for hidden constraints (undocumented API quirk, required call ordering, external bug workaround), stating the constraint; design rationale goes in PR / commit / decision log
   - Workaround: cite upstream evidence (URL, or observed behavior with version); fix or file own-code defects instead. An unverified constraint comment makes a defect look intentional
   - Referenced issue / PR / doc: full URL, never a bare issue number
 - Lint / type-check findings: never suppress (disable comment, ignore entry) without user approval. A suppressed finding passes CI while the defect stays
@@ -23,11 +23,10 @@
 
 ## Communication Style
 
-- Work volume (line / file counts, `+X/-Y`, completion %): omit from PRs, issues, commits, and progress updates; the diff already shows it. Describe impact, rationale, and risk instead
+- Prose: keep a sentence only when the reader would err without it; of several consequences state the most critical, and always the irreversible ones
 
 ## Git Conventions
 
-- Type vocabulary (Issue / Branch / Commit): Conventional Commits (build, chore, ci, docs, feat, fix, perf, refactor, style, test)
-- Issue / Commit: `<type>(<scope>): <description>` (e.g., `fix(api): 429 responses on batch endpoint`)
+- Issue / Commit: `<type>(<scope>): <description>`, Conventional Commits types
 - Issue: `--assignee @me` only when the issue will be worked on immediately
-- Branch: `[#<number>_]<type>/<description>`, with the issue number prefix only when an issue exists (e.g., `#42_feat/add-login`)
+- Branch: `[#<number>_]<type>/<description>` (e.g., `#42_feat/add-login`)
