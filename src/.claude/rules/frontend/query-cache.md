@@ -1,5 +1,5 @@
 ---
-paths: ["**/*.{ts,tsx,vue}"]
+paths: ['**/*.{ts,tsx,vue}']
 ---
 
 # Query Cache
@@ -11,7 +11,7 @@ Do not use `invalidateQueries` / `refetch` when the mutation response contains c
 ```typescript
 // Bad: unnecessary network request after mutation
 onSuccess: () => {
-  queryClient.invalidateQueries({ queryKey: ["users"] });
+  queryClient.invalidateQueries({ queryKey: ['users'] });
 };
 
 // Bad: same problem with refetch
@@ -21,7 +21,7 @@ onSuccess: () => {
 
 // Good: direct cache update, no extra request
 onSuccess: (newUser) => {
-  queryClient.setQueryData(["users"], (old) => [...(old ?? []), newUser]);
+  queryClient.setQueryData(['users'], (old) => [...(old ?? []), newUser]);
 };
 ```
 

@@ -1,7 +1,7 @@
 id: prefer-arrow-function-decl-ts
 language: TypeScript
 severity: warning
-message: "Prefer arrow function (`const fn = () => {}`) over `function` declaration, unless hoisting is required."
+message: 'Prefer arrow function (`const fn = () => {}`) over `function` declaration, unless hoisting is required.'
 rule:
   kind: function_declaration
   not:
@@ -18,14 +18,14 @@ rule:
 id: prefer-arrow-function-expr-ts
 language: TypeScript
 severity: warning
-message: "Prefer arrow function (`() => {}`) over `function` expression."
+message: 'Prefer arrow function (`() => {}`) over `function` expression.'
 rule:
   kind: function_expression
 ---
 id: prefer-arrow-function-decl-tsx
 language: Tsx
 severity: warning
-message: "Prefer arrow function (`const fn = () => {}`) over `function` declaration, unless hoisting is required."
+message: 'Prefer arrow function (`const fn = () => {}`) over `function` declaration, unless hoisting is required.'
 rule:
   kind: function_declaration
   not:
@@ -42,6 +42,6 @@ rule:
 id: prefer-arrow-function-expr-tsx
 language: Tsx
 severity: warning
-message: "Prefer arrow function (`() => {}`) over `function` expression."
+message: 'Prefer arrow function (`() => {}`) over `function` expression.'
 rule:
   kind: function_expression

@@ -1,5 +1,5 @@
 ---
-paths: ["**/*.{component,directive}.ts", "**/*.{tsx,vue}"]
+paths: ['**/*.{component,directive}.ts', '**/*.{tsx,vue}']
 ---
 
 # Component Structure

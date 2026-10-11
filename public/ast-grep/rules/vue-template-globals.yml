@@ -3,7 +3,7 @@ language: Html
 severity: error
 metadata:
   scope: file
-message: "Vue template uses an Options API global inside {{ }}; bind it from <script setup> instead"
+message: 'Vue template uses an Options API global inside {{ }}; bind it from <script setup> instead'
 rule:
   kind: text
   regex: "\\{\\{[^}]*\\$(attrs|emit|props|slots|el|refs|parent|root|route|router|store)\\b"
@@ -13,7 +13,7 @@ language: Html
 severity: error
 metadata:
   scope: file
-message: "Vue template uses an Options API global in a directive/binding value; bind it from <script setup> instead"
+message: 'Vue template uses an Options API global in a directive/binding value; bind it from <script setup> instead'
 rule:
   kind: quoted_attribute_value
   regex: "\\$(attrs|emit|props|slots|el|refs|parent|root|route|router|store)\\b"
@@ -21,4 +21,4 @@ rule:
     kind: attribute
     has:
       kind: attribute_name
-      regex: "^([:@]|v-)"
+      regex: '^([:@]|v-)'

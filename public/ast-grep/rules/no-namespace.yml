@@ -2,8 +2,8 @@ id: no-namespace-ts
 language: TypeScript
 severity: error
 ignores:
-  - "**/*.d.ts"
-message: "Use ES module exports instead of `namespace` / `module`."
+  - '**/*.d.ts'
+message: 'Use ES module exports instead of `namespace` / `module`.'
 rule:
   any:
     - kind: internal_module
@@ -17,8 +17,8 @@ id: no-namespace-tsx
 language: Tsx
 severity: error
 ignores:
-  - "**/*.d.ts"
-message: "Use ES module exports instead of `namespace` / `module`."
+  - '**/*.d.ts'
+message: 'Use ES module exports instead of `namespace` / `module`.'
 rule:
   any:
     - kind: internal_module

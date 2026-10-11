@@ -1,5 +1,5 @@
 languageGlobs:
   html:
-    - "*.vue"
+    - '*.vue'
 ruleDirs:
   - rules

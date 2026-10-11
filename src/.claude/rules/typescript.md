@@ -1,5 +1,5 @@
 ---
-paths: ["**/*.{ts,tsx,vue}"]
+paths: ['**/*.{ts,tsx,vue}']
 ---
 
 # TypeScript
@@ -51,8 +51,8 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 
 ```typescript
 const Status = {
-  Active: "ACTIVE",
-  Inactive: "INACTIVE",
+  Active: 'ACTIVE',
+  Inactive: 'INACTIVE',
 } as const;
 type Status = (typeof Status)[keyof typeof Status];
 ```

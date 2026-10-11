@@ -4,8 +4,8 @@ severity: warning
 metadata:
   scope: file
 files:
-  - "*.vue"
-message: "Vue SFC should declare `defineOptions({ inheritAttrs: false })` and forward attrs via `useAttrs()` + `v-bind` on the intended target"
+  - '*.vue'
+message: 'Vue SFC should declare `defineOptions({ inheritAttrs: false })` and forward attrs via `useAttrs()` + `v-bind` on the intended target'
 rule:
   kind: script_element
   not:

@@ -1,5 +1,5 @@
 ---
-paths: ["**/*.vue"]
+paths: ['**/*.vue']
 ---
 
 # Vue Style Guide
@@ -25,11 +25,11 @@ const data = ref<Data | null>(null);
 
 // Good: discriminated union
 type State =
-  | { type: "idle" }
-  | { type: "loading" }
-  | { type: "error"; error: Error }
-  | { type: "ok"; data: Data };
-const state = ref<State>({ type: "idle" });
+  | { type: 'idle' }
+  | { type: 'loading' }
+  | { type: 'error'; error: Error }
+  | { type: 'ok'; data: Data };
+const state = ref<State>({ type: 'idle' });
 ```
 
 ## Composable
