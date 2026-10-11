@@ -5,45 +5,57 @@ description: Evaluate and tune an LLM-facing instruction doc (a skill, subagent 
 
 # Skill Eval
 
-The author of a prompt cannot judge its quality: whoever wrote the text already holds the implicit context, so re-reading it "from the same head" cannot detect ambiguity. The only reliable detector is a bias-free executor: dispatch a fresh subagent, score the run two-sidedly, and iterate until improvements stop.
+The author already holds the doc's implicit context, so cannot detect its ambiguity. Fresh subagents execute it and score it instead.
 
 ## Workflow
 
 ### 1. Consistency Check
 
-Read the doc's trigger surface (skill `description`, rule title) and confirm the body actually covers what it claims. Fix mismatches first. Otherwise an executor silently reinterprets the body to match the description and produces a false positive.
+Confirm the body covers what the trigger surface (skill `description`, rule title) claims, and fix mismatches first. Otherwise the executor reinterprets the body to match the description and passes falsely.
 
 ### 2. Freeze the Harness
 
-Before any dispatch, write down in a throwaway working file:
+In a scratchpad file (never the repo under test), write:
 
-- 2–3 realistic scenarios (at least 1 typical + 1 edge), each phrased as a user prompt that should trigger the doc.
-- Per scenario, a requirements checklist of 3–7 observable items; mark at least one per scenario as `[critical]`.
+- 2–3 tuning scenarios (at least 1 typical + 1 edge) and 1 holdout scenario, each as a user prompt that should trigger the doc.
+- Per scenario, 3–7 checklist items, at least one `[critical]`. Each must be checkable from a file the executor left or its action log; internal reasoning cannot be scored.
 
-Once a run has been recorded, the checklist is frozen. Editing it retroactively converts the eval into a vibes check.
+Scenarios must stay local: replace any that would push, open a PR, post, or write to an external service, or run it where that action cannot succeed and score the attempt from the action log. Never tell the executor to dry-run or skip a step; that breaks blindness.
+
+The checklist is frozen once a run is recorded.
 
 ### 3. Blind Dispatch
 
-Confirm the revision under test is the one a subagent will actually load (symlinks applied, live file matches the edited source). Then spawn one fresh subagent per scenario, passing the scenario prompt only. Do not paste the doc, summarize it, or hint at the expected behavior. The subagent must encounter the doc cold, the way a future session would. Ask each subagent to also report: points that were unclear, decisions it filled in at its own discretion, and places the doc's structure did not fit, tagged by phase (understanding / planning / execution / output).
+Confirm the subagent will load the revision under test (symlinks applied). Spawn 3 fresh subagents per tuning scenario with the scenario prompt only, using `isolation: "worktree"` when it edits files. Never pass, summarize, or hint at the doc. Ask each to end its report with:
 
-### 4. Two-Sided Scoring
+- Skills, rules, and instruction files it loaded.
+- Action log: actions in order, each with its target (path, command, URL).
+- Unclear points, decisions filled in at its own discretion, and places the doc's structure did not fit, tagged understanding / planning / execution / output.
 
-Record per scenario:
+A run that did not load the doc is invalid, not failed: fix the trigger surface (Step 1) and re-dispatch.
 
-- Pass / fail: pass only if every `[critical]` item is satisfied.
-- Accuracy: satisfied / total (full = 1.0, partial = 0.5, miss = 0).
-- The executor's self-reported unclear points, each as `Issue / Cause / General Fix Rule` so the same failure class is recognizable next run.
-- Rework signals if visible (the executor re-deciding the same thing, redundant tool round-trips).
+### 4. Scoring
+
+Dispatch one fresh grader per iteration with the frozen checklists and executor reports only; you wrote the fixes, so you cannot judge partial versus full. Record per scenario:
+
+- Pass rate: runs with every `[critical]` item satisfied / runs.
+- Accuracy: mean of satisfied / total (full = 1.0, partial = 0.5, miss = 0).
+- Unclear points, deduplicated with their run count, each as `Issue / Cause / General Fix Rule`.
 
 ### 5. Minimum Fix
 
-Edit the doc to remove the unclear points, one theme per iteration; unrelated fixes wait for the next round. Before writing a fix, state which checklist item it is meant to satisfy; fixes inferred from vibes tend not to land. If the same `General Fix Rule` recurs across iterations, the existing fix is in the wrong place (too low in the doc, too soft, ambiguous trigger). Move or strengthen it instead of adding another note.
+Fix one theme per iteration, naming the checklist item each fix targets. A `General Fix Rule` that recurs means the existing fix is misplaced or too soft: move or strengthen it rather than adding another note.
 
 ### 6. Loop to Plateau
 
-Re-run with a new subagent. Never reuse one, since it has already learned the prior text. Stop when two consecutive iterations produce zero new unclear points and accuracy improvement falls below ~5% relative.
+Repeat Steps 3–5 with new subagents. Stop when two consecutive iterations bring no new unclear points and no pass-rate change (accuracy deltas alone are run-to-run noise), or after 5 iterations.
+
+### 7. Holdout Check
+
+Dispatch and grade the holdout 3 times. A failure means the fixes overfit the tuning scenarios: record it as a residual limitation. Fixing it requires a new holdout first.
 
 ## Final Report
 
-- Doc under test and iterations run, with per-iteration pass/accuracy.
-- Fix rules resolved, and residual known limitations left in the doc.
+- Per-iteration pass rate and accuracy per scenario, plus the holdout's.
+- Invalid runs and the trigger-surface fixes they caused.
+- Fix rules resolved, and residual limitations, including unclear points left at the iteration cap.
