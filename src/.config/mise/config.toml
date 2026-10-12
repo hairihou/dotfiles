@@ -48,7 +48,7 @@ aube = "2.7.0"
 carapace = "1.8.0"
 claude-code = { version = "latest", auto_update = true }
 fnox = "1.39.0"
-fzf = "0.74.4"
+fzf = "0.74.5"
 gh = "2.102.0"
 ghq = "1.11.2"
 go = "1.27.2"
