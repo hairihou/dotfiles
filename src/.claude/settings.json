@@ -147,8 +147,6 @@
     "enabled": true
   },
   "timeFormat": "24-hour",
-  "preferredNotifChannel": "ghostty",
   "showMessageTimestamps": true,
-  "remoteControlAtStartup": false,
-  "agentPushNotifEnabled": true
+  "remoteControlAtStartup": false
 }
