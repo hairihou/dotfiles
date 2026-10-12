@@ -16,7 +16,7 @@ dump_packages() {
   fi
   printf '%s\n' "$content" > "$BREWFILE"
   local total
-  total=$(grep -cE "^(brew|cask) " "$BREWFILE" 2>/dev/null || echo 0)
+  total=$(grep -cE "^(brew|cask) " "$BREWFILE" || true)
   echo "Dumped $total packages to $BREWFILE"
 }
 

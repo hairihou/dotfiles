@@ -9,7 +9,8 @@ readonly XDG_DIRS=(
 )
 readonly BOUNDARIES=("$HOME" "${XDG_DIRS[@]}")
 
-readonly DOTFILES_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+DOTFILES_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+readonly DOTFILES_ROOT
 readonly MANAGED_ROOTS=(
   "${CLAUDE_CONFIG_DIR:-$HOME/.claude}|$DOTFILES_ROOT/src/.claude"
   "${XDG_CONFIG_HOME:-$HOME/.config}|$DOTFILES_ROOT/src/.config"
