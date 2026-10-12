@@ -6,3 +6,11 @@ steps {
   ["ruff"] = Builtins.ruff
   ["ruff_format"] = Builtins.ruff_format
 }
+
+hooks {
+  ["commit-msg"] {
+    steps {
+      ["conventional-commit"] = Builtins.check_conventional_commit
+    }
+  }
+}
