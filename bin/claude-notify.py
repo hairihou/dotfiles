@@ -1,10 +1,10 @@
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.14"
+# requires-python = ">=3.15"
 # ///
-import subprocess
 import sys
 from pathlib import Path
+lazy import subprocess
 
 if not sys.stdin.isatty():
     sys.stdin.read()

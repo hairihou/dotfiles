@@ -1,14 +1,14 @@
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.14"
+# requires-python = ">=3.15"
 # ///
 import json
 import re
-import shutil
-import subprocess
 import sys
 from pathlib import Path
 from typing import Any
+lazy import shutil
+lazy import subprocess
 
 EXTENSION_SUFFIXES = (".ts", ".tsx", ".vue")
 HUNK_RE = re.compile(r"^@@ -\d+(?:,\d+)? \+(\d+)(?:,(\d+))? @@", re.MULTILINE)

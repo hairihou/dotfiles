@@ -39,7 +39,7 @@ Follow `.gitmessage` / `CONTRIBUTING.md` when the repo has one, else Conventiona
 
 ## Issue Link
 
-First hit wins: branch prefix `#<number>_...`, else `closes #N` / `fixes #N` / `refs #N` (case-insensitive) in commit bodies ahead of `Compare ref`, else omit the line. One `closes #N` line per distinct issue.
+Collect every issue number from both sources: the branch prefix `#<number>_...`, and `closes #N` / `fixes #N` / `refs #N` (case-insensitive) in commit bodies ahead of `Compare ref`. Write one `closes #N` line per distinct issue, the branch prefix's first. With none found, omit the line.
 
 ## Body
 

@@ -1,12 +1,12 @@
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.14"
+# requires-python = ">=3.15"
 # ///
 import json
 import os
-import re
 import sys
 from typing import NoReturn
+lazy import re
 
 
 def deny(reason: str) -> NoReturn:
