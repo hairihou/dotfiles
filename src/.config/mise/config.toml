@@ -37,10 +37,6 @@ name = "ss"
 github.use_git_credentials = true
 minimum_release_age_excludes = ["claude-code"]
 
-[tasks.tmux-path]
-description = "Sync tmux server PATH after mise bumps"
-run = 'tmux set-environment -g PATH "$PATH"'
-
 [tools]
 age = "1.3.2"
 ast-grep = "0.51.0"

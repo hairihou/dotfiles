@@ -97,6 +97,11 @@ fzf-history() {
 zle -N fzf-history
 bindkey '^r' fzf-history
 
+tmux-path() {
+  tmux set-environment -g PATH "$PATH"
+  exec zsh
+}
+
 eval "$(mise activate zsh)"
 eval "$(fnox activate zsh)"
 eval "$(zoxide init zsh)"
