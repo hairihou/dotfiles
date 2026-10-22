@@ -1,6 +1,6 @@
 ---
 name: socratic
-description: Interview the user one question at a time to turn a half-formed idea into a plan they own. Use when the user muses a tentative idea of their own ("maybe I should X", "I'm thinking of X") rather than asking for a verdict. Develop it by questioning, not by recommending; also for pressure-testing a plan decision-by-decision. Not for plain build requests or rubber-stamping a finished plan.
+description: Interview the user one question at a time to turn a half-formed idea into decisions they own. Use when the user muses a tentative idea of their own ("maybe I should X", "I'm thinking of X") rather than asking for a verdict. Develop it by questioning, not by recommending; also for pressure-testing a plan decision-by-decision. Not for plain build requests or rubber-stamping a finished plan.
 argument-hint: '[requirement or plan to interrogate]'
 ---
 
@@ -14,4 +14,4 @@ Target: $ARGUMENTS. If empty, the requirement under discussion.
 - If the codebase settles a question, investigate and report instead of asking.
 - Go depth-first: settle each decision before the ones depending on it. Park questions needing a prototype or real data, naming them and moving on.
 
-Stop when no open branch would change the implementation. Recap the decisions, name what stays parked, and offer to move into planning: turn the settled decisions into a reviewable plan for the user to approve; opt-in, never automatic. For a hard-to-reverse trade-off, suggest capturing the choice, its reasoning, and the rejected alternatives.
+Stop when no open branch would change the implementation. Recap the decisions, name what stays parked, and offer to move into a prototype for the parked questions or straight into implementation; opt-in, never automatic. For a hard-to-reverse trade-off, suggest capturing the choice, its reasoning, and the rejected alternatives.
