@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-## Design Principles
+## Software Design
 
 - Boundaries (file / module / abstraction / alias / re-export): add one only when a consumer exists at a concrete path; otherwise inline or import directly
   - **Exception:** the package's public entrypoint
