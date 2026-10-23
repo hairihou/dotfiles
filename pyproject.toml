@@ -1,7 +1,7 @@
 [project]
 name = "dotfiles"
 version = "0.0.0"
-requires-python = ">=3.15.0"
+requires-python = ">=3.15.1"
 
 [dependency-groups]
-dev = ["ty>=0.0.90"]
+dev = ["ty>=0.0.91"]
