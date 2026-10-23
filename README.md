@@ -31,7 +31,7 @@ Available globally after setup:
 Re-apply after editing `src/` (or re-run `install.sh`):
 
 ```sh
-mise dotfiles apply                    # re-create symlinks
+mise dotfiles apply --prune            # re-create symlinks, remove stale ones
 mise dotfiles status                   # show drift between src/ and $HOME
 mise bootstrap macos-defaults apply    # write macOS defaults (log out to fully apply)
 ```

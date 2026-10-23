@@ -30,7 +30,7 @@ is_owner() {
 
 mkdir -p "$HOME/.config/mise"
 ln -sf "$DST/src/.config/mise/config.toml" "$HOME/.config/mise/config.toml"
-mise dotfiles apply --force --yes
+mise dotfiles apply --force --prune --yes
 
 if is_owner; then
   ln -sf "$DST/src/.Brewfile.owner" "$HOME/.Brewfile"

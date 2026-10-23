@@ -17,7 +17,6 @@ Rows are tab-separated: year, cited_by, openalex_id, title, doi, oa_pdf_url.
 """
 
 import argparse
-import html
 import io
 import ipaddress
 import json
@@ -34,6 +33,7 @@ from pypdf.errors import PdfReadError
 API = "https://api.openalex.org"
 FIELDS = "id,display_name,publication_year,cited_by_count,doi,best_oa_location"
 WORK_ID = re.compile(r"W\d+")
+META_CHARSET = re.compile(rb"""<meta[^>]+charset=["']?([\w-]+)""", re.IGNORECASE)
 UA = {"User-Agent": "source-trace"}
 MAX_BYTES = 50_000_000
 
@@ -59,7 +59,7 @@ class PublicRedirectHandler(urllib.request.HTTPRedirectHandler):
 OPENER = urllib.request.build_opener(PublicRedirectHandler)
 
 
-def fetch(url: str) -> tuple[bytes, str]:
+def fetch(url: str) -> tuple[bytes, str, str | None]:
     # urllib encodes the request line as ASCII, so a pasted URL with Japanese or other non-ASCII characters fails.
     url = urllib.parse.quote(url, safe=":/?#[]@!$&'()*+,;=%~")
     check_public(url)
@@ -68,11 +68,11 @@ def fetch(url: str) -> tuple[bytes, str]:
         body = res.read(MAX_BYTES + 1)
         if len(body) > MAX_BYTES:
             raise ValueError(f"response exceeds {MAX_BYTES:,} bytes")
-        return body, res.headers.get_content_type()
+        return body, res.headers.get_content_type(), res.headers.get_content_charset()
 
 
 def api(path: str, **params) -> dict:
-    body, _ = fetch(f"{API}{path}?{urllib.parse.urlencode(params)}")
+    body, *_ = fetch(f"{API}{path}?{urllib.parse.urlencode(params)}")
     return json.loads(body)
 
 
@@ -135,6 +135,11 @@ class TextExtractor(HTMLParser):
             "li",
             "br",
             "tr",
+            "td",
+            "th",
+            "table",
+            "ul",
+            "ol",
             "h1",
             "h2",
             "h3",
@@ -145,6 +150,12 @@ class TextExtractor(HTMLParser):
             "blockquote",
             "section",
             "article",
+            "main",
+            "header",
+            "footer",
+            "nav",
+            "aside",
+            "figcaption",
             "dd",
             "dt",
         }
@@ -174,18 +185,23 @@ class TextExtractor(HTMLParser):
 
 
 def text(url: str) -> str:
-    body, ctype = fetch(url)
+    body, ctype, charset = fetch(url)
     if ctype == "application/pdf" or body.startswith(b"%PDF"):
         pages = PdfReader(io.BytesIO(body)).pages
         return "\n".join(page.extract_text() or "" for page in pages)
-    decoded = body.decode("utf-8", errors="replace")
+    if not charset and "html" in ctype and (meta := META_CHARSET.search(body[:4096])):
+        charset = meta.group(1).decode("ascii")
+    try:
+        decoded = body.decode(charset or "utf-8", errors="replace")
+    except LookupError:
+        decoded = body.decode("utf-8", errors="replace")
     if "html" not in ctype:
         return decoded
     parser = TextExtractor()
     parser.feed(decoded)
     lines = (
         re.sub(r"[ \t\u00a0]+", " ", line).strip()
-        for line in html.unescape("".join(parser.parts)).splitlines()
+        for line in "".join(parser.parts).splitlines()
     )
     return "\n".join(line for line in lines if line)
 
