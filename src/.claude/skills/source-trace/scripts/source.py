@@ -1,6 +1,9 @@
 #!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">=3.14"
+# dependencies = [
+#     "pypdf>=6.21.2",
+# ]
 # ///
 """Trace papers through OpenAlex and extract page text for verbatim quote checks.
 
@@ -15,17 +18,18 @@ Rows are tab-separated: year, cited_by, openalex_id, title, doi, oa_pdf_url.
 
 import argparse
 import html
+import io
 import ipaddress
 import json
 import re
-import shutil
 import socket
-import subprocess
 import sys
-import tempfile
 import urllib.parse
 import urllib.request
 from html.parser import HTMLParser
+
+from pypdf import PdfReader
+from pypdf.errors import PdfReadError
 
 API = "https://api.openalex.org"
 FIELDS = "id,display_name,publication_year,cited_by_count,doi,best_oa_location"
@@ -172,17 +176,8 @@ class TextExtractor(HTMLParser):
 def text(url: str) -> str:
     body, ctype = fetch(url)
     if ctype == "application/pdf" or body.startswith(b"%PDF"):
-        if not shutil.which("pdftotext"):
-            sys.exit("PDF needs pdftotext (poppler); not installed")
-        with tempfile.NamedTemporaryFile(suffix=".pdf") as f:
-            f.write(body)
-            f.flush()
-            return subprocess.run(
-                ["pdftotext", "-layout", f.name, "-"],
-                capture_output=True,
-                text=True,
-                check=True,
-            ).stdout
+        pages = PdfReader(io.BytesIO(body)).pages
+        return "\n".join(page.extract_text() or "" for page in pages)
     decoded = body.decode("utf-8", errors="replace")
     if "html" not in ctype:
         return decoded
@@ -238,7 +233,7 @@ def main() -> None:
             )
             for work in res["results"]:
                 print(row(work))
-    except (OSError, ValueError, subprocess.CalledProcessError) as e:
+    except (OSError, ValueError, PdfReadError) as e:
         sys.exit(f"error: {e}")
 
 
