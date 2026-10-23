@@ -15,9 +15,11 @@ Rows are tab-separated: year, cited_by, openalex_id, title, doi, oa_pdf_url.
 
 import argparse
 import html
+import ipaddress
 import json
 import re
 import shutil
+import socket
 import subprocess
 import sys
 import tempfile
@@ -29,14 +31,40 @@ API = "https://api.openalex.org"
 FIELDS = "id,display_name,publication_year,cited_by_count,doi,best_oa_location"
 WORK_ID = re.compile(r"W\d+")
 UA = {"User-Agent": "source-trace"}
+MAX_BYTES = 50_000_000
+
+
+def check_public(url: str) -> None:
+    parts = urllib.parse.urlsplit(url)
+    if parts.scheme not in {"http", "https"} or not parts.hostname:
+        raise ValueError(f"only http(s) URLs are fetched: {clean(url)}")
+    for *_, addr in socket.getaddrinfo(parts.hostname, parts.port or 443):
+        ip = ipaddress.ip_address(addr[0])
+        if not ip.is_global:
+            raise ValueError(
+                f"refusing non-public address {ip} for {clean(parts.hostname)}"
+            )
+
+
+class PublicRedirectHandler(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        check_public(newurl)
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+OPENER = urllib.request.build_opener(PublicRedirectHandler)
 
 
 def fetch(url: str) -> tuple[bytes, str]:
     # urllib encodes the request line as ASCII, so a pasted URL with Japanese or other non-ASCII characters fails.
     url = urllib.parse.quote(url, safe=":/?#[]@!$&'()*+,;=%~")
+    check_public(url)
     req = urllib.request.Request(url, headers=UA)
-    with urllib.request.urlopen(req, timeout=60) as res:
-        return res.read(), res.headers.get_content_type()
+    with OPENER.open(req, timeout=60) as res:
+        body = res.read(MAX_BYTES + 1)
+        if len(body) > MAX_BYTES:
+            raise ValueError(f"response exceeds {MAX_BYTES:,} bytes")
+        return body, res.headers.get_content_type()
 
 
 def api(path: str, **params) -> dict:
