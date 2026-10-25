@@ -1,9 +1,5 @@
 {
   "$schema": "https://unpkg.com/oxfmt/configuration_schema.json",
-  "ignorePatterns": [
-    "src/.config/nvim/lazy-lock.json",
-    "src/.config/zed/keymap.json",
-    "src/.config/zed/settings.json"
-  ],
+  "ignorePatterns": ["src/.config/nvim/lazy-lock.json", "src/.config/zed/*.json"],
   "singleQuote": true
 }
