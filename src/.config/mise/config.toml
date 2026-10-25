@@ -28,14 +28,8 @@ AppleFnUsageType = 0
 name = "ss"
 
 [dotfiles]
-"~/.claude" = { source = "~/dotfiles/src/.claude", mode = "symlink-each", exclude = [
-  "__pycache__",
-  ".ruff_cache",
-] }
-"~/.config" = { source = "~/dotfiles/src/.config", mode = "symlink-each", exclude = [
-  "__pycache__",
-  ".ruff_cache",
-] }
+"~/.claude" = { source = "~/dotfiles/src/.claude", mode = "symlink-each" }
+"~/.config" = { source = "~/dotfiles/src/.config", mode = "symlink-each" }
 "~/.hushlogin" = { source = "~/dotfiles/src/.hushlogin" }
 "~/.npmrc" = { source = "~/dotfiles/src/.npmrc" }
 "~/.zshrc" = { source = "~/dotfiles/src/.zshrc" }
