@@ -13,6 +13,7 @@ ActuationStrength = 0
 autohide = true
 orientation = "left"
 "show-recents" = false
+"wvous-br-corner" = 1
 
 [bootstrap.macos.defaults."com.apple.driver.AppleBluetoothMultitouch.trackpad"]
 ActuationStrength = 0
