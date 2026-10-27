@@ -33,14 +33,6 @@ onSuccess: (newUser) => {
 - Paginated lists
 - Response lacks required data
 
-## Cache Update Patterns
-
-| Operation | Pattern                                           |
-| --------- | ------------------------------------------------- |
-| Create    | `[...old, newItem]`                               |
-| Update    | `old.map(x => x.id === updated.id ? updated : x)` |
-| Delete    | `old.filter(x => x.id !== deletedId)`             |
-
 ## Framework Reference
 
 | Framework              | Cache Access       | Key Prop   |

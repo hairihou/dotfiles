@@ -11,12 +11,10 @@ Group related state, computed values, handlers, and side effects by feature.
 A logical group of related state, computed values, and handlers for a single concern.
 
 ```tsx
-// user feature block
 const user = ref<User | null>(null)
 const fullName = computed(() => `${user.value?.first} ${user.value?.last}`)
 const handleUserUpdate = () => { ... }
 
-// form feature block
 const name = ref('')
 const email = ref('')
 const isValid = computed<boolean>(() => name.value.length > 0)
@@ -32,7 +30,6 @@ const handleSubmit = () => { ... }
 
 - 1 blank line between feature blocks
 - No blank lines within same feature block
-- No comments to label feature blocks (spacing alone indicates grouping)
 
 ---
 
@@ -53,10 +50,6 @@ props → external hooks → `useQuery`/`useMutation` → feature blocks → com
 ---
 
 ## Vue
-
-### Composables
-
-- Accept refs as parameters when reactivity is needed (`MaybeRef<T>`)
 
 ### Declaration Order
 

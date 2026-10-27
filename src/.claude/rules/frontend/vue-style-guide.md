@@ -36,6 +36,7 @@ const state = ref<State>({ type: 'idle' });
 
 - Must be Server-Client Universal. No client globals like `window` at top level
 - Avoid `useRouter`, `inject`, or other implicit dependencies. Accept values and callbacks as arguments instead
+- Accept refs as parameters when reactivity is needed (`MaybeRef<T>`)
 - All async operations must handle race conditions with `AbortController`
 
 ```typescript

@@ -8,8 +8,6 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 
 ## Module Structure
 
-- Re-export-only `index.ts` (barrel): do not create new ones
-  - Exception: package public entrypoint (file referenced by `package.json#exports`/`main`/`module`)
 - Path aliases (`@/...`, `~/...`): do not introduce new ones; in projects where aliases are already configured, write new imports as relative paths
 - `export default` → named exports only
   - Exception: files whose default export a framework or tool reads (`vite.config.ts`, route/page modules, Storybook meta)
