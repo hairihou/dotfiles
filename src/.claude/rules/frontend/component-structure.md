@@ -23,7 +23,6 @@ const handleSubmit = () => { ... }
 
 ## Reactive Primitives
 
-- Declare in consistent order (predictable execution)
 - One side effect (useEffect / watch / effect) = one responsibility
 
 ## Spacing

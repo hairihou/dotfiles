@@ -7,7 +7,6 @@ paths: ['**/*.vue']
 ## General
 
 - No auto imports. Always write explicit imports
-- Define blocks in order: `<script setup>` → `<template>` → `<style>`
 
 ## State Design
 

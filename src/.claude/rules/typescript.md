@@ -32,7 +32,6 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
   - Exception: the shape must stay assignable to an index-signature type (`Record<string, unknown>`). Interfaces have no implicit index signature
 - Optional parameter or property written as `x: T | undefined` → `x?: T`
   - Exception: callers must pass the key explicitly
-- Type annotation the initializer already determines (`const n: number = 1`) → omit
 - `!` (non-null assertion) → use type guards or restructure
   - Exception: test code where the value is guaranteed by setup
 - Fire-and-forget promises → always `await` or return; if intentionally discarding, use `void someAsyncFn()`
