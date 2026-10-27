@@ -44,7 +44,7 @@ Dispatch one fresh grader per iteration with the frozen checklists and executor 
 
 ### 5. Minimum Fix
 
-Fix one theme per iteration, naming the checklist item each fix targets. A `General Fix Rule` that recurs means the existing fix is misplaced or too soft: move or strengthen it rather than adding another note.
+Fix one theme per iteration, naming the checklist item each fix targets. A `General Fix Rule` that recurs means the existing fix is misplaced or too soft: move or strengthen it rather than adding another note. A fix that drops a previously satisfied `[critical]` item is reverted, not patched over.
 
 ### 6. Loop to Plateau
 
