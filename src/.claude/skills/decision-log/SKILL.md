@@ -36,11 +36,11 @@ When `$ARGUMENTS` starts with none of `search`, `supersede`, `delete`.
 
 Write `chosen`, `alternatives`, and `reasoning` in plain English, concise but complete.
 
-- **topic**: kebab-case label, not a sentence (`database-selection`, not `We decided to use PostgreSQL`)
-- **reasoning** is why this won; **consequences** is what follows from it: operational impact, trade-offs accepted, follow-up work required
-- **confidence**: `high` = clear winner after research, `medium` = alternatives were close, `low` = best guess under uncertainty or time pressure. Do not default to `high`
-- **reevaluate_when**: the specific condition that should trigger revisiting (e.g. "latency exceeds 200ms", "library reaches v2.0")
-- **outcome**: left empty at insert; fill in later with `update-outcome <id> '<outcome>'` once results are known
+- `topic`: kebab-case label, not a sentence (`database-selection`, not `We decided to use PostgreSQL`)
+- `reasoning` is why this won; `consequences` is what follows from it: operational impact, trade-offs accepted, follow-up work required
+- `confidence`: `high` = clear winner after research, `medium` = alternatives were close, `low` = best guess under uncertainty or time pressure. Do not default to `high`
+- `reevaluate_when`: the specific condition that should trigger revisiting (e.g. "latency exceeds 200ms", "library reaches v2.0")
+- `outcome`: left empty at insert; fill in later with `update-outcome <id> '<outcome>'` once results are known
 
 ## Mode: Supersede
 

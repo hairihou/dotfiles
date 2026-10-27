@@ -26,7 +26,7 @@ Judge contrast on the final rendered result in every theme the surface ships, ac
 
 - Set font-size in `rem`, not `px`, so it honors the user's default font-size preference. `px` only responds to page zoom, ignoring the root setting
 - Body and annotations at least 0.875rem (14px at the default root)
-  - **Exception:** labels inside interactive components (buttons, chips, form controls) may be smaller
+  - Labels inside interactive components (buttons, chips, form controls) may be smaller
 - Headings larger than body, except extension `popup.html`, where a heading may match body size
 
 ### Banned By Default

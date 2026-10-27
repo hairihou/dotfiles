@@ -3,9 +3,9 @@
 ## Software Design
 
 - Boundaries (file / module / abstraction / alias / re-export): add one only when a consumer exists at a concrete path; otherwise inline or import directly
-  - **Exception:** the package's public entrypoint
+  - The package's public entrypoint is exempt
 - Dependency selection (library / CLI tool / GitHub Action / plugin): check the latest release date before proposing, never from recall; reject anything over a year old. A project that stopped shipping releases will not ship the fix you need
-  - **Exception:** no maintained alternative and not reasonably self-written. State the staleness when proposing it
+  - When no maintained alternative exists and self-writing is unreasonable, propose the stale one and state its staleness
 - Dependency installation: use the lockfile's package manager command, never hand-edit the manifest. A hand-written version can be one that does not exist
 
 ## Reasoning
