@@ -12,6 +12,7 @@
 
 - Code review: name what the change's safety depends on and tag each with its evidence: `[cited]` (`file:line`), `[reasoned]` (failure path unreachable), or `[executed]` (ran the code). "No issues found" requires every one tagged; report anything below `[executed]` as unconfirmed
   - Tag each proposed fix `[surface]` (symptom) or `[root]` (cause)
+- Doc / code mismatch: ask before acting when it affects the current change; otherwise follow the code and list the mismatch in the final reply. Never rewrite existing code to match a doc without asking
 
 ## Code Style
 
@@ -20,10 +21,6 @@
   - Referenced issue / PR / doc: full URL, never a bare issue number
 - Lint / type-check findings: never suppress (disable comment, ignore entry) without user approval. A suppressed finding passes CI while the defect stays
 - Ordering (code, documentation): semantic hierarchy (main rule → exceptions → details) first; alphabetical only as tiebreaker among peers
-
-## Communication Style
-
-- Prose: keep a sentence only when the reader would err without it; of several consequences state the most critical, and always the irreversible ones
 
 ## Git Conventions
 
