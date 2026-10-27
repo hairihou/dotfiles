@@ -22,6 +22,8 @@ In a scratchpad file (never the repo under test), write:
 
 Scenarios must stay local: replace any that would push, open a PR, post, or write to an external service, or run it where that action cannot succeed and score the attempt from the action log. Never tell the executor to dry-run or skip a step; that breaks blindness.
 
+Name the scratchpad directory, fixtures, and run directories neutrally. Executors read the paths in their prompt, and a name that echoes the doc or its subject gets taken as the task's intent.
+
 The checklist is frozen once a run is recorded.
 
 ### 3. Blind Dispatch
@@ -33,6 +35,8 @@ Confirm the subagent will load the revision under test (symlinks applied). Spawn
 - Unclear points, decisions filled in at its own discretion, and places the doc's structure did not fit, tagged understanding / planning / execution / output.
 
 A run that did not load the doc is invalid, not failed: fix the trigger surface (Step 1) and re-dispatch.
+
+When the doc is new, also run a baseline before the first fix: the same tuning scenarios, 3 runs each, with the doc absent, graded against the same checklists. Without it, a full pass rate cannot be told apart from what the model does unaided. To hide the doc, move it out of every path it loads from and dispatch from a new `claude -p` process; subagents of the current session keep the skill listing it started with after the file is gone (observed in Claude Code 2.1.311). Restore the doc before the runs that test it, and confirm with a probe that baseline runs do not list it.
 
 ### 4. Scoring
 
@@ -56,6 +60,6 @@ Dispatch and grade the holdout 3 times. A failure means the fixes overfit the tu
 
 ## Final Report
 
-- Per-iteration pass rate and accuracy per scenario, plus the holdout's.
+- Per-iteration pass rate and accuracy per scenario, plus the holdout's and the baseline's.
 - Invalid runs and the trigger-surface fixes they caused.
 - Fix rules resolved, and residual limitations, including unclear points left at the iteration cap.

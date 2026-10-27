@@ -23,7 +23,7 @@ paths: ['**/*.md']
 - Name a heading for what its section is, not for what the section contains
 - H1 is the file or directory name in canonical case (`skeptic.md` → `# Skeptic`, `skills/pr/` → `# PR`); never open at H2
   - **Exception:** a file whose content is embedded inside another document, which supplies the H1
-- Title Case for headings (`# Markdown Style`, `## Configuration Files`)
+- Title Case for English headings (`# Markdown Style`, `## Configuration Files`)
 - Preserve canonical case for brand or product names. Do not force Title Case (`npm`, `ESLint`, `ZAP`, `iOS`, `macOS`, `Draw.io`)
 - Omit category suffixes from an H1 (`Skill`, `Tool`, `Rules`, `Security Scan`). The filename, directory, and `name` frontmatter already convey the kind
 

@@ -13,7 +13,7 @@ Target WCAG 2.2 AA with margin, not at the threshold. A number given here overri
 
 ## Enforced Deltas
 
-Judge contrast on the final rendered result in both light and dark themes, accounting for `opacity`, `rgba()` / `hsla()`, and `filter: opacity()` compositing.
+Judge contrast on the final rendered result in every theme the surface ships, accounting for `opacity`, `rgba()` / `hsla()`, and `filter: opacity()` compositing.
 
 ### Contrast
 
