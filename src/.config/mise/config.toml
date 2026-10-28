@@ -41,7 +41,7 @@ minimum_release_age_excludes = ["claude-code"]
 [tools]
 age = { version = "latest", auto_update = true }
 ast-grep = "0.51.0"
-aube = "2.8.2"
+aube = "2.8.3"
 carapace = { version = "latest", auto_update = true }
 claude-code = { version = "latest", auto_update = true }
 fnox = { version = "latest", auto_update = true }
@@ -61,10 +61,10 @@ node = "24.22.1"
 "pipx:git+https://github.com/github/spec-kit.git" = "v1.2.3"
 pnpm = "12.15.0"
 ripgrep = { version = "latest", auto_update = true }
-ruff = "0.17.2"
+ruff = "0.17.3"
 swiftlint = "0.65.1"
 tmux = { version = "latest", auto_update = true }
 tree-sitter = "0.27.1"
-uv = "0.13.5"
+uv = "0.13.6"
 xh = { version = "latest", auto_update = true }
 zoxide = { version = "latest", auto_update = true }
