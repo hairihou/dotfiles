@@ -41,7 +41,7 @@ minimum_release_age_excludes = ["claude-code"]
 [tools]
 age = { version = "latest", auto_update = true }
 ast-grep = "0.51.0"
-aube = "2.8.3"
+aube = "2.8.4"
 carapace = { version = "latest", auto_update = true }
 claude-code = { version = "latest", auto_update = true }
 fnox = { version = "latest", auto_update = true }
@@ -51,14 +51,14 @@ ghq = { version = "latest", auto_update = true }
 go = "1.27.3"
 hk = { version = "latest", auto_update = true }
 neovim = { version = "latest", auto_update = true }
-node = "24.22.1"
+node = "24.22.2"
 "npm:@angular/cli" = "22.2.4"
 "npm:@earendil-works/pi-coding-agent" = "1.4.0"
 "npm:@ionic/cli" = "7.2.1"
 "npm:@playwright/cli" = "0.1.22"
 "npm:agent-browser" = "0.39.2"
 "npm:oxfmt" = "0.74.0"
-"pipx:git+https://github.com/github/spec-kit.git" = "v1.2.3"
+"pipx:git+https://github.com/github/spec-kit.git" = "v1.2.4"
 pnpm = "12.15.0"
 ripgrep = { version = "latest", auto_update = true }
 ruff = "0.17.3"
