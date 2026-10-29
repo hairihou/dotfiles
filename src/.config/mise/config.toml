@@ -51,7 +51,7 @@ ghq = { version = "latest", auto_update = true }
 go = "1.27.3"
 hk = { version = "latest", auto_update = true }
 neovim = { version = "latest", auto_update = true }
-node = "24.22.2"
+node = "26.13.0"
 "npm:@angular/cli" = "22.2.4"
 "npm:@earendil-works/pi-coding-agent" = "1.4.0"
 "npm:@ionic/cli" = "7.2.1"
