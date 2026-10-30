@@ -12,10 +12,6 @@ export JAVA_HOME='/Applications/Android Studio.app/Contents/jbr/Contents/Home'
 export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools"
 export PATH="$HOME/dotfiles/bin:$PATH"
 
-HISTFILE="$HOME/.zsh_history"
-HISTSIZE=100000
-SAVEHIST=100000
-
 setopt AUTO_CD
 setopt AUTO_PUSHD
 setopt EXTENDED_HISTORY
@@ -108,7 +104,7 @@ eval "$(mise activate zsh)"
 eval "$(fnox activate zsh)"
 eval "$(zoxide init zsh)"
 
-export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense'
+export CARAPACE_BRIDGES='zsh,bash'
 zstyle ':completion:*' format $'\e[2mCompleting %d\e[m'
 zstyle ':completion:*' menu select
 source <(carapace _carapace)
