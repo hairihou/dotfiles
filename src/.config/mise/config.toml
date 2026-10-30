@@ -57,7 +57,7 @@ node = "26.13.0"
 "npm:@ionic/cli" = "7.2.1"
 "npm:@playwright/cli" = "0.1.22"
 "npm:agent-browser" = "0.39.4"
-"npm:oxfmt" = "0.74.0"
+"npm:oxfmt" = "0.75.0"
 "pipx:git+https://github.com/github/spec-kit.git" = "v1.2.5"
 pnpm = "12.16.0"
 ripgrep = { version = "latest", auto_update = true }
