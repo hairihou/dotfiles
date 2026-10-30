@@ -16,7 +16,7 @@ sound = (
 )
 if sound.exists():
     subprocess.Popen(
-        ["afplay", str(sound)],
+        ["/usr/bin/afplay", str(sound)],
         stdin=subprocess.DEVNULL,
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,

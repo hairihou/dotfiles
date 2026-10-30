@@ -119,34 +119,21 @@ def format_matches(matches: list[Match]) -> str:
     return "\n\n".join(lines)
 
 
-def main() -> None:
+def read_target() -> Path | None:
     payload = {}
     if not sys.stdin.isatty():
         try:
             payload = json.load(sys.stdin)
         except ValueError:
-            return
+            return None
     file_path = (payload.get("tool_input") or {}).get("file_path", "")
     if not file_path.endswith(EXTENSION_SUFFIXES):
-        return
+        return None
     target = Path(file_path)
-    ast_grep = shutil.which("ast-grep")
-    if ast_grep is None or not SGCONFIG.is_file() or not target.is_file():
-        return
+    return target if target.is_file() else None
 
-    ranges = changed_line_ranges(target)
-    if ranges is not None:
-        ranges = apply_fixes(ast_grep, target, ranges)
 
-    matches, raw = scan(ast_grep, target)
-    if matches is None:
-        if raw:
-            print(
-                json.dumps(
-                    {"decision": "block", "reason": f"ast-grep failed:\n\n{raw}"}
-                )
-            )
-        return
+def report(matches: list[Match], ranges: list[LineRange] | None) -> None:
     if ranges is not None:
         matches = [m for m in matches if in_scope(m, ranges)]
 
@@ -173,6 +160,28 @@ def main() -> None:
                 }
             )
         )
+
+
+def main() -> None:
+    target = read_target()
+    ast_grep = shutil.which("ast-grep")
+    if target is None or ast_grep is None or not SGCONFIG.is_file():
+        return
+
+    ranges = changed_line_ranges(target)
+    if ranges is not None:
+        ranges = apply_fixes(ast_grep, target, ranges)
+
+    matches, raw = scan(ast_grep, target)
+    if matches is None:
+        if raw:
+            print(
+                json.dumps(
+                    {"decision": "block", "reason": f"ast-grep failed:\n\n{raw}"}
+                )
+            )
+        return
+    report(matches, ranges)
 
 
 main()

@@ -4,11 +4,11 @@
 """Decision log database operations."""
 
 import argparse
-import os
 import sqlite3
+from pathlib import Path
 
-DB_DIR = os.path.expanduser("~/.local/share/claude")
-DB_PATH = os.path.join(DB_DIR, "claude.db")
+DB_DIR = Path("~/.local/share/claude").expanduser()
+DB_PATH = DB_DIR / "claude.db"
 
 INIT_SQL = """
 CREATE TABLE IF NOT EXISTS decisions (
@@ -40,21 +40,46 @@ CREATE VIRTUAL TABLE IF NOT EXISTS decisions_fts USING fts5(
   content='decisions',
   content_rowid='id'
 );
-INSERT INTO decisions_fts(rowid, topic, chosen, alternatives, reasoning, outcome, consequences)
-  SELECT id, topic, chosen, alternatives, reasoning, outcome, consequences FROM decisions;
+INSERT INTO decisions_fts(
+  rowid, topic, chosen, alternatives, reasoning, outcome, consequences
+)
+  SELECT id, topic, chosen, alternatives, reasoning, outcome, consequences
+  FROM decisions;
 CREATE TRIGGER IF NOT EXISTS decisions_ai AFTER INSERT ON decisions BEGIN
-  INSERT INTO decisions_fts(rowid, topic, chosen, alternatives, reasoning, outcome, consequences)
-  VALUES (new.id, new.topic, new.chosen, new.alternatives, new.reasoning, new.outcome, new.consequences);
+  INSERT INTO decisions_fts(
+    rowid, topic, chosen, alternatives, reasoning, outcome, consequences
+  )
+  VALUES (
+    new.id, new.topic, new.chosen, new.alternatives, new.reasoning,
+    new.outcome, new.consequences
+  );
 END;
 CREATE TRIGGER IF NOT EXISTS decisions_ad AFTER DELETE ON decisions BEGIN
-  INSERT INTO decisions_fts(decisions_fts, rowid, topic, chosen, alternatives, reasoning, outcome, consequences)
-  VALUES ('delete', old.id, old.topic, old.chosen, old.alternatives, old.reasoning, old.outcome, old.consequences);
+  INSERT INTO decisions_fts(
+    decisions_fts, rowid, topic, chosen, alternatives, reasoning, outcome,
+    consequences
+  )
+  VALUES (
+    'delete', old.id, old.topic, old.chosen, old.alternatives, old.reasoning,
+    old.outcome, old.consequences
+  );
 END;
 CREATE TRIGGER IF NOT EXISTS decisions_au AFTER UPDATE ON decisions BEGIN
-  INSERT INTO decisions_fts(decisions_fts, rowid, topic, chosen, alternatives, reasoning, outcome, consequences)
-  VALUES ('delete', old.id, old.topic, old.chosen, old.alternatives, old.reasoning, old.outcome, old.consequences);
-  INSERT INTO decisions_fts(rowid, topic, chosen, alternatives, reasoning, outcome, consequences)
-  VALUES (new.id, new.topic, new.chosen, new.alternatives, new.reasoning, new.outcome, new.consequences);
+  INSERT INTO decisions_fts(
+    decisions_fts, rowid, topic, chosen, alternatives, reasoning, outcome,
+    consequences
+  )
+  VALUES (
+    'delete', old.id, old.topic, old.chosen, old.alternatives, old.reasoning,
+    old.outcome, old.consequences
+  );
+  INSERT INTO decisions_fts(
+    rowid, topic, chosen, alternatives, reasoning, outcome, consequences
+  )
+  VALUES (
+    new.id, new.topic, new.chosen, new.alternatives, new.reasoning,
+    new.outcome, new.consequences
+  );
 END;
 """
 
@@ -65,6 +90,32 @@ MIGRATE_COLUMNS = {
     "status": "TEXT NOT NULL DEFAULT 'accepted'",
     "superseded_by": "INTEGER REFERENCES decisions(id)",
 }
+
+INSERT_SQL = (
+    "INSERT INTO decisions (date, repository, topic, chosen, alternatives,"
+    " reasoning, consequences, confidence, reevaluate_when)"
+    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+)
+
+SEARCH_SQL = """
+SELECT d.id, d.date, d.repository, d.topic, d.chosen, d.status
+FROM decisions d
+WHERE (:from_date IS NULL OR d.date >= :from_date)
+  AND (:repo IS NULL OR d.repository = :repo)
+  AND (:status IS NULL OR d.status = :status)
+  AND (:to IS NULL OR d.date <= :to)
+ORDER BY d.date DESC
+"""
+SEARCH_MATCH_SQL = """
+SELECT d.id, d.date, d.repository, d.topic, d.chosen, d.status
+FROM decisions d JOIN decisions_fts f ON d.id = f.rowid
+WHERE decisions_fts MATCH :match
+  AND (:from_date IS NULL OR d.date >= :from_date)
+  AND (:repo IS NULL OR d.repository = :repo)
+  AND (:status IS NULL OR d.status = :status)
+  AND (:to IS NULL OR d.date <= :to)
+ORDER BY d.date DESC
+"""
 
 LIST_COLUMNS = ["id", "date", "repository", "topic", "chosen", "status"]
 ALL_COLUMNS = [
@@ -84,16 +135,16 @@ ALL_COLUMNS = [
 ]
 
 
-def get_connection():
-    os.makedirs(DB_DIR, exist_ok=True)
+def get_connection() -> sqlite3.Connection:
+    DB_DIR.mkdir(parents=True, exist_ok=True)
     return sqlite3.connect(DB_PATH)
 
 
-def _get_existing_columns(conn):
+def _get_existing_columns(conn: sqlite3.Connection) -> set[str]:
     return {row[1] for row in conn.execute("PRAGMA table_info(decisions)").fetchall()}
 
 
-def _migrate(conn):
+def _migrate(conn: sqlite3.Connection) -> None:
     existing = _get_existing_columns(conn)
     for col, typedef in MIGRATE_COLUMNS.items():
         if col not in existing:
@@ -101,14 +152,15 @@ def _migrate(conn):
     conn.commit()
 
 
-def delete(conn, args):
+def delete(conn: sqlite3.Connection, args: argparse.Namespace) -> None:
     row = conn.execute("SELECT id FROM decisions WHERE id = ?", (args.id,)).fetchone()
     if not row:
         print(f"Error: decision #{args.id} not found.")
         return
     detail(conn, args)
     conn.execute(
-        "UPDATE decisions SET status = 'accepted', superseded_by = NULL WHERE superseded_by = ?",
+        "UPDATE decisions SET status = 'accepted', superseded_by = NULL"
+        " WHERE superseded_by = ?",
         (args.id,),
     )
     conn.execute("DELETE FROM decisions WHERE id = ?", (args.id,))
@@ -116,7 +168,7 @@ def delete(conn, args):
     print(f"Deleted decision #{args.id}.")
 
 
-def detail(conn, args):
+def detail(conn: sqlite3.Connection, args: argparse.Namespace) -> None:
     row = conn.execute("SELECT * FROM decisions WHERE id = ?", (args.id,)).fetchone()
     if not row:
         print("No results.")
@@ -126,17 +178,16 @@ def detail(conn, args):
             print(f"{col}: {val}")
 
 
-def init_db(conn):
+def init_db(conn: sqlite3.Connection) -> None:
     conn.executescript(INIT_SQL)
     _migrate(conn)
     conn.executescript(FTS_SQL)
     print("OK")
 
 
-def insert(conn, args):
+def insert(conn: sqlite3.Connection, args: argparse.Namespace) -> None:
     conn.execute(
-        "INSERT INTO decisions (date, repository, topic, chosen, alternatives, reasoning, consequences, confidence, reevaluate_when)"
-        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        INSERT_SQL,
         (
             args.date,
             args.repository,
@@ -154,42 +205,30 @@ def insert(conn, args):
     detail(conn, argparse.Namespace(id=row_id))
 
 
-def search(conn, args):
-    conditions = []
-    params = []
-    if args.from_date:
-        conditions.append("d.date >= ?")
-        params.append(args.from_date)
-    if args.match:
-        conditions.append("decisions_fts MATCH ?")
-        params.append(args.match)
-    if args.repo:
-        conditions.append("d.repository = ?")
-        params.append(args.repo)
-    if args.status:
-        conditions.append("d.status = ?")
-        params.append(args.status)
-    if args.to:
-        conditions.append("d.date <= ?")
-        params.append(args.to)
-    where = f"WHERE {' AND '.join(conditions)}" if conditions else ""
-    if args.match:
-        sql = f"SELECT d.id, d.date, d.repository, d.topic, d.chosen, d.status FROM decisions d JOIN decisions_fts f ON d.id = f.rowid {where} ORDER BY d.date DESC"
-    else:
-        sql = f"SELECT d.id, d.date, d.repository, d.topic, d.chosen, d.status FROM decisions d {where} ORDER BY d.date DESC"
+def search(conn: sqlite3.Connection, args: argparse.Namespace) -> None:
+    params = {
+        "from_date": args.from_date or None,
+        "match": args.match or None,
+        "repo": args.repo or None,
+        "status": args.status or None,
+        "to": args.to or None,
+    }
+    sql = SEARCH_MATCH_SQL if params["match"] else SEARCH_SQL
     _print_table(sql, params, conn)
 
 
-def summary(conn, args):
+def summary(conn: sqlite3.Connection, args: argparse.Namespace) -> None:
     total = conn.execute("SELECT COUNT(*) FROM decisions").fetchone()[0]
     if total == 0:
         print("No decisions recorded yet.")
         return
     repos = conn.execute(
-        "SELECT repository, COUNT(*) as cnt FROM decisions GROUP BY repository ORDER BY cnt DESC"
+        "SELECT repository, COUNT(*) as cnt FROM decisions"
+        " GROUP BY repository ORDER BY cnt DESC"
     ).fetchall()
     recent = conn.execute(
-        "SELECT date, repository, topic, status FROM decisions ORDER BY date DESC, id DESC LIMIT ?",
+        "SELECT date, repository, topic, status FROM decisions"
+        " ORDER BY date DESC, id DESC LIMIT ?",
         (args.limit,),
     ).fetchall()
     print(f"Total: {total} decisions across {len(repos)} repos")
@@ -200,7 +239,7 @@ def summary(conn, args):
         print(f"  {row[0]} {row[1]}: {row[2]}{status_mark}")
 
 
-def supersede(conn, args):
+def supersede(conn: sqlite3.Connection, args: argparse.Namespace) -> None:
     old = conn.execute(
         "SELECT id, status FROM decisions WHERE id = ?", (args.id,)
     ).fetchone()
@@ -210,8 +249,7 @@ def supersede(conn, args):
     if old[1] == "superseded":
         print(f"Warning: decision #{args.id} is already superseded.")
     conn.execute(
-        "INSERT INTO decisions (date, repository, topic, chosen, alternatives, reasoning, consequences, confidence, reevaluate_when)"
-        " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        INSERT_SQL,
         (
             args.date,
             args.repository,
@@ -234,7 +272,7 @@ def supersede(conn, args):
     detail(conn, argparse.Namespace(id=new_id))
 
 
-def update_outcome(conn, args):
+def update_outcome(conn: sqlite3.Connection, args: argparse.Namespace) -> None:
     conn.execute(
         "UPDATE decisions SET outcome = ? WHERE id = ?", (args.outcome, args.id)
     )
@@ -242,13 +280,15 @@ def update_outcome(conn, args):
     detail(conn, argparse.Namespace(id=args.id))
 
 
-def _print_table(sql, params, conn):
+def _print_table(
+    sql: str, params: dict[str, str | None], conn: sqlite3.Connection
+) -> None:
     rows = conn.execute(sql, params).fetchall()
     if not rows:
         print("No results.")
         return
     widths = [
-        max(len(str(col)), max(len(str(row[i])) for row in rows))
+        max(len(str(col)), *(len(str(row[i])) for row in rows))
         for i, col in enumerate(LIST_COLUMNS)
     ]
     header = "  ".join(col.ljust(widths[i]) for i, col in enumerate(LIST_COLUMNS))
@@ -264,7 +304,7 @@ def _print_table(sql, params, conn):
         )
 
 
-def _add_insert_args(parser):
+def _add_insert_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("date", help="Decision date (YYYYMMDD)")
     parser.add_argument("repository", help="Repository name")
     parser.add_argument("topic", help="Short kebab-case label")
@@ -282,7 +322,7 @@ def _add_insert_args(parser):
     )
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Decision log database operations")
     sub = parser.add_subparsers(dest="command", required=True)
     p_delete = sub.add_parser(

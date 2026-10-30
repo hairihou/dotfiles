@@ -7,11 +7,13 @@ import sys
 import time
 
 BRAILLE = "⠀⡀⣀⣤⣶⣿"
+FULL = len(BRAILLE) - 1
 GREEN, YELLOW, RED = "\033[32m", "\033[33m", "\033[31m"
 RESET = "\033[0m"
 SEP = " | "
 FIVE_HOURS = 5 * 3600
 SEVEN_DAYS = 7 * 86400
+LONG_CONTEXT = 1_000_000
 
 
 def level_color(value: float, warning: float, critical: float) -> str:
@@ -34,8 +36,8 @@ def pace_color(
 
 def gauge(pct: int, color: str) -> str:
     level = max(1, min(10, pct * 10 // 100))
-    if level >= 5:
-        hi, lo = BRAILLE[5], BRAILLE[level - 5]
+    if level >= FULL:
+        hi, lo = BRAILLE[FULL], BRAILLE[level - FULL]
     else:
         hi, lo = BRAILLE[level], BRAILLE[0]
     gap = "" if lo == BRAILLE[0] else " "
@@ -65,17 +67,19 @@ except Exception:  # noqa: BLE001
     sys.exit()
 
 line = model
-if ctx_size >= 1_000_000:
+if ctx_size >= LONG_CONTEXT:
     line += " (1M)"
 if effort:
     line += f" - {effort}"
 line += f"{SEP}context {gauge(ctx_pct, level_color(ctx_pct, 70, 90))}"
 if rate_5h_pct >= 0:
-    line += f"{SEP}5h {gauge(rate_5h_pct, pace_color(rate_5h_pct, rate_5h_reset, FIVE_HOURS, 60, 80))}"
+    color = pace_color(rate_5h_pct, rate_5h_reset, FIVE_HOURS, 60, 80)
+    line += f"{SEP}5h {gauge(rate_5h_pct, color)}"
 else:
     line += f"{SEP}5h --%"
 if rate_7d_pct >= 0:
-    line += f"{SEP}7d {gauge(rate_7d_pct, pace_color(rate_7d_pct, rate_7d_reset, SEVEN_DAYS, 50, 70))}"
+    color = pace_color(rate_7d_pct, rate_7d_reset, SEVEN_DAYS, 50, 70)
+    line += f"{SEP}7d {gauge(rate_7d_pct, color)}"
 else:
     line += f"{SEP}7d --%"
 

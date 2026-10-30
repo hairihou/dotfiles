@@ -18,13 +18,15 @@ import sys
 import tempfile
 import uuid
 from pathlib import Path
-from typing import NoReturn
+from typing import TYPE_CHECKING, NoReturn
 from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 from google.auth.transport.requests import AuthorizedSession, Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
-from requests import Response
+
+if TYPE_CHECKING:
+    from requests import Response
 
 CONFIG_DIR = Path.home() / ".config" / "google-workspace"
 CLIENT_SECRET = CONFIG_DIR / "client_secret.json"
@@ -100,7 +102,9 @@ def upload_body(path: Path, metadata: bytes | None) -> tuple[bytes, str]:
     boundary = uuid.uuid4().hex
     body = b"".join(
         [
-            f"--{boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n".encode(),
+            (
+                f"--{boundary}\r\nContent-Type: application/json; charset=UTF-8\r\n\r\n"
+            ).encode(),
             metadata,
             f"\r\n--{boundary}\r\nContent-Type: {media_type}\r\n\r\n".encode(),
             data,
@@ -163,7 +167,8 @@ def emit(content: bytes, content_type: str, output: Path | None) -> None:
         text = content.decode()
     except UnicodeDecodeError:
         fail(
-            f"Binary response ({content_type}, {len(content)} bytes). Save it with -o <file>."
+            f"Binary response ({content_type}, {len(content)} bytes)."
+            " Save it with -o <file>."
         )
     piped = stat.S_ISFIFO(os.fstat(sys.stdout.fileno()).st_mode)
     if piped or len(text) <= SPILL_THRESHOLD:

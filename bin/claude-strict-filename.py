@@ -3,10 +3,10 @@
 # requires-python = ">=3.15"
 # ///
 import json
-import os
+import re
 import sys
+from pathlib import Path
 from typing import NoReturn
-lazy import re
 
 
 def deny(reason: str) -> NoReturn:
@@ -39,7 +39,7 @@ path = (payload.get("tool_input") or {}).get("file_path", "")
 if not path:
     sys.exit(0)
 
-basename = os.path.basename(path)
+basename = Path(path).name
 if not basename:
     sys.exit(0)
 
@@ -48,7 +48,7 @@ try:
 except UnicodeEncodeError:
     deny(f"non-ASCII filename blocked by policy: {basename!r}")
 
-if os.path.exists(path):
+if Path(path).exists():
     sys.exit(0)
 
 stem = basename.lstrip(".").partition(".")[0]

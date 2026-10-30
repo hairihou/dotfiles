@@ -26,9 +26,13 @@ import sys
 import urllib.parse
 import urllib.request
 from html.parser import HTMLParser
+from typing import IO, TYPE_CHECKING, override
 
 from pypdf import PdfReader
 from pypdf.errors import PdfReadError
+
+if TYPE_CHECKING:
+    from http.client import HTTPMessage
 
 API = "https://api.openalex.org"
 FIELDS = "id,display_name,publication_year,cited_by_count,doi,best_oa_location"
@@ -38,20 +42,42 @@ UA = {"User-Agent": "source-trace"}
 MAX_BYTES = 50_000_000
 
 
+class UnsupportedSchemeError(ValueError):
+    def __init__(self, url: str) -> None:
+        super().__init__(f"only http(s) URLs are fetched: {clean(url)}")
+
+
+class NonPublicAddressError(ValueError):
+    def __init__(self, ip: object, host: str) -> None:
+        super().__init__(f"refusing non-public address {ip} for {clean(host)}")
+
+
+class ResponseTooLargeError(ValueError):
+    def __init__(self) -> None:
+        super().__init__(f"response exceeds {MAX_BYTES:,} bytes")
+
+
 def check_public(url: str) -> None:
     parts = urllib.parse.urlsplit(url)
     if parts.scheme not in {"http", "https"} or not parts.hostname:
-        raise ValueError(f"only http(s) URLs are fetched: {clean(url)}")
+        raise UnsupportedSchemeError(url)
     for *_, addr in socket.getaddrinfo(parts.hostname, parts.port or 443):
         ip = ipaddress.ip_address(addr[0])
         if not ip.is_global:
-            raise ValueError(
-                f"refusing non-public address {ip} for {clean(parts.hostname)}"
-            )
+            raise NonPublicAddressError(ip, parts.hostname)
 
 
 class PublicRedirectHandler(urllib.request.HTTPRedirectHandler):
-    def redirect_request(self, req, fp, code, msg, headers, newurl):
+    @override
+    def redirect_request(
+        self,
+        req: urllib.request.Request,
+        fp: IO[bytes],
+        code: int,
+        msg: str,
+        headers: HTTPMessage,
+        newurl: str,
+    ) -> urllib.request.Request | None:
         check_public(newurl)
         return super().redirect_request(req, fp, code, msg, headers, newurl)
 
@@ -60,24 +86,26 @@ OPENER = urllib.request.build_opener(PublicRedirectHandler)
 
 
 def fetch(url: str) -> tuple[bytes, str, str | None]:
-    # urllib encodes the request line as ASCII, so a pasted URL with Japanese or other non-ASCII characters fails.
+    # urllib encodes the request line as ASCII, so a pasted URL with Japanese or
+    # other non-ASCII characters fails.
     url = urllib.parse.quote(url, safe=":/?#[]@!$&'()*+,;=%~")
     check_public(url)
     req = urllib.request.Request(url, headers=UA)
     with OPENER.open(req, timeout=60) as res:
         body = res.read(MAX_BYTES + 1)
         if len(body) > MAX_BYTES:
-            raise ValueError(f"response exceeds {MAX_BYTES:,} bytes")
+            raise ResponseTooLargeError
         return body, res.headers.get_content_type(), res.headers.get_content_charset()
 
 
-def api(path: str, **params) -> dict:
+def api(path: str, **params: str | int) -> dict:
     body, *_ = fetch(f"{API}{path}?{urllib.parse.urlencode(params)}")
     return json.loads(body)
 
 
 def clean(value: object) -> str:
-    # Titles come from third parties; tabs, newlines, or bidi controls would break the row format.
+    # Titles come from third parties; tabs, newlines, or bidi controls would break
+    # the row format.
     return re.sub(
         r"[\s\x00-\x1f\x7f-\x9f\u200b\u200e\u200f\u202a-\u202e\u2066-\u2069\ufeff]+",
         " ",
@@ -117,7 +145,7 @@ def resolve(key: str) -> dict:
     if WORK_ID.fullmatch(wid):
         return api(f"/works/{wid}", select=FIELDS)
     if key.startswith("10.") or "doi.org/" in key:
-        doi = urllib.parse.unquote(key.split("doi.org/")[-1])
+        doi = urllib.parse.unquote(key.rsplit("doi.org/", maxsplit=1)[-1])
         if any(part in {".", ".."} for part in doi.split("/")):
             sys.exit(f"invalid DOI: {clean(key)}")
         return api(f"/works/doi:{urllib.parse.quote(doi, safe='/')}", select=FIELDS)
@@ -167,19 +195,22 @@ class TextExtractor(HTMLParser):
         self.parts: list[str] = []
         self.skipping = 0
 
-    def handle_starttag(self, tag, attrs):
+    @override
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
         if tag in self.SKIP:
             self.skipping += 1
         elif tag in self.BLOCK:
             self.parts.append("\n")
 
-    def handle_endtag(self, tag):
+    @override
+    def handle_endtag(self, tag: str) -> None:
         if tag in self.SKIP and self.skipping:
             self.skipping -= 1
         elif tag in self.BLOCK:
             self.parts.append("\n")
 
-    def handle_data(self, data):
+    @override
+    def handle_data(self, data: str) -> None:
         if not self.skipping:
             self.parts.append(data)
 
@@ -230,7 +261,8 @@ def main() -> None:
             hits = [resolve(key)] if is_id else search_title(key)
             if not hits:
                 print(
-                    f"no candidates: {clean(key)} (retry with the DOI or fewer title words)"
+                    f"no candidates: {clean(key)}"
+                    " (retry with the DOI or fewer title words)"
                 )
             for work in hits:
                 print(row(work))
@@ -244,9 +276,8 @@ def main() -> None:
                 **{"per-page": args.n},
                 select=FIELDS,
             )
-            print(
-                f"# {args.cmd} {wid}: top {len(res['results'])} of {clean(res['meta']['count'])}"
-            )
+            total = clean(res["meta"]["count"])
+            print(f"# {args.cmd} {wid}: top {len(res['results'])} of {total}")
             for work in res["results"]:
                 print(row(work))
     except (OSError, ValueError, PdfReadError) as e:

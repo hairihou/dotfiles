@@ -3,7 +3,6 @@
 # requires-python = ">=3.15"
 # ///
 import json
-import os
 import sys
 from pathlib import Path
 
@@ -16,10 +15,12 @@ except json.JSONDecodeError, ValueError:
     sys.exit(0)
 
 file = (payload.get("tool_input") or {}).get("file_path", "")
-if not file or not os.path.isfile(file):
+if not file:
     sys.exit(0)
 
 p = Path(file)
+if not p.is_file():
+    sys.exit(0)
 try:
     original = p.read_text()
 except UnicodeDecodeError:
