@@ -39,7 +39,6 @@ Every sentence must carry information the reader did not already have. Apply the
   - Good: "This fails when the input contains non-ASCII characters."
 - Do not restate what you already said, in different words or in a summary paragraph that adds nothing new.
 - Skip preamble, such as "Here is an overview of X:" followed by a bullet list. Start with the content itself.
-- When the English form is the established technical term, use it as-is instead of translating (e.g., Bundler, Container, Runtime).
 
 ## Exceptions
 

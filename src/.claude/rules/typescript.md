@@ -8,7 +8,7 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 
 ## Module Structure
 
-- Path aliases (`@/...`, `~/...`): do not introduce new ones; in projects where aliases are already configured, write new imports as relative paths
+- Path aliases (`@/...`, `~/...`): even in projects where aliases are configured, write new imports as relative paths
 - `export default` → named exports only
   - Exception: files whose default export a framework or tool reads (`vite.config.ts`, route/page modules, Storybook meta)
 - Class with only static members → export module-level functions and constants
@@ -58,4 +58,3 @@ type Status = (typeof Status)[keyof typeof Status];
 
 - `return await` inside `try`/`catch`/`finally`: required (without `await` the promise escapes the block)
 - `return await` outside error-handling blocks: omit (redundant)
-- When `@typescript-eslint/return-await` is configured: linter takes precedence
