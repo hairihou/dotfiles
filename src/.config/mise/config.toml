@@ -61,7 +61,6 @@ node = "26.13.0"
 "pipx:git+https://github.com/github/spec-kit.git" = "v1.2.5"
 pnpm = "12.16.0"
 ripgrep = { version = "latest", auto_update = true }
-ruff = "0.17.3"
 swiftlint = "0.65.1"
 tmux = { version = "latest", auto_update = true }
 tree-sitter = "0.27.1"

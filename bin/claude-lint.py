@@ -22,7 +22,7 @@ type LineRange = tuple[int, int]
 
 
 def run(*args: str) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(args, capture_output=True, text=True, check=False)
+    return subprocess.run(args, capture_output=True, text=True, check=False)  # noqa: S603
 
 
 def scan(ast_grep: str, target: Path) -> tuple[list[Match] | None, str]:

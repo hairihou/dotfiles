@@ -4,4 +4,8 @@ version = "0.0.0"
 requires-python = ">=3.15.2"
 
 [dependency-groups]
-dev = ["ty>=0.0.95"]
+dev = ["ruff>=0.17.3", "ty>=0.0.95"]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["COM812", "CPY001", "D", "T201"]

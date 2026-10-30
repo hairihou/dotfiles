@@ -15,7 +15,7 @@ sound = (
     / f"{sys.argv[1] if len(sys.argv) > 1 else 'stop'}.mp3"
 )
 if sound.exists():
-    subprocess.Popen(
+    subprocess.Popen(  # noqa: S603
         ["/usr/bin/afplay", str(sound)],
         stdin=subprocess.DEVNULL,
         stdout=subprocess.DEVNULL,

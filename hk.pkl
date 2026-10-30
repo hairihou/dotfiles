@@ -3,8 +3,8 @@ import "package://github.com/jdx/hk/releases/download/v2.9.0/hk@2.9.0#/Builtins.
 
 steps {
   ["oxfmt"] = Builtins.oxfmt
-  ["ruff"] = Builtins.ruff
-  ["ruff_format"] = Builtins.ruff_format
+  ["ruff"] = (Builtins.ruff) { prefix = List("uv", "run", "--no-sync") }
+  ["ruff_format"] = (Builtins.ruff_format) { prefix = List("uv", "run", "--no-sync") }
 }
 
 hooks {

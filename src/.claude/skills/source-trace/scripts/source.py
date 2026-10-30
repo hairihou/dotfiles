@@ -90,7 +90,7 @@ def fetch(url: str) -> tuple[bytes, str, str | None]:
     # other non-ASCII characters fails.
     url = urllib.parse.quote(url, safe=":/?#[]@!$&'()*+,;=%~")
     check_public(url)
-    req = urllib.request.Request(url, headers=UA)
+    req = urllib.request.Request(url, headers=UA)  # noqa: S310
     with OPENER.open(req, timeout=60) as res:
         body = res.read(MAX_BYTES + 1)
         if len(body) > MAX_BYTES:
