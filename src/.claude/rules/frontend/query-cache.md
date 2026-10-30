@@ -39,13 +39,3 @@ onSuccess: (newUser) => {
 | ---------------------- | ------------------ | ---------- |
 | TanStack Query (React) | `useQueryClient()` | `queryKey` |
 | Pinia Colada (Vue)     | `useQueryCache()`  | `key`      |
-
-## API Design Prerequisite
-
-REST APIs must return mutated data:
-
-```text
-POST   /users     → { id, name, ... }  // created resource
-PUT    /users/:id → { id, name, ... }  // updated resource
-DELETE /users/:id → 204 No Content     // id from request
-```

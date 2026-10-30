@@ -8,7 +8,6 @@ Target WCAG 2.2 AA with margin, not at the threshold. A number given here overri
 
 ## Philosophy
 
-- The goal is to benefit as many people as possible, not to clear the bar minimally or to exploit its exemptions
 - WCAG exemptions were written against 2008-era browser, assistive-tech, and bandwidth limits. Do not cite an exemption to justify a lower bar today
 
 ## Enforced Deltas
@@ -27,7 +26,6 @@ Judge contrast on the final rendered result in every theme the surface ships, ac
 - Set font-size in `rem`, not `px`, so it honors the user's default font-size preference. `px` only responds to page zoom, ignoring the root setting
 - Body and annotations at least 0.875rem (14px at the default root)
   - Labels inside interactive components (buttons, chips, form controls) may be smaller
-- Headings larger than body, except extension `popup.html`, where a heading may match body size
 
 ### Banned By Default
 

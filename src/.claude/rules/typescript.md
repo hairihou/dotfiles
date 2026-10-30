@@ -11,7 +11,6 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 - Path aliases (`@/...`, `~/...`): even in projects where aliases are configured, write new imports as relative paths
 - `export default` → named exports only
   - Exception: files whose default export a framework or tool reads (`vite.config.ts`, route/page modules, Storybook meta)
-- Class with only static members → export module-level functions and constants
 
 ## Test Files
 
@@ -34,7 +33,6 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
   - Exception: callers must pass the key explicitly
 - `!` (non-null assertion) → use type guards or restructure
   - Exception: test code where the value is guaranteed by setup
-- Fire-and-forget promises → always `await` or return; if intentionally discarding, use `void someAsyncFn()`
 - Bare `if (value)` for nullish checks → use `value !== undefined` or `value !== null`; boolean types, and unions whose non-`false` members are always truthy (`'sm' | 'md' | false`), allow truthy checks; `if (name)` on `string` allowed only when excluding empty string is intentional
 - `!!value` → allowed only for coercing union with multiple falsy values (`string | null | undefined` → `boolean`)
 - Wrapper-function conversion (`String(x)` / `Number(x)` / `Boolean(x)`) → `x.toString()`, `parseInt(x, 10)` / `parseFloat(x)`, explicit comparison
@@ -57,4 +55,3 @@ type Status = (typeof Status)[keyof typeof Status];
 ## Error Handling
 
 - `return await` inside `try`/`catch`/`finally`: required (without `await` the promise escapes the block)
-- `return await` outside error-handling blocks: omit (redundant)
