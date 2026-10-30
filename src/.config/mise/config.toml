@@ -59,7 +59,7 @@ node = "26.13.0"
 "npm:agent-browser" = "0.39.4"
 "npm:oxfmt" = "0.75.0"
 "pipx:git+https://github.com/github/spec-kit.git" = "v1.2.5"
-pnpm = "12.16.0"
+pnpm = "12.16.1"
 ripgrep = { version = "latest", auto_update = true }
 swiftlint = "0.65.1"
 tmux = { version = "latest", auto_update = true }
