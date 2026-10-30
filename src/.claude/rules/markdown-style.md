@@ -8,7 +8,7 @@ paths: ['**/*.md']
 
 - No bold, neither for emphasis nor as a label (`- **Key:** value`). Rewrite the sentence so the important part carries itself, or move key-value content into a table
 - Use `*italic*` only for the first mention of a term being defined, or for titles of works
-- No em dash (`—`). Split the sentence, or use a comma, colon, or parentheses
+- No em dash. Split the sentence, or use a comma, colon, or parentheses
   - A rule about the character itself may name it
 - No emojis
 - Prefer flowing prose over bullet lists when the content is sequential or narrative
@@ -20,7 +20,7 @@ paths: ['**/*.md']
 - Use headings only in a document that has more than one section; a single-section document carries none, however long it runs
   - A standalone line introducing the block below it (`Rules:`, `Provide:`) is a heading in other syntax. Promote it to a real heading or drop it. A label whose value sits on the same line (`Topic: {{topic}}`) is a field, not a section
 - Name a heading for what its section is, not for what the section contains
-- H1 is the file or directory name in canonical case (`skeptic.md` → `# Skeptic`, `skills/pr/` → `# PR`); never open at H2
+- H1 is the file or directory name in canonical case (`skeptic.md` -> `# Skeptic`, `skills/pr/` -> `# PR`); never open at H2
   - A file whose content is embedded inside another document opens below H1, since that document supplies it
 - Title Case for English headings (`# Markdown Style`, `## Configuration Files`)
 - Preserve canonical case for brand or product names. Do not force Title Case (`npm`, `ESLint`, `ZAP`, `iOS`, `macOS`, `Draw.io`)

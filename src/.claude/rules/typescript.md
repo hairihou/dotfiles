@@ -9,7 +9,7 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 ## Module Structure
 
 - Path aliases (`@/...`, `~/...`): even in projects where aliases are configured, write new imports as relative paths
-- `export default` → named exports only
+- `export default` -> named exports only
   - Exception: files whose default export a framework or tool reads (`vite.config.ts`, route/page modules, Storybook meta)
 
 ## Test Files
@@ -20,23 +20,23 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 
 ## Prohibited Patterns
 
-- `any` → use `unknown` and narrow
+- `any` -> use `unknown` and narrow
   - Exception: generic function bodies where TypeScript cannot infer correctly
-- `as` type assertion → use type guards or `satisfies`
+- `as` type assertion -> use type guards or `satisfies`
   - Exception: `as const`, unavoidable DOM casts (`as HTMLInputElement`), library `.d.ts` that lacks generics or returns `any`/`object`
-- `enum` → use `as const` objects (see Naming Conventions)
-- Type alias referenced once → inline the expression at its use site
-- Type restating an existing declaration → derive it: `NonNullable<IconProps['fontSize']>`, `Omit<IconProps, 'viewBox'>`
-- Object-shape `type` alias (`type X = { ... }`) → declare with `interface`
+- `enum` -> use `as const` objects (see Naming Conventions)
+- Type alias referenced once -> inline the expression at its use site
+- Type restating an existing declaration -> derive it: `NonNullable<IconProps['fontSize']>`, `Omit<IconProps, 'viewBox'>`
+- Object-shape `type` alias (`type X = { ... }`) -> declare with `interface`
   - Exception: the shape must stay assignable to an index-signature type (`Record<string, unknown>`). Interfaces have no implicit index signature
-- Optional parameter or property written as `x: T | undefined` → `x?: T`
+- Optional parameter or property written as `x: T | undefined` -> `x?: T`
   - Exception: callers must pass the key explicitly
-- `!` (non-null assertion) → use type guards or restructure
+- `!` (non-null assertion) -> use type guards or restructure
   - Exception: test code where the value is guaranteed by setup
-- Bare `if (value)` for nullish checks → use `value !== undefined` or `value !== null`; boolean types, and unions whose non-`false` members are always truthy (`'sm' | 'md' | false`), allow truthy checks; `if (name)` on `string` allowed only when excluding empty string is intentional
-- `!!value` → allowed only for coercing union with multiple falsy values (`string | null | undefined` → `boolean`)
-- Wrapper-function conversion (`String(x)` / `Number(x)` / `Boolean(x)`) → `x.toString()`, `parseInt(x, 10)` / `parseFloat(x)`, explicit comparison
-  - Rationale: wrappers convert anything silently (`String(null)` → `"null"`, `Number('')` → `0`); method calls and parsers fail on unintended input
+- Bare `if (value)` for nullish checks -> use `value !== undefined` or `value !== null`; boolean types, and unions whose non-`false` members are always truthy (`'sm' | 'md' | false`), allow truthy checks; `if (name)` on `string` allowed only when excluding empty string is intentional
+- `!!value` -> allowed only for coercing union with multiple falsy values (`string | null | undefined` -> `boolean`)
+- Wrapper-function conversion (`String(x)` / `Number(x)` / `Boolean(x)`) -> `x.toString()`, `parseInt(x, 10)` / `parseFloat(x)`, explicit comparison
+  - Rationale: wrappers convert anything silently (`String(null)` -> `"null"`, `Number('')` -> `0`); method calls and parsers fail on unintended input
 
 ## Naming Conventions
 

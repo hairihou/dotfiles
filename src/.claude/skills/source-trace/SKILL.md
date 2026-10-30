@@ -1,6 +1,6 @@
 ---
 name: source-trace
-description: Trace each claim back to its primary source (spec, official doc, source code, paper, or the originator's own record) and answer with verbatim quotes and the path followed to reach them. Use when the user asks for the primary source, original, citation, or evidence behind something ("一次情報", "出典", "原典", "元ネタ", "ソースは？", "裏取りして"), or when a claim found in a blog, summary, or AI answer needs to be checked against where it came from. Not for opinions, or for facts the user only wants answered without provenance.
+description: Trace each claim back to its primary source (spec, official doc, source code, paper, or the originator's own record) and answer with verbatim quotes and the path followed to reach them. Use when the user asks for the primary source, original, citation, or evidence behind something, or when a claim found in a blog, summary, or AI answer needs to be checked against where it came from. Not for opinions, or for facts the user only wants answered without provenance.
 argument-hint: '<question or claim to trace>'
 allowed-tools: Bash, Grep, Read, WebFetch, WebSearch
 ---
@@ -39,7 +39,7 @@ Every claim gets every field below, even when a field repeats the previous claim
 - Claim and status. The claim is the proposition as it circulates or as the user worded it, and the status says what the primary does to that proposition: `verified` (states it), `contradicted` (states otherwise; the quote is the contrary text), `secondary only` (no primary read, but a lead fetched with `text` states it; name that lead), `not found` (nothing fetched states it; a search-result summary does not count). One status per claim: a claim whose parts would get different statuses is split into separate claims. A correction is never tagged `verified` under the wording it corrects. The status is judged against the part of the primary actually read, named in the note (`full text`, `abstract`, `metadata`): metadata settles only bibliographic claims (title, authors, year, venue), an abstract settles only what it states, and anything beyond that part is judged as if no primary were read (`secondary only` or `not found`). Optionally follow with a short note
 - Quote: verbatim in the original language; a translation, if added, labeled as one
 - Source: type (`spec` / `official` / `code` / `paper` / `first-hand`), title, author or org, date or version, and the URL a reader would open, with the narrowest anchor (`#section-N`, page, line, commit). The raw-text URL fetched for checking is not that URL. A page with no anchor for the quoted part (a registry, an index, an unsectioned page) gets the line number in the fetched text instead, so every Source points below the document level
-- Path: lead → … → primary, one line
+- Path: lead -> ... -> primary, one line
 - Discrepancy: where the leads differ from the primary (misquote, older version, rounded number, narrowed scope, the "source" not saying it at all). Report even small ones; this is often the finding the user needed
 
 Then list unreached primaries (paywall, login, removed) with URL and why each matters. The user opens those in their own browser; never log in or create accounts.

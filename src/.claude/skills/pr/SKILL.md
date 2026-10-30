@@ -58,7 +58,7 @@ closes #<number>
 ## Steps
 
 1. Push by name: `git push -u origin <branch>`. `gh pr create` only prompts for this (fails without a TTY) and `gh pr edit` never checks, so unpushed commits would be missing from the PR
-2. Open PR exists (`gh pr view <branch> --json body`) → `gh pr edit <branch> --title ...`. Pass `--body` only to prepend an issue link the body lacks, keeping the author's text unchanged
-3. Otherwise → `gh pr create --draft --title ... --body ... --base <base> --head <branch> --assignee @me`. Always draft; the author marks ready for review
+2. Open PR exists (`gh pr view <branch> --json body`) -> `gh pr edit <branch> --title ...`. Pass `--body` only to prepend an issue link the body lacks, keeping the author's text unchanged
+3. Otherwise -> `gh pr create --draft --title ... --body ... --base <base> --head <branch> --assignee @me`. Always draft; the author marks ready for review
    - `<base>`: `$ARGUMENTS` when `git rev-parse --verify -q "$ARGUMENTS"` or `git rev-parse --verify -q "origin/$ARGUMENTS"` succeeds, else `Default branch`. Never an `origin/`-prefixed ref, since `--base` takes a branch name
    - `--head <branch>`: always explicit. Left out, `gh pr create` infers head from the session's working directory

@@ -18,7 +18,7 @@ Judge contrast on the final rendered result in every theme the surface ships, ac
 
 - Body text against its background: at least 7:1
 - Secondary / annotation text: at least 4.5:1, and lower contrast than body. Express priority through contrast, not font size. Defaults ship ~3:1 muted grays, which fail even bare AA
-- Non-text (UI component borders and edges, dividers that bound an operable region, icons, focus rings): at least 3:1. Defaults ship ~1.2–1.6 hairlines, invisible to low-vision users. A decorative divider between pieces of content is exempt
+- Non-text (UI component borders and edges, dividers that bound an operable region, icons, focus rings): at least 3:1. Defaults ship ~1.2-1.6 hairlines, invisible to low-vision users. A decorative divider between pieces of content is exempt
 - Text over an accent or colored fill must also clear its text threshold
 
 ### Font Size

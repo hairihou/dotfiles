@@ -17,8 +17,8 @@ Confirm the body covers what the trigger surface (skill `description`, rule titl
 
 In a scratchpad file (never the repo under test), write:
 
-- 2–3 tuning scenarios (at least 1 typical + 1 edge) and 1 holdout scenario, each as a user prompt that should trigger the doc.
-- Per scenario, 3–7 checklist items, at least one `[critical]`. Each must be checkable from a file the executor left or its action log; internal reasoning cannot be scored.
+- 2-3 tuning scenarios (at least 1 typical + 1 edge) and 1 holdout scenario, each as a user prompt that should trigger the doc.
+- Per scenario, 3-7 checklist items, at least one `[critical]`. Each must be checkable from a file the executor left or its action log; internal reasoning cannot be scored.
 
 Scenarios must stay local: replace any that would push, open a PR, post, or write to an external service, or run it where that action cannot succeed and score the attempt from the action log. Never tell the executor to dry-run or skip a step; that breaks blindness.
 
@@ -52,7 +52,7 @@ Fix one theme per iteration, naming the checklist item each fix targets. A `Gene
 
 ### 6. Loop to Plateau
 
-Repeat Steps 3–5 with new subagents. Stop when two consecutive iterations bring no new unclear points and no pass-rate change (accuracy deltas alone are run-to-run noise), or after 5 iterations.
+Repeat Steps 3-5 with new subagents. Stop when two consecutive iterations bring no new unclear points and no pass-rate change (accuracy deltas alone are run-to-run noise), or after 5 iterations.
 
 ### 7. Holdout Check
 
