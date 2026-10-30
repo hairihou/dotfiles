@@ -4,4 +4,4 @@ version = "0.0.0"
 requires-python = ">=3.15.2"
 
 [dependency-groups]
-dev = ["ty>=0.0.94"]
+dev = ["ty>=0.0.95"]
