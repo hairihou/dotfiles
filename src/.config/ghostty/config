@@ -9,7 +9,7 @@ keybind = alt+left=unbind
 keybind = alt+right=unbind
 macos-non-native-fullscreen = true
 macos-option-as-alt = true
-macos-titlebar-style = hidden
+macos-titlebar-style = tabs
 palette = 0=#1e2939
 palette = 1=#ff637e
 palette = 2=#00d492
@@ -29,3 +29,4 @@ palette = 15=#ffffff
 selection-background = #364153
 selection-foreground = #f3f4f6
 window-padding-balance = equal
+window-save-state = always
