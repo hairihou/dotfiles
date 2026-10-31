@@ -20,7 +20,7 @@ Available globally after setup:
 - `brewsync [--dump | --prune]` - Homebrew package synchronizer
 - `dprune` - Remove `.DS_Store` files and empty directories
 - `xdgclean [--dry-run]` - Remove broken symlinks (`$HOME` top level, XDG config/data/state, `~/.claude`) and the directories they leave empty
-- `zhistprune` - Remove `.zsh_history` entries older than 90 days
+- `zhistprune` - Remove `.zsh_history` entries older than 90 days and duplicate commands (keeps the newest)
 
 ### Owner Variants
 
