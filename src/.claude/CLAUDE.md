@@ -16,7 +16,7 @@
 
 ## Code Style
 
-- Comments: only for hidden constraints (undocumented API quirk, required call ordering, external bug workaround), stating the constraint; design rationale goes in PR / commit / decision log
+- Comments: only for hidden constraints (undocumented API quirk, required call ordering, external bug workaround), stating the constraint; design rationale goes in PR / commit / design doc
   - Workaround: cite upstream evidence (URL, or observed behavior with version); fix or file own-code defects instead. An unverified constraint comment makes a defect look intentional
   - Referenced issue / PR / doc: full URL, never a bare issue number
 - Lint / type-check findings: never suppress (disable comment, ignore entry) without user approval. A suppressed finding passes CI while the defect stays
