@@ -63,7 +63,11 @@
   "terminal": {
     "option_as_meta": true,
   },
-  "theme": "Nocturne",
+  "theme": {
+    "mode": "system",
+    "light": "Nocturne Light",
+    "dark": "Nocturne",
+  },
   "ui_font_size": 14,
   "use_system_window_tabs": true,
 }

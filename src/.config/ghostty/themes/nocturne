@@ -18,5 +18,5 @@ palette = 12=#8ec5ff
 palette = 13=#dab2ff
 palette = 14=#53eafd
 palette = 15=#ffffff
-selection-background = #364153
-selection-foreground = #f3f4f6
+selection-background = #6a7282
+selection-foreground = #f9fafb

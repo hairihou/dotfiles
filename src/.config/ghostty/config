@@ -6,6 +6,6 @@ keybind = alt+right=unbind
 macos-non-native-fullscreen = true
 macos-option-as-alt = true
 macos-titlebar-style = tabs
-theme = nocturne
+theme = light:nocturne-light,dark:nocturne
 window-padding-balance = equal
 window-save-state = always
