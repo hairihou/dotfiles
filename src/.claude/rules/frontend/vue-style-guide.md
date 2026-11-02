@@ -12,7 +12,6 @@ paths: ['**/*.vue']
 
 - Represent state transitions with a single `ref` of a discriminated union (algebraic data types), not multiple separate `ref`s
 - Only define essential state. Derive everything else with `computed`
-- Use `ref()` and `Ref<T>`. Do not use `reactive()`
 - Use nominal typing with `unique symbol` for IDs, timestamps, dimensions
 - `computed()`: always specify generic type parameter (`computed<T>(() => ...)`); never rely on return type inference
 

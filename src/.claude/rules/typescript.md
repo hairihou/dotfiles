@@ -4,7 +4,7 @@ paths: ['**/*.{ts,tsx,vue}']
 
 # TypeScript
 
-Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow project linter config when present; these rules supplement it.
+Applies to all TypeScript code, including `<script>` blocks in Vue SFC.
 
 ## Module Structure
 
@@ -20,8 +20,6 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC. Follow p
 
 ## Prohibited Patterns
 
-- `any` -> use `unknown` and narrow
-  - Exception: generic function bodies where TypeScript cannot infer correctly
 - `as` type assertion -> use type guards or `satisfies`
   - Exception: `as const`, unavoidable DOM casts (`as HTMLInputElement`), library `.d.ts` that lacks generics or returns `any`/`object`
 - `enum` -> use `as const` objects (see Naming Conventions)
