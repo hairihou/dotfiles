@@ -19,6 +19,7 @@ Available globally after setup:
 
 - `brewsync [--dump | --prune]` - Homebrew package synchronizer
 - `dprune` - Remove `.DS_Store` files and empty directories
+- `nocturne-palette.py [--check | --json | --apply BASELINE]` - Nocturne theme palette generator: print slot contrast, verify theme files use only palette colors, or remap them after editing the parameters
 - `xdgclean [--dry-run]` - Remove broken symlinks (`$HOME` top level, XDG config/data/state, `~/.claude`) and the directories they leave empty
 - `zhistprune` - Remove `.zsh_history` entries older than 90 days and duplicate commands (keeps the newest)
 
