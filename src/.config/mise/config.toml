@@ -40,7 +40,7 @@ minimum_release_age_excludes = ["claude-code"]
 
 [tools]
 age = { version = "latest", auto_update = true }
-ast-grep = "0.51.0"
+ast-grep = "0.51.1"
 aube = "2.8.5"
 carapace = { version = "latest", auto_update = true }
 claude-code = { version = "latest", auto_update = true }
