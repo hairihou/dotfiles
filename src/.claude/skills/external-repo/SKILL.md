@@ -18,6 +18,7 @@ Default target: latest of the default branch, unless the user specifies a ref. L
 3. `git -C <path> worktree add --detach <dir> <commit>`, with `<dir>` = `<scratchpad>/external-repo/<owner>-<name>-<short-sha>` (no scratchpad: `mktemp -d`). If `<dir>` already exists from earlier in this conversation, reuse it. Read, Grep, and run git history commands inside `<dir>`.
 4. Report `<dir>` and the commit it points at.
 5. When the answer about this repo is given, `git -C <path> worktree remove --force <dir>`. A worktree left behind stays listed in the clone's `git worktree list` until git prunes it. Recreating one for a follow-up question takes one command.
+6. If step 1 cloned the repo in this conversation and nothing points to coming back to it (no follow-up pending, the user did not ask to keep it), remove the clone as well. First confirm `git -C <path> worktree list` lists only the clone itself. Then run `echo y | ghq rm <host>/<owner>/<name>`: `ghq rm` asks for confirmation on stdin and has no flag to skip it. `rmdir` the owner directory if that left it empty, and report the removal. A clone that existed before this conversation stays.
 
 ## Notes
 
