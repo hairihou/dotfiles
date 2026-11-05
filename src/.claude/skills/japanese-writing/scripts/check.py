@@ -8,10 +8,8 @@ Usage:
     check.py <file>...    check files
     check.py -            read the text from stdin
 
-Rows are `path:line:col: rule: excerpt`. Exits 1 when any row is printed.
-Rules map to SKILL.md sections: ending -> Consistent Register,
-wordy -> Tight and Concrete, spacing -> Spacing, bold-label -> No Filler,
-dash -> One Point per Sentence, non-joyo -> Kanji.
+Rows are `path:line:col: rule: excerpt`, followed by one fix line per rule
+that fired. Exits 1 when any row is printed.
 Fenced code blocks, inline code, and URLs are skipped.
 """
 
@@ -34,6 +32,20 @@ URL = re.compile(r"https?://\S+")
 ISSUE_REF = re.compile(r"#\d+ (?=\S)")
 SENTENCE_END = r"[。\uff01\uff1f」\uff09)]"
 NUMERAL = r"[0-9\uff10-\uff19一二三四五六七八九十百千万]"
+HINTS = {
+    "ending": "文末を「だ」「である」で結ばず、述語を動詞に言い換える"
+    " (原因は設定だ -> 原因は設定にある、確認が必要だ -> 確認が要る)",
+    "wordy": "短い形に直す"
+    " (利用することができる -> 利用できる、調査を実施した -> 調査した、"
+    "約20名くらい -> 約20名)",
+    "spacing": "スペースを詰める (APIで取得、3件、`retryCount`は)。"
+    "既存の文書を直すときも詰める。既存の文書へ文を書き足すときに限り、"
+    "その文書がスペースを空けて書いていれば、書き足す文もそれに合わせる",
+    "bold-label": "太字とラベルを外し、ラベルの意味を説明の文に入れる"
+    " (- **応答の遅さ**: ピーク時は3秒かかる -> ピーク時は応答に3秒かかる)",
+    "dash": "文を分け、文どうしの関係を接続詞か語順で示す",
+    "non-joyo": "仮名で書く (揃える -> そろえる)。固有名詞と引用した原文の語は変えない",
+}
 RULES = [
     ("ending", re.compile(rf"(である|(?<![まな])だ)(?={SENTENCE_END}|\s*$)")),
     ("wordy", re.compile(r"(?<=[うくぐすつぬぶむる])ことができ|を実施[しすさ]")),
@@ -61,8 +73,8 @@ def lines_to_check(text: str) -> Iterator[tuple[int, str, str]]:
         yield number, line, masked
 
 
-def check(path: str, text: str) -> int:
-    hits = 0
+def check(path: str, text: str) -> set[str]:
+    fired: set[str] = set()
     for number, line, masked in lines_to_check(text):
         found = [
             (m.start(), rule)
@@ -77,21 +89,22 @@ def check(path: str, text: str) -> int:
         for col, rule in sorted(found):
             excerpt = line[max(col - 10, 0) : col + 10].strip()
             print(f"{path}:{number}:{col + 1}: {rule}: {excerpt}")
-            hits += 1
-    return hits
+            fired.add(rule)
+    return fired
 
 
 def main() -> None:
     args = sys.argv[1:]
     if not args:
         sys.exit(__doc__)
-    hits = 0
+    fired: set[str] = set()
     for arg in args:
-        if arg == "-":
-            hits += check("<stdin>", sys.stdin.read())
-        else:
-            hits += check(arg, Path(arg).read_text(encoding="utf-8"))
-    sys.exit(1 if hits else 0)
+        text = sys.stdin.read() if arg == "-" else Path(arg).read_text(encoding="utf-8")
+        fired |= check("<stdin>" if arg == "-" else arg, text)
+    for rule, hint in HINTS.items():
+        if rule in fired:
+            print(f"fix {rule}: {hint}")
+    sys.exit(1 if fired else 0)
 
 
 if __name__ == "__main__":
