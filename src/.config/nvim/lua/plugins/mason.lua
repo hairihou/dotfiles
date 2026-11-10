@@ -9,7 +9,6 @@ return {
     opts = {
       ensure_installed = {
         "angularls",
-        "gopls",
         "lua_ls",
         "oxlint",
         "vtsls",

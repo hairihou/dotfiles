@@ -107,6 +107,8 @@
   },
   "enabledPlugins": {
     "figma@claude-plugins-official": true,
+    "gopls-lsp@claude-plugins-official": true,
+    "modern-go-guidelines@goland-claude-marketplace": true,
     "modern-web-guidance@googlechrome": true,
     "pyright-lsp@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
@@ -115,6 +117,12 @@
     "typescript-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
+    "goland-claude-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "JetBrains/go-modern-guidelines"
+      }
+    },
     "googlechrome": {
       "source": {
         "source": "github",
