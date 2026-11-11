@@ -28,7 +28,8 @@
   - Workaround: cite upstream evidence (URL, or observed behavior with version); fix or file own-code defects instead. An unverified constraint comment makes a defect look intentional
   - Referenced issue / PR / doc: full URL, never a bare issue number
 - Lint / type-check findings: never suppress (disable comment, ignore entry) without user approval. A suppressed finding passes CI while the defect stays
-- Ordering (code, documentation): semantic hierarchy (main rule -> exceptions -> details) first; alphabetical only as tiebreaker among peers
+- Ordering (every sequence written: code, config files of any format, CLI arguments, documentation): semantic hierarchy (main rule -> exceptions -> details; in config and CLI arguments, related keys / flags grouped with the primary one before those that modify it) first; alphabetical only as tiebreaker among peers
+  - Adding to an existing sequence: insert at the position this order assigns, never append to the end. An appended entry leaves the order broken for every later reader and edit
 
 ## Git Conventions
 
