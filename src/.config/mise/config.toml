@@ -43,7 +43,7 @@ tool_update.global_auto = true
 [tools]
 age = "1.3.2"
 ast-grep = "0.51.1"
-aube = { version = "2.9.0", workflow = [
+aube = { version = "2.10.0", workflow = [
   "release-plz.yml@refs/heads/main",
   "release.yml@refs/heads/main",
 ] }
@@ -57,7 +57,7 @@ go = "1.27.3"
 "go:github.com/go-delve/delve/cmd/dlv" = "1.27.2"
 "go:golang.org/x/tools/gopls" = "0.24.0"
 golangci-lint = "2.15.0"
-hk = { version = "2.11.1", workflow = "release.yml" }
+hk = { version = "2.12.0", workflow = "release.yml" }
 neovim = "latest"
 node = "26.13.0"
 "npm:@angular/cli" = "22.2.6"
