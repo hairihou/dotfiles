@@ -42,7 +42,7 @@ tool_update.global_auto = true
 
 [tools]
 age = "1.3.2"
-ast-grep = "0.51.1"
+ast-grep = "0.51.2"
 aube = { version = "2.10.0", workflow = [
   "release-plz.yml@refs/heads/main",
   "release.yml@refs/heads/main",
