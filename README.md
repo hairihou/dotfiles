@@ -19,7 +19,7 @@ Available globally after setup:
 
 - `brewsync [--dump | --prune]` - Homebrew package synchronizer
 - `dprune` - Remove `.DS_Store` files and empty directories
-- `ghreposetup [--dry-run] [OWNER/REPO]` - Apply GitHub repository settings: disable forking (organization repositories only), projects, and wiki; allow squash merge only, titled by the PR title; set Actions workflow permissions to read-only
+- `ghreposetup [--dry-run] [OWNER/REPO]` - Apply GitHub repository settings: disable forking (organization repositories only), projects, and wiki; allow squash merge only, titled by the PR title; delete head branches on merge; set Actions workflow permissions to read-only
 - `nocturne-palette.py [--check | --json | --apply BASELINE]` - Nocturne theme palette generator: print slot contrast, verify theme files use only palette colors, or remap them after editing the parameters
 - `xdgclean [--dry-run]` - Remove broken symlinks (`$HOME` top level, XDG config/data/state, `~/.claude`) and the directories they leave empty
 - `zhistprune` - Remove `.zsh_history` entries older than 90 days and duplicate commands (keeps the newest)

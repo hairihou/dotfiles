@@ -34,7 +34,7 @@ run() {
 
 echo "Target: $repo"
 
-edit_args=(--enable-projects=false --enable-wiki=false)
+edit_args=(--delete-branch-on-merge --enable-projects=false --enable-wiki=false)
 if [[ "$in_org" == true ]]; then
   edit_args=(--allow-forking=false "${edit_args[@]}")
 fi
