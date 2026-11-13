@@ -43,12 +43,10 @@ run gh repo edit "$repo" "${edit_args[@]}"
 run gh api --silent -X PATCH "repos/$repo" \
   -F allow_merge_commit=false \
   -F allow_rebase_merge=false \
-  -F allow_squash_merge=true \
   -f squash_merge_commit_title=PR_TITLE \
   -f squash_merge_commit_message=BLANK
 
 run gh api --silent -X PUT "repos/$repo/actions/permissions/workflow" \
-  -F can_approve_pull_request_reviews=false \
   -f default_workflow_permissions=read
 
 if "$dry_run"; then
