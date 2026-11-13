@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+dry_run=false
+target=''
+
+usage() {
+  echo "Usage: ghreposetup [--dry-run] [OWNER/REPO]"
+  echo "  OWNER/REPO  Target repository (default: repository of the current directory)"
+  echo "  --dry-run   Show the commands without applying"
+}
+
+while (($# > 0)); do
+  case "$1" in
+    --dry-run) dry_run=true ;;
+    --help) usage; exit 0 ;;
+    -*) echo "Unknown option: $1" >&2; exit 1 ;;
+    *) target="$1" ;;
+  esac
+  shift
+done
+
+info="$(gh repo view ${target:+"$target"} --json nameWithOwner,isInOrganization --jq '"\(.nameWithOwner) \(.isInOrganization)"')"
+repo="${info% *}"
+in_org="${info#* }"
+
+run() {
+  if "$dry_run"; then
+    echo "[run] $*"
+  else
+    "$@"
+  fi
+}
+
+echo "Target: $repo"
+
+edit_args=(--enable-projects=false --enable-wiki=false)
+if [[ "$in_org" == true ]]; then
+  edit_args=(--allow-forking=false "${edit_args[@]}")
+fi
+run gh repo edit "$repo" "${edit_args[@]}"
+
+run gh api --silent -X PATCH "repos/$repo" \
+  -F allow_merge_commit=false \
+  -F allow_rebase_merge=false \
+  -F allow_squash_merge=true \
+  -f squash_merge_commit_title=PR_TITLE \
+  -f squash_merge_commit_message=BLANK
+
+run gh api --silent -X PUT "repos/$repo/actions/permissions/workflow" \
+  -F can_approve_pull_request_reviews=false \
+  -f default_workflow_permissions=read
+
+if "$dry_run"; then
+  echo 'Run without --dry-run to apply'
+else
+  echo "Applied settings to $repo"
+fi
