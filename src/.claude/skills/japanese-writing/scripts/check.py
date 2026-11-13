@@ -38,7 +38,7 @@ HINTS = {
     "wordy": "短い形に直す"
     " (利用することができる -> 利用できる、調査を実施した -> 調査した、"
     "約20名くらい -> 約20名)",
-    "spacing": "スペースを詰める (APIで取得、3件、`retryCount`は)。"
+    "spacing": "スペースを詰める (APIで取得、3件)。"
     "既存の文書を直すときも詰める。既存の文書へ文を書き足すときに限り、"
     "その文書がスペースを空けて書いていれば、書き足す文もそれに合わせる",
     "bold-label": "太字とラベルを外し、ラベルの意味を説明の文に入れる"
@@ -74,7 +74,7 @@ def lines_to_check(text: str) -> Iterator[tuple[int, str, str]]:
         if in_fence:
             continue
         masked = line
-        for pattern, fill in ((URL, "x"), (INLINE_CODE, "c"), (ISSUE_REF, "#")):
+        for pattern, fill in ((URL, "x"), (INLINE_CODE, "_"), (ISSUE_REF, "#")):
             masked = pattern.sub(lambda m, f=fill: f * len(m.group()), masked)
         yield number, line, masked
 
