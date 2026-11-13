@@ -1,0 +1,10 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "ty-lsp",
+  "version": "0.1.0",
+  "description": "ty (Astral's Python type checker) language server",
+  "author": {
+    "name": "hairihou",
+    "email": "38448411+hairihou@users.noreply.github.com"
+  }
+}

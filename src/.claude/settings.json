@@ -110,7 +110,6 @@
     "gopls-lsp@claude-plugins-official": true,
     "modern-go-guidelines@goland-claude-marketplace": true,
     "modern-web-guidance@googlechrome": true,
-    "pyright-lsp@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true,
     "slack@claude-plugins-official": true,
