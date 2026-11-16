@@ -16,6 +16,8 @@
       "Bash(brew *)",
       "Bash(pip *)",
       "Bash(pip3 *)",
+      "Bash(python -m pip *)",
+      "Bash(python3 -m pip *)",
       "Read(~/.aws/**)",
       "Read(~/.config/gh/hosts.yml)",
       "Read(~/.ssh/**)",
