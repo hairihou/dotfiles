@@ -11,6 +11,7 @@
   - Over 1 year: reject
     - When no maintained alternative exists and self-writing is unreasonable, propose the stale one and state its staleness
 - Dependency installation: use the lockfile's package manager command, never hand-edit the manifest. A hand-written version can be one that does not exist
+  - Python: use uv (`uvx`, `uv run --with`, `uv add`), never pip. pip fails in this environment, and working around it installs packages outside uv's management
 - Version-dependent output (project setup, config files, API usage, CLI flags): derive from the installed version's primary source, never from recall. Recall reflects whatever version dominated training data, so the output silently targets an outdated release
   - Generation: when the tool ships a generator (create / init / scaffold command), run it and edit the output instead of hand-writing
   - Reference: otherwise read the installed package's own docs, types, schema, or `--help` before writing; fall back to upstream docs for the installed version
