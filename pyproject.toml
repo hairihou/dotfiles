@@ -1,8 +1,0 @@
-[project]
-name = "dotfiles"
-version = "0.0.0"
-requires-python = ">=3.15.2"
-
-[tool.ruff.lint]
-select = ["ALL"]
-ignore = ["COM812", "CPY001", "D", "T201"]
