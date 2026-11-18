@@ -17,7 +17,6 @@ curl -fsSL https://raw.githubusercontent.com/hairihou/dotfiles/main/install.sh |
 
 Available globally after setup:
 
-- `brewsync [--dump | --prune]` - Homebrew package synchronizer
 - `dprune` - Remove `.DS_Store` files and empty directories
 - `ghreposetup [--dry-run] [OWNER/REPO]` - Apply GitHub repository settings: disable forking (organization repositories only), projects, and wiki; allow squash merge only, titled by the PR title; delete head branches on merge; set Actions workflow permissions to read-only
 - `nocturne-palette.py [--check | --json | --apply BASELINE]` - Nocturne theme palette generator: print slot contrast, verify theme files use only palette colors, or remap them after editing the parameters
@@ -26,7 +25,15 @@ Available globally after setup:
 
 ### Owner Variants
 
-`install.sh` symlinks the Brewfile and gitconfig per machine, chosen by git email: owner machines get the `.owner` variants, other machines get the base files. The base `.gitconfig` reads the git identity (`[user]`) from `~/.gitconfig.local`; `.gitconfig.owner` includes the base and bakes in the owner identity.
+`install.sh` symlinks the gitconfig per machine, chosen by git email: owner machines get `.gitconfig.owner`, other machines get the base `.gitconfig`. The base reads the git identity (`[user]`) from `~/.gitconfig.local`; `.gitconfig.owner` includes the base and bakes in the owner identity.
+
+### GUI Apps and Fonts
+
+`[bootstrap.packages]` in `src/.config/mise/config.toml` declares the GUI apps and fonts as Homebrew casks, which mise installs without Homebrew. Entries marked `env = "owner"` or `env = "work"` apply only on a machine that saved that environment, once per machine:
+
+```sh
+mise -E owner bootstrap --only packages --save-env    # or -E work
+```
 
 ### Syncing
 
@@ -35,6 +42,8 @@ Re-apply after editing `src/` (or re-run `install.sh`):
 ```sh
 mise dotfiles apply --prune            # re-create symlinks, remove stale ones
 mise dotfiles status                   # show drift between src/ and $HOME
+mise bootstrap packages apply          # install missing apps
+mise bootstrap packages upgrade        # update apps that do not update themselves
 mise bootstrap macos defaults apply    # write macOS defaults (log out to fully apply)
 ```
 

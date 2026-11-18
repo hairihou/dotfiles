@@ -1,8 +1,0 @@
-brew "mise"
-cask "android-studio"
-cask "azookey"
-cask "font-udev-gothic-nf"
-cask "ghostty"
-cask "orbstack"
-cask "vivaldi"
-cask "zed"

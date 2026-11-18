@@ -15,7 +15,7 @@ set -euo pipefail
 
 ## Target: bash 3.2
 
-macOS preinstalled `/bin/bash` is the floor. Brewfile doesn't install a newer bash, and `install.sh` runs pre-Brew. Avoid bash 4+ syntax.
+macOS preinstalled `/bin/bash` is the floor. Nothing in this repo installs a newer bash, and `install.sh` runs before mise installs any tool. Avoid bash 4+ syntax.
 
 ## Pitfalls
 

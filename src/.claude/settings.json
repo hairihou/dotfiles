@@ -13,7 +13,6 @@
   },
   "permissions": {
     "deny": [
-      "Bash(brew *)",
       "Read(~/.aws/**)",
       "Read(~/.config/gh/hosts.yml)",
       "Read(~/.ssh/**)",

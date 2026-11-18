@@ -33,10 +33,8 @@ ln -sf "$DST/src/.config/mise/config.toml" "$HOME/.config/mise/config.toml"
 mise dotfiles apply --force --prune --yes
 
 if is_owner; then
-  ln -sf "$DST/src/.Brewfile.owner" "$HOME/.Brewfile"
   ln -sf "$DST/src/.gitconfig.owner" "$HOME/.gitconfig"
 else
-  ln -sf "$DST/src/.Brewfile" "$HOME/.Brewfile"
   ln -sf "$DST/src/.gitconfig" "$HOME/.gitconfig"
 fi
 

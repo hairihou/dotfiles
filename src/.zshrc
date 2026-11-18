@@ -11,6 +11,7 @@ export RUFF_CACHE_DIR="$HOME/.cache/ruff"
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export JAVA_HOME='/Applications/Android Studio.app/Contents/jbr/Contents/Home'
 export PATH="$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/tools/bin:$ANDROID_HOME/platform-tools"
+export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$HOME/dotfiles/bin:$PATH"
 
 setopt AUTO_CD
@@ -101,7 +102,7 @@ tmux-path() {
   exec zsh
 }
 
-eval "$(mise activate zsh)"
+eval "$("$HOME/.local/bin/mise" activate zsh)"
 eval "$(fnox activate zsh)"
 eval "$(zoxide init zsh)"
 

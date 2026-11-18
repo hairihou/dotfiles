@@ -1,3 +1,18 @@
+[bootstrap.packages]
+"brew-cask:azookey" = "latest"
+"brew-cask:font-udev-gothic-nf" = "latest"
+"brew-cask:ghostty" = "latest"
+"brew-cask:vivaldi" = "latest"
+"brew-cask:zed" = "latest"
+"brew-cask:android-studio" = { env = "owner" }
+"brew-cask:orbstack" = { env = "owner" }
+"brew-cask:firefox" = { env = "work" }
+"brew-cask:google-chrome" = { env = "work" }
+"brew-cask:google-chrome@canary" = { env = "work" }
+"brew-cask:microsoft-edge" = { env = "work" }
+"brew-cask:rancher" = { env = "work" }
+"brew-cask:zoom" = { env = "work" }
+
 [bootstrap.macos.defaults.NSGlobalDomain]
 ApplePressAndHoldEnabled = false
 AppleShowAllExtensions = true
