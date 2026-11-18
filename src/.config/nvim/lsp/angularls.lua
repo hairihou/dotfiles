@@ -6,10 +6,9 @@ local function node_modules_paths(root_dir)
   end
   local ngserver = vim.fn.exepath("ngserver")
   if ngserver ~= "" then
-    local realpath = vim.uv.fs_realpath(ngserver) or ngserver
-    local candidate = vim.fs.normalize(vim.fs.joinpath(vim.fs.dirname(realpath), "../../.."))
-    if vim.uv.fs_stat(candidate) then
-      table.insert(paths, candidate)
+    local package_dir = vim.uv.fs_realpath(vim.fs.joinpath(vim.fs.dirname(ngserver), "../@angular/language-server"))
+    if package_dir then
+      table.insert(paths, vim.fs.normalize(vim.fs.joinpath(package_dir, "../..")))
     end
   end
   return paths

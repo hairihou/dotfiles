@@ -1,7 +1,7 @@
 {
   "ty": {
-    "command": "uv",
-    "args": ["run", "--no-sync", "ty", "server"],
+    "command": "ty",
+    "args": ["server"],
     "extensionToLanguage": {
       ".py": "python",
       ".pyi": "python"

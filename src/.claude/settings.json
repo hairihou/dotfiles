@@ -109,8 +109,7 @@
     "modern-web-guidance@googlechrome": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true,
-    "slack@claude-plugins-official": true,
-    "typescript-lsp@claude-plugins-official": true
+    "slack@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "goland-claude-marketplace": {

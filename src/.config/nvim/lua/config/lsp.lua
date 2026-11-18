@@ -4,7 +4,7 @@ vim.diagnostic.config({
   virtual_lines = { current_line = true },
   virtual_text = { current_line = false },
 })
-vim.lsp.enable({ "angularls", "gopls", "lua_ls", "oxlint", "ty", "vtsls", "vue_ls" })
+vim.lsp.enable({ "angularls", "gopls", "lua_ls", "oxlint", "tsc", "ty" })
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("my.lsp", {}),
   callback = function(ev)
