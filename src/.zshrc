@@ -102,7 +102,7 @@ tmux-path() {
   exec zsh
 }
 
-eval "$("$HOME/.local/bin/mise" activate zsh)"
+eval "$(~/.local/bin/mise activate zsh)"
 eval "$(fnox activate zsh)"
 eval "$(zoxide init zsh)"
 
