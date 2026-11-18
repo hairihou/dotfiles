@@ -1,7 +1,4 @@
 #!/usr/bin/env -S uv run --script
-# /// script
-# requires-python = ">=3.14"
-# ///
 """Flag mechanical notation issues in Japanese prose (Markdown or plain text).
 
 Usage:

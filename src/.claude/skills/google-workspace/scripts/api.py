@@ -1,6 +1,5 @@
 #!/usr/bin/env -S uv run --script
 # /// script
-# requires-python = ">=3.14"
 # dependencies = [
 #   "google-auth[requests]>=2.58.0",
 #   "google-auth-oauthlib>=1.4.1",
