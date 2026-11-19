@@ -4,7 +4,6 @@ export EDITOR='nvim'
 export FNOX_SHELL_OUTPUT='none'
 export LANG='en_US.UTF-8'
 export LSCOLORS='exGxFxDxcxDxDxhbadacec'
-export PIP_REQUIRE_VIRTUALENV=1
 
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export JAVA_HOME='/Applications/Android Studio.app/Contents/jbr/Contents/Home'
