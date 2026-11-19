@@ -134,8 +134,8 @@
     "enabled": true
   },
   "timeFormat": "24-hour",
+  "skipWorkflowUsageWarning": true,
   "theme": "auto",
   "showMessageTimestamps": true,
-  "remoteControlAtStartup": false,
-  "skipWorkflowUsageWarning": true
+  "remoteControlAtStartup": false
 }
