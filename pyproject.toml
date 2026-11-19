@@ -9,3 +9,6 @@ dev = ["ruff>=0.17.5", "ty>=0.0.107"]
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = ["COM812", "CPY001", "D", "T201"]
+
+[tool.ty.project-manager]
+script = "uv"
