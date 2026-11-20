@@ -15,7 +15,8 @@
 - Version-dependent output (project setup, config files, API usage, CLI flags): derive from the installed version's primary source, never from recall. Recall reflects whatever version dominated training data, so the output silently targets an outdated release
   - Generation: when the tool ships a generator (create / init / scaffold command), run it and edit the output instead of hand-writing
   - Reference: otherwise read the installed package's own docs, types, schema, or `--help` before writing; fall back to upstream docs for the installed version
-  - Defaults: omit options whose value equals the installed version's default
+  - Defaults: write a value only to override the installed version's default; omit any argument, prop, config key, or CLI flag equal to it. A written value reads as an intentional override
+    - Generator output: keep the defaults a generator wrote, so the template's diff between versions applies cleanly on upgrade
 
 ## Reasoning
 
