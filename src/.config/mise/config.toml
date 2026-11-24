@@ -6,6 +6,7 @@
 "brew-cask:zed" = "latest"
 "brew-cask:android-studio" = { env = "owner" }
 "brew-cask:orbstack" = { env = "owner" }
+"brew-cask:claude" = { env = "work" }
 "brew-cask:firefox" = { env = "work" }
 "brew-cask:google-chrome" = { env = "work" }
 "brew-cask:google-chrome@canary" = { env = "work" }
