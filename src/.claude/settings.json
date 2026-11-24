@@ -137,5 +137,6 @@
   "skipWorkflowUsageWarning": true,
   "theme": "auto",
   "showMessageTimestamps": true,
-  "remoteControlAtStartup": false
+  "remoteControlAtStartup": false,
+  "disableDeepLinkRegistration": "disable"
 }
