@@ -1,0 +1,47 @@
+id: validation-type-suffix-ts
+language: TypeScript
+severity: error
+message: 'Name a type inferred from a Valibot / Zod schema `<Name>Input`, `<Name>Output`, or `<Name>Data` (https://valibot.dev/guides/naming-convention/).'
+rule:
+  any:
+    - all:
+        - any:
+            - pattern: type $NAME = v.InferInput<$$$ARGS>
+            - pattern: type $NAME = z.input<$$$ARGS>
+        - not:
+            has:
+              field: name
+              regex: '^[A-Z][A-Za-z0-9]*Input$'
+    - all:
+        - any:
+            - pattern: type $NAME = v.InferOutput<$$$ARGS>
+            - pattern: type $NAME = z.output<$$$ARGS>
+            - pattern: type $NAME = z.infer<$$$ARGS>
+        - not:
+            has:
+              field: name
+              regex: '^[A-Z][A-Za-z0-9]*(Output|Data)$'
+---
+id: validation-type-suffix-tsx
+language: Tsx
+severity: error
+message: 'Name a type inferred from a Valibot / Zod schema `<Name>Input`, `<Name>Output`, or `<Name>Data` (https://valibot.dev/guides/naming-convention/).'
+rule:
+  any:
+    - all:
+        - any:
+            - pattern: type $NAME = v.InferInput<$$$ARGS>
+            - pattern: type $NAME = z.input<$$$ARGS>
+        - not:
+            has:
+              field: name
+              regex: '^[A-Z][A-Za-z0-9]*Input$'
+    - all:
+        - any:
+            - pattern: type $NAME = v.InferOutput<$$$ARGS>
+            - pattern: type $NAME = z.output<$$$ARGS>
+            - pattern: type $NAME = z.infer<$$$ARGS>
+        - not:
+            has:
+              field: name
+              regex: '^[A-Z][A-Za-z0-9]*(Output|Data)$'

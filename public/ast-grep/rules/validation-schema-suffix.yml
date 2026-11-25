@@ -1,0 +1,43 @@
+id: validation-schema-suffix-ts
+language: TypeScript
+severity: warning
+message: 'Name a Valibot / Zod schema `<Name>Schema` in PascalCase (https://valibot.dev/guides/naming-convention/).'
+rule:
+  kind: variable_declarator
+  has:
+    field: value
+    kind: call_expression
+    has:
+      field: function
+      kind: member_expression
+      regex: '^[vz]\.'
+      not:
+        has:
+          field: property
+          regex: '^(assert|config|is|isOfKind|isOfType|isValiError|memoizer|registry|summarize|toJSONSchema|toZod|flatten|(flatten|format|prettify|treeify)Error|(get|set|delete)[A-Z]\w*|(parse|parser|encode|decode|validate|safeParse|safeParser|safeEncode|safeDecode)(Async)?)$'
+  not:
+    has:
+      field: name
+      regex: '^[A-Z][A-Za-z0-9]*Schema$'
+---
+id: validation-schema-suffix-tsx
+language: Tsx
+severity: warning
+message: 'Name a Valibot / Zod schema `<Name>Schema` in PascalCase (https://valibot.dev/guides/naming-convention/).'
+rule:
+  kind: variable_declarator
+  has:
+    field: value
+    kind: call_expression
+    has:
+      field: function
+      kind: member_expression
+      regex: '^[vz]\.'
+      not:
+        has:
+          field: property
+          regex: '^(assert|config|is|isOfKind|isOfType|isValiError|memoizer|registry|summarize|toJSONSchema|toZod|flatten|(flatten|format|prettify|treeify)Error|(get|set|delete)[A-Z]\w*|(parse|parser|encode|decode|validate|safeParse|safeParser|safeEncode|safeDecode)(Async)?)$'
+  not:
+    has:
+      field: name
+      regex: '^[A-Z][A-Za-z0-9]*Schema$'

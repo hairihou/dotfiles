@@ -40,6 +40,10 @@ Applies to all TypeScript code, including `<script>` blocks in Vue SFC.
 
 - `as const` objects: `PascalCase` (keys also `PascalCase`); declare the same-named union type on the next line, with no blank line between
 - Discriminated union discriminant: `type`
+- Validation schema (Valibot, Zod): follow https://valibot.dev/guides/naming-convention/ with suffixes, `PascalCase` base name
+  - Schema: `<Name>Schema`; input type: `<Name>Input`; output type: `<Name>Output`
+  - Input and output types identical: a single `<Name>Data` type may replace the pair
+  - Never give the schema and its type the same name: it collides with other types and classes, and leaves no room for a separate input type
 - `SCREAMING_CASE`: reserved for environment variables only
 
 ```typescript
