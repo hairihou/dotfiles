@@ -1,0 +1,27 @@
+id: prefer-number-methods-ts
+language: TypeScript
+severity: error
+message: 'Use the `Number.` method instead of the global `$ID`.'
+rule:
+  kind: identifier
+  regex: '^(isFinite|isNaN|parseFloat|parseInt)$'
+  pattern: $ID
+  not:
+    inside:
+      kind: variable_declarator
+      field: name
+fix: Number.$ID
+---
+id: prefer-number-methods-tsx
+language: Tsx
+severity: error
+message: 'Use the `Number.` method instead of the global `$ID`.'
+rule:
+  kind: identifier
+  regex: '^(isFinite|isNaN|parseFloat|parseInt)$'
+  pattern: $ID
+  not:
+    inside:
+      kind: variable_declarator
+      field: name
+fix: Number.$ID

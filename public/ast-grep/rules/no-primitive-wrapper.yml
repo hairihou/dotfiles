@@ -1,0 +1,25 @@
+id: no-primitive-wrapper-ts
+language: TypeScript
+severity: error
+message: 'Do not call `$ID` as a conversion function or constructor: it converts any input silently (`String(null)` -> `"null"`, `Number('''')` -> `0`). Use `x.toString()`, `Number.parseInt(x, 10)` / `Number.parseFloat(x)`, or an explicit comparison.'
+rule:
+  kind: identifier
+  regex: '^(Boolean|Number|String)$'
+  pattern: $ID
+  not:
+    inside:
+      kind: member_expression
+      field: object
+---
+id: no-primitive-wrapper-tsx
+language: Tsx
+severity: error
+message: 'Do not call `$ID` as a conversion function or constructor: it converts any input silently (`String(null)` -> `"null"`, `Number('''')` -> `0`). Use `x.toString()`, `Number.parseInt(x, 10)` / `Number.parseFloat(x)`, or an explicit comparison.'
+rule:
+  kind: identifier
+  regex: '^(Boolean|Number|String)$'
+  pattern: $ID
+  not:
+    inside:
+      kind: member_expression
+      field: object

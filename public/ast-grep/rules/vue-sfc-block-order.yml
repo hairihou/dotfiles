@@ -1,0 +1,39 @@
+id: vue-sfc-block-order-script
+language: Html
+severity: error
+files:
+  - '*.vue'
+message: 'Declare Vue SFC blocks in the order `<script>` -> `<template>` -> `<style>`.'
+rule:
+  kind: script_element
+  inside:
+    kind: document
+  follows:
+    stopBy: end
+    any:
+      - kind: style_element
+      - kind: element
+        has:
+          kind: start_tag
+          has:
+            kind: tag_name
+            regex: '^template$'
+---
+id: vue-sfc-block-order-template
+language: Html
+severity: error
+files:
+  - '*.vue'
+message: 'Declare Vue SFC blocks in the order `<script>` -> `<template>` -> `<style>`.'
+rule:
+  kind: element
+  inside:
+    kind: document
+  has:
+    kind: start_tag
+    has:
+      kind: tag_name
+      regex: '^template$'
+  follows:
+    stopBy: end
+    kind: style_element
