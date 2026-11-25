@@ -1,0 +1,23 @@
+id: vue-explicit-import
+language: TypeScript
+severity: error
+message: 'Import `$F` explicitly instead of relying on auto import.'
+rule:
+  kind: identifier
+  regex: '^(computed|customRef|defineComponent|effectScope|getCurrentInstance|h|inject|isReactive|isReadonly|isRef|markRaw|navigateTo|nextTick|onActivated|onBeforeMount|onBeforeUnmount|onBeforeUpdate|onDeactivated|onErrorCaptured|onMounted|onScopeDispose|onServerPrefetch|onUnmounted|onUpdated|provide|reactive|readonly|ref|shallowReactive|shallowReadonly|shallowRef|toRaw|toRef|toRefs|toValue|triggerRef|unref|useAsyncData|useAttrs|useCookie|useFetch|useHead|useId|useLazyAsyncData|useLazyFetch|useNuxtApp|useRoute|useRouter|useRuntimeConfig|useSlots|useState|useTemplateRef|watch|watchEffect|watchPostEffect|watchSyncEffect)$'
+  pattern: $F
+  inside:
+    field: function
+    kind: call_expression
+  not:
+    inside:
+      stopBy: end
+      kind: program
+      has:
+        kind: import_statement
+        has:
+          stopBy: end
+          kind: import_specifier
+          has:
+            field: name
+            pattern: $F

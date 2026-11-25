@@ -1,0 +1,36 @@
+id: vue-composable-client-global
+language: TypeScript
+severity: error
+message: 'Do not touch the client-only global `$G` in a composable body, which also runs on the server; move it into `onMounted` or an event handler.'
+rule:
+  kind: identifier
+  regex: '^(cancelAnimationFrame|customElements|devicePixelRatio|document|DOMParser|FileReader|getComputedStyle|indexedDB|innerHeight|innerWidth|IntersectionObserver|localStorage|matchMedia|MutationObserver|navigator|outerHeight|outerWidth|requestAnimationFrame|requestIdleCallback|ResizeObserver|scrollX|scrollY|sessionStorage|visualViewport|window|XMLHttpRequest)$'
+  pattern: $G
+  not:
+    inside:
+      kind: unary_expression
+      regex: '^typeof\s'
+  inside:
+    stopBy:
+      any:
+        - kind: arrow_function
+        - kind: function_declaration
+        - kind: function_expression
+        - kind: method_definition
+    any:
+      - kind: arrow_function
+        inside:
+          kind: variable_declarator
+          has:
+            field: name
+            regex: '^use[A-Z]'
+      - kind: function_expression
+        inside:
+          kind: variable_declarator
+          has:
+            field: name
+            regex: '^use[A-Z]'
+      - kind: function_declaration
+        has:
+          field: name
+          regex: '^use[A-Z]'

@@ -1,0 +1,22 @@
+id: vue-composable-implicit-dependency
+language: TypeScript
+severity: error
+message: 'Do not call `$F()` inside a composable; accept the value or a callback as an argument instead.'
+rule:
+  kind: call_expression
+  has:
+    field: function
+    kind: identifier
+    regex: '^(inject|useLink|useRoute|useRouter)$'
+    pattern: $F
+  inside:
+    stopBy: end
+    any:
+      - kind: variable_declarator
+        has:
+          field: name
+          regex: '^use[A-Z]'
+      - kind: function_declaration
+        has:
+          field: name
+          regex: '^use[A-Z]'

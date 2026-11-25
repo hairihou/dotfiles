@@ -1,0 +1,14 @@
+id: vue-computed-type-argument
+language: TypeScript
+severity: error
+message: 'Pass the type argument to `computed<T>(...)` instead of relying on return type inference.'
+rule:
+  kind: call_expression
+  has:
+    field: function
+    kind: identifier
+    regex: '^computed$'
+  not:
+    has:
+      field: type_arguments
+      kind: type_arguments

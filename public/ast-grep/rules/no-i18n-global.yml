@@ -1,0 +1,10 @@
+id: no-i18n-global
+language: TypeScript
+severity: error
+message: 'Call the function returned by `useI18n()` instead of the global `$ID`.'
+rule:
+  any:
+    - kind: identifier
+    - kind: property_identifier
+  regex: '^\$(d|n|rt|t|tc|te|tm)$'
+  pattern: $ID
