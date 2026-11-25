@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly DB="$HOME/Library/Group Containers/group.com.apple.mobiletimerd/local.sqlite"
+readonly RECENTS_WHERE="ZISFAVORITE = 0"
+readonly TIMERS_WHERE="ZSTATE = 1 AND ZTITLE IS NOT 'CURRENT_TIMER'"
+
+dry_run=false
+
+usage() {
+  echo "Usage: timerclear [--dry-run]"
+  echo "  --dry-run  Show how many items would be removed without applying"
+}
+
+case "${1:-}" in
+  --dry-run) dry_run=true ;;
+  --help) usage; exit 0 ;;
+  ?*) echo "Unknown option: $1" >&2; exit 1 ;;
+esac
+
+if [[ ! -f "$DB" ]]; then
+  echo "Error: Clock database not found: $DB" >&2
+  exit 1
+fi
+
+tables=$(sqlite3 -readonly "file:$DB?mode=ro" \
+  "SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name IN ('ZMTCDTIMER', 'ZMTCDTIMERDURATION');")
+if [[ "$tables" -ne 2 ]]; then
+  echo 'Error: Clock database schema changed; refusing to edit it' >&2
+  exit 1
+fi
+
+count=$(sqlite3 -readonly "file:$DB?mode=ro" \
+  "SELECT (SELECT count(*) FROM ZMTCDTIMERDURATION WHERE $RECENTS_WHERE) + (SELECT count(*) FROM ZMTCDTIMER WHERE $TIMERS_WHERE);")
+
+if [[ "$count" -eq 0 ]]; then
+  echo 'Nothing to clean'
+  exit 0
+fi
+
+if $dry_run; then
+  echo "Would remove $count item$([[ $count -eq 1 ]] && echo '' || echo 's')"
+  exit 0
+fi
+
+clock_was_running=false
+if pgrep -xq Clock; then
+  clock_was_running=true
+  osascript -e 'quit app "Clock"'
+  while pgrep -xq Clock; do sleep 0.2; done
+fi
+
+sqlite3 "$DB" "DELETE FROM ZMTCDTIMERDURATION WHERE $RECENTS_WHERE; DELETE FROM ZMTCDTIMER WHERE $TIMERS_WHERE;"
+
+# mobiletimerd keeps recents in memory and serves them to Clock until it restarts.
+# On macOS 27.2.1 it ignores SIGTERM and `launchctl kickstart` is blocked by SIP; launchd relaunches it after SIGKILL.
+pkill -KILL -x mobiletimerd || true
+
+if $clock_was_running; then
+  open -a Clock
+fi
+
+echo "Cleaned $count item$([[ $count -eq 1 ]] && echo '' || echo 's')"
