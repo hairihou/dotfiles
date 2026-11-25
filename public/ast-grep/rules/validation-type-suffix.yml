@@ -1,7 +1,7 @@
 id: validation-type-suffix-ts
 language: TypeScript
 severity: error
-message: 'Name a type inferred from a Valibot / Zod schema `<Name>Input`, `<Name>Output`, or `<Name>Data` (https://valibot.dev/guides/naming-convention/).'
+message: 'Name a type inferred from a Valibot / Zod schema `<Name>Input` or `<Name>Output`; a single `<Name>Data` only when input and output types are identical (https://valibot.dev/guides/naming-convention/).'
 rule:
   any:
     - all:
@@ -25,7 +25,7 @@ rule:
 id: validation-type-suffix-tsx
 language: Tsx
 severity: error
-message: 'Name a type inferred from a Valibot / Zod schema `<Name>Input`, `<Name>Output`, or `<Name>Data` (https://valibot.dev/guides/naming-convention/).'
+message: 'Name a type inferred from a Valibot / Zod schema `<Name>Input` or `<Name>Output`; a single `<Name>Data` only when input and output types are identical (https://valibot.dev/guides/naming-convention/).'
 rule:
   any:
     - all:
