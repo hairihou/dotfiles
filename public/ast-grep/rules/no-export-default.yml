@@ -1,0 +1,27 @@
+id: no-export-default-ts
+language: TypeScript
+severity: warning
+ignores:
+  - '**/*.config.*'
+  - '**/app/{middleware,plugins}/**'
+  - '**/app/router.options.ts'
+  - '**/server/{api,middleware,plugins,routes}/**'
+  - '**/src/server.ts'
+message: 'Use a named export instead of `export default`, unless a framework or tool reads this default export.'
+rule:
+  kind: export_statement
+  regex: '^export\s+default\s'
+---
+id: no-export-default-tsx
+language: Tsx
+severity: warning
+ignores:
+  - '**/*.config.*'
+  - '**/app/{middleware,plugins}/**'
+  - '**/app/router.options.ts'
+  - '**/server/{api,middleware,plugins,routes}/**'
+  - '**/src/server.ts'
+message: 'Use a named export instead of `export default`, unless a framework or tool reads this default export.'
+rule:
+  kind: export_statement
+  regex: '^export\s+default\s'

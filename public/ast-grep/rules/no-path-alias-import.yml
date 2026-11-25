@@ -1,0 +1,41 @@
+id: no-path-alias-import-ts
+language: TypeScript
+severity: error
+message: 'Import by relative path instead of a path alias (`@/`, `~/`).'
+rule:
+  kind: string
+  regex: '^.(@|~)/'
+  any:
+    - inside:
+        any:
+          - kind: import_statement
+          - kind: export_statement
+        field: source
+    - inside:
+        kind: arguments
+        inside:
+          kind: call_expression
+          has:
+            field: function
+            kind: import
+---
+id: no-path-alias-import-tsx
+language: Tsx
+severity: error
+message: 'Import by relative path instead of a path alias (`@/`, `~/`).'
+rule:
+  kind: string
+  regex: '^.(@|~)/'
+  any:
+    - inside:
+        any:
+          - kind: import_statement
+          - kind: export_statement
+        field: source
+    - inside:
+        kind: arguments
+        inside:
+          kind: call_expression
+          has:
+            field: function
+            kind: import

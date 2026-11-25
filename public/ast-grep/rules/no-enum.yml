@@ -1,0 +1,17 @@
+id: no-enum-ts
+language: TypeScript
+severity: error
+ignores:
+  - '**/*.d.ts'
+message: 'Use an `as const` object followed by a same-named union type (`type X = (typeof X)[keyof typeof X]`) instead of `enum`.'
+rule:
+  kind: enum_declaration
+---
+id: no-enum-tsx
+language: Tsx
+severity: error
+ignores:
+  - '**/*.d.ts'
+message: 'Use an `as const` object followed by a same-named union type (`type X = (typeof X)[keyof typeof X]`) instead of `enum`.'
+rule:
+  kind: enum_declaration

@@ -1,0 +1,19 @@
+id: no-non-null-assertion-ts
+language: TypeScript
+severity: error
+ignores:
+  - '**/*.spec.*'
+  - '**/*.test.*'
+message: 'Narrow with a type guard or restructure instead of the non-null assertion `!`.'
+rule:
+  kind: non_null_expression
+---
+id: no-non-null-assertion-tsx
+language: Tsx
+severity: error
+ignores:
+  - '**/*.spec.*'
+  - '**/*.test.*'
+message: 'Narrow with a type guard or restructure instead of the non-null assertion `!`.'
+rule:
+  kind: non_null_expression
