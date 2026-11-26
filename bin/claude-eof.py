@@ -21,10 +21,8 @@ if not file:
 p = Path(file)
 if not p.is_file():
     sys.exit(0)
-try:
-    original = p.read_text()
-except UnicodeDecodeError:
+content = p.read_bytes()
+if not content or content.endswith(b"\n") or b"\0" in content:
     sys.exit(0)
-fixed = original.rstrip() + "\n"
-if fixed != original:
-    p.write_text(fixed)
+with p.open("ab") as f:
+    f.write(b"\r\n" if b"\r\n" in content else b"\n")
