@@ -62,11 +62,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "claude-eof.py",
-            "args": []
-          },
-          {
-            "type": "command",
             "command": "claude-actionlint.py",
             "args": []
           },
