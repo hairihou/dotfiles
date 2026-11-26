@@ -67,6 +67,11 @@
           },
           {
             "type": "command",
+            "command": "claude-actionlint.py",
+            "args": []
+          },
+          {
+            "type": "command",
             "command": "claude-lint.py",
             "args": []
           }
