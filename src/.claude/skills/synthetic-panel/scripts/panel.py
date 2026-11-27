@@ -13,6 +13,7 @@ Usage:
                  --scale L1 L2 L3 L4 L5 --language LANG --out DIR
                  [--model M] [--jobs N] [--dry-run]
     panel.py report DIR
+    panel.py answers DIR [--concept ID] [--split VALUE]
 
 personas.jsonl rows: {"id": "...", "profile": "<who this person is, in LANG>"},
 plus an optional "split" value that `report` breaks paired differences down by.
@@ -343,6 +344,25 @@ def print_paired(
             )
 
 
+def answers(args: argparse.Namespace) -> None:
+    lines = (Path(args.dir) / "responses.jsonl").read_text().splitlines()
+    rows = [
+        row
+        for row in map(json.loads, lines)
+        if "rating" in row
+        and args.concept in {None, row["concept"]}
+        and args.split in {None, row.get("split")}
+    ]
+    groups: dict[tuple[str, str], list[dict]] = {}
+    for row in rows:
+        groups.setdefault((row["concept"], row.get("split", "")), []).append(row)
+    for (concept, split), group in sorted(groups.items()):
+        print(f"## {concept}" + (f", split {split}" if split else "") + "\n")
+        for row in sorted(group, key=lambda r: (r["rating"], r["persona"])):
+            print(f"- {row['persona']} ({row['rating']}): {row['answer']}")
+        print()
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
@@ -370,6 +390,13 @@ def main() -> None:
     report_parser = commands.add_parser("report", help="summarize a finished run")
     report_parser.add_argument("dir")
     report_parser.set_defaults(func=report)
+    answers_parser = commands.add_parser(
+        "answers", help="print rated answers grouped by concept and split"
+    )
+    answers_parser.add_argument("dir")
+    answers_parser.add_argument("--concept")
+    answers_parser.add_argument("--split")
+    answers_parser.set_defaults(func=answers)
     args = parser.parse_args()
     args.func(args)
 
