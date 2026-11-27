@@ -9,12 +9,13 @@ What belongs together, what comes first, and what matters most are shown by prox
 
 ## Removal Test
 
-After composing, go through every piece of visible text that names or introduces something rather than being the content itself: eyebrows, captions, a `Label:` before a value, table column headers, step numbers, legends, helper text. Page titles and section headings are outside this test and stay visible. For each, picture the surface without it and name what a reader would then get wrong. Keep it only when you can name that error. Otherwise remove it, and if the grouping turns unclear, fix the grouping with spacing, alignment, order, or weight rather than restoring the text. Table column headers are judged as one row: keep the whole row when any column needs its header, and drop it only when every column reads on its own.
+After composing, go through every piece of visible text that names or introduces something rather than being the content itself: eyebrows, captions, a `Label:` before a value, table column headers, step numbers, legends, helper text. Page titles and section headings are outside this test and stay visible. For each, picture the surface without it and name what a reader would then get wrong. Keep it only when you can name that error. Otherwise remove it, and if the grouping turns unclear, fix the grouping with spacing, alignment, order, or weight rather than restoring the text. Table column headers are judged as one row: keep the whole row when any column needs its header, and drop it only when every column reads on its own. In a table of records, some column almost always needs its header, so the row usually stays. When a narrow layout stacks each row into a block, the header row is gone, and each field's label is judged on its own like a `Label:` before a value.
 
 ### Errors That Justify Keeping Text
 
 - A form control loses its visible label. A placeholder is not a label
-- A value loses its unit, its basis, or what it is compared against, and the value alone does not show it
+- An input loses the format it requires (`MM/YY`), and its label does not state it
+- A value loses its unit, its basis, or what it is compared against, and the value alone does not show it. When the source does not give that basis, leave it out and say so in the reply rather than inventing one
 - Two groups that look alike differ in a way their content does not show
 
 "It reads clearer" without a named error does not justify keeping text, and neither does a template that had a title in that spot.
@@ -27,7 +28,7 @@ Separate groups with the lightest means that works, in this order: space, then a
 - Line: only where adjacent groups hold different kinds of information and space alone leaves the boundary unclear. Not between items of the same kind, except table rows, where one neutral rule per row (not alternating row fills) keeps a row's cells together across columns
 - Background fill: only where lines would pile up, or one region must stand apart from the rest of the surface. Never inside another filled or bordered region
 
-A template that boxes every section does not justify a box, and neither does a page background tinted only so white cards stand out against it, when the design system's page background is not that tint.
+A template that boxes every section does not justify a box, and neither does a page background tinted only so white cards stand out against it, unless a design system in use sets that tint as the page background. With no design system in view, the tint fails.
 
 ## Emphasis
 
