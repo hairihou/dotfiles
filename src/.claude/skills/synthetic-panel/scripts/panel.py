@@ -14,9 +14,11 @@ Usage:
                  [--model M] [--jobs N] [--dry-run]
     panel.py report DIR
 
-personas.jsonl rows: {"id": "...", "profile": "<who this person is, in LANG>"}.
-DIR/responses.jsonl rows: {"persona", "concept", "answer", "rating" | "error",
-"cost_usd"}; DIR/run.json holds the question, scale, language, and model.
+personas.jsonl rows: {"id": "...", "profile": "<who this person is, in LANG>"},
+plus an optional "split" value that `report` breaks paired differences down by.
+DIR/responses.jsonl rows: {"persona", "concept", ["split"], "answer",
+"rating" | "error", "cost_usd"}; DIR/run.json holds the question, scale,
+language, and model.
 Concept paths ending in .png/.jpg/.jpeg/.gif/.webp are sent as images, others as
 text. Rerunning `run` with the same --out skips pairs that already succeeded.
 """
@@ -210,6 +212,8 @@ def run(args: argparse.Namespace) -> None:
         nonlocal cost
         persona, concept_id = pair
         row: dict[str, object] = {"persona": persona["id"], "concept": concept_id}
+        if "split" in persona:
+            row["split"] = persona["split"]
         spent = 0.0
         with tempfile.TemporaryDirectory() as cwd:
             try:
@@ -294,13 +298,35 @@ def report(args: argparse.Namespace) -> None:
             f"| {interval(bootstrap_means(values, rng))} | {spread} |"
         )
     if len(ranked) > 1:
-        print_paired(ratings, ranked, rng)
+        print_paired(ratings, ranked, rng, "all personas")
+        splits = {row["persona"]: row["split"] for row in rows if "split" in row}
+        for value in sorted(set(splits.values())):
+            subset = {
+                c: {p: r for p, r in ratings[c].items() if splits.get(p) == value}
+                for c in ranked
+            }
+            print_paired(
+                subset,
+                sorted(
+                    [c for c in ranked if subset[c]],
+                    key=lambda c: statistics.fmean(subset[c].values()),
+                    reverse=True,
+                ),
+                rng,
+                f"split {value}",
+            )
 
 
 def print_paired(
-    ratings: dict[str, dict[str, int]], ranked: list[str], rng: random.Random
+    ratings: dict[str, dict[str, int]],
+    ranked: list[str],
+    rng: random.Random,
+    group: str,
 ) -> None:
-    print("\nPaired differences (same personas rating both concepts):\n")
+    means = ", ".join(
+        f"{c} {statistics.fmean(ratings[c].values()):.2f}" for c in ranked
+    )
+    print(f"\nPaired differences, {group} (means: {means}):\n")
     print("| higher | lower | n | mean diff | 95% CI | share of resamples > 0 |")
     print("|---|---|---|---|---|---|")
     for i, a in enumerate(ranked):
@@ -309,11 +335,11 @@ def print_paired(
             if not shared:
                 continue
             diffs = [ratings[a][p] - ratings[b][p] for p in shared]
-            means = bootstrap_means(diffs, rng)
-            share = sum(m > 0 for m in means) / BOOTSTRAP_ROUNDS
+            resampled = bootstrap_means(diffs, rng)
+            share = sum(m > 0 for m in resampled) / BOOTSTRAP_ROUNDS
             print(
                 f"| {a} | {b} | {len(shared)} | {statistics.fmean(diffs):.2f} "
-                f"| {interval(means)} | {share:.0%} |"
+                f"| {interval(resampled)} | {share:.0%} |"
             )
 
 
