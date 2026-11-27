@@ -98,7 +98,8 @@ def persona_prompt(profile: str, language: str) -> str:
         f"{profile}\n\n"
         f"Reply in {language}, in 2 to 4 sentences, in your own voice. "
         "Do not give numbers, scores, ratings, or scale positions: "
-        "say how you feel and why."
+        "say how you feel and why. Judge the offer exactly as shown, assuming "
+        "nothing it does not state."
     )
 
 
@@ -107,7 +108,9 @@ def rater_prompt(question: str, scale: list[str]) -> str:
     return (
         "You rate free-text survey answers on a 5-point scale. Given a respondent's "
         "answer to the question below, choose the scale point that respondent would "
-        "most likely have picked.\n\n"
+        "most likely have picked. Rate the decision as things stand: intent that "
+        "depends on something the respondent wishes for (a free trial, a lower "
+        "price) counts as that condition not being met.\n\n"
         f"Question: {question}\n\nScale:\n{points}"
     )
 
