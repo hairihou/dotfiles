@@ -15,6 +15,8 @@ Usage:
     panel.py report DIR
 
 personas.jsonl rows: {"id": "...", "profile": "<who this person is, in LANG>"}.
+DIR/responses.jsonl rows: {"persona", "concept", "answer", "rating" | "error",
+"cost_usd"}; DIR/run.json holds the question, scale, language, and model.
 Concept paths ending in .png/.jpg/.jpeg/.gif/.webp are sent as images, others as
 text. Rerunning `run` with the same --out skips pairs that already succeeded.
 """
@@ -331,7 +333,11 @@ def main() -> None:
     )
     run_parser.add_argument("--language", required=True)
     run_parser.add_argument("--out", required=True)
-    run_parser.add_argument("--model", default="sonnet")
+    run_parser.add_argument(
+        "--model",
+        default="sonnet",
+        help="claude model alias or ID (default: %(default)s)",
+    )
     run_parser.add_argument("--jobs", type=int, default=8)
     run_parser.add_argument("--dry-run", action="store_true")
     run_parser.set_defaults(func=run)
